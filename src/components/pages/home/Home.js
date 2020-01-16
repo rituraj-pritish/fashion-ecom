@@ -73,21 +73,16 @@ const Home = ({ products }) => {
         </ShopLinks>
       </Container>
 
-      {products && (
         <ProductCarousel
           title='Trending'
-          data={{
-            ...products.shoes.shoeItems,
-            ...products.accessories.accItems
-          }}
+          data={[...products.shoes, ...products.accessories]}
         />
-      )}
     </PageContainer>
   );
 };
 
 const mapStateToProps = state => ({
-  products: (state.firestore.data.products && state.firestore.data.products.accessories) && state.firestore.data.products
+  products: state.user.products
 });
 
 export default connect(mapStateToProps)(Home);

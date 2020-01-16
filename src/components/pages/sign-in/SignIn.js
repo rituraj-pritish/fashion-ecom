@@ -35,9 +35,7 @@ const SignIn = ({ firebase, signin, history }) => {
           <Logo src={logo} alt={logo} />
         </Link>
         <form onSubmit={handleSubmit}>
-          <label htmlFor='email' required={true}>
-            Email / Phone
-          </label>
+          <label htmlFor='email'>Email</label>
           <input
             type='text'
             name='email'

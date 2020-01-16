@@ -8,7 +8,7 @@ export const FooterContainer = styled.div`
   margin-top: auto;
   padding: 30px ${({ theme }) => theme.padding.lg};
   padding-bottom: 5px;
-  display: ${({show}) => show ? 'block' : 'none'};
+  display: ${({ show }) => (show ? 'block' : 'none')};
 `;
 
 export const Logo = styled.div`
@@ -31,8 +31,8 @@ export const SiteLinks = styled.ul`
 
     a {
       &:hover {
-      color: #fff;
-    }
+        color: #fff;
+      }
     }
   }
 `;
@@ -89,12 +89,12 @@ export const BottomContainer = styled.div`
 
 export const SocialLinks = styled.div`
   img {
-    width: 4.5rem;
-    padding-right: 15px;
+    width: 3.2rem;
+    margin-right: 15px;
     transition: 0.2s;
 
     &:hover {
-      transform: scale(1.1);
+      transform: translateY(-2px);
     }
   }
 `;

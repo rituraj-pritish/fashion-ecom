@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
 export const PageContainer = styled.div`
-  margin-top: ${({ theme }) => theme.navHt};
-  padding: 0 50px;
+  padding: 15px 50px 30px 50px;
   max-width: 1450px;
   margin: ${({ theme }) => theme.navHt} auto 0 auto;
   width: 100%;
   text-align: center;
-
 `;
 
 export const MaxWidthContainer = styled.div`

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
+import ReactTooltip from 'react-tooltip';
 
 import theme from '../theme';
 import Navbar from './layout/navbar/Navbar';
@@ -13,8 +13,11 @@ import Home from './pages/home/Home';
 import MailListModal from './mail-list-modal/MailListModal';
 import SignIn from './pages/sign-in/SignIn';
 import SignUp from './pages/sign-up/SignUp';
+import ProductDetails from './product/product-details/ProductDetails';
+import { getProducts } from '../redux/actions/userActions';
+import Cart from './pages/cart/Cart';
 
-function App({ auth }) {
+function App({ auth, getProducts }) {
   const [showMaillistModal, setShowMailListModal] = useState(false);
 
   useEffect(() => {
@@ -24,6 +27,8 @@ function App({ auth }) {
       setShowMailListModal(true);
       window.localStorage.setItem('mailModalDisplayed', true);
     }
+
+    getProducts();
   }, []);
 
   if (!auth.isLoaded) {
@@ -37,6 +42,12 @@ function App({ auth }) {
           <Navbar />
           <TopButton />
           <Switch>
+            <Route
+              exact
+              path='/product/:productCategory/:productId'
+              component={ProductDetails}
+            />
+            <Route exact path='/cart' component={Cart} />
             <Route exact path='/signin' component={SignIn} />
             <Route exact path='/signup' component={SignUp} />
             <Route path='/' component={Home} />
@@ -48,6 +59,7 @@ function App({ auth }) {
           />
         </Router>
       </ThemeProvider>
+      <ReactTooltip />
     </Fragment>
   );
 }
@@ -56,10 +68,4 @@ const mapStateToProps = state => ({
   auth: state.firebase.auth
 });
 
-export default compose(
-  connect(mapStateToProps),
-  firestoreConnect([
-    'products/shoes/shoeItems',
-    'products/accessories/accItems'
-  ])
-)(App);
+export default connect(mapStateToProps, { getProducts })(App);

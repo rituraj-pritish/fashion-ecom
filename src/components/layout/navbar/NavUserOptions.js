@@ -8,12 +8,12 @@ import { connect } from 'react-redux';
 const NavUserOptions = ({ show, setShow, signOut, auth }) => {
   const noAuthOptions = (
     <NoAuthOptions>
-      <Link to='signin'>
+      <Link to='/signin'>
         <button>Sign In</button>
       </Link>
       <div>
         <p>New Customer ?</p>
-        <Link to='signup'>
+        <Link to='/signup'>
           <button>Sign up</button>
         </Link>
       </div>

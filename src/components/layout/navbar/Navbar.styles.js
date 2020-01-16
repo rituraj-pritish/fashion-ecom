@@ -49,6 +49,7 @@ export const Cart = styled.li`
   display: flex;
   align-items: center;
   margin-right: 0 !important;
+  position: relative;
 
   img {
     width: 30px;
@@ -102,4 +103,17 @@ export const Search = styled.form`
       opacity: 0.7;
     }
   }
+`;
+
+export const Nothing = styled.div`
+  position: absolute;
+  top: 110%;
+  background: #eee;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  padding: 15px;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 `;

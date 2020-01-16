@@ -41,15 +41,15 @@ const SignUp = ({ signup, firebase }) => {
           <label htmlFor='name'>Name</label>
           <input type='text' name='name' value={name} onChange={handleChange} />
 
-          <label htmlFor='phone'>Phone</label>
+          <label htmlFor='phone'>Phone (optional)</label>
           <input
-            type='text'
+            type='number'
             name='phone'
             value={phone}
             onChange={handleChange}
           />
 
-          <label htmlFor='email'>Email (optional)</label>
+          <label htmlFor='email'>Email</label>
           <input
             type='text'
             name='email'

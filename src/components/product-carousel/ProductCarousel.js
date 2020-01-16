@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Swiper from 'react-id-swiper';
 import 'swiper/css/swiper.css';
 import LazyLoad from 'react-lazy-load';
+import { Link } from 'react-router-dom';
 
 import heart from '../../assets/heart.svg';
 import {
@@ -31,6 +32,7 @@ const params = {
   //     slidesPerView: 3
   //   }
   // },
+  slidesPerGroup: 5,
   loop: false,
   spaceBetween: 20,
   containerClass: 'carousel-container',
@@ -41,26 +43,22 @@ const params = {
 };
 
 const ProductCarousel = ({ title, data }) => {
-  // const render = Object.values(data).map(({ name, variants }) => (
-  //   <ProductItem
-  //     key={variants[0].variant}
-  //     name={name}
-  //     price={variants[0].price}
-  //     image={variants[0].images[0]}
-  //   />
-  // ));
-
-  const render = Object.values(data).map(({ name, variants }) => {
+  const render = data.map(({ name, variants, id, category }) => {
     const { price, images } = variants[0];
     return (
-      <CarouselItemContainer>
+      <CarouselItemContainer key={id}>
         <LazyLoad className='lazyload product'>
-          <img src={images[0]} alt={name} />
+          <Link to={`/product/${category}/${id}`}>
+            <img src={images[0]} alt={name} />
+          </Link>
         </LazyLoad>
         <ItemBottom>
           <i className='fas fa-heart' />
           <h3>{name}</h3>
-          <p>$ {price}</p>
+          <p>
+            $ {price}
+            {price % 1 === 0 && '.00'}
+          </p>
           <button>ADD TO CART</button>
         </ItemBottom>
       </CarouselItemContainer>
@@ -80,5 +78,5 @@ const ProductCarousel = ({ title, data }) => {
 export default ProductCarousel;
 
 ProductCarousel.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.array.isRequired
 };

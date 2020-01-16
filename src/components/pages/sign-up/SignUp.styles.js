@@ -29,6 +29,11 @@ export const Container = styled.div`
       height: 35px;
       border-radius: 8px;
     }
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
 
     button {
       background: ${({ theme }) => theme.color.primary.main};

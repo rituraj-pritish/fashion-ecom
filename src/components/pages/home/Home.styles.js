@@ -19,6 +19,7 @@ export const ShopLinks = styled.div`
   grid-template-rows: repeat(2, 1fr%);
   grid-gap: 10px;
   padding: 10px 0;
+  padding-top: 0;
   overflow: hidden;
 
   .women {
