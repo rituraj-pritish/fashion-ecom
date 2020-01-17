@@ -12,26 +12,12 @@ import {
   ItemBottom
 } from './ProductCarousel.styles';
 import ProductItem from '../product/product-item/ProductItem';
+import { addToCart } from '../../redux/actions/userActions';
+import { connect } from 'react-redux';
 
 const params = {
   slidesPerView: 5,
-  // breakpoints: {
-  //   1250: {
-  //     slidesPerView: 7
-  //   },
-  //   1050: {
-  //     slidesPerView: 6
-  //   },
-  //   860: {
-  //     slidesPerView: 5
-  //   },
-  //   670: {
-  //     slidesPerView: 4
-  //   },
-  //   400: {
-  //     slidesPerView: 3
-  //   }
-  // },
+  lazy: true,
   slidesPerGroup: 5,
   loop: false,
   spaceBetween: 20,
@@ -42,16 +28,18 @@ const params = {
   }
 };
 
-const ProductCarousel = ({ title, data }) => {
-  const render = data.map(({ name, variants, id, category }) => {
+const ProductCarousel = ({ title, data, addToCart, cart }) => {
+  const render = data.map(product => {
+    const { name, variants, id, category } = product;
     const { price, images } = variants[0];
+    const isInCart = cart.find(item => item.product.id === id);
     return (
       <CarouselItemContainer key={id}>
-        <LazyLoad className='lazyload product'>
-          <Link to={`/product/${category}/${id}`}>
-            <img src={images[0]} alt={name} />
-          </Link>
-        </LazyLoad>
+        {/* <LazyLoad className='lazyload product'> */}
+        <Link to={`/product/${category}/${id}`}>
+          <img data-src={images[0]} alt={name} className='swiper-lazy' />
+        </Link>
+        {/* </LazyLoad> */}
         <ItemBottom>
           <i className='fas fa-heart' />
           <h3>{name}</h3>
@@ -59,7 +47,13 @@ const ProductCarousel = ({ title, data }) => {
             $ {price}
             {price % 1 === 0 && '.00'}
           </p>
-          <button>ADD TO CART</button>
+          {isInCart ? (
+            <button>ADDED TO CART</button>
+          ) : (
+            <button onClick={() => addToCart(product, 0, 1)}>
+              ADD TO CART
+            </button>
+          )}
         </ItemBottom>
       </CarouselItemContainer>
     );
@@ -67,15 +61,16 @@ const ProductCarousel = ({ title, data }) => {
 
   return (
     <ProductCarouselContainer>
-      <Swiper {...params}>
-        {render}
-        {render}
-      </Swiper>
+      <Swiper {...params}>{render}</Swiper>
     </ProductCarouselContainer>
   );
 };
 
-export default ProductCarousel;
+const mapStateToProps = state => ({
+  cart: state.user.cart
+});
+
+export default connect(mapStateToProps, { addToCart })(ProductCarousel);
 
 ProductCarousel.propTypes = {
   data: PropTypes.array.isRequired

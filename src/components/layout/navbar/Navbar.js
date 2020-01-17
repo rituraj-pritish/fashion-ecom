@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -9,11 +9,15 @@ import logo from '../../../assets/logo.svg';
 import { MaxWidthContainer } from '../../../index.styles';
 import { Nav, Logo, Search, NavLinks, Cart, Nothing } from './Navbar.styles';
 import NavUserOptions from './NavUserOptions';
+import clickOutside from '../../../helpers/clickOutside'
 
 const Navbar = ({ history, cart }) => {
   const [showUserOptions, setShowUserOptions] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [show, setShow] = useState(true);
+  const node = useRef()
+
+  clickOutside(node, () => setShowCart(false));
 
   useEffect(() => {
     if (
@@ -39,7 +43,7 @@ const Navbar = ({ history, cart }) => {
     }
   };
 
-  const nothingInCart = <Nothing>Cart is empty.</Nothing>;
+  const nothingInCart = <Nothing ref={node}>Cart is empty.</Nothing>;
 
   return (
     <Nav show={show}>

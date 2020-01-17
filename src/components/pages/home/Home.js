@@ -67,7 +67,7 @@ const Home = ({ products }) => {
           <div className='shoes'>
             <Link to=''>
               <div className='bg' style={{ backgroundImage: `url(${shoe})` }} />
-              <p>Shoes</p>
+              <p>Footwear</p>
             </Link>
           </div>
         </ShopLinks>
@@ -75,7 +75,7 @@ const Home = ({ products }) => {
 
         <ProductCarousel
           title='Trending'
-          data={[...products.shoes, ...products.accessories]}
+          data={[...products.shoes, ...products.accessories,...products.women, ...products.men]}
         />
     </PageContainer>
   );

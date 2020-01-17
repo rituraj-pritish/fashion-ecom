@@ -21,7 +21,7 @@ export const SmallImage = styled.div`
 
   &::after {
     content: '';
-    display: ${({current}) => current ? 'none' : 'block'};
+    display: ${({ current }) => (current ? 'none' : 'block')};
     position: absolute;
     top: 0;
     left: 0;
@@ -79,6 +79,32 @@ export const Stock = styled.div`
   color: #5ac12a;
 `;
 
+export const Policy = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 15px 0;
+
+  span {
+    max-width: 80px;
+    margin-right: 25px;
+    text-align: center;
+    flex: 1 1 0;
+
+    p {
+      font-size: 1.2rem;
+    }
+  }
+  .lazyload {
+    padding-top: 100%;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+`;
+
 export const CartBtn = styled.div`
   display: flex;
   width: 100%;
@@ -124,6 +150,24 @@ export const BuyBtn = styled.div`
     &:hover {
       background: ${({ theme }) => theme.color.primary.darker};
     }
+  }
+`;
+
+export const Wishlist = styled.div`
+  display: flex;
+  margin-top: 3rem;
+
+  i {
+    margin-right: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: blue;
+  }
+
+  p {
+    font-size: 1.5rem;
+    color: blue;
+    cursor: pointer;
   }
 `;
 

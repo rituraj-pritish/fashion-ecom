@@ -7,7 +7,6 @@ import ReactTooltip from 'react-tooltip';
 
 import theme from '../theme';
 import Navbar from './layout/navbar/Navbar';
-import TopButton from './layout/top-button/TopButton';
 import Footer from './layout/footer/Footer';
 import Home from './pages/home/Home';
 import MailListModal from './mail-list-modal/MailListModal';
@@ -15,7 +14,8 @@ import SignIn from './pages/sign-in/SignIn';
 import SignUp from './pages/sign-up/SignUp';
 import ProductDetails from './product/product-details/ProductDetails';
 import { getProducts } from '../redux/actions/userActions';
-import Cart from './pages/cart/Cart';
+import Cart from './pages/cart/cart-container/Cart';
+import TopButton from './layout/top-button/TopButton';
 
 function App({ auth, getProducts }) {
   const [showMaillistModal, setShowMailListModal] = useState(false);
@@ -40,7 +40,6 @@ function App({ auth, getProducts }) {
       <ThemeProvider theme={theme}>
         <Router>
           <Navbar />
-          <TopButton />
           <Switch>
             <Route
               exact
@@ -52,6 +51,7 @@ function App({ auth, getProducts }) {
             <Route exact path='/signup' component={SignUp} />
             <Route path='/' component={Home} />
           </Switch>
+          <TopButton />
           <Footer />
           <MailListModal
             open={showMaillistModal}

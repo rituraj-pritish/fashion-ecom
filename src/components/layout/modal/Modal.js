@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
+
+import clickOutside from '../../../helpers/clickOutside';
 
 const ModalContainer = styled.div`
   position: absolute;
@@ -30,8 +32,11 @@ const Remove = styled.div`
 `;
 
 const Modal = ({ children, open, setOpen }) => {
+  const node = useRef();
+
+  clickOutside(node, () => setOpen(false));
   return (
-    <ModalContainer show={open}>
+    <ModalContainer ref={node} show={open}>
       <Remove onClick={() => setOpen(false)}>
         <i className='fas fa-times' />
       </Remove>

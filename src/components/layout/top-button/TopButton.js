@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+const Container = styled.div`
+  max-width: 1366px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+`;
+
 const Top = styled.div`
-  z-index: 5;
+  z-index: 50;
   position: fixed;
   height: 40px;
   font-size: 30px;
@@ -18,6 +28,7 @@ const Top = styled.div`
   cursor: pointer;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
   visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
+  visibility: visible;
 `;
 
 const TopButton = () => {
@@ -39,9 +50,9 @@ const TopButton = () => {
   };
 
   return (
-    <Top show={show} onClick={scrollToTop}>
-      &uarr;
-    </Top>
+      <Top show={show} onClick={scrollToTop}>
+        &uarr;
+      </Top>
   );
 };
 

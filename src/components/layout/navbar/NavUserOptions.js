@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { UserOptions, NoAuthOptions } from './NavUserOptions.styles';
 import { Link } from 'react-router-dom';
 import { signOut } from '../../../redux/actions/authActions';
 import { connect } from 'react-redux';
+import clickOutside from '../../../helpers/clickOutside';
 
 const NavUserOptions = ({ show, setShow, signOut, auth }) => {
+  const node = useRef();
+
+  clickOutside(node, () => setShow(false));
+
   const noAuthOptions = (
     <NoAuthOptions>
       <Link to='/signin'>
@@ -23,7 +28,7 @@ const NavUserOptions = ({ show, setShow, signOut, auth }) => {
   const authOptions = <button onClick={signOut}>logout</button>;
 
   return (
-    <UserOptions show={show}>
+    <UserOptions ref={node} show={show}>
       {auth.uid ? authOptions : noAuthOptions}
     </UserOptions>
   );

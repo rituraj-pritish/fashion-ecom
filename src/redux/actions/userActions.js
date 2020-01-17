@@ -4,7 +4,9 @@ import {
   REMOVE_CURRENT_PRODUCT,
   ADD_TO_CART,
   REMOVE_FROM_CART,
-  UPDATE_CART
+  UPDATE_CART,
+  REMOVE_FROM_WISHLIST,
+  ADD_TO_WISHLIST
 } from '../types';
 import PRODUCTS from '../../data/PRODUCTS';
 
@@ -40,3 +42,18 @@ export const removeFromCart = product => {
     payload: product
   };
 };
+
+export const addToWishlist = product => {
+  return {
+    type: ADD_TO_WISHLIST,
+    payload: product
+  };
+};
+
+export const removeFromWishlist = id => {
+  return {
+    type: REMOVE_FROM_WISHLIST,
+    payload: id
+  };
+};
+

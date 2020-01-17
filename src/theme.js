@@ -2,7 +2,8 @@ export default {
   color: {
     primary: {
       main: '#007bff',
-      darker: '#0063cc'
+      darker: '#0063cc',
+      lighter: '#3d9aff'
     },
     text: {
       main: '#000',
