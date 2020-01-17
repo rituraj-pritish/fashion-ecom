@@ -1,15 +1,14 @@
 import firebase from '../../firebase/firebase';
+import { setAlert } from './userActions';
 
-export const signup = data => async dispatch  => {
+export const signup = data => async dispatch => {
   const { email, password, name, phone } = data;
   try {
-    const res = await firebase.auth().createUserWithEmailAndPassword(email, password);
-
-    console.log(res.user);
-    console.log(res.user.uid);
+    const res = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password);
 
     if (res.user.uid) {
-      console.log('called');
       firebase
         .firestore()
         .collection('users')
@@ -19,6 +18,7 @@ export const signup = data => async dispatch  => {
           phone: phone
         });
     }
+    setAlert('Sign up successful', 'success');
   } catch (err) {}
 
   return { type: 'some' };
@@ -27,6 +27,7 @@ export const signup = data => async dispatch  => {
 export const signin = ({ email, password }) => {
   try {
     firebase.auth().signInWithEmailAndPassword(email, password);
+    setAlert('Sign in successful', 'success');
   } catch (err) {}
   return { type: 'some' };
 };
@@ -34,6 +35,7 @@ export const signin = ({ email, password }) => {
 export const signOut = () => {
   try {
     firebase.auth().signOut();
+    setAlert('Sign out successful', 'success');
   } catch (err) {}
   return { type: 'some' };
 };

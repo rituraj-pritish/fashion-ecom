@@ -22,27 +22,6 @@ export const Container = styled.div`
       margin-bottom: 10px;
     }
 
-    input {
-      background: #eee;
-      width: 100%;
-      margin-bottom: 20px;
-      height: 35px;
-      border-radius: 8px;
-    }
-
-    button {
-      background: ${({ theme }) => theme.color.primary.main};
-      color: #fff;
-      width: 100%;
-      height: 40px;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 1.7rem;
-
-      &:hover {
-        background: ${({ theme }) => theme.color.primary.darker};
-      }
-    }
 }
       p {
         margin-top: 15px;

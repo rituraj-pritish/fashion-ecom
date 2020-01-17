@@ -73,7 +73,7 @@ export const Search = styled.form`
   display: flex;
   height: 30px;
   flex-grow: 1;
-  margin: 0 20px;
+  margin: 0 150px;
   align-self: center;
 
   input {

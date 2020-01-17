@@ -6,8 +6,11 @@ import { PageContainer } from '../../../index.styles';
 import { Logo, Container } from './SignIn.styles';
 import { connect } from 'react-redux';
 import { signin } from '../../../redux/actions/authActions';
+import { setAlert } from '../../../redux/actions/userActions';
+import Input from '../../reusable-components/Input';
+import PrimaryButton from '../../reusable-components/PrimaryButton';
 
-const SignIn = ({ firebase, signin, history }) => {
+const SignIn = ({ firebase, signin, setAlert }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -24,7 +27,10 @@ const SignIn = ({ firebase, signin, history }) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    //todo form validation
+    if (email === '' || password === '') {
+      setAlert('All fields are required', 'danger');
+      return;
+    }
     signin({ email, password });
   };
 
@@ -36,7 +42,7 @@ const SignIn = ({ firebase, signin, history }) => {
         </Link>
         <form onSubmit={handleSubmit}>
           <label htmlFor='email'>Email</label>
-          <input
+          <Input
             type='text'
             name='email'
             value={email}
@@ -44,14 +50,14 @@ const SignIn = ({ firebase, signin, history }) => {
           />
 
           <label htmlFor='password'>Password</label>
-          <input
+          <Input
             type='password'
             name='password'
             value={password}
             onChange={handleChange}
           />
 
-          <button>Sign In</button>
+          <PrimaryButton fullWidth>Sign In</PrimaryButton>
           <p>
             Don't have an account ? <Link to='/signup'>Sign Up</Link>
           </p>
@@ -65,4 +71,4 @@ const mapStateToProps = state => ({
   firebase: state.firebase
 });
 
-export default connect(mapStateToProps, { signin })(SignIn);
+export default connect(mapStateToProps, { signin, setAlert })(SignIn);

@@ -6,8 +6,11 @@ import logo from '../../../assets/logo.svg';
 import { PageContainer } from '../../../index.styles';
 import { Logo, Container } from './SignUp.styles';
 import { signup } from '../../../redux/actions/authActions';
+import { setAlert } from '../../../redux/actions/userActions';
+import Input from '../../reusable-components/Input';
+import PrimaryButton from '../../reusable-components/PrimaryButton';
 
-const SignUp = ({ signup, firebase }) => {
+const SignUp = ({ signup, firebase, setAlert }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,7 +30,16 @@ const SignUp = ({ signup, firebase }) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    //todo form validation
+    if (email === '' || name === '' || password1 === '' || password2 === '') {
+      setAlert('All fields are required', 'danger');
+      return;
+    } else if (password1 !== password2) {
+      setAlert('Passwords do not match', 'danger');
+      return;
+    } else if (password1.length < 6) {
+      setAlert('Password must be at least six characters long', 'danger');
+      return;
+    }
     signup({ ...formData, password: password1 });
   };
 
@@ -39,10 +51,10 @@ const SignUp = ({ signup, firebase }) => {
         </Link>
         <form onSubmit={handleSubmit}>
           <label htmlFor='name'>Name</label>
-          <input type='text' name='name' value={name} onChange={handleChange} />
+          <Input type='text' name='name' value={name} onChange={handleChange} />
 
           <label htmlFor='phone'>Phone (optional)</label>
-          <input
+          <Input
             type='number'
             name='phone'
             value={phone}
@@ -50,7 +62,7 @@ const SignUp = ({ signup, firebase }) => {
           />
 
           <label htmlFor='email'>Email</label>
-          <input
+          <Input
             type='text'
             name='email'
             value={email}
@@ -58,7 +70,7 @@ const SignUp = ({ signup, firebase }) => {
           />
 
           <label htmlFor='password1'>Password</label>
-          <input
+          <Input
             type='password'
             name='password1'
             value={password1}
@@ -66,14 +78,14 @@ const SignUp = ({ signup, firebase }) => {
           />
 
           <label htmlFor='password2'>Confirm Password</label>
-          <input
+          <Input
             type='password'
             name='password2'
             value={password2}
             onChange={handleChange}
           />
 
-          <button>Sign Up</button>
+          <PrimaryButton>Sign Up</PrimaryButton>
           <p>
             Already have an account ? <Link to='/signin'>Sign In</Link>
           </p>
@@ -87,4 +99,4 @@ const mapStateToProps = state => ({
   firebase: state.firebase
 });
 
-export default connect(mapStateToProps, { signup })(SignUp);
+export default connect(mapStateToProps, { signup, setAlert })(SignUp);

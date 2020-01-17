@@ -4,6 +4,8 @@ import { ThemeProvider } from 'styled-components';
 import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 
 import theme from '../theme';
 import Navbar from './layout/navbar/Navbar';
@@ -16,6 +18,7 @@ import ProductDetails from './product/product-details/ProductDetails';
 import { getProducts } from '../redux/actions/userActions';
 import Cart from './pages/cart/cart-container/Cart';
 import TopButton from './layout/top-button/TopButton';
+import Wishlist from './pages/wishlist/Wishlist';
 
 function App({ auth, getProducts }) {
   const [showMaillistModal, setShowMailListModal] = useState(false);
@@ -47,6 +50,7 @@ function App({ auth, getProducts }) {
               component={ProductDetails}
             />
             <Route exact path='/cart' component={Cart} />
+            <Route exact path='/user/wishlist' component={Wishlist} />
             <Route exact path='/signin' component={SignIn} />
             <Route exact path='/signup' component={SignUp} />
             <Route path='/' component={Home} />
@@ -59,6 +63,7 @@ function App({ auth, getProducts }) {
           />
         </Router>
       </ThemeProvider>
+      <ReactNotification />
       <ReactTooltip />
     </Fragment>
   );

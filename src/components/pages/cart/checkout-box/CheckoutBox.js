@@ -18,7 +18,10 @@ const CheckoutBox = ({ cart }) => {
         Subtotal: <p>{subTotal}</p> <br />
         Shipping: <p>{subTotal > 200 ? 'FREE' : '$ 20'}</p>
         <Line />
-        Total: <p>$ {subTotal > 200 ? subTotal : parseFloat(subTotal) + 20}</p>
+        Total:{' '}
+        <p>
+          $ {subTotal > 200 ? subTotal : (parseFloat(subTotal) + 20).toFixed(2)}
+        </p>
         <PrimaryButton>checkout</PrimaryButton>
       </Container>
     </CheckoutBoxContainer>

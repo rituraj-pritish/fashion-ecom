@@ -25,7 +25,12 @@ const NavUserOptions = ({ show, setShow, signOut, auth }) => {
     </NoAuthOptions>
   );
 
-  const authOptions = <button onClick={signOut}>logout</button>;
+  const authOptions = (
+    <>
+      <Link to='/user/wishlist'>Wishlist</Link>
+      <button onClick={signOut}>logout</button>
+    </>
+  );
 
   return (
     <UserOptions ref={node} show={show}>

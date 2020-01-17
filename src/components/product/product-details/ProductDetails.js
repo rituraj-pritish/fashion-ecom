@@ -9,7 +9,8 @@ import {
   getProduct,
   removeProduct,
   addToCart,
-  addToWishlist
+  addToWishlist,
+  setAlert
 } from '../../../redux/actions/userActions';
 import { PageContainer } from '../../../index.styles';
 import {
@@ -41,7 +42,9 @@ const ProductDetails = ({
   wishlist,
   cart,
   addToCart,
-  addToWishlist
+  addToWishlist,
+  auth,
+  setAlert
 }) => {
   const productCategory = match.params.productCategory;
   const productId = match.params.productId;
@@ -107,7 +110,10 @@ const ProductDetails = ({
   };
 
   const handleWishlist = () => {
-    //todo check for auth
+    if (auth.isEmpty) {
+      setAlert('Login to continue', 'danger');
+      return;
+    }
     if (isInWishlist) return;
     addToWishlist(product);
   };
@@ -209,14 +215,16 @@ const mapStateToProps = state => ({
   product: state.user.currentProduct,
   cart: state.user.cart,
   wishlist: state.user.wishlist,
-  loading: state.user.loading
+  loading: state.user.loading,
+  auth: state.firebase.auth
 });
 
 export default connect(mapStateToProps, {
   getProduct,
   removeProduct,
   addToCart,
-  addToWishlist
+  addToWishlist,
+  setAlert
 })(ProductDetails);
 
 ProductDetails.propTypes = {
