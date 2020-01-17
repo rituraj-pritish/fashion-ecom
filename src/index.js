@@ -9,7 +9,7 @@ import { createFirestoreInstance } from 'redux-firestore';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { persistStore, persistReducer } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
-import storage from 'redux-persist/lib/storage'
+import storage from 'redux-persist/lib/storage';
 import firebase from './firebase/firebase';
 
 import './index.css';
@@ -28,10 +28,12 @@ const rrfConfig = {
 };
 
 const middlewares = [reduxThunk];
-const store = createStore(
-  persistedReducer,
-  composeWithDevTools(applyMiddleware(...middlewares))
-);
+
+const devTools =
+  process.env.NODE_ENV === 'production'
+    ? applyMiddleware(...middlewares)
+    : composeWithDevTools(applyMiddleware(...middlewares));
+const store = createStore(persistedReducer, devTools);
 
 const persistor = persistStore(store);
 
@@ -44,7 +46,7 @@ const rrfProps = {
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={(<div>LOADING....</div>)} persistor={persistor}>
+    <PersistGate loading={<div>LOADING....</div>} persistor={persistor}>
       <ReactReduxFirebaseProvider {...rrfProps}>
         <App />
       </ReactReduxFirebaseProvider>
