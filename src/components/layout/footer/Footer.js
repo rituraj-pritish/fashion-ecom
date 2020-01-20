@@ -43,32 +43,32 @@ const Footer = ({ history }) => {
           <SiteLinks>
             <h3>Buy</h3>
             <li>
-              <Link to=''>Men</Link>
+              <Link to='/products/men'>Men</Link>
             </li>
             <li>
-              <Link to=''>Women</Link>
+              <Link to='/products/women'>Women</Link>
             </li>
             <li>
-              <Link to=''>Accessories</Link>
+              <Link to='/products/accessories'>Accessories</Link>
             </li>
             <li>
-              <Link to=''>Shoes</Link>
+              <Link to='/products/shoes'>Footwear</Link>
             </li>
           </SiteLinks>
 
           <SiteLinks>
             <h3>Special</h3>
             <li>
-              <Link to=''>Today's Offers</Link>
+              <Link to='/products/offers'>Today's Offers</Link>
             </li>
             <li>
-              <Link to=''>Best Sellers</Link>
+              <Link to='/products/best-sellers'>Best Sellers</Link>
             </li>
             <li>
-              <Link to=''>Trending</Link>
+              <Link to='/products/trending'>Trending</Link>
             </li>
             <li>
-              <Link to=''>New</Link>
+              <Link to='/products/new'>New</Link>
             </li>
           </SiteLinks>
 

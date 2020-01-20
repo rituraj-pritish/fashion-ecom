@@ -58,3 +58,7 @@ export const NoAuthOptions = styled.div`
     }
   }
 `;
+
+export const AuthOptions  = styled.div`
+  
+`

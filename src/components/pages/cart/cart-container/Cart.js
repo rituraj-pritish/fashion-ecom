@@ -14,7 +14,7 @@ const Cart = ({ cart }) => {
       <Container>
         <ItemsContainer>
           {cart.map(item => (
-            <CartItem key={item.product.id} item={item} />
+            <CartItem page='cart' key={item.product.id} item={item} />
           ))}
         </ItemsContainer>
         <CheckoutBox cart={cart} />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PrimaryButton from '../../../reusable-components/PrimaryButton';
+import Button from '../../../reusable-components/Button';
 import { CheckoutBoxContainer, Container, Line } from './CheckoutBox.styles';
 
 const CheckoutBox = ({ cart }) => {
@@ -22,7 +22,7 @@ const CheckoutBox = ({ cart }) => {
         <p>
           $ {subTotal > 200 ? subTotal : (parseFloat(subTotal) + 20).toFixed(2)}
         </p>
-        <PrimaryButton>checkout</PrimaryButton>
+        <Button>checkout</Button>
       </Container>
     </CheckoutBoxContainer>
   );

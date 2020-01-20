@@ -14,6 +14,7 @@ import firebase from './firebase/firebase';
 
 import './index.css';
 import App from './components/App';
+import Loader from './components/layout/loader/Loader';
 
 const persistConfig = {
   key: 'root',
@@ -46,7 +47,7 @@ const rrfProps = {
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={<div>LOADING....</div>} persistor={persistor}>
+    <PersistGate loading={<Loader/>} persistor={persistor}>
       <ReactReduxFirebaseProvider {...rrfProps}>
         <App />
       </ReactReduxFirebaseProvider>

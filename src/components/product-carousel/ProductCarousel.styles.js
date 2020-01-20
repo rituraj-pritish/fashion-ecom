@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 
 export const ProductCarouselContainer = styled.div`
+  margin: 30px 0;
+
   .carousel-container {
     position: relative;
     margin: 20px 10px;
     overflow: hidden;
+  }
+
+  .swiper-slide {
+    height: auto;
   }
 
   .swiper-button-next {
@@ -14,6 +20,7 @@ export const ProductCarouselContainer = styled.div`
     height: 65px;
     width: 35px;
     border-radius: 4px 0 0 4px;
+    z-index: 4;
   }
 
   .swiper-button-prev {
@@ -23,11 +30,28 @@ export const ProductCarouselContainer = styled.div`
     height: 65px;
     width: 35px;
     border-radius: 0 4px 4px 0;
+    z-index: 4;
+  }
+
+  .swiper-button-next.swiper-button-disabled,
+  .swiper-button-prev.swiper-button-disabled {
+    cursor: default;
+    pointer-events: all;
+  }
+
+  /* for touch screens */
+  @media (hover: none) and (pointer: coarse) {
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: none;
+    }
   }
 `;
 
 export const CarouselItemContainer = styled.div`
-  background: #F6F8FC;
+  background: #f6f8fc;
+  display: flex;
+  flex-direction: column;
 
   img {
     width: 100%;
@@ -36,8 +60,11 @@ export const CarouselItemContainer = styled.div`
 `;
 
 export const ItemBottom = styled.div`
-  padding: 0 15px 15px 15px;
+  padding: 0 10px 10px 10px;
   text-align: left;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 
   h3 {
     font-size: 1.3rem;
@@ -62,20 +89,14 @@ export const ItemBottom = styled.div`
   p {
     margin-top: 5px;
     font-size: 1.3rem;
+    margin-bottom: 15px;
   }
 
   button {
-    width: 100%;
-    padding:10px;
-    border-radius: 8px;
-    background: ${({theme}) => theme.color.primary.main};
-    color: white;
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-top: 15px;
-    
-    &:hover {
-      background: ${({theme}) => theme.color.primary.darker};
-    }
+    margin-top: auto;
   }
-`
+`;
+export const Title = styled.div`
+  text-align: left;
+  font-size: 1.8rem;
+`;

@@ -45,10 +45,10 @@ export const removeFromCart = product => {
   };
 };
 
-export const addToWishlist = product => {
+export const addToWishlist = (product, variant) => {
   return {
     type: ADD_TO_WISHLIST,
-    payload: product
+    payload: { product, variant }
   };
 };
 

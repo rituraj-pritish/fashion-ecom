@@ -3,6 +3,8 @@ import styled from 'styled-components'
 export const ProductItemContainer = styled.div`
   background: #F6F8FC;
   position: relative;
+  display: flex;
+  flex-direction: column;
 
   img {
     width: 100%;
@@ -13,6 +15,9 @@ export const ProductItemContainer = styled.div`
 export const ItemBottom = styled.div`
   padding: 0 15px 15px 15px;
   text-align: left;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 
   h3 {
     font-size: 1.6rem;
@@ -32,25 +37,16 @@ export const ItemBottom = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 
   p {
     margin-top: 5px;
     font-size: 1.3rem;
+    margin-bottom: 15px;
   }
 
   button {
-    width: 100%;
-    padding:10px;
-    border-radius: 8px;
-    background: ${({theme}) => theme.color.primary.main};
-    color: white;
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-top: 15px;
-    
-    &:hover {
-      background: ${({theme}) => theme.color.primary.darker};
-    }
+    margin-top: auto;
   }
 `

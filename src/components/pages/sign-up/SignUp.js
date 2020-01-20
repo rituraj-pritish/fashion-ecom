@@ -8,7 +8,7 @@ import { Logo, Container } from './SignUp.styles';
 import { signup } from '../../../redux/actions/authActions';
 import { setAlert } from '../../../redux/actions/userActions';
 import Input from '../../reusable-components/Input';
-import PrimaryButton from '../../reusable-components/PrimaryButton';
+import Button from '../../reusable-components/Button';
 
 const SignUp = ({ signup, firebase, setAlert }) => {
   const [formData, setFormData] = useState({
@@ -85,7 +85,7 @@ const SignUp = ({ signup, firebase, setAlert }) => {
             onChange={handleChange}
           />
 
-          <PrimaryButton>Sign Up</PrimaryButton>
+          <Button>Sign Up</Button>
           <p>
             Already have an account ? <Link to='/signin'>Sign In</Link>
           </p>

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-import { UserOptions, NoAuthOptions } from './NavUserOptions.styles';
+import { UserOptions, NoAuthOptions, AuthOptions } from './NavUserOptions.styles';
 import { Link } from 'react-router-dom';
 import { signOut } from '../../../redux/actions/authActions';
 import { connect } from 'react-redux';
@@ -26,10 +26,20 @@ const NavUserOptions = ({ show, setShow, signOut, auth }) => {
   );
 
   const authOptions = (
-    <>
-      <Link to='/user/wishlist'>Wishlist</Link>
-      <button onClick={signOut}>logout</button>
-    </>
+    <AuthOptions>
+      <ul>
+        <li>
+          <Link to='/user/wishlist'>
+            Wishlist
+          </Link>
+        </li>
+        <li>
+          <Link to='#' onClick={() => signOut()}>
+            Logout
+          </Link>
+        </li>
+      </ul>
+    </AuthOptions>
   );
 
   return (

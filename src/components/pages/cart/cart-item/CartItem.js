@@ -11,11 +11,18 @@ import {
 } from './CartItem.styles';
 import {
   updateCart,
-  removeFromCart
+  removeFromCart,
+  removeFromWishlist
 } from '../../../../redux/actions/userActions';
 import { Link } from 'react-router-dom';
 
-const CartItem = ({ item, updateCart, removeFromCart }) => {
+const CartItem = ({
+  page,
+  item,
+  updateCart,
+  removeFromCart,
+  removeFromWishlist
+}) => {
   const {
     product: { variants, name, category, id },
     variant,
@@ -23,6 +30,14 @@ const CartItem = ({ item, updateCart, removeFromCart }) => {
   } = item;
   const imageUrl = variants[variant].images[0];
   const price = variants[variant].price;
+
+  const handleRemove = () => {
+    if (page === 'cart') {
+      removeFromCart(item.product);
+    } else {
+      removeFromWishlist(item.product.id);
+    }
+  };
 
   return (
     <CartItemContainer>
@@ -35,30 +50,35 @@ const CartItem = ({ item, updateCart, removeFromCart }) => {
       <Details>
         <p>{name}</p>
 
-        <Quantity>
-          <i
-            className='fas fa-minus'
-            onClick={() => {
-              if (qty === 1) return;
-              updateCart(item.product, qty - 1);
-            }}
-          />
-          <p>{qty}</p>
-          <i
-            className='fas fa-plus'
-            onClick={() => updateCart(item.product, qty + 1)}
-          />
-        </Quantity>
+        {qty && (
+          <Quantity>
+            <i
+              className='fas fa-minus'
+              onClick={() => {
+                if (qty === 1) return;
+                updateCart(item.product, qty - 1);
+              }}
+            />
+            <p>{qty}</p>
+            <i
+              className='fas fa-plus'
+              onClick={() => updateCart(item.product, qty + 1)}
+            />
+          </Quantity>
+        )}
       </Details>
 
-      <Amount>$ {(Math.round(qty * price * 100) / 100).toFixed(2)}</Amount>
+      <Amount>
+        $ {qty ? (Math.round(qty * price * 100) / 100).toFixed(2) : price}
+      </Amount>
 
-      <Remove
-        onClick={() => removeFromCart(item.product)}
-        className='far fa-trash-alt'
-      />
+      <Remove onClick={handleRemove} className='far fa-trash-alt' />
     </CartItemContainer>
   );
 };
 
-export default connect(null, { updateCart, removeFromCart })(CartItem);
+export default connect(null, {
+  updateCart,
+  removeFromCart,
+  removeFromWishlist
+})(CartItem);

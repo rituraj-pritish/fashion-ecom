@@ -76,13 +76,16 @@ export default (state = initialState, { type, payload }) => {
       if (state.wishlist.find(item => item === payload)) return state;
       return {
         ...state,
-        wishlist: [...state.wishlist, payload],
+        wishlist: [
+          ...state.wishlist,
+          { product: payload.product, variant: payload.variant }
+        ],
         loading: false
       };
     case REMOVE_FROM_WISHLIST:
       return {
         ...state,
-        wishlist: state.wishlist.filter(item => item.id !== payload),
+        wishlist: state.wishlist.filter(item => item.product.id !== payload),
         loading: false
       };
     default:

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import sizes from '../../../sizes';
 
 export const Nav = styled.nav`
   font-size: 1.6rem;
@@ -8,16 +9,52 @@ export const Nav = styled.nav`
   color: #202020;
   display: flex;
   align-items: center;
-  padding: 0 50px;
+  padding: 0 ${({ theme }) => theme.padding.xxl};
   box-shadow: 0px 3px 10px #20202042;
   box-sizing: border-box;
   z-index: 5;
   position: fixed;
   display: ${({ show }) => (show ? 'flex' : 'none')};
+
+  @media ${sizes.md} {
+    padding: 0 ${({ theme }) => theme.padding.md};
+  }
+
+  @media ${sizes.mob} {
+    padding: 0 ${({ theme }) => theme.padding.mob};
+  }
+`;
+
+export const Container = styled.div`
+  max-width: ${({ theme }) => theme.maxWidth};
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+
+  @media ${sizes.lg} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
 export const Logo = styled.img`
   width: 120px;
+`;
+
+export const SearchIcon = styled.li`
+  display: none;
+  font-size: 2.2rem;
+
+  @media ${sizes.lg} {
+    display: block;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const NavLinks = styled.ul`
@@ -72,8 +109,7 @@ export const Cart = styled.li`
 export const Search = styled.form`
   display: flex;
   height: 30px;
-  flex-grow: 1;
-  margin: 0 150px;
+  margin: 0 auto;
   align-self: center;
 
   input {
@@ -83,6 +119,7 @@ export const Search = styled.form`
     flex-grow: 1;
     border-radius: 10px 0 0 10px;
     padding: 5px 10px;
+    border: 2px solid #fff;
 
     &:focus {
       outline: none;
@@ -97,11 +134,17 @@ export const Search = styled.form`
     width: 70px;
     background: #20202042;
     cursor: pointer;
-    color: black;
+    color: #fff;
+    border: 2px solid #fff;
 
     &:hover {
-      opacity: 0.7;
+      background: #eee;
+      color: black;
     }
+  }
+
+  @media ${sizes.lg} {
+    display: none;
   }
 `;
 

@@ -12,7 +12,9 @@ export default {
   },
   navHt: '50px',
   padding: {
-    lg: '50px'
+    mob: '15px',
+    md: '30px',
+    xxl: '50px'
   },
 
   maxWidth: '1350px'

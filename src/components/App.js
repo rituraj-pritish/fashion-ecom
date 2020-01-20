@@ -19,6 +19,8 @@ import { getProducts } from '../redux/actions/userActions';
 import Cart from './pages/cart/cart-container/Cart';
 import TopButton from './layout/top-button/TopButton';
 import Wishlist from './pages/wishlist/Wishlist';
+import Loader from './layout/loader/Loader';
+import Products from './pages/products/products/Products';
 
 function App({ auth, getProducts }) {
   const [showMaillistModal, setShowMailListModal] = useState(false);
@@ -35,7 +37,7 @@ function App({ auth, getProducts }) {
   }, []);
 
   if (!auth.isLoaded) {
-    return <div>Loading......</div>;
+    return <Loader />;
   }
 
   return (
@@ -48,6 +50,11 @@ function App({ auth, getProducts }) {
               exact
               path='/product/:productCategory/:productId'
               component={ProductDetails}
+            />
+            <Route
+              exact
+              path='/products/:productsCategory'
+              component={Products}
             />
             <Route exact path='/cart' component={Cart} />
             <Route exact path='/user/wishlist' component={Wishlist} />

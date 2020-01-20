@@ -24,18 +24,26 @@ export const signup = data => async dispatch => {
   return { type: 'some' };
 };
 
-export const signin = ({ email, password }) => {
+export const signin = ({ email, password }) => async dispatch => {
   try {
-    firebase.auth().signInWithEmailAndPassword(email, password);
-    setAlert('Sign in successful', 'success');
+    const res = await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password);
+
+    if (res.user.uid) {
+      setAlert('Sign in successful', 'success');
+    }
   } catch (err) {}
-  return { type: 'some' };
+  dispatch({ type: 'some' });
 };
 
-export const signOut = () => {
+export const signOut = () => async dispatch => {
   try {
-    firebase.auth().signOut();
+    const res = await firebase.auth().signOut();
+    console.log(res);
+    localStorage.clear();
+    // window.location.reload();
     setAlert('Sign out successful', 'success');
   } catch (err) {}
-  return { type: 'some' };
+  dispatch({ type: 'some' });
 };

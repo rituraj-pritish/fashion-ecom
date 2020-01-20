@@ -6,8 +6,7 @@ import userIcon from '../../../assets/user-icon.svg';
 import cartIcon from '../../../assets/cart.svg';
 import logo from '../../../assets/logo.svg';
 
-import { MaxWidthContainer } from '../../../index.styles';
-import { Nav, Logo, Search, NavLinks, Cart, Nothing } from './Navbar.styles';
+import { Nav, Logo, Search, NavLinks, Cart, Nothing,Container, SearchIcon } from './Navbar.styles';
 import NavUserOptions from './NavUserOptions';
 import clickOutside from '../../../helpers/clickOutside'
 
@@ -47,7 +46,7 @@ const Navbar = ({ history, cart }) => {
 
   return (
     <Nav show={show}>
-      <MaxWidthContainer style={{ display: 'flex' }}>
+      <Container>
         <Link to='/'>
           <Logo className='logo' src={logo} alt='logo' />
         </Link>
@@ -57,6 +56,10 @@ const Navbar = ({ history, cart }) => {
           <button className='search-btn'>Search</button>
         </Search>
         <NavLinks>
+          <SearchIcon>
+            <i className='fas fa-search'/>
+          </SearchIcon>
+
           <li onClick={() => setShowUserOptions(!showUserOptions)}>
             <img src={userIcon} alt='userIcon' />
 
@@ -72,7 +75,7 @@ const Navbar = ({ history, cart }) => {
             {showCart && nothingInCart}
           </Cart>
         </NavLinks>
-      </MaxWidthContainer>
+      </Container>
     </Nav>
   );
 };

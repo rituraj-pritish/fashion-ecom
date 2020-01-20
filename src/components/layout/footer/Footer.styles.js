@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import sizes from '../../../sizes';
 
 export const FooterContainer = styled.div`
   position: relative;
@@ -7,9 +8,17 @@ export const FooterContainer = styled.div`
   width: 100%;
   background: #b5b5b5;
   margin-top: auto;
-  padding: 30px ${({ theme }) => theme.padding.lg};
+  padding: 30px ${({ theme }) => theme.padding.xxl};
   padding-bottom: 5px;
   display: ${({ show }) => (show ? 'block' : 'none')};
+
+  @media ${sizes.md} {
+    padding: 30px ${({ theme }) => theme.padding.md};
+  }
+
+  @media ${sizes.mob} {
+    padding: 30px ${({ theme }) => theme.padding.md};
+  }
 `;
 
 export const Logo = styled.div`

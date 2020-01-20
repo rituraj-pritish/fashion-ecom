@@ -1,82 +1,29 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import women from '../../../assets/women.webp';
-import men from '../../../assets/men.webp';
-import accesories from '../../../assets/accesories.webp';
-import sale from '../../../assets/sale.jpg';
-import newItems from '../../../assets/new.jpg';
-import shoe from '../../../assets/shoes.jpg';
-
 import { PageContainer } from '../../../index.styles';
-import { ShopLinks, Container } from './Home.styles';
+import { Container } from './Home.styles';
 import ProductCarousel from '../../product-carousel/ProductCarousel';
+import ShopLinks from './shop-links/ShopLinks';
 
 const Home = ({ products }) => {
   useEffect(() => {}, [products]);
 
   return (
     <PageContainer>
-      <Container>
-        <ShopLinks>
-          <div className='sale'>
-            <Link to='shop/sale'>
-              <div className='bg' style={{ backgroundImage: `url(${sale})` }} />
-              <p>Sale</p>
-            </Link>
-          </div>
+      <ShopLinks />
 
-          <div className='new'>
-            <Link to='shop/sale'>
-              <div
-                className='bg'
-                style={{ backgroundImage: `url(${newItems})` }}
-              />
-              <p>New</p>
-            </Link>
-          </div>
+      <ProductCarousel title='trending' data={Object.values(products).flat()} />
 
-          <div className='women'>
-            <Link to=''>
-              <div
-                className='bg'
-                style={{ backgroundImage: `url(${women})` }}
-              />
-              <p>Women</p>
-            </Link>
-          </div>
+      <ProductCarousel
+        title='top selling'
+        data={Object.values(products).flat()}
+      />
 
-          <div className='men'>
-            <Link to=''>
-              <div className='bg' style={{ backgroundImage: `url(${men})` }} />
-              <p>Men</p>
-            </Link>
-          </div>
-
-          <div className='accesories'>
-            <Link to=''>
-              <div
-                className='bg'
-                style={{ backgroundImage: `url(${accesories})` }}
-              />
-              <p>Accessories</p>
-            </Link>
-          </div>
-
-          <div className='shoes'>
-            <Link to=''>
-              <div className='bg' style={{ backgroundImage: `url(${shoe})` }} />
-              <p>Footwear</p>
-            </Link>
-          </div>
-        </ShopLinks>
-      </Container>
-
-        <ProductCarousel
-          title='Trending'
-          data={[...products.shoes, ...products.accessories,...products.women, ...products.men]}
-        />
+      <ProductCarousel
+        title="today's offers"
+        data={Object.values(products).flat()}
+      />
     </PageContainer>
   );
 };
