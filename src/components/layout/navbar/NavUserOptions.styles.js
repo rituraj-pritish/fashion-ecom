@@ -60,5 +60,11 @@ export const NoAuthOptions = styled.div`
 `;
 
 export const AuthOptions  = styled.div`
-  
+  a {
+    display: flex;
+
+    i {
+      margin-right: 20px;
+    }
+  }
 `

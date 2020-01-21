@@ -30,6 +30,10 @@ const Footer = ({ history }) => {
     }
   }, [history.location]);
 
+  const handleMaillist = e => {
+    e.preventDefault();
+  };
+
   return (
     <FooterContainer show={show}>
       <MaxWidthContainer>
@@ -41,40 +45,44 @@ const Footer = ({ history }) => {
           </Logo>
 
           <SiteLinks>
-            <h3>Buy</h3>
-            <li>
-              <Link to='/products/men'>Men</Link>
-            </li>
-            <li>
-              <Link to='/products/women'>Women</Link>
-            </li>
-            <li>
-              <Link to='/products/accessories'>Accessories</Link>
-            </li>
-            <li>
-              <Link to='/products/shoes'>Footwear</Link>
-            </li>
+            <div>
+              <h3>Buy</h3>
+              <li>
+                <Link to='/products/men'>Men</Link>
+              </li>
+              <li>
+                <Link to='/products/women'>Women</Link>
+              </li>
+              <li>
+                <Link to='/products/accessories'>Accessories</Link>
+              </li>
+              <li>
+                <Link to='/products/shoes'>Footwear</Link>
+              </li>
+            </div>
           </SiteLinks>
 
           <SiteLinks>
-            <h3>Special</h3>
-            <li>
-              <Link to='/products/offers'>Today's Offers</Link>
-            </li>
-            <li>
-              <Link to='/products/best-sellers'>Best Sellers</Link>
-            </li>
-            <li>
-              <Link to='/products/trending'>Trending</Link>
-            </li>
-            <li>
-              <Link to='/products/new'>New</Link>
-            </li>
+            <div>
+              <h3>Special</h3>
+              <li>
+                <Link to='/products/offers'>Today's Offers</Link>
+              </li>
+              <li>
+                <Link to='/products/best-sellers'>Best Sellers</Link>
+              </li>
+              <li>
+                <Link to='/products/trending'>Trending</Link>
+              </li>
+              <li>
+                <Link to='/products/new'>New</Link>
+              </li>
+            </div>
           </SiteLinks>
 
           <MailList>
             <h3>Stay up to date from fashion.co</h3>
-            <form>
+            <form onSubmit={handleMaillist}>
               <input type='text' placeholder='enter your email' />
               <button>Submit</button>
             </form>

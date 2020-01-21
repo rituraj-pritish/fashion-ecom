@@ -22,10 +22,22 @@ export const FooterContainer = styled.div`
 `;
 
 export const Logo = styled.div`
+  margin-right: 30px;
   img {
     width: 100%;
     height: auto;
     max-width: 200px;
+  }
+
+  @media ${sizes.lg} {
+    grid-row: 2;
+    grid-column: 1;
+  }
+
+  @media ${sizes.md} {
+    grid-row: 3;
+    grid-column: 1/3;
+    margin: 0 auto;
   }
 `;
 
@@ -44,6 +56,15 @@ export const SiteLinks = styled.ul`
         color: #fff;
       }
     }
+  }
+
+  @media ${sizes.lg} {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media ${sizes.md} {
+    margin-top: 15px;
   }
 `;
 
@@ -81,12 +102,36 @@ export const MailList = styled.div`
       background: ${({ theme }) => theme.color.primary.darker};
     }
   }
+
+  @media ${sizes.lg} {
+    grid-row: 2;
+    grid-column: 2;
+    width: 100%;
+    text-align: center;
+  }
+
+  @media ${sizes.md} {
+    grid-row: 1;
+    grid-column: 1/3;
+    width: 100%;
+    text-align: center;
+  }
 `;
 
 export const TopContainer = styled.div`
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
   align-items: center;
+
+  @media ${sizes.lg} {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  @media ${sizes.md} {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
 `;
 
 export const BottomContainer = styled.div`

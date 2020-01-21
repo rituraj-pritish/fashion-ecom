@@ -1,3 +1,5 @@
+import ss from 'string-similarity';
+
 import {
   SET_CURRENT_PRODUCT,
   REMOVE_CURRENT_PRODUCT,
@@ -6,14 +8,19 @@ import {
   UPDATE_CART,
   REMOVE_FROM_CART,
   ADD_TO_WISHLIST,
-  REMOVE_FROM_WISHLIST
+  REMOVE_FROM_WISHLIST,
+  SET_SEARCH,
+  REMOVE_SEARCH,
+  SIGNOUT
 } from '../types';
 
 const initialState = {
   products: {},
   currentProduct: null,
+  search: false,
   cart: [],
   wishlist: [],
+  filtered: [],
   loading: true
 };
 
@@ -86,6 +93,38 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         wishlist: state.wishlist.filter(item => item.product.id !== payload),
+        loading: false
+      };
+    case SET_SEARCH:
+      return {
+        ...state,
+        filtered: Object.values(state.products)
+          .flat()
+          .filter(item => {
+            if (
+              ss.compareTwoStrings(item.name, payload) > 0.25 ||
+              ss.compareTwoStrings(item.brand, payload) > 0.25 ||
+              ss.compareTwoStrings(item.category, payload) > 0.25
+            ) {
+              return item;
+            }
+            return null;
+          }),
+        search: true,
+        loading: false
+      };
+    case REMOVE_SEARCH:
+      return {
+        ...state,
+        filtered: [],
+        search: false,
+        loading: false
+      };
+    case SIGNOUT:
+      return {
+        ...state,
+        wishlist: [],
+        filtered: [],
         loading: false
       };
     default:

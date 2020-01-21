@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import Button from '../../../reusable-components/Button';
 import { CheckoutBoxContainer, Container, Line } from './CheckoutBox.styles';
 
-const CheckoutBox = ({ cart }) => {
+const CheckoutBox = ({ cart, history, auth }) => {
   let subTotal = cart
     .reduce(
       (total, { product, variant, qty }) =>
@@ -11,6 +13,14 @@ const CheckoutBox = ({ cart }) => {
       0
     )
     .toFixed(2);
+
+  const handleCheckout = () => {
+    if (auth.isEmpty) {
+      history.push('/signin');
+      return;
+    }
+    history.push('/user/checkout');
+  };
 
   return (
     <CheckoutBoxContainer>
@@ -22,10 +32,14 @@ const CheckoutBox = ({ cart }) => {
         <p>
           $ {subTotal > 200 ? subTotal : (parseFloat(subTotal) + 20).toFixed(2)}
         </p>
-        <Button>checkout</Button>
+        <Button onClick={handleCheckout}>checkout</Button>
       </Container>
     </CheckoutBoxContainer>
   );
 };
 
-export default CheckoutBox;
+const mapStateToProps = state => ({
+  auth: state.firebase.auth
+});
+
+export default withRouter(connect(mapStateToProps)(CheckoutBox));

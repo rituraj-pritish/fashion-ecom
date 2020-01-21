@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LazyLoad from 'react-lazy-load';
+import { withRouter } from 'react-router-dom';
 
 import returnImg from '../../../assets/return.webp';
 import worldwideImg from '../../../assets/worldwide.webp';
@@ -32,7 +33,8 @@ const ProductOverview = ({
   addToCart,
   addToWishlist,
   auth,
-  setAlert
+  setAlert,
+  history
 }) => {
   const [currentImg, setCurrentImg] = useState();
   const [variant, setVariant] = useState(0);
@@ -92,6 +94,17 @@ const ProductOverview = ({
     }
     if (isInWishlist) return;
     addToWishlist(product, variant);
+  };
+
+  const handleBuy = e => {
+    e.preventDefault();
+
+    if (auth.isEmpty) {
+      history.push('/signin');
+      return;
+    }
+    addToCart(product, variant, 1);
+    history.push('/user/cart')
   };
 
   return (
@@ -169,7 +182,9 @@ const ProductOverview = ({
           </Button>
         </CartBtn>
         <BuyBtn>
-          <Button fullWidth>BUY NOW</Button>
+          <Button onClick={handleBuy} fullWidth>
+            BUY NOW
+          </Button>
         </BuyBtn>
         <Wishlist onClick={handleWishlist}>
           {isInWishlist ? (
@@ -184,4 +199,4 @@ const ProductOverview = ({
   );
 };
 
-export default ProductOverview;
+export default withRouter(ProductOverview);

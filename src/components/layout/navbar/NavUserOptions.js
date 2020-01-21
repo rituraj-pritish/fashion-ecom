@@ -1,15 +1,19 @@
 import React, { useRef } from 'react';
 
-import { UserOptions, NoAuthOptions, AuthOptions } from './NavUserOptions.styles';
+import {
+  UserOptions,
+  NoAuthOptions,
+  AuthOptions
+} from './NavUserOptions.styles';
 import { Link } from 'react-router-dom';
 import { signOut } from '../../../redux/actions/authActions';
 import { connect } from 'react-redux';
 import clickOutside from '../../../helpers/clickOutside';
 
-const NavUserOptions = ({ show, setShow, signOut, auth }) => {
+const NavUserOptions = ({ show, setShow, signOut, auth,userRef }) => {
   const node = useRef();
 
-  clickOutside(node, () => setShow(false));
+  clickOutside(node, () => setShow(false),userRef);
 
   const noAuthOptions = (
     <NoAuthOptions>
@@ -30,11 +34,19 @@ const NavUserOptions = ({ show, setShow, signOut, auth }) => {
       <ul>
         <li>
           <Link to='/user/wishlist'>
+            <i className='fas fa-heart' />
             Wishlist
           </Link>
         </li>
         <li>
+          <Link to='/user/cart'>
+            <i className='fas fa-shopping-cart' />
+            Cart
+          </Link>
+        </li>
+        <li>
           <Link to='#' onClick={() => signOut()}>
+            <i className='fas fa-sign-out-alt' />
             Logout
           </Link>
         </li>

@@ -8,7 +8,9 @@ import {
   REMOVE_FROM_CART,
   UPDATE_CART,
   REMOVE_FROM_WISHLIST,
-  ADD_TO_WISHLIST
+  ADD_TO_WISHLIST,
+  SET_SEARCH,
+  REMOVE_SEARCH
 } from '../types';
 import PRODUCTS from '../../data/PRODUCTS';
 
@@ -89,4 +91,12 @@ export const setAlert = (message, type) => {
   });
 
   return { type: 'set_alert' };
+};
+
+export const search = query => async dispatch => {
+  dispatch({ type: SET_SEARCH, payload: query });
+};
+
+export const removeSearch = () => async dispatch => {
+  dispatch({ type: REMOVE_SEARCH });
 };

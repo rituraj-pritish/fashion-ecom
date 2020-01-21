@@ -6,17 +6,32 @@ import userIcon from '../../../assets/user-icon.svg';
 import cartIcon from '../../../assets/cart.svg';
 import logo from '../../../assets/logo.svg';
 
-import { Nav, Logo, Search, NavLinks, Cart, Nothing,Container, SearchIcon } from './Navbar.styles';
+import SearchBar from './search-bar/SearchBar';
+import {
+  Nav,
+  Logo,
+  Search,
+  NavLinks,
+  Cart,
+  Nothing,
+  Container,
+  SearchIcon
+} from './Navbar.styles';
 import NavUserOptions from './NavUserOptions';
-import clickOutside from '../../../helpers/clickOutside'
+import clickOutside from '../../../helpers/clickOutside';
+import { search } from '../../../redux/actions/userActions';
 
-const Navbar = ({ history, cart }) => {
+const Navbar = ({ history, cart, search }) => {
   const [showUserOptions, setShowUserOptions] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [show, setShow] = useState(true);
-  const node = useRef()
+  const [showSearchBar, setShowSearchBar] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const node = useRef();
+  const cartRef = useRef();
+  const userRef = useRef();
 
-  clickOutside(node, () => setShowCart(false));
+  clickOutside(node, () => setShowCart(false), cartRef);
 
   useEffect(() => {
     if (
@@ -30,16 +45,23 @@ const Navbar = ({ history, cart }) => {
   }, [history.location]);
 
   const handleCart = () => {
-    if (showCart === true) {
+    if (showCart) {
       setShowCart(false);
       return;
     }
     if (cart.length === 0) {
       setShowCart(true);
     } else {
-      history.push('/cart');
+      history.push('/user/cart');
       setShowCart(false);
     }
+  };
+
+  const handleSearch = e => {
+    e.preventDefault();
+
+    search(searchQuery);
+    history.push(`/products/${searchQuery}`);
   };
 
   const nothingInCart = <Nothing ref={node}>Cart is empty.</Nothing>;
@@ -48,28 +70,44 @@ const Navbar = ({ history, cart }) => {
     <Nav show={show}>
       <Container>
         <Link to='/'>
-          <Logo className='logo' src={logo} alt='logo' />
+          <Logo show={showSearchBar} className='logo' src={logo} alt='logo' />
         </Link>
 
-        <Search className='search'>
-          <input type='text' className='search-input' />
+        <Search onSubmit={handleSearch} className='search'>
+          <input
+            type='text'
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            className='search-input'
+          />
           <button className='search-btn'>Search</button>
         </Search>
         <NavLinks>
-          <SearchIcon>
-            <i className='fas fa-search'/>
+          <SearchIcon onClick={() => setShowSearchBar(true)}>
+            <i className='fas fa-search' />
           </SearchIcon>
+          <SearchBar
+            showSearchBar={showSearchBar}
+            setShowSearchBar={setShowSearchBar}
+            handleSearch={handleSearch}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
 
-          <li onClick={() => setShowUserOptions(!showUserOptions)}>
+          <li
+            ref={userRef}
+            onClick={() => setShowUserOptions(!showUserOptions)}
+          >
             <img src={userIcon} alt='userIcon' />
 
             <NavUserOptions
+              userRef={userRef}
               show={showUserOptions}
               setShow={setShowUserOptions}
             />
           </li>
 
-          <Cart onClick={handleCart}>
+          <Cart ref={cartRef} onClick={handleCart}>
             <img className='cart-icon' src={cartIcon} alt='' />
             <span className='cart-count'>{cart.length}</span>
             {showCart && nothingInCart}
@@ -84,4 +122,4 @@ const mapStateToProps = state => ({
   cart: state.user.cart
 });
 
-export default withRouter(connect(mapStateToProps)(Navbar));
+export default withRouter(connect(mapStateToProps, { search })(Navbar));

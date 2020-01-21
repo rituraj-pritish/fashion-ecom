@@ -21,6 +21,9 @@ import TopButton from './layout/top-button/TopButton';
 import Wishlist from './pages/wishlist/Wishlist';
 import Loader from './layout/loader/Loader';
 import Products from './pages/products/products/Products';
+import PrivateRoute from './PrivateRoute';
+import ScrollToTop from './ScrollToTop';
+import PaymentsPage from './pages/payments-page/PaymentsPage';
 
 function App({ auth, getProducts }) {
   const [showMaillistModal, setShowMailListModal] = useState(false);
@@ -45,23 +48,31 @@ function App({ auth, getProducts }) {
       <ThemeProvider theme={theme}>
         <Router>
           <Navbar />
-          <Switch>
-            <Route
-              exact
-              path='/product/:productCategory/:productId'
-              component={ProductDetails}
-            />
-            <Route
-              exact
-              path='/products/:productsCategory'
-              component={Products}
-            />
-            <Route exact path='/cart' component={Cart} />
-            <Route exact path='/user/wishlist' component={Wishlist} />
-            <Route exact path='/signin' component={SignIn} />
-            <Route exact path='/signup' component={SignUp} />
-            <Route path='/' component={Home} />
-          </Switch>
+          <ScrollToTop>
+            <Switch>
+              <Route
+                exact
+                path='/product/:productCategory/:productId'
+                component={ProductDetails}
+              />
+              <Route
+                exact
+                path='/products/:productsCategory'
+                component={Products}
+              />
+              <Route exact path='/user/cart' component={Cart} />
+              <PrivateRoute exact path='/user/wishlist' component={Wishlist} />
+              <PrivateRoute
+                exact
+                path='/user/checkout'
+                component={PaymentsPage}
+              />
+              <Route exact path='/signin' component={SignIn} />
+              <Route exact path='/signup' component={SignUp} />
+              <Route path='/' component={Home} />
+            </Switch>
+          </ScrollToTop>
+
           <TopButton />
           <Footer />
           <MailListModal

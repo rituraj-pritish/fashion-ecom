@@ -48,7 +48,7 @@ const ProductItem = ({
     <ProductItemContainer>
       <Link to={`/product/${category}/${id}`}>
         <LazyLoad className='lazyload'>
-          <img src={image} alt={image} />
+          <img src={image} alt={name} />
         </LazyLoad>
       </Link>
       <ItemBottom>

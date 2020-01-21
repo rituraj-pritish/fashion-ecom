@@ -30,8 +30,9 @@ export const Container = styled.div`
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
+  position: relative;
 
   @media ${sizes.lg} {
     display: flex;
@@ -42,6 +43,11 @@ export const Container = styled.div`
 
 export const Logo = styled.img`
   width: 120px;
+  display: ${({ show }) => (show ? 'none' : 'block')};
+
+  @media ${sizes.md} {
+    width: 95px;
+  }
 `;
 
 export const SearchIcon = styled.li`
@@ -108,9 +114,11 @@ export const Cart = styled.li`
 
 export const Search = styled.form`
   display: flex;
-  height: 30px;
+  height: 35px;
   margin: 0 auto;
   align-self: center;
+  width: 100%;
+  max-width: 500px;
 
   input {
     box-sizing: border-box;
