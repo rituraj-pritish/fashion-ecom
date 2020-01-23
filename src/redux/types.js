@@ -9,3 +9,6 @@ export const UPDATE_CART = 'UPDATE_CART';
 export const SET_SEARCH = 'SET_SEARCH';
 export const REMOVE_SEARCH = 'REMOVE_SEARCH';
 export const SIGNOUT = 'SIGNOUT';
+export const APPLY_FILTER = 'APPLY_FILTER';
+export const SET_CURRENT_PRODUCTS = 'SET_CURRENT_PRODUCTS';
+export const RESET_FILTER = 'RESET_FILTER';

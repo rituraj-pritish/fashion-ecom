@@ -5,7 +5,7 @@ export const FilterPanelContainer = styled.aside`
   background: #eee;
   text-align: left;
   padding: 20px;
-  height: calc(100vh - 80px);
+  height: fit-content;
   position: sticky;
   top: 65px;
 
@@ -34,8 +34,18 @@ export const List = styled.ul`
   list-style-type: none;
 
   li {
-    cursor: pointer;
+    display: flex;
+    align-items: center;
     font-size: 1.2rem;
     margin-bottom: 5px;
+
+    label {
+      cursor: pointer;
+    }
+
+    input {
+      margin-right: 5px;
+      cursor: pointer;
+    }
   }
 `;

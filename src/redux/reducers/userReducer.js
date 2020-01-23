@@ -11,13 +11,19 @@ import {
   REMOVE_FROM_WISHLIST,
   SET_SEARCH,
   REMOVE_SEARCH,
-  SIGNOUT
+  SIGNOUT,
+  APPLY_FILTER,
+  RESET_FILTER,
+  SET_CURRENT_PRODUCTS
 } from '../types';
+import filter from '../../helpers/filter';
 
 const initialState = {
   products: {},
   currentProduct: null,
-  search: false,
+  currentProducts: [],
+  searching: false,
+  filtering: false,
   cart: [],
   wishlist: [],
   filtered: [],
@@ -110,14 +116,20 @@ export default (state = initialState, { type, payload }) => {
             }
             return null;
           }),
-        search: true,
+        searching: true,
         loading: false
       };
     case REMOVE_SEARCH:
       return {
         ...state,
         filtered: [],
-        search: false,
+        searching: false,
+        loading: false
+      };
+    case SET_CURRENT_PRODUCTS:
+      return {
+        ...state,
+        currentProducts: payload,
         loading: false
       };
     case SIGNOUT:
@@ -125,6 +137,34 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         wishlist: [],
         filtered: [],
+        loading: false
+      };
+    case APPLY_FILTER:
+      let products;
+      // if (payload.category === 'sort') {
+      //   products = state.filtered ? state.filtered : state.currentProducts;
+      // } else {
+      //   products = state.currentProducts;
+      // }
+
+      products = state.currentProducts;
+
+      const filteredProducts = filter(
+        products,
+        payload.category,
+        payload.subCategory
+      );
+      return {
+        ...state,
+        filtered: filteredProducts,
+        filtering: true,
+        loading: false
+      };
+    case RESET_FILTER:
+      return {
+        ...state,
+        filtered: [],
+        filtering: false,
         loading: false
       };
     default:

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import LazyLoad from 'react-lazy-load';
 
 import {
   getProduct,
@@ -9,13 +8,15 @@ import {
   addToCart,
   addToWishlist,
   setAlert
-} from '../../../redux/actions/userActions';
-import { PageContainer } from '../../../index.styles';
+} from '../../../../redux/actions/userActions';
+import { PageContainer } from '../../../../index.styles';
 
-import Button from '../../reusable-components/Button';
 import ProductOverview from '../product-overview/ProductOverview';
+import ProductDetails from '../product-details/ProductDetails';
+import ProductCarousel from '../../../product-carousel/ProductCarousel';
+import PRODUCTS from '../../../../data/PRODUCTS';
 
-const ProductDetails = ({
+const ProductPage = ({
   match,
   getProduct,
   removeProduct,
@@ -52,6 +53,10 @@ const ProductDetails = ({
         addToCart={addToCart}
         addToWishlist={addToWishlist}
       />
+
+      <ProductDetails product={product} />
+
+      <ProductCarousel title='Similar Products' data={Object.values(PRODUCTS).flat()} />
     </PageContainer>
   );
 };
@@ -70,8 +75,8 @@ export default connect(mapStateToProps, {
   addToCart,
   addToWishlist,
   setAlert
-})(ProductDetails);
+})(ProductPage);
 
-ProductDetails.propTypes = {
+ProductPage.propTypes = {
   product: PropTypes.object.isRequired
 };

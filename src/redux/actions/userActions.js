@@ -10,7 +10,10 @@ import {
   REMOVE_FROM_WISHLIST,
   ADD_TO_WISHLIST,
   SET_SEARCH,
-  REMOVE_SEARCH
+  REMOVE_SEARCH,
+  APPLY_FILTER,
+  RESET_FILTER,
+  SET_CURRENT_PRODUCTS
 } from '../types';
 import PRODUCTS from '../../data/PRODUCTS';
 
@@ -99,4 +102,16 @@ export const search = query => async dispatch => {
 
 export const removeSearch = () => async dispatch => {
   dispatch({ type: REMOVE_SEARCH });
+};
+
+export const applyFilter = (category, subCategory) => async dispatch => {
+  dispatch({ type: APPLY_FILTER, payload: { category, subCategory } });
+};
+
+export const resetFilter = () => async dispatch => {
+  dispatch({ type: RESET_FILTER });
+};
+
+export const setCurrentProducts = products => async dispatch => {
+  dispatch({ type: SET_CURRENT_PRODUCTS, payload: products });
 };

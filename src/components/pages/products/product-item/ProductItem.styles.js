@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const ProductItemContainer = styled.div`
-  background: #F6F8FC;
+  background: #f6f8fc;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -21,23 +21,7 @@ export const ItemBottom = styled.div`
 
   h3 {
     font-size: 1.6rem;
-  }
-
-  i {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.6rem;
-    background-color: #ffffff;
-    color: #eee;
-    padding: 3px;
-    width: 30px;
-    height: 30px;
-    border-radius: 3px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+    flex-grow: 1;
   }
 
   p {
@@ -49,4 +33,20 @@ export const ItemBottom = styled.div`
   button {
     margin-top: auto;
   }
-`
+`;
+export const Wishlist = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.6rem;
+  background-color: #ffffff;
+  color: #eee;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;

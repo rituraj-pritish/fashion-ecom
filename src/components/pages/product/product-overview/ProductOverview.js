@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import LazyLoad from 'react-lazy-load';
 import { withRouter } from 'react-router-dom';
 
-import returnImg from '../../../assets/return.webp';
-import worldwideImg from '../../../assets/worldwide.webp';
-import Button from '../../reusable-components/Button';
+import returnImg from '../../../../assets/return.webp';
+import worldwideImg from '../../../../assets/worldwide.webp';
+import Button from '../../../reusable-components/Button';
 import {
   MainImage,
   SmallImages,

@@ -14,7 +14,6 @@ import Home from './pages/home/Home';
 import MailListModal from './mail-list-modal/MailListModal';
 import SignIn from './pages/sign-in/SignIn';
 import SignUp from './pages/sign-up/SignUp';
-import ProductDetails from './product/product-details/ProductDetails';
 import { getProducts } from '../redux/actions/userActions';
 import Cart from './pages/cart/cart-container/Cart';
 import TopButton from './layout/top-button/TopButton';
@@ -24,6 +23,7 @@ import Products from './pages/products/products/Products';
 import PrivateRoute from './PrivateRoute';
 import ScrollToTop from './ScrollToTop';
 import PaymentsPage from './pages/payments-page/PaymentsPage';
+import ProductPage from './pages/product/product-page/ProductPage';
 
 function App({ auth, getProducts }) {
   const [showMaillistModal, setShowMailListModal] = useState(false);
@@ -53,7 +53,7 @@ function App({ auth, getProducts }) {
               <Route
                 exact
                 path='/product/:productCategory/:productId'
-                component={ProductDetails}
+                component={ProductPage}
               />
               <Route
                 exact

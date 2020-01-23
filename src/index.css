@@ -89,12 +89,26 @@ button:focus {
   height: 100%;
 }
 
-.n-parent {
-  
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .notification-container-mobile-bottom .n-parent {
+    max-width: calc(100vw - 116px) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .notification-container-mobile-bottom .n-parent {
+    max-width: calc(100vw - 76px) !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .notification-container-bottom-center .n-parent {
+    min-width: 500px !important ;
+  }
 }

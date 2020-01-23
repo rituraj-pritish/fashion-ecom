@@ -4,13 +4,19 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazy-load';
 
-import { ItemBottom, ProductItemContainer } from './ProductItem.styles';
+import redHeart from '../../../../assets/red-heart.svg';
+import greyHeart from '../../../../assets/grey-heart.svg';
+import {
+  ItemBottom,
+  ProductItemContainer,
+  Wishlist
+} from './ProductItem.styles';
 import {
   addToCart,
   addToWishlist,
   setAlert
-} from '../../../redux/actions/userActions';
-import Button from '../../reusable-components/Button';
+} from '../../../../redux/actions/userActions';
+import Button from '../../../reusable-components/Button';
 
 const ProductItem = ({
   item,
@@ -52,13 +58,18 @@ const ProductItem = ({
         </LazyLoad>
       </Link>
       <ItemBottom>
-        {isAddedToWishlist ? (
-          <i className='fas fa-heart' style={{ color: 'red' }} />
-        ) : (
-          <i className='fas fa-heart' onClick={handleWishlist} />
-        )}
+        <Wishlist>
+          {isAddedToWishlist ? (
+            <img src={redHeart} alt='red heart' />
+          ) : (
+            <img src={greyHeart} alt='grey heart' onClick={handleWishlist} />
+          )}
+        </Wishlist>
+
         <h3>{name}</h3>
-        <p>$ {variant.price}</p>
+        <p>
+          $ {variant.price} {variant.price % 1 === 0 && '.00'}
+        </p>
         <Button onClick={handleCartBtn} secondary={isAddedToCart}>
           {isAddedToCart ? 'ADDED TO CART' : 'ADD TO CART'}
         </Button>
@@ -78,5 +89,5 @@ export default connect(mapStateToProps, { addToCart, addToWishlist })(
 );
 
 ProductItem.propTypes = {
-  item: PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired
 };

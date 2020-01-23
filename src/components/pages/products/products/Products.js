@@ -6,30 +6,34 @@ import { PageContainer } from '../../../../index.styles';
 import FilterPanel from '../filter-panel/FilterPanel';
 import ProductsContainer from '../products-container/ProductsContainer';
 import { Container } from './Products.styles';
-import { removeSearch } from '../../../../redux/actions/userActions';
+import {
+  removeSearch,
+  resetFilter
+} from '../../../../redux/actions/userActions';
 
 const Products = ({
   match,
   products,
-  search,
+  searching,
   filtered,
+  filtering,
   loading,
-  removeSearch
+  removeSearch,
+  resetFilter
 }) => {
   const category = match.params.productsCategory;
 
   useEffect(() => {
     return () => {
-      if (search) removeSearch();
+      if (searching) removeSearch();
+      if (filtering) resetFilter();
     };
   }, []);
 
   if (loading) return <div>loading</div>;
 
   let items;
-  if (search) {
-    items = filtered;
-  } else if (!products[category]) {
+  if (!products[category]) {
     items = Object.values(products).flat();
   } else {
     items = products[category];
@@ -37,11 +41,11 @@ const Products = ({
   return (
     <PageContainer>
       <Container>
-        <FilterPanel products={items} />
-        {search && filtered.length === 0 && (
+        <FilterPanel items={items} />
+        {searching && filtered.length === 0 && (
           <div>Sorry no products found. Try different keyword</div>
         )}
-        <ProductsContainer products={items} />
+        <ProductsContainer items={items} />
       </Container>
     </PageContainer>
   );
@@ -49,15 +53,16 @@ const Products = ({
 
 const mapStateToProps = state => ({
   products: state.user.products,
-  search: state.user.search,
+  searching: state.user.searching,
   filtered: state.user.filtered,
+  filtering: state.user.filtering,
   loading: state.user.loading
 });
 
-export default connect(mapStateToProps, { removeSearch })(Products);
+export default connect(mapStateToProps, { removeSearch, resetFilter })(
+  Products
+);
 
 Products.propTypes = {
   products: PropTypes.object.isRequired
 };
-
-//todo add bool search to userreducer, to see if user searched or not, then based on that render products, and on unmount if(search) turn search = false
