@@ -22,8 +22,9 @@ import Loader from './layout/loader/Loader';
 import Products from './pages/products/products/Products';
 import PrivateRoute from './PrivateRoute';
 import ScrollToTop from './ScrollToTop';
-import PaymentsPage from './pages/payments-page/PaymentsPage';
+import PaymentsPage from './payments/payments-page/PaymentsPage';
 import ProductPage from './pages/product/product-page/ProductPage';
+import Overlay from './layout/overlay/Overlay';
 
 function App({ auth, getProducts }) {
   const [showMaillistModal, setShowMailListModal] = useState(false);
@@ -83,6 +84,7 @@ function App({ auth, getProducts }) {
       </ThemeProvider>
       <ReactNotification />
       <ReactTooltip />
+      <Overlay />
     </Fragment>
   );
 }

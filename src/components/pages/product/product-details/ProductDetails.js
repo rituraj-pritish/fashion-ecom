@@ -7,7 +7,7 @@ import {
   Tab
 } from './ProductDetails.styles';
 
-const ProductDetails = ({ product }) => {
+const ProductDetails = ({ product, variant }) => {
   const [currentTab, setCurrentTab] = useState('desc');
 
   const handleClick = e => {
@@ -43,9 +43,9 @@ const ProductDetails = ({ product }) => {
           </div>
         ) : (
           <div>
-            details <br />
-            details <br />
-            details <br />
+            Colors: {product.variants[variant].variant} <br />
+            Product Id: #1234554321 <br />
+            Vendor: {product.brand.toUpperCase()} <br />
             details <br />
             details <br />
             details <br />

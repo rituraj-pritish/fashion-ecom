@@ -22,12 +22,8 @@ const PrimaryBtn = styled.button`
   }
 `;
 
-const Button = ({ children, onClick, fullWidth, secondary }) => {
-  return (
-    <PrimaryBtn onClick={onClick} secondary={secondary} fullWidth={fullWidth}>
-      {children}
-    </PrimaryBtn>
-  );
+const Button = ({ children, ...otherProps }) => {
+  return <PrimaryBtn {...otherProps}>{children}</PrimaryBtn>;
 };
 
 export default Button;

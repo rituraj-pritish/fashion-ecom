@@ -4,18 +4,18 @@ import { connect } from 'react-redux';
 
 import userIcon from '../../../assets/user-icon.svg';
 import cartIcon from '../../../assets/cart.svg';
-import logo from '../../../assets/logo.svg';
+import Logo from '../../../assets/Logo';
 
 import SearchBar from './search-bar/SearchBar';
 import {
   Nav,
-  Logo,
   Search,
   NavLinks,
   Cart,
   Nothing,
   Container,
-  SearchIcon
+  SearchIcon,
+  StyledLogo
 } from './Navbar.styles';
 import NavUserOptions from './NavUserOptions';
 import clickOutside from '../../../helpers/clickOutside';
@@ -69,9 +69,11 @@ const Navbar = ({ history, cart, search }) => {
   return (
     <Nav show={show}>
       <Container>
-        <Link to='/'>
-          <Logo show={showSearchBar} className='logo' src={logo} alt='logo' />
-        </Link>
+        <StyledLogo>
+          <Link to='/'>
+            <Logo />
+          </Link>
+        </StyledLogo>
 
         <Search onSubmit={handleSearch} className='search'>
           <input

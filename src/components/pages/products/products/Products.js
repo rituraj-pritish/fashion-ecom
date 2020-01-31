@@ -8,8 +8,10 @@ import ProductsContainer from '../products-container/ProductsContainer';
 import { Container } from './Products.styles';
 import {
   removeSearch,
-  resetFilter
+  resetFilter,
+  setOverlay
 } from '../../../../redux/actions/userActions';
+import { useState } from 'react';
 
 const Products = ({
   match,
@@ -19,9 +21,11 @@ const Products = ({
   filtering,
   loading,
   removeSearch,
-  resetFilter
+  resetFilter,
+  setOverlay
 }) => {
   const category = match.params.productsCategory;
+  const [showFilter, setShowFilter] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -38,10 +42,18 @@ const Products = ({
   } else {
     items = products[category];
   }
+
+  const handleClick = () => {
+    setShowFilter(!showFilter);
+    setOverlay(true);
+  };
   return (
     <PageContainer>
+      <div>
+        dfdssf <button onClick={handleClick}>sdfsf</button>{' '}
+      </div>
       <Container>
-        <FilterPanel items={items} />
+        <FilterPanel show={showFilter} setShow={setShowFilter} items={items} />
         {searching && filtered.length === 0 && (
           <div>Sorry no products found. Try different keyword</div>
         )}
@@ -59,9 +71,11 @@ const mapStateToProps = state => ({
   loading: state.user.loading
 });
 
-export default connect(mapStateToProps, { removeSearch, resetFilter })(
-  Products
-);
+export default connect(mapStateToProps, {
+  removeSearch,
+  resetFilter,
+  setOverlay
+})(Products);
 
 Products.propTypes = {
   products: PropTypes.object.isRequired

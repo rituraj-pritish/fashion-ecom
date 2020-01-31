@@ -21,9 +21,9 @@ export const FooterContainer = styled.div`
   }
 `;
 
-export const Logo = styled.div`
+export const StyledLogo = styled.div`
   margin-right: 30px;
-  img {
+  svg {
     width: 100%;
     height: auto;
     max-width: 200px;
@@ -143,9 +143,10 @@ export const BottomContainer = styled.div`
 `;
 
 export const SocialLinks = styled.div`
-  img {
-    width: 3.2rem;
-    margin-right: 15px;
+  svg {
+    width: 40px;
+    margin: 0 7px;
+    cursor: pointer;
     transition: 0.2s;
 
     &:hover {

@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-import logo from '../../../assets/logo.svg';
-import facebook from '../../../assets/facebook.svg';
-import instagram from '../../../assets/instagram.svg';
-import twitter from '../../../assets/twitter.svg';
+import Logo from '../../../assets/Logo';
+import InstagramIcon from '../../../assets/InstagramIcon';
+import FacebookIcon from '../../../assets/FacebookIcon';
+import TwitterIcon from '../../../assets/TwitterIcon';
 import { MaxWidthContainer } from '../../../index.styles';
 import {
   FooterContainer,
   SiteLinks,
   MailList,
   TopContainer,
-  Logo,
   BottomContainer,
-  SocialLinks
+  SocialLinks,
+  SocialLink,
+  StyledLogo
 } from './Footer.styles';
 
 const Footer = ({ history }) => {
@@ -38,11 +39,11 @@ const Footer = ({ history }) => {
     <FooterContainer show={show}>
       <MaxWidthContainer>
         <TopContainer>
-          <Logo>
+          <StyledLogo>
             <Link to='/'>
-              <img src={logo} alt={logo} />
+              <Logo />
             </Link>
-          </Logo>
+          </StyledLogo>
 
           <SiteLinks>
             <div>
@@ -90,15 +91,9 @@ const Footer = ({ history }) => {
         </TopContainer>
         <BottomContainer>
           <SocialLinks>
-            <Link to=''>
-              <img src={facebook} alt='facebook' />
-            </Link>
-            <Link to=''>
-              <img src={instagram} alt='instagram' />
-            </Link>
-            <Link to=''>
-              <img src={twitter} alt='twitter' />
-            </Link>
+            <InstagramIcon />
+            <FacebookIcon />
+            <TwitterIcon />
           </SocialLinks>
 
           <div>&copy; {new Date().getFullYear()} fashion.co</div>

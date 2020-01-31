@@ -41,12 +41,14 @@ export const Container = styled.div`
   }
 `;
 
-export const Logo = styled.img`
-  width: 120px;
-  display: ${({ show }) => (show ? 'none' : 'block')};
+export const StyledLogo = styled.div`
+  svg {
+    width: 120px;
+    display: ${({ show }) => (show ? 'none' : 'block')};
 
-  @media ${sizes.md} {
-    width: 95px;
+    @media ${sizes.md} {
+      width: 95px;
+    }
   }
 `;
 

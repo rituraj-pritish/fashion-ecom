@@ -10,7 +10,7 @@ export default {
       variants: [
         {
           variant: 'white',
-          price: 79.99,
+          price: 79,
           color: '#ffffff',
           images: [
             'https://firebasestorage.googleapis.com/v0/b/fashion-e40e0.appspot.com/o/products%2Faccessories%2FSaffiano_Leather_Belt_013384fb-f4ca-425a-9865-1a9c0db0f802_2048x2048.jpg?alt=media&token=80dc6e09-5097-4113-8987-de575dcafa66'
@@ -18,7 +18,7 @@ export default {
         },
         {
           variant: 'black',
-          price: 79.99,
+          price: 79,
           color: '#000000',
           images: [
             'https://firebasestorage.googleapis.com/v0/b/fashion-e40e0.appspot.com/o/products%2Faccessories%2FSaffiano_Leather_Belt_3_e9338d83-df6c-43ca-89f3-f133448414ca_2048x2048.jpg?alt=media&token=4af3c9d2-007c-4545-822a-1efe213d6953'
@@ -26,7 +26,7 @@ export default {
         },
         {
           variant: 'brown',
-          price: 79.99,
+          price: 79,
           color: '#AF5429',
           images: [
             'https://firebasestorage.googleapis.com/v0/b/fashion-e40e0.appspot.com/o/products%2Faccessories%2FSaffiano_Leather_Belt_2_eaee41fd-feff-405b-b834-aaabc549ffec_2048x2048.jpg?alt=media&token=e6f3aafe-c8ba-4e34-94fa-92446dee5133'
@@ -70,7 +70,7 @@ export default {
       variants: [
         {
           variant: 'black and white',
-          price: 49.99,
+          price: 49,
           color: '#000000',
           images: [
             'https://firebasestorage.googleapis.com/v0/b/fashion-e40e0.appspot.com/o/products%2Faccessories%2FRounded_Cat_Eye_Sunglasses_f1da40e7-625e-4361-ba65-66e597145a06_600x.webp?alt=media&token=346c9a2c-20c8-40c4-ae9d-fa126aa1698f',
@@ -93,7 +93,7 @@ export default {
       variants: [
         {
           variant: 'pink',
-          price: 47.99,
+          price: 47,
           color: '#F7788F',
           images: [
             'https://firebasestorage.googleapis.com/v0/b/fashion-e40e0.appspot.com/o/products%2Fshoes%2FPink_Pony_Leather_Sneaker_2_77e3945e-ec1a-41dd-9e3c-dae8b1f6a268_1024x1024.jpg?alt=media&token=cd8845cd-8675-4a4f-8837-406bdfe2cf01',
@@ -114,7 +114,7 @@ export default {
         {
           variant: 'blue',
           color: '#7B9ECF',
-          price: 29.99,
+          price: 29,
           images: [
             'https://firebasestorage.googleapis.com/v0/b/fashion-e40e0.appspot.com/o/products%2Fshoes%2FFaxon_Chambray_Low-Top_Sneaker_9_1024x1024.webp?alt=media&token=fefbe8d9-9159-416b-b246-d12a619f5b15',
             'https://firebasestorage.googleapis.com/v0/b/fashion-e40e0.appspot.com/o/products%2Fshoes%2FFaxon_Chambray_Low-Top_Sneaker_8_1024x1024.webp?alt=media&token=eaa166b6-5733-4d11-a5d8-14d270776aa5',
@@ -124,7 +124,7 @@ export default {
         {
           variant: 'brown',
           color: '#ADA082',
-          price: 25.99,
+          price: 25,
           images: [
             'https://firebasestorage.googleapis.com/v0/b/fashion-e40e0.appspot.com/o/products%2Fshoes%2FFaxon_Canvas_Low-Top_Sneaker_5.jpg?alt=media&token=f8702f94-d845-47fb-b34b-87daab48e6ef',
             'https://firebasestorage.googleapis.com/v0/b/fashion-e40e0.appspot.com/o/products%2Fshoes%2FFaxon_Canvas_Low-Top_Sneaker_4_1024x1024.webp?alt=media&token=a7d1e139-0cf2-4ea1-8db9-d5bbd671fb30',
@@ -168,7 +168,7 @@ export default {
         {
           variant: 'blue',
           color: '#104591',
-          price: 82.99,
+          price: 82,
           images: [
             'https://firebasestorage.googleapis.com/v0/b/fashion-e40e0.appspot.com/o/products%2Fwomen%2FTailored_Fit_Mesh-Panel_Polo_4_fba54f8e-368e-4537-92ff-03fef8a6c09c_1024x1024.jpg?alt=media&token=14f2a80c-2646-4835-8af0-735a4538b6bc'
           ]
@@ -268,7 +268,7 @@ export default {
         {
           variant: 'grey',
           color: '#B2B2B2',
-          price: 149.99,
+          price: 149,
           images: [
             'https://firebasestorage.googleapis.com/v0/b/fashion-e40e0.appspot.com/o/products%2Fmen%2FFeatherweight_Pima_Hoodie_7270f97f-f554-4568-bf1a-30e7490a5a92_600x.webp?alt=media&token=04de7249-7204-4a6f-94cb-b23ce5e306d6',
             'https://firebasestorage.googleapis.com/v0/b/fashion-e40e0.appspot.com/o/products%2Fmen%2FFeatherweight_Pima_Hoodie_1_07c107d9-51d7-4c24-9c8f-61e704872bb7_600x.webp?alt=media&token=7842ff55-5421-429f-af32-36b27c0fd1f0',

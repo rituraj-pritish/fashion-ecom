@@ -28,6 +28,7 @@ import {
 
 const ProductOverview = ({
   product,
+  variant,setVariant,
   cart,
   wishlist,
   addToCart,
@@ -37,7 +38,6 @@ const ProductOverview = ({
   history
 }) => {
   const [currentImg, setCurrentImg] = useState();
-  const [variant, setVariant] = useState(0);
   const [price, setPrice] = useState();
   const [quantity, setQuantity] = useState(1);
 

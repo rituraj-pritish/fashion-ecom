@@ -32,7 +32,7 @@ const CheckoutBox = ({ cart, history, auth }) => {
         <p>
           $ {subTotal > 200 ? subTotal : (parseFloat(subTotal) + 20).toFixed(2)}
         </p>
-        <Button onClick={handleCheckout}>checkout</Button>
+        <Button onClick={handleCheckout}>Proceed to buy</Button>
       </Container>
     </CheckoutBoxContainer>
   );

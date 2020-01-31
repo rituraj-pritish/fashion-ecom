@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { FilterPanelContainer, Line, List } from './FilterPanel.styles';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  FilterPanelContainer,
+  Line,
+  List,
+  Overlay
+} from './FilterPanel.styles';
 import { connect } from 'react-redux';
 
 import { applyFilter } from '../../../../redux/actions/userActions';
+import clickOutside from '../../../../helpers/clickOutside';
 
-const FilterPanel = ({ items, applyFilter }) => {
+const FilterPanel = ({ items, applyFilter, show, setShow }) => {
   //to get unique values
   const brands = [...new Set(items.map(p => p.brand.toUpperCase()))];
 
   const [priceRange, setPriceRange] = useState('all');
   const [currentBrand, setCurrentBrand] = useState('all');
   const [sort, setSort] = useState('rating');
+  const node = useRef();
 
   useEffect(() => {
     applyFilter('sort', 'rating');
@@ -37,8 +44,10 @@ const FilterPanel = ({ items, applyFilter }) => {
     applyFilter('brand', e.target.getAttribute('id'));
   };
 
+  clickOutside(node, () => setShow(false));
+
   return (
-    <FilterPanelContainer>
+    <FilterPanelContainer show={show} ref={node}>
       <h2>
         <i className='fas fa-filter' />
         Filter

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 import { Link, Redirect } from 'react-router-dom';
-import logo from '../../../assets/logo.svg';
+import Logo from '../../../assets/Logo'
 import { PageContainer } from '../../../index.styles';
-import { Logo, Container } from './SignIn.styles';
+import { StyledLogo, Container } from './SignIn.styles';
 import { connect } from 'react-redux';
 import { signin } from '../../../redux/actions/authActions';
 import { setAlert } from '../../../redux/actions/userActions';
@@ -38,7 +38,9 @@ const SignIn = ({ firebase, signin, setAlert }) => {
     <PageContainer>
       <Container>
         <Link to='/'>
-          <Logo src={logo} alt={logo} />
+          <StyledLogo>
+            <Logo/>
+          </StyledLogo>
         </Link>
         <form onSubmit={handleSubmit}>
           <label htmlFor='email'>Email</label>

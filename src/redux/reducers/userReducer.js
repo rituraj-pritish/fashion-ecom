@@ -14,7 +14,8 @@ import {
   SIGNOUT,
   APPLY_FILTER,
   RESET_FILTER,
-  SET_CURRENT_PRODUCTS
+  SET_CURRENT_PRODUCTS,
+  SET_OVERLAY
 } from '../types';
 import filter from '../../helpers/filter';
 
@@ -24,6 +25,7 @@ const initialState = {
   currentProducts: [],
   searching: false,
   filtering: false,
+  showOverlay: false,
   cart: [],
   wishlist: [],
   filtered: [],
@@ -165,6 +167,12 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         filtered: [],
         filtering: false,
+        loading: false
+      };
+    case SET_OVERLAY:
+      return {
+        ...state,
+        showOverlay: payload,
         loading: false
       };
     default:

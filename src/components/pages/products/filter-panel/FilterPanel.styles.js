@@ -20,7 +20,19 @@ export const FilterPanelContainer = styled.aside`
   }
 
   @media ${sizes.xl} {
-    display: none;
+    position: absolute;
+    z-index: 11;
+    width: 250px;
+    transform: translateX(${({ show, theme }) => (show ? 0 : '-300px')});
+    transition: 0.3s;
+  }
+
+  @media ${sizes.md} {
+    transform: translateX(${({ show, theme }) => (show ? 0 : '-280px')});
+  }
+
+  @media ${sizes.mob} {
+    transform: translateX(${({ show, theme }) => (show ? 0 : '-265px')});
   }
 `;
 export const Line = styled.div`

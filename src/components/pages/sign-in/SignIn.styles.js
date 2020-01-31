@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Logo = styled.img`
+export const StyledLogo = styled.div`
   width: 16rem;
 `;
 export const Container = styled.div`

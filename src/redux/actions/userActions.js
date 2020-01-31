@@ -13,7 +13,8 @@ import {
   REMOVE_SEARCH,
   APPLY_FILTER,
   RESET_FILTER,
-  SET_CURRENT_PRODUCTS
+  SET_CURRENT_PRODUCTS,
+  SET_OVERLAY
 } from '../types';
 import PRODUCTS from '../../data/PRODUCTS';
 
@@ -115,3 +116,8 @@ export const resetFilter = () => async dispatch => {
 export const setCurrentProducts = products => async dispatch => {
   dispatch({ type: SET_CURRENT_PRODUCTS, payload: products });
 };
+
+export const setOverlay = state => ({
+  type: SET_OVERLAY,
+  payload: state
+});

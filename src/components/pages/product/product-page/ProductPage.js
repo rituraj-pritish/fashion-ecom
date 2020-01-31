@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -31,6 +31,7 @@ const ProductPage = ({
 }) => {
   const productCategory = match.params.productCategory;
   const productId = match.params.productId;
+  const [variant, setVariant] = useState(0);
 
   useEffect(() => {
     getProduct(productCategory, productId);
@@ -48,13 +49,15 @@ const ProductPage = ({
         auth={auth}
         setAlert={setAlert}
         product={product}
+        variant={variant}
+        setVariant={setVariant}
         cart={cart}
         wishlist={wishlist}
         addToCart={addToCart}
         addToWishlist={addToWishlist}
       />
 
-      <ProductDetails product={product} />
+      <ProductDetails product={product} variant={variant} />
 
       <ProductCarousel title='Similar Products' data={Object.values(PRODUCTS).flat()} />
     </PageContainer>

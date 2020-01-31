@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
-import logo from '../../../assets/logo.svg';
+import Logo from '../../../assets/Logo';
 import { PageContainer } from '../../../index.styles';
-import { Logo, Container } from './SignUp.styles';
+import { StyledLogo, Container } from './SignUp.styles';
 import { signup } from '../../../redux/actions/authActions';
 import { setAlert } from '../../../redux/actions/userActions';
 import Input from '../../reusable-components/Input';
@@ -47,7 +47,9 @@ const SignUp = ({ signup, firebase, setAlert }) => {
     <PageContainer>
       <Container>
         <Link to='/'>
-          <Logo src={logo} alt={logo} />
+          <StyledLogo>
+            <Logo />
+          </StyledLogo>
         </Link>
         <form onSubmit={handleSubmit}>
           <label htmlFor='name'>Name</label>

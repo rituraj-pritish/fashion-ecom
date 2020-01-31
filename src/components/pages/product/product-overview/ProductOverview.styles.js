@@ -1,9 +1,15 @@
 import styled from 'styled-components'
+import sizes from '../../../../sizes';
 
 export const ProductOverviewContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 4%;
+
+  @media ${sizes.lg} {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto ;
+  }
 `;
 
 export const SmallImages = styled.div``;
@@ -159,6 +165,10 @@ export const Wishlist = styled.div`
     font-size: 1.5rem;
     color: blue;
     cursor: pointer;
+  }
+
+  @media ${sizes.lg} {
+    margin-bottom: 30px;
   }
 `;
 
