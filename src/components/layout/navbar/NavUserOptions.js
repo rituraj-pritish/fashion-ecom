@@ -9,21 +9,22 @@ import { Link } from 'react-router-dom';
 import { signOut } from '../../../redux/actions/authActions';
 import { connect } from 'react-redux';
 import clickOutside from '../../../helpers/clickOutside';
+import Button from '../../common/Button';
 
-const NavUserOptions = ({ show, setShow, signOut, auth,userRef }) => {
+const NavUserOptions = ({ show, setShow, signOut, auth, userRef }) => {
   const node = useRef();
 
-  clickOutside(node, () => setShow(false),userRef);
+  clickOutside(node, () => setShow(false), userRef);
 
   const noAuthOptions = (
     <NoAuthOptions>
       <Link to='/signin'>
-        <button>Sign In</button>
+        <Button>Sign In</Button>
       </Link>
       <div>
         <p>New Customer ?</p>
         <Link to='/signup'>
-          <button>Sign up</button>
+          <Button variant='secondary'>Sign up</Button>
         </Link>
       </div>
     </NoAuthOptions>

@@ -16,6 +16,7 @@ export const SearchBarContainer = styled.form`
   visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
   opacity: ${({ show }) => (show ? 1 : 0)};
   transition: opacity 0.2s;
+  margin: 5px 0;
 
   input {
     flex-grow: 1;

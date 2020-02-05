@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import Icon from '../../../common/Icon';
+import Text from '../../../common/Text';
+import BarsIcon from '../../../../assets/icons/BarsIcon';
 import { PageContainer } from '../../../../index.styles';
 import FilterPanel from '../filter-panel/FilterPanel';
 import ProductsContainer from '../products-container/ProductsContainer';
@@ -32,7 +35,8 @@ const Products = ({
       if (searching) removeSearch();
       if (filtering) resetFilter();
     };
-  }, []);
+    // eslint-disable-next-line
+  }, [match.params]);
 
   if (loading) return <div>loading</div>;
 
@@ -50,7 +54,10 @@ const Products = ({
   return (
     <PageContainer>
       <FilterBtn onClick={handleClick}>
-        <i className='fas fa-bars' /> Filter
+        <Icon display='inline-block' width='15px'>
+          <BarsIcon />
+        </Icon>{' '}
+        Filter
       </FilterBtn>
 
       <Container>

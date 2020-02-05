@@ -22,7 +22,6 @@ export const OverlayContainer = styled.div`
 
 const Overlay = ({ showOverlay, setOverlay }) => {
   const root = document.getElementById('root');
-  const myNav = document.getElementById('my-nav');
 
   useEffect(() => {
     if (showOverlay) {
@@ -34,6 +33,7 @@ const Overlay = ({ showOverlay, setOverlay }) => {
       root.style.position = 'initial';
       root.style.overflow = 'initial';
     };
+// eslint-disable-next-line
   }, [showOverlay]);
 
   return (

@@ -91,10 +91,10 @@ const SignUp = ({ signup, firebase, setAlert }) => {
           <Button>Sign Up</Button>
           <Text mt='2rem'>
             Don't have an account ?
-            <Link to='/signup'>
+            <Link to='/signin'>
               <Text display='inline' color='blue'>
                 {' '}
-                Sign Up
+                Sign In
               </Text>
             </Link>
           </Text>

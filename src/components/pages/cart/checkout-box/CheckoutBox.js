@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import Button from '../../../common/Button';
+import Text from '../../../common/Text';
 import { CheckoutBoxContainer, Container, Line } from './CheckoutBox.styles';
 
 const CheckoutBox = ({ cart, history, auth }) => {
@@ -33,6 +34,10 @@ const CheckoutBox = ({ cart, history, auth }) => {
           $ {subTotal > 200 ? subTotal : (parseFloat(subTotal) + 20).toFixed(2)}
         </p>
         <Button onClick={handleCheckout}>Proceed to buy</Button>
+        <Text mt='2rem' lineHeight='22px'>
+          Free shipping on orders over
+          {'  '}<Text color='primary'> $200</Text>
+        </Text>
       </Container>
     </CheckoutBoxContainer>
   );

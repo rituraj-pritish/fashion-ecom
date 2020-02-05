@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import clickOutside from '../../../../helpers/clickOutside';
 
 import { SearchBarContainer } from './SearchBar.styles';
+import SearchIcon from '../../../../assets/icons/SearchIcon';
+import Icon from '../../../common/Icon';
 
 const SearchBar = ({
   showSearchBar,
@@ -16,6 +18,7 @@ const SearchBar = ({
     () => () => {
       setSearchQuery('');
     },
+    // eslint-disable-next-line
     [showSearchBar]
   );
 
@@ -35,7 +38,9 @@ const SearchBar = ({
         onChange={e => setSearchQuery(e.target.value)}
       />
       <button>
-        <i className='fas fa-search' />
+        <Icon width='18px'>
+          <SearchIcon />
+        </Icon>
       </button>
     </SearchBarContainer>
   );

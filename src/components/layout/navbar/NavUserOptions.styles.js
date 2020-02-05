@@ -15,26 +15,11 @@ export const UserOptions = styled.div`
 export const NoAuthOptions = styled.div`
   min-width: 170px;
 
-  button {
-    padding: 10px;
-    width: 100%;
-    border-radius: 7px;
-    color: white;
-    background: ${({ theme }) => theme.colors.primary};
-    font-weight: bold;
-    font-size: 1.8rem;
-    border: 2px solid rgba(#fff, 0, 5);
-    margin-bottom: 15px;
-
-    &:hover {
-      background: ${({ theme }) => theme.colors.primaryDark};
-    }
-  }
-
   div {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 1rem;
 
     p {
       font-size: 1.2rem;
@@ -44,17 +29,7 @@ export const NoAuthOptions = styled.div`
     }
 
     button {
-      background: #fff;
-      color: #3e3e3e;
-      font-weight: unset;
-      border: 2px solid ${({ theme }) => theme.colors.primary};
-      font-size: 1.5rem;
-      padding: 7px;
-      margin: 0;
-
-      &:hover {
-        background: #fff;
-      }
+      white-space: nowrap;
     }
   }
 `;

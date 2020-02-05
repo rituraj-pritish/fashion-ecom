@@ -60,10 +60,6 @@ export const SearchIconContainer = styled.li`
   @media ${sizes.lg} {
     display: block;
   }
-
-  &:hover {
-    transform: scale(1.1);
-  }
 `;
 
 export const NavLinks = styled.ul`

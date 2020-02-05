@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ProductCarouselContainer = styled.div`
-  margin: 30px 0;
+  margin: 5rem 0;
 
   .carousel-container {
     position: relative;
@@ -91,3 +91,4 @@ export const Title = styled.div`
   text-align: left;
   font-size: 1.8rem;
 `;
+

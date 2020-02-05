@@ -4,7 +4,6 @@ import {
   typography,
   space,
   color,
-  variant,
   position,
   flexbox,
   layout,

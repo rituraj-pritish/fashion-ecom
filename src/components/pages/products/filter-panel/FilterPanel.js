@@ -3,7 +3,6 @@ import {
   FilterPanelContainer,
   Line,
   List,
-  Overlay
 } from './FilterPanel.styles';
 import { connect } from 'react-redux';
 
@@ -23,6 +22,7 @@ const FilterPanel = ({ items, applyFilter, show, setShow, loading }) => {
     if (!loading) {
       applyFilter('sort', 'rating');
     }
+// eslint-disable-next-line
   }, [loading]);
 
   const handlePriceChange = e => {

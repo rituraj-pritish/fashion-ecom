@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -39,6 +39,7 @@ const ProductPage = ({
     return () => {
       removeProduct();
     };
+    // eslint-disable-next-line
   }, [match.params]);
 
   if (loading || product === null) return <div>Loading...</div>;
@@ -59,7 +60,10 @@ const ProductPage = ({
 
       <ProductDetails product={product} variant={variant} />
 
-      <ProductCarousel title='Similar Products' data={Object.values(PRODUCTS).flat()} />
+      <ProductCarousel
+        title='Similar Products'
+        data={Object.values(PRODUCTS).flat()}
+      />
     </PageContainer>
   );
 };

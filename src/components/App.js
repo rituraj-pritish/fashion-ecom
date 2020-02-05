@@ -1,7 +1,6 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import ReactNotification from 'react-notifications-component';
@@ -9,8 +8,7 @@ import 'react-notifications-component/dist/theme.css';
 
 import theme from '../theme';
 import Navbar from './layout/navbar/Navbar';
-import Footer from './layout/footer/Footer';
-import Home from './pages/home/Home';
+import Home from './pages/home/home/Home';
 import SignIn from './pages/sign-in/SignIn';
 import SignUp from './pages/sign-up/SignUp';
 import { getProducts } from '../redux/actions/userActions';
@@ -24,10 +22,14 @@ import ScrollToTop from './ScrollToTop';
 import PaymentsPage from './payments/payments-page/PaymentsPage';
 import ProductPage from './pages/product/product-page/ProductPage';
 import Overlay from './layout/overlay/Overlay';
+import Preloader from './Preloader';
+import Footer from './layout/footer/Footer';
 
 function App({ auth, getProducts }) {
+  console.log('app');
   useEffect(() => {
     getProducts();
+    // eslint-disable-next-line
   }, []);
 
   if (!auth.isLoaded) {
@@ -68,6 +70,7 @@ function App({ auth, getProducts }) {
           <Footer />
         </Router>
       </ThemeProvider>
+      <Preloader />
       <ReactNotification />
       <ReactTooltip />
       <Overlay />

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazy-load';
 
 import HeartIcon from '../../../../assets/icons/HeartIcon';
+import SaleBanner from '../../product/SaleBanner'
 import {
   ItemBottom,
   ProductItemContainer,
@@ -26,7 +27,7 @@ const ProductItem = ({
   wishlist,
   auth
 }) => {
-  const { name, variants, id, category } = item;
+  const { name, variants, id, category,sale } = item;
   const variant = variants[0];
   const image = variant.images[0];
 
@@ -57,6 +58,7 @@ const ProductItem = ({
           <img src={image} alt={name} />
         </LazyLoad>
       </Link>
+      {sale && <SaleBanner/>}
       <ItemBottom>
         <Wishlist>
           <Icon
@@ -74,6 +76,8 @@ const ProductItem = ({
         <Button
           onClick={handleCartBtn}
           variant={isInCart ? 'secondary' : 'primary'}
+          minHeight='35px'
+          height='auto'
         >
           {isInCart ? 'ADDED TO CART' : 'ADD TO CART'}
         </Button>

@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { PageContainer } from '../../../index.styles';
-import { Container } from './Home.styles';
-import ProductCarousel from '../../product-carousel/ProductCarousel';
-import ShopLinks from './shop-links/ShopLinks';
+import { PageContainer } from '../../../../index.styles';
+import ProductCarousel from '../../../product-carousel/ProductCarousel';
+import ShopLinks from '../shop-links/ShopLinks';
+import CollectionContainer from '../collection/CollectionContainer';
+import Brands from '../brands/Brands';
 
 const Home = ({ products }) => {
   useEffect(() => {}, [products]);
@@ -13,18 +14,11 @@ const Home = ({ products }) => {
   return (
     <PageContainer>
       <ShopLinks />
-
       <ProductCarousel title='trending' data={items} />
-
-      <ProductCarousel
-        title='top selling'
-        data={items}
-      />
-
-      <ProductCarousel
-        title="today's offers"
-        data={items}
-      />
+      <CollectionContainer />
+      <ProductCarousel title='top selling' data={items} />
+      <ProductCarousel title="today's offers" data={items} />
+      <Brands />
     </PageContainer>
   );
 };

@@ -7,6 +7,7 @@ export default {
       rating: 3,
       for: 'women',
       id: 1,
+      sale: true,
       variants: [
         {
           variant: 'white',
@@ -90,6 +91,7 @@ export default {
       id: 4,
       rating: 5,
       category: 'shoes',
+      sale: true,
       variants: [
         {
           variant: 'pink',

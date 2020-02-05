@@ -88,9 +88,9 @@ const Navbar = ({ history, cart, search }) => {
         </Search>
         <NavLinks>
           <SearchIconContainer onClick={() => setShowSearchBar(true)}>
-          <Icon>
-            <SearchIcon />
-          </Icon>
+            <Icon>
+              <SearchIcon />
+            </Icon>
           </SearchIconContainer>
           <SearchBar
             showSearchBar={showSearchBar}
@@ -104,7 +104,7 @@ const Navbar = ({ history, cart, search }) => {
             ref={userRef}
             onClick={() => setShowUserOptions(!showUserOptions)}
           >
-            <Icon height='35px'>
+            <Icon height='35px' mb='5px'>
               <UserIcon />
             </Icon>
 

@@ -17,7 +17,6 @@ import {
 } from './Footer.styles';
 import Input from '../../common/Input'
 import Button from '../../common/Button'
-import Text from '../../common/Text'
 
 const Footer = ({ history }) => {
   const [show, setShow] = useState(true);

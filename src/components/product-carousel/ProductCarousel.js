@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import Swiper from 'react-id-swiper';
 import 'swiper/css/swiper.css';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import HeartIcon from '../../assets/icons/HeartIcon';
+import SaleBanner from '../pages/product/SaleBanner'
 import {
   ProductCarouselContainer,
   CarouselItemContainer,
@@ -16,7 +18,6 @@ import {
   addToWishlist,
   setAlert
 } from '../../redux/actions/userActions';
-import { connect } from 'react-redux';
 import Button from '../common/Button';
 import Icon from '../common/Icon';
 import Text from '../common/Text';
@@ -58,7 +59,7 @@ const ProductCarousel = ({
   auth
 }) => {
   const render = data.map(product => {
-    const { name, variants, id, category } = product;
+    const { name, variants, id, category, sale } = product;
     const { price, images } = variants[0];
     const isInCart = cart.find(item => item.product.id === id);
     const isInWishlist = wishlist.find(item => item.product.id === id);
@@ -82,6 +83,7 @@ const ProductCarousel = ({
         <Link to={`/product/${category}/${id}`}>
           <img src={images[0]} alt={name} />
         </Link>
+        {sale && <SaleBanner/>}
         <ItemBottom>
           <Icon
             className='wishlist-icon'
@@ -98,6 +100,8 @@ const ProductCarousel = ({
           <Button
             onClick={handleCartBtn}
             variant={isInCart ? 'secondary' : 'primary'}
+            minHeight='35px'
+            height='auto'
           >
             {isInCart ? 'ADDED TO CART' : 'ADD TO CART'}
           </Button>
