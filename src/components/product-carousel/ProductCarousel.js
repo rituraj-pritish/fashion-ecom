@@ -4,9 +4,10 @@ import Swiper from 'react-id-swiper';
 import 'swiper/css/swiper.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import LazyLoad from 'react-lazy-load';
 
 import HeartIcon from '../../assets/icons/HeartIcon';
-import SaleBanner from '../pages/product/SaleBanner'
+import SaleBanner from '../pages/product/SaleBanner';
 import {
   ProductCarouselContainer,
   CarouselItemContainer,
@@ -81,9 +82,11 @@ const ProductCarousel = ({
     return (
       <CarouselItemContainer key={id}>
         <Link to={`/product/${category}/${id}`}>
-          <img src={images[0]} alt={name} />
+          <LazyLoad className='lazyload' offsetBottom={250} offsetRight={2000}>
+            <img src={images[0]} alt={name} />
+          </LazyLoad>
         </Link>
-        {sale && <SaleBanner/>}
+        {sale && <SaleBanner />}
         <ItemBottom>
           <Icon
             className='wishlist-icon'

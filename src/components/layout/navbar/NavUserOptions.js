@@ -9,7 +9,11 @@ import { Link } from 'react-router-dom';
 import { signOut } from '../../../redux/actions/authActions';
 import { connect } from 'react-redux';
 import clickOutside from '../../../helpers/clickOutside';
+import SignOutIcon from '../../../assets/icons/SignOutIcon';
+import HeartIcon from '../../../assets/icons/HeartIcon';
+import CartIcon from '../../../assets/icons/CartIcon';
 import Button from '../../common/Button';
+import Icon from '../../common/Icon';
 
 const NavUserOptions = ({ show, setShow, signOut, auth, userRef }) => {
   const node = useRef();
@@ -35,20 +39,26 @@ const NavUserOptions = ({ show, setShow, signOut, auth, userRef }) => {
       <ul>
         <li>
           <Link to='/user/wishlist'>
-            <i className='fas fa-heart' />
+            <Icon>
+              <HeartIcon />
+            </Icon>
             Wishlist
           </Link>
         </li>
         <li>
           <Link to='/user/cart'>
-            <i className='fas fa-shopping-cart' />
+            <Icon>
+              <CartIcon />
+            </Icon>
             Cart
           </Link>
         </li>
         <li>
           <Link to='#' onClick={() => signOut()}>
-            <i className='fas fa-sign-out-alt' />
-            Logout
+            <Icon>
+              <SignOutIcon />
+            </Icon>
+            Sign Out
           </Link>
         </li>
       </ul>

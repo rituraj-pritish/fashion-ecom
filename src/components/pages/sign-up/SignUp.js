@@ -90,7 +90,7 @@ const SignUp = ({ signup, firebase, setAlert }) => {
 
           <Button>Sign Up</Button>
           <Text mt='2rem'>
-            Don't have an account ?
+            Already have an account ?
             <Link to='/signin'>
               <Text display='inline' color='blue'>
                 {' '}

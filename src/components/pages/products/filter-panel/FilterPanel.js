@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  FilterPanelContainer,
-  Line,
-  List,
-} from './FilterPanel.styles';
+import { FilterPanelContainer, Line, List } from './FilterPanel.styles';
 import { connect } from 'react-redux';
 
 import { applyFilter } from '../../../../redux/actions/userActions';
@@ -14,16 +10,9 @@ const FilterPanel = ({ items, applyFilter, show, setShow, loading }) => {
   const brands = [...new Set(items.map(p => p.brand.toUpperCase()))];
 
   const [priceRange, setPriceRange] = useState('all');
-  const [currentBrand, setCurrentBrand] = useState('all');
+  const [currentBrand, setCurrentBrand] = useState('brand-all');
   const [sort, setSort] = useState('rating');
   const node = useRef();
-
-  useEffect(() => {
-    if (!loading) {
-      applyFilter('sort', 'rating');
-    }
-// eslint-disable-next-line
-  }, [loading]);
 
   const handlePriceChange = e => {
     if (priceRange === e.target.getAttribute('id')) return;
@@ -41,7 +30,7 @@ const FilterPanel = ({ items, applyFilter, show, setShow, loading }) => {
 
   const handleBrandChange = e => {
     if (currentBrand === e.target.getAttribute('id')) return;
-
+    console.log('change');
     setCurrentBrand(e.target.getAttribute('id'));
     applyFilter('brand', e.target.getAttribute('id'));
   };
@@ -165,6 +154,17 @@ const FilterPanel = ({ items, applyFilter, show, setShow, loading }) => {
 
       <h3>Brand</h3>
       <List>
+        <li key='brand-all'>
+          <div>
+            <input
+              type='checkbox'
+              id='brand-all'
+              checked={currentBrand === 'brand-all'}
+              onChange={handleBrandChange}
+            />
+            <label htmlFor='brand-all'>All</label>
+          </div>
+        </li>
         {brands.map(brand => (
           <li key={brand}>
             <div>

@@ -26,7 +26,6 @@ import Preloader from './Preloader';
 import Footer from './layout/footer/Footer';
 
 function App({ auth, getProducts }) {
-  console.log('app');
   useEffect(() => {
     getProducts();
     // eslint-disable-next-line

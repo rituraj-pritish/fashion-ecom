@@ -10,7 +10,7 @@ export const UserOptions = styled.div`
   top: 52px;
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
-  cursor:initial ;
+  cursor: initial;
 `;
 export const NoAuthOptions = styled.div`
   min-width: 170px;
@@ -34,12 +34,19 @@ export const NoAuthOptions = styled.div`
   }
 `;
 
-export const AuthOptions  = styled.div`
+export const AuthOptions = styled.div`
+  padding: 1rem 2rem;
+
+  li {
+    padding: 0;
+    margin: 8px 0;
+  }
+
   a {
     display: flex;
-
-    i {
-      margin-right: 20px;
+    white-space: nowrap;
+    div {
+      margin-right: 2rem;
     }
   }
-`
+`;

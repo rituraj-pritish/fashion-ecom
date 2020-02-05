@@ -34,16 +34,17 @@ export const StyledCollectionContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.3s;
+  transition: 0.4s;
 `;
 
 export const StyledCollectionItem = styled.div`
   position: relative;
   overflow: hidden;
-  cursor: pointer;
+  width: 100%;
+  height: 100%;
 
   .col-bg {
-    transition: 0.3s;
+    transition: 0.5s;
     width: 100%;
     height: 100%;
   }

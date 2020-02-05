@@ -11,7 +11,6 @@ import {
 
 const StyledText = styled.p`
   font-size: 1.6rem;
-  display: ${({ inline }) => inline && 'inline'};
   color: inherit;
 
   ${color} ${space} ${typography} ${position} ${grid} ${display}

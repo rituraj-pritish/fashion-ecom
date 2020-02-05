@@ -36,7 +36,7 @@ const Products = ({
       if (filtering) resetFilter();
     };
     // eslint-disable-next-line
-  }, [match.params]);
+  }, [match.params,filtering,searching]);
 
   if (loading) return <div>loading</div>;
 

@@ -132,7 +132,7 @@ export default (state = initialState, { type, payload }) => {
     case SET_CURRENT_PRODUCTS:
       return {
         ...state,
-        currentProducts: payload,
+        currentProducts: payload.sort((a,b) => b.rating - a.rating),
         loading: false
       };
     case SIGNOUT:
@@ -151,6 +151,15 @@ export default (state = initialState, { type, payload }) => {
       }
 
       if (payload.category === 'sort' && payload.subCategory === 'all') {
+        return {
+          ...state,
+          filtered: state.currentProducts,
+          filtering: true,
+          loading: false
+        };
+      }
+
+      if (payload.category === 'brand' && payload.subCategory === 'brand-all') {
         return {
           ...state,
           filtered: state.currentProducts,
@@ -179,6 +188,7 @@ export default (state = initialState, { type, payload }) => {
     case RESET_FILTER:
       return {
         ...state,
+        currentProducts: [],
         filtered: [],
         filtering: false,
         loading: false

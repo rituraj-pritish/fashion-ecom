@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Background from '../../../common/Background';
 import {
@@ -9,12 +10,14 @@ import {
 
 const CollectionItem = ({ imageUrl, title }) => {
   return (
-    <StyledCollectionItem>
-      <Background url={imageUrl} className='col-bg' />
-      <StyledCollectionContent>
-        <StyledTitle>{title}</StyledTitle>
-      </StyledCollectionContent>
-    </StyledCollectionItem>
+    <Link to='/products/sale'>
+      <StyledCollectionItem>
+        <Background url={imageUrl} className='col-bg' />
+        <StyledCollectionContent>
+          <StyledTitle>{title}</StyledTitle>
+        </StyledCollectionContent>
+      </StyledCollectionItem>
+    </Link>
   );
 };
 

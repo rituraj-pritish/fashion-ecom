@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  z-index: 5;
+  z-index: 7;
   max-width: 1366px;
   position: fixed;
   left: 50%;
@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const Top = styled.div`
   pointer-events: all;
-  z-index: 5;
+  z-index: 7;
   position: fixed;
   height: 40px;
   font-size: 30px;

@@ -34,10 +34,10 @@ const CheckoutBox = ({ cart, history, auth }) => {
           $ {subTotal > 200 ? subTotal : (parseFloat(subTotal) + 20).toFixed(2)}
         </p>
         <Button onClick={handleCheckout}>Proceed to buy</Button>
-        <Text mt='2rem' lineHeight='22px'>
+        {subTotal < 200 && <Text mt='2rem' lineHeight='22px'>
           Free shipping on orders over
           {'  '}<Text color='primary'> $200</Text>
-        </Text>
+        </Text>}
       </Container>
     </CheckoutBoxContainer>
   );

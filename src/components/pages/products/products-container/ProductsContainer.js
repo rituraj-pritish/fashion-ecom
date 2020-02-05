@@ -8,6 +8,7 @@ import {
 import ProductItem from '../product-item/ProductItem';
 import { Container } from './ProductsContainer.styles';
 
+import Text from '../../../common/Text'
 const ProductsContainer = ({
   items,
   setCurrentProducts,
@@ -34,11 +35,11 @@ const ProductsContainer = ({
     }
   }, [filtering, searching, filtered, items, setCurrentProducts]);
 
-  if (loading || products === null) return <div>loadingsdfsdfsdfsdfsdf</div>;
+  if (loading || products === null) return <div>loading...</div>;
 
   return (
     <Container>
-      {products.length === 0 && <p>No products found.</p>}
+      {products.length === 0 && <Text gridColumn='1/-1' m='3rem 0'>No products found.</Text>}
       {products.length > 0 &&
         products.map(item => <ProductItem key={item.id} item={item} />)}
     </Container>
