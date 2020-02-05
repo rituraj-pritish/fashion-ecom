@@ -12,6 +12,7 @@ import {
   SET_SEARCH,
   REMOVE_SEARCH,
   APPLY_FILTER,
+  UPDATE_FILTERED,
   RESET_FILTER,
   SET_CURRENT_PRODUCTS,
   SET_OVERLAY
@@ -108,6 +109,10 @@ export const removeSearch = () => async dispatch => {
 export const applyFilter = (category, subCategory) => async dispatch => {
   dispatch({ type: APPLY_FILTER, payload: { category, subCategory } });
 };
+
+export const updateFiltered = (products) => async dispatch => {
+  dispatch({type: UPDATE_FILTERED, payload: products})
+}
 
 export const resetFilter = () => async dispatch => {
   dispatch({ type: RESET_FILTER });

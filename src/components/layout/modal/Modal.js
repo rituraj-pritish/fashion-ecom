@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import sizes from '../../../sizes.js';
 import styled from 'styled-components';
 
 import clickOutside from '../../../helpers/clickOutside';
@@ -15,6 +16,10 @@ const ModalContainer = styled.div`
   display: ${({ show }) => (show ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
+
+  @media ${sizes.xl} {
+    display: none;
+  }
 `;
 
 const Remove = styled.div`

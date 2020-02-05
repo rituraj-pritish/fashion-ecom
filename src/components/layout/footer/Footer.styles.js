@@ -11,6 +11,7 @@ export const FooterContainer = styled.div`
   padding: 30px ${({ theme }) => theme.padding.xxl};
   padding-bottom: 5px;
   display: ${({ show }) => (show ? 'block' : 'none')};
+  color: ${({theme}) => theme.colors.black};
 
   @media ${sizes.md} {
     padding: 30px ${({ theme }) => theme.padding.md};
@@ -53,7 +54,7 @@ export const SiteLinks = styled.ul`
 
     a {
       &:hover {
-        color: #fff;
+        color: #000;
       }
     }
   }
@@ -75,9 +76,14 @@ export const MailList = styled.div`
   justify-self: end;
 
   h3 {
-    font-size: 1.6rem;
+    font-size: 2rem;
     margin-bottom: 15px;
     white-space: nowrap;
+
+    @media ${sizes.mob} {
+      white-space: normal;
+      text-align: center;
+    }
   }
 
   form {
@@ -93,13 +99,13 @@ export const MailList = styled.div`
 
   button {
     height: 35px;
-    background: ${({ theme }) => theme.color.primary.main};
+    background: ${({ theme }) => theme.colors.primary};
     border-radius: 8px;
     color: white;
     cursor: pointer;
 
     &:hover {
-      background: ${({ theme }) => theme.color.primary.darker};
+      background: ${({ theme }) => theme.colors.primaryDark};
     }
   }
 
@@ -151,6 +157,10 @@ export const SocialLinks = styled.div`
 
     &:hover {
       transform: translateY(-2px);
+    }
+
+    @media ${sizes.mob} {
+      width: 30px;
     }
   }
 `;

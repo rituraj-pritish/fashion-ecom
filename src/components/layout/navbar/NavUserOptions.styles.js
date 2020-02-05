@@ -20,14 +20,14 @@ export const NoAuthOptions = styled.div`
     width: 100%;
     border-radius: 7px;
     color: white;
-    background: ${({ theme }) => theme.color.primary.main};
+    background: ${({ theme }) => theme.colors.primary};
     font-weight: bold;
     font-size: 1.8rem;
     border: 2px solid rgba(#fff, 0, 5);
     margin-bottom: 15px;
 
     &:hover {
-      background: ${({ theme }) => theme.color.primary.darker};
+      background: ${({ theme }) => theme.colors.primaryDark};
     }
   }
 
@@ -47,7 +47,7 @@ export const NoAuthOptions = styled.div`
       background: #fff;
       color: #3e3e3e;
       font-weight: unset;
-      border: 2px solid ${({ theme }) => theme.color.primary.main};
+      border: 2px solid ${({ theme }) => theme.colors.primary};
       font-size: 1.5rem;
       padding: 7px;
       margin: 0;

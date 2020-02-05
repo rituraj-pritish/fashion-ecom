@@ -19,13 +19,13 @@ export const MailListContainer = styled.div`
   }
 
   h2 {
-    margin: 0;
+    margin-bottom: 1rem;
     font-size: 2rem;
   }
 
   p {
     color: #2c2c2c;
-    font-size: 0.9rem;
+    font-size: 1.6rem;
     width: 75%;
     text-align: center;
   }
@@ -59,4 +59,5 @@ export const MailListContainer = styled.div`
       }
     }
   }
+
 `;

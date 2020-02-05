@@ -10,6 +10,8 @@ export const OverlayContainer = styled.div`
   z-index: 10;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
@@ -19,9 +21,10 @@ export const OverlayContainer = styled.div`
 `;
 
 const Overlay = ({ showOverlay, setOverlay }) => {
-  useEffect(() => {
-    const root = document.getElementById('root');
+  const root = document.getElementById('root');
+  const myNav = document.getElementById('my-nav');
 
+  useEffect(() => {
     if (showOverlay) {
       root.style.position = 'fixed';
       root.style.overflow = 'hidden';
@@ -32,6 +35,7 @@ const Overlay = ({ showOverlay, setOverlay }) => {
       root.style.overflow = 'initial';
     };
   }, [showOverlay]);
+
   return (
     <OverlayContainer onClick={() => setOverlay(false)} show={showOverlay} />
   );

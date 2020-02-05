@@ -40,7 +40,6 @@ export const Wishlist = styled.div`
   right: 10px;
   font-size: 1.6rem;
   background-color: #ffffff;
-  color: #eee;
   padding: 5px;
   width: 30px;
   height: 30px;
@@ -49,4 +48,8 @@ export const Wishlist = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  svg path {
+    fill: ${({isAddedToWishlist}) => isAddedToWishlist ? 'red' : '#eee' };
+  }
 `;

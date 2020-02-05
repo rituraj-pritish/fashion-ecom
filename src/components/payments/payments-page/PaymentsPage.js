@@ -9,7 +9,7 @@ import {
   Amount,
   Container
 } from './PaymentsPage.styles';
-import Button from '../../reusable-components/Button';
+import Button from '../../common/Button';
 import { Link } from 'react-router-dom';
 
 const PaymentsPage = ({ cart }) => {

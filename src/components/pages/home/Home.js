@@ -8,21 +8,22 @@ import ShopLinks from './shop-links/ShopLinks';
 
 const Home = ({ products }) => {
   useEffect(() => {}, [products]);
+  const items = Object.values(products).flat();
 
   return (
     <PageContainer>
       <ShopLinks />
 
-      <ProductCarousel title='trending' data={Object.values(products).flat()} />
+      <ProductCarousel title='trending' data={items} />
 
       <ProductCarousel
         title='top selling'
-        data={Object.values(products).flat()}
+        data={items}
       />
 
       <ProductCarousel
         title="today's offers"
-        data={Object.values(products).flat()}
+        data={items}
       />
     </PageContainer>
   );

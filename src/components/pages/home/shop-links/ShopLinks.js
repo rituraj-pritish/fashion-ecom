@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { ShopLinksContainer, Container } from './ShopLinks.styles';
-import women from '../../../../assets/women.webp';
-import men from '../../../../assets/men.webp';
-import accesories from '../../../../assets/accesories.webp';
-import sale from '../../../../assets/sale.jpg';
-import newItems from '../../../../assets/new.jpg';
-import shoe from '../../../../assets/shoes.jpg';
+import women from '../../../../assets/images/women.webp';
+import men from '../../../../assets/images/men.webp';
+import accesories from '../../../../assets/images/accesories.webp';
+import sale from '../../../../assets/images/sale.jpg';
+import newItems from '../../../../assets/images/new.jpg';
+import shoe from '../../../../assets/images/shoes.jpg';
 
 const ShopLinks = () => {
   return (

@@ -11,7 +11,6 @@ import theme from '../theme';
 import Navbar from './layout/navbar/Navbar';
 import Footer from './layout/footer/Footer';
 import Home from './pages/home/Home';
-import MailListModal from './mail-list-modal/MailListModal';
 import SignIn from './pages/sign-in/SignIn';
 import SignUp from './pages/sign-up/SignUp';
 import { getProducts } from '../redux/actions/userActions';
@@ -27,16 +26,7 @@ import ProductPage from './pages/product/product-page/ProductPage';
 import Overlay from './layout/overlay/Overlay';
 
 function App({ auth, getProducts }) {
-  const [showMaillistModal, setShowMailListModal] = useState(false);
-
   useEffect(() => {
-    const displayed = window.localStorage.getItem('mailModalDisplayed');
-
-    if (displayed === null) {
-      setShowMailListModal(true);
-      window.localStorage.setItem('mailModalDisplayed', true);
-    }
-
     getProducts();
   }, []);
 
@@ -76,10 +66,6 @@ function App({ auth, getProducts }) {
 
           <TopButton />
           <Footer />
-          <MailListModal
-            open={showMaillistModal}
-            setOpen={setShowMailListModal}
-          />
         </Router>
       </ThemeProvider>
       <ReactNotification />

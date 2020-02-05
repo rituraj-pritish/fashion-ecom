@@ -66,18 +66,14 @@ export const ItemBottom = styled.div`
   display: flex;
   flex-direction: column;
 
-  h3 {
-    font-size: 1.3rem;
-  }
-
-  i {
+  .wishlist-icon {
     position: absolute;
     top: 10px;
     right: 10px;
     font-size: 1.6rem;
     background-color: #ffffff;
     color: #eee;
-    padding: 3px;
+    padding: 4px;
     width: 30px;
     height: 30px;
     border-radius: 3px;
@@ -85,12 +81,6 @@ export const ItemBottom = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-  }
-
-  p {
-    margin-top: 5px;
-    font-size: 1.3rem;
-    margin-bottom: 15px;
   }
 
   button {

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 import Logo from '../../../assets/Logo';
-import InstagramIcon from '../../../assets/InstagramIcon';
-import FacebookIcon from '../../../assets/FacebookIcon';
-import TwitterIcon from '../../../assets/TwitterIcon';
+import InstagramIcon from '../../../assets/icons/InstagramIcon';
+import FacebookIcon from '../../../assets/icons/FacebookIcon';
+import TwitterIcon from '../../../assets/icons/TwitterIcon';
 import { MaxWidthContainer } from '../../../index.styles';
 import {
   FooterContainer,
@@ -13,9 +13,11 @@ import {
   TopContainer,
   BottomContainer,
   SocialLinks,
-  SocialLink,
   StyledLogo
 } from './Footer.styles';
+import Input from '../../common/Input'
+import Button from '../../common/Button'
+import Text from '../../common/Text'
 
 const Footer = ({ history }) => {
   const [show, setShow] = useState(true);
@@ -84,8 +86,8 @@ const Footer = ({ history }) => {
           <MailList>
             <h3>Stay up to date from fashion.co</h3>
             <form onSubmit={handleMaillist}>
-              <input type='text' placeholder='enter your email' />
-              <button>Submit</button>
+              <Input type='text' placeholder='enter your email' />
+              <Button>Submit</Button>
             </form>
           </MailList>
         </TopContainer>

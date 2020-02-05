@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { applyFilter } from '../../../../redux/actions/userActions';
 import clickOutside from '../../../../helpers/clickOutside';
 
-const FilterPanel = ({ items, applyFilter, show, setShow }) => {
+const FilterPanel = ({ items, applyFilter, show, setShow, loading }) => {
   //to get unique values
   const brands = [...new Set(items.map(p => p.brand.toUpperCase()))];
 
@@ -20,8 +20,10 @@ const FilterPanel = ({ items, applyFilter, show, setShow }) => {
   const node = useRef();
 
   useEffect(() => {
-    applyFilter('sort', 'rating');
-  }, []);
+    if (!loading) {
+      applyFilter('sort', 'rating');
+    }
+  }, [loading]);
 
   const handlePriceChange = e => {
     if (priceRange === e.target.getAttribute('id')) return;
@@ -153,10 +155,10 @@ const FilterPanel = ({ items, applyFilter, show, setShow }) => {
           <input
             type='checkbox'
             onChange={handlePriceChange}
-            checked={priceRange === '200to300'}
-            id='200to300'
+            checked={priceRange === '201to300'}
+            id='201to300'
           />
-          <label htmlFor='200to300'>$200 - $300</label>
+          <label htmlFor='201to300'>$201 - $300</label>
         </li>
       </List>
       <Line />
@@ -182,4 +184,8 @@ const FilterPanel = ({ items, applyFilter, show, setShow }) => {
   );
 };
 
-export default connect(null, { applyFilter })(FilterPanel);
+const mapStateToProps = state => ({
+  loading: state.user.loading
+});
+
+export default connect(mapStateToProps, { applyFilter })(FilterPanel);

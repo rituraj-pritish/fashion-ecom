@@ -1,14 +1,15 @@
 export default {
-  color: {
-    primary: {
-      main: '#007bff',
-      darker: '#0063cc',
-      lighter: '#3d9aff'
-    },
-    text: {
-      main: '#000',
-      lighter: '#4c4c4c'
-    }
+  colors: {
+    primary: '#007bff',
+    primaryDark: '#0063cc',
+    primaryLight: '#3d9aff',
+    black: '#313131',
+    grey: '#4c4c4c',
+    lightGrey: '#e4e4e4',
+    white: '#ffffff',
+    red: '#ef4148',
+    green: '#5ac12a',
+    golden: '#FFD700'
   },
   navHt: '50px',
   padding: {
@@ -18,5 +19,4 @@ export default {
   },
 
   maxWidth: '1350px'
-
-}
+};

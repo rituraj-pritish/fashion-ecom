@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import LazyLoad from 'react-lazy-load';
 import { withRouter } from 'react-router-dom';
 
-import returnImg from '../../../../assets/return.webp';
-import worldwideImg from '../../../../assets/worldwide.webp';
-import Button from '../../../reusable-components/Button';
+import returnImg from '../../../../assets/images/return.webp';
+import worldwideImg from '../../../../assets/images/worldwide.webp';
+import Button from '../../../common/Button';
+import Text from '../../../common/Text';
+import Icon from '../../../common/Icon';
+import PlusIcon from '../../../../assets/icons/PlusIcon';
+import MinusIcon from '../../../../assets/icons/MinusIcon';
+import HeartIcon from '../../../../assets/icons/HeartIcon';
+import StarIcon from '../../../../assets/icons/StarIcon';
 import {
-  MainImage,
   SmallImages,
   SmallImage,
   ActionsContainer,
@@ -14,21 +19,16 @@ import {
   ProductOverviewContainer,
   Variants,
   Variant,
-  Name,
-  Price,
-  Brand,
   Rating,
-  Stock,
   CartBtn,
-  BuyBtn,
   Policy,
-  Wishlist,
-  StickyContainer
+  Wishlist
 } from './ProductOverview.styles';
 
 const ProductOverview = ({
   product,
-  variant,setVariant,
+  variant,
+  setVariant,
   cart,
   wishlist,
   addToCart,
@@ -41,15 +41,7 @@ const ProductOverview = ({
   const [price, setPrice] = useState();
   const [quantity, setQuantity] = useState(1);
 
-  const { id, name, rating, brand, variants } = product;
-
-  const changeVariant = item => {
-    const index = variants.indexOf(item);
-    if (index === variant) return;
-    setVariant(index);
-    setCurrentImg(variants[index].images[0]);
-    setPrice(variants[index].price);
-  };
+  const { name, rating, brand, variants } = product;
 
   if (!currentImg) {
     setCurrentImg(variants[variant].images[0]);
@@ -74,13 +66,22 @@ const ProductOverview = ({
   const stars = [];
   for (let i = 1; i <= rating; i++) {
     stars.push(
-      <i key={i} className='fas fa-star' style={{ color: '#FFD700' }} />
+      <Icon key={i} color='golden'>
+        <StarIcon />
+      </Icon>
     );
   }
 
   const isInCart = cart.find(item => item.product.id === product.id);
-
   const isInWishlist = wishlist.find(item => item.product.id === product.id);
+
+  const changeVariant = item => {
+    const index = variants.indexOf(item);
+    if (index === variant) return;
+    setVariant(index);
+    setCurrentImg(variants[index].images[0]);
+    setPrice(variants[index].price);
+  };
 
   const handleCartBtn = () => {
     if (isInCart) return;
@@ -104,7 +105,7 @@ const ProductOverview = ({
       return;
     }
     addToCart(product, variant, 1);
-    history.push('/user/cart')
+    history.push('/user/cart');
   };
 
   return (
@@ -121,14 +122,18 @@ const ProductOverview = ({
       </div>
 
       <ActionsContainer>
-        <Name>{name}</Name>
-        <Brand>{brand}</Brand>
-        <Price>
+        <Text fontSize='3rem'>{name}</Text>
+        <Text fontSize='1.5rem' color='grey' mt='-15px'>
+          {brand.toUpperCase()}
+        </Text>
+        <Text fontSize='2.3rem'>
           $ {price}
           {price % 1 === 0 && '.00'}
-        </Price>
+        </Text>
         <Rating>{stars}</Rating>
-        <Stock>In Stock</Stock>
+        <Text fontSize='1.9rem' color='green'>
+          In Stock
+        </Text>
         {variants.length > 1 && (
           <Variants>
             {variants.map(item => (
@@ -164,35 +169,40 @@ const ProductOverview = ({
 
         <CartBtn>
           <div>
-            <span
+            <Icon
+              width='10px'
               onClick={() => {
                 if (quantity === 1) return;
                 setQuantity(quantity - 1);
               }}
             >
-              <i className='fas fa-minus' />
-            </span>
-            <p>{quantity}</p>
-            <span onClick={() => setQuantity(quantity + 1)}>
-              <i className='fas fa-plus' />
-            </span>
+              <MinusIcon />
+            </Icon>
+            <Text mb='3px'>{quantity}</Text>
+            <Icon width='10px' onClick={() => setQuantity(quantity + 1)}>
+              <PlusIcon />
+            </Icon>
           </div>
-          <Button secondary onClick={handleCartBtn}>
+          <Button variant='secondary' onClick={handleCartBtn}>
             {isInCart ? 'ADDED TO CART' : 'ADD TO CART'}
           </Button>
         </CartBtn>
-        <BuyBtn>
-          <Button onClick={handleBuy} fullWidth>
-            BUY NOW
-          </Button>
-        </BuyBtn>
+
+        <Button
+          height='50px'
+          fontWeight='bold'
+          fontSize='2rem'
+          letterSpacing='4px'
+          onClick={handleBuy}
+        >
+          BUY NOW
+        </Button>
+
         <Wishlist onClick={handleWishlist}>
-          {isInWishlist ? (
-            <i className='fas fa-heart' style={{ color: 'red' }} />
-          ) : (
-            <i className='far fa-heart' />
-          )}
-          {isInWishlist ? <p>Added To Wishlist</p> : <p>Add To Wishlist</p>}
+          <Icon color={isInWishlist ? 'red' : 'lightGrey'} mr='1rem'>
+            <HeartIcon />
+          </Icon>
+          <Text>{isInWishlist ? 'Added To Wishlist' : 'Add To Wishlist'}</Text>
         </Wishlist>
       </ActionsContainer>
     </ProductOverviewContainer>

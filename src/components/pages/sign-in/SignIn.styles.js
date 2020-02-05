@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const StyledLogo = styled.div`
   width: 16rem;
+  margin: 0 auto;
+  svg {
+    width: 100%;
+  }
 `;
 export const Container = styled.div`
   font-size: 1.6rem;
@@ -21,15 +25,5 @@ export const Container = styled.div`
     label {
       margin-bottom: 10px;
     }
-
-}
-      p {
-        margin-top: 15px;
-        font-size: 1.4rem;
-        color: ${({theme}) => theme.color.text.lighter};
-
-        a {
-          color: blue;
-        }
-      }
+  }
 `;

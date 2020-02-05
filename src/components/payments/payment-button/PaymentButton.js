@@ -1,6 +1,6 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
-import Button from '../../reusable-components/Button';
+import Button from '../../common/Button';
 import styled from 'styled-components';
 
 export const StyledButton = styled.button``;

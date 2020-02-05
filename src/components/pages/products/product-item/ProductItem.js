@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazy-load';
 
-import redHeart from '../../../../assets/red-heart.svg';
-import greyHeart from '../../../../assets/grey-heart.svg';
+import HeartIcon from '../../../../assets/icons/HeartIcon';
 import {
   ItemBottom,
   ProductItemContainer,
@@ -16,7 +15,8 @@ import {
   addToWishlist,
   setAlert
 } from '../../../../redux/actions/userActions';
-import Button from '../../../reusable-components/Button';
+import Button from '../../../common/Button';
+import Icon from '../../../common/Icon';
 
 const ProductItem = ({
   item,
@@ -30,13 +30,13 @@ const ProductItem = ({
   const variant = variants[0];
   const image = variant.images[0];
 
-  const isAddedToCart = cart.find(item => item.product.id === id);
-  const isAddedToWishlist = wishlist.find(item => item.product.id === id);
+  const isInCart = cart.find(item => item.product.id === id);
+  const isInWishlist = wishlist.find(item => item.product.id === id);
 
   const handleCartBtn = e => {
     e.preventDefault();
 
-    if (isAddedToCart) return;
+    if (isInCart) return;
     addToCart(item, 0, 1);
   };
 
@@ -45,7 +45,7 @@ const ProductItem = ({
       setAlert('Login to add to wishlist', 'danger');
       return;
     }
-    if (isAddedToWishlist) return;
+    if (isInWishlist) return;
 
     addToWishlist(item, 0);
   };
@@ -59,19 +59,23 @@ const ProductItem = ({
       </Link>
       <ItemBottom>
         <Wishlist>
-          {isAddedToWishlist ? (
-            <img src={redHeart} alt='red heart' />
-          ) : (
-            <img src={greyHeart} alt='grey heart' onClick={handleWishlist} />
-          )}
+          <Icon
+            onClick={handleWishlist}
+            color={isInWishlist ? 'red' : 'lightGrey'}
+          >
+            <HeartIcon />
+          </Icon>
         </Wishlist>
 
         <h3>{name}</h3>
         <p>
           $ {variant.price} {variant.price % 1 === 0 && '.00'}
         </p>
-        <Button onClick={handleCartBtn} secondary={isAddedToCart}>
-          {isAddedToCart ? 'ADDED TO CART' : 'ADD TO CART'}
+        <Button
+          onClick={handleCartBtn}
+          variant={isInCart ? 'secondary' : 'primary'}
+        >
+          {isInCart ? 'ADDED TO CART' : 'ADD TO CART'}
         </Button>
       </ItemBottom>
     </ProductItemContainer>

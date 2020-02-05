@@ -8,6 +8,7 @@ export const PageContainer = styled.div`
   margin: ${({ theme }) => theme.navHt} auto 0 auto;
   width: 100%;
   text-align: center;
+  color: ${({theme}) => theme.colors.black};
 
   @media ${sizes.md} {
     padding: 15px ${({ theme }) => theme.padding.md} 30px

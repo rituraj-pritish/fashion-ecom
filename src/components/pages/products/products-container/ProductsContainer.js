@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { setCurrentProducts } from '../../../../redux/actions/userActions';
+import {
+  setCurrentProducts,
+  updateFiltered
+} from '../../../../redux/actions/userActions';
 import ProductItem from '../product-item/ProductItem';
 import { Container } from './ProductsContainer.styles';
 
 const ProductsContainer = ({
   items,
   setCurrentProducts,
+  updateFiltered,
   filtered,
   filtering,
   searching,
@@ -25,6 +29,7 @@ const ProductsContainer = ({
     }
 
     if (filtering) {
+      // updateFiltered(items);
       setProducts(filtered);
     }
   }, [filtering, searching, filtered, items, setCurrentProducts]);
@@ -47,6 +52,6 @@ const mapStateToProps = state => ({
   loading: state.user.loading
 });
 
-export default connect(mapStateToProps, { setCurrentProducts })(
+export default connect(mapStateToProps, { setCurrentProducts, updateFiltered })(
   ProductsContainer
 );

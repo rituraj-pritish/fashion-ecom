@@ -38,6 +38,8 @@ export default (products, category, subcategory) => {
         return products.filter(
           ({ variants }) => variants[0].price >= 201 && variants[0].price <= 300
         );
+      case 'all': 
+          return products
       default:
         return products;
     }

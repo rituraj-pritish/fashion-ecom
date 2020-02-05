@@ -68,7 +68,7 @@ export const ShopLinksContainer = styled.div`
     }
 
     &:hover p {
-      background: ${({ theme }) => theme.color.primary.main + 'c9'};
+      background: ${({ theme }) => theme.colors.primary + 'c9'};
       color: #fff;
       border: 2px solid white;
     }

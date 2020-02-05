@@ -12,7 +12,7 @@ export const Nav = styled.nav`
   padding: 0 ${({ theme }) => theme.padding.xxl};
   box-shadow: 0px 3px 10px #20202042;
   box-sizing: border-box;
-  z-index: 5;
+  z-index: 10;
   position: fixed;
   display: ${({ show }) => (show ? 'flex' : 'none')};
 
@@ -43,6 +43,7 @@ export const Container = styled.div`
 
 export const StyledLogo = styled.div`
   svg {
+    height: 100%;
     width: 120px;
     display: ${({ show }) => (show ? 'none' : 'block')};
 
@@ -52,7 +53,7 @@ export const StyledLogo = styled.div`
   }
 `;
 
-export const SearchIcon = styled.li`
+export const SearchIconContainer = styled.li`
   display: none;
   font-size: 2.2rem;
 

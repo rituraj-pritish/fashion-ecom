@@ -1,39 +1,17 @@
-body,
-html {
-  font-size: 10px;
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body,
+html {
+  font-size: 10px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
-
-div,
-span,
-ul,
-li,
-ol,
-button,
-a,
-img,
-form,
-input {
-  box-sizing: inherit !important;
 }
 
 #root {
@@ -52,7 +30,6 @@ ul {
   color: inherit;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 input {
@@ -87,12 +64,6 @@ button:focus {
   left: 0;
   width: 100%;
   height: 100%;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { PageContainer } from '../../../../index.styles';
 import FilterPanel from '../filter-panel/FilterPanel';
 import ProductsContainer from '../products-container/ProductsContainer';
-import { Container } from './Products.styles';
+import { Container, FilterBtn } from './Products.styles';
 import {
   removeSearch,
   resetFilter,
@@ -49,9 +49,10 @@ const Products = ({
   };
   return (
     <PageContainer>
-      <div>
-        dfdssf <button onClick={handleClick}>sdfsf</button>{' '}
-      </div>
+      <FilterBtn onClick={handleClick}>
+        <i className='fas fa-bars' /> Filter
+      </FilterBtn>
+
       <Container>
         <FilterPanel show={showFilter} setShow={setShowFilter} items={items} />
         {searching && filtered.length === 0 && (

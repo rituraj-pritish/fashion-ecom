@@ -2,12 +2,16 @@ import React from 'react';
 import LazyLoad from 'react-lazy-load';
 import { connect } from 'react-redux';
 
+import Icon from '../../../common/Icon';
+import Text from '../../../common/Text';
+import PlusIcon from '../../../../assets/icons/PlusIcon';
+import TrashIcon from '../../../../assets/icons/TrashIcon';
+import MinusIcon from '../../../../assets/icons/MinusIcon';
 import {
   CartItemContainer,
   Quantity,
   Details,
-  Remove,
-  Amount
+  Remove
 } from './CartItem.styles';
 import {
   updateCart,
@@ -52,27 +56,39 @@ const CartItem = ({
 
         {qty && (
           <Quantity>
-            <i
-              className='fas fa-minus'
+            <Icon
+              m='5px'
+              p='5px'
               onClick={() => {
                 if (qty === 1) return;
                 updateCart(item.product, qty - 1);
               }}
-            />
-            <p>{qty}</p>
-            <i
-              className='fas fa-plus'
+            >
+              <MinusIcon />
+            </Icon>
+            <Text m='5px' p='5px' mb='8px'>
+              {qty}
+            </Text>
+            <Icon
+              m='5px'
+              p='5px'
               onClick={() => updateCart(item.product, qty + 1)}
-            />
+            >
+              <PlusIcon />
+            </Icon>
           </Quantity>
         )}
       </Details>
 
-      <Amount>
+      <Text fontWeight='bold'>
         $ {qty ? (Math.round(qty * price * 100) / 100).toFixed(2) : price}
-      </Amount>
+      </Text>
 
-      <Remove onClick={handleRemove} className='far fa-trash-alt' />
+      <Remove onClick={handleRemove} className='far fa-trash-alt'>
+        <Icon width='16px'>
+          <TrashIcon />
+        </Icon>
+      </Remove>
     </CartItemContainer>
   );
 };

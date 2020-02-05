@@ -4,8 +4,8 @@ import Swiper from 'react-id-swiper';
 import 'swiper/css/swiper.css';
 
 import { Slide, SwiperContainer,BG } from './ImageSlider.styles';
-import image from '../../assets/maillist.jpg'
-import image2 from '../../assets/male + female.webp'
+import image from '../../assets/images/maillist.jpg'
+import image2 from '../../assets/images/male + female.webp'
 import { Keyboard } from 'swiper/js/swiper.esm';
 
 const ImageSlider = () => {

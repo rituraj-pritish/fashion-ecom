@@ -30,6 +30,7 @@
     "redux-thunk": "^2.3.0",
     "string-similarity": "^4.0.1",
     "styled-components": "^4.4.1",
+    "styled-system": "^5.1.4",
     "swiper": "^5.2.1"
   },
   "scripts": {

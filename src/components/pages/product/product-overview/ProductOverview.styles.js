@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import sizes from '../../../../sizes';
 
 export const ProductOverviewContainer = styled.div`
@@ -8,7 +8,7 @@ export const ProductOverviewContainer = styled.div`
 
   @media ${sizes.lg} {
     grid-template-columns: 1fr;
-    grid-template-rows: auto ;
+    grid-template-rows: auto;
   }
 `;
 
@@ -64,27 +64,8 @@ export const ActionsContainer = styled.div`
   grid-row-gap: 15px;
 `;
 
-export const Name = styled.div`
-  font-size: 3rem;
-`;
-export const Brand = styled.div`
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  color: #4e4e4e;
-  margin-top: -15px;
-`;
-
-export const Price = styled.div`
-  font-size: 2.3rem;
-`;
-
 export const Rating = styled.div`
-  font-size: 1.7rem;
-`;
-
-export const Stock = styled.div`
-  font-size: 1.9rem;
-  color: #5ac12a;
+  display: flex;
 `;
 
 export const Policy = styled.div`
@@ -117,7 +98,7 @@ export const CartBtn = styled.div`
   display: flex;
   width: 100%;
 
-  div {
+  & > div {
     background: whitesmoke;
     border-radius: 5px;
     margin-right: 20px;
@@ -135,24 +116,13 @@ export const CartBtn = styled.div`
       cursor: pointer;
     }
   }
-
-  button {
-    flex-grow: 1;
-    padding: 1rem;
-  }
-`;
-
-export const BuyBtn = styled.div`
-  width: 100%;
-
-  button {
-    padding: 1.5rem;
-  }
 `;
 
 export const Wishlist = styled.div`
   display: flex;
+  align-items: center;
   margin-top: 3rem;
+  width: fit-content;
 
   i {
     margin-right: 1rem;

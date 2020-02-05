@@ -7,8 +7,9 @@ import { PageContainer } from '../../../index.styles';
 import { StyledLogo, Container } from './SignUp.styles';
 import { signup } from '../../../redux/actions/authActions';
 import { setAlert } from '../../../redux/actions/userActions';
-import Input from '../../reusable-components/Input';
-import Button from '../../reusable-components/Button';
+import Input from '../../common/Input';
+import Button from '../../common/Button';
+import Text from '../../common/Text';
 
 const SignUp = ({ signup, firebase, setAlert }) => {
   const [formData, setFormData] = useState({
@@ -46,11 +47,11 @@ const SignUp = ({ signup, firebase, setAlert }) => {
   return (
     <PageContainer>
       <Container>
-        <Link to='/'>
-          <StyledLogo>
+        <StyledLogo>
+          <Link to='/'>
             <Logo />
-          </StyledLogo>
-        </Link>
+          </Link>
+        </StyledLogo>
         <form onSubmit={handleSubmit}>
           <label htmlFor='name'>Name</label>
           <Input type='text' name='name' value={name} onChange={handleChange} />
@@ -88,9 +89,15 @@ const SignUp = ({ signup, firebase, setAlert }) => {
           />
 
           <Button>Sign Up</Button>
-          <p>
-            Already have an account ? <Link to='/signin'>Sign In</Link>
-          </p>
+          <Text mt='2rem'>
+            Don't have an account ?
+            <Link to='/signup'>
+              <Text display='inline' color='blue'>
+                {' '}
+                Sign Up
+              </Text>
+            </Link>
+          </Text>
         </form>
       </Container>
     </PageContainer>

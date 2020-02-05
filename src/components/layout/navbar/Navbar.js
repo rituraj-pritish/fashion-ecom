@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import userIcon from '../../../assets/user-icon.svg';
-import cartIcon from '../../../assets/cart.svg';
+import UserIcon from '../../../assets/icons/UserIcon';
+import CartIcon from '../../../assets/icons/CartIcon';
+import SearchIcon from '../../../assets/icons/SearchIcon';
 import Logo from '../../../assets/Logo';
+import Icon from '../../common/Icon';
 
 import SearchBar from './search-bar/SearchBar';
 import {
@@ -14,7 +16,7 @@ import {
   Cart,
   Nothing,
   Container,
-  SearchIcon,
+  SearchIconContainer,
   StyledLogo
 } from './Navbar.styles';
 import NavUserOptions from './NavUserOptions';
@@ -59,7 +61,7 @@ const Navbar = ({ history, cart, search }) => {
 
   const handleSearch = e => {
     e.preventDefault();
-
+    setSearchQuery('');
     search(searchQuery);
     history.push(`/products/${searchQuery}`);
   };
@@ -67,9 +69,9 @@ const Navbar = ({ history, cart, search }) => {
   const nothingInCart = <Nothing ref={node}>Cart is empty.</Nothing>;
 
   return (
-    <Nav show={show}>
+    <Nav id='my-nav' show={show}>
       <Container>
-        <StyledLogo>
+        <StyledLogo show={showSearchBar}>
           <Link to='/'>
             <Logo />
           </Link>
@@ -85,9 +87,11 @@ const Navbar = ({ history, cart, search }) => {
           <button className='search-btn'>Search</button>
         </Search>
         <NavLinks>
-          <SearchIcon onClick={() => setShowSearchBar(true)}>
-            <i className='fas fa-search' />
-          </SearchIcon>
+          <SearchIconContainer onClick={() => setShowSearchBar(true)}>
+          <Icon>
+            <SearchIcon />
+          </Icon>
+          </SearchIconContainer>
           <SearchBar
             showSearchBar={showSearchBar}
             setShowSearchBar={setShowSearchBar}
@@ -100,7 +104,9 @@ const Navbar = ({ history, cart, search }) => {
             ref={userRef}
             onClick={() => setShowUserOptions(!showUserOptions)}
           >
-            <img src={userIcon} alt='userIcon' />
+            <Icon height='35px'>
+              <UserIcon />
+            </Icon>
 
             <NavUserOptions
               userRef={userRef}
@@ -110,7 +116,9 @@ const Navbar = ({ history, cart, search }) => {
           </li>
 
           <Cart ref={cartRef} onClick={handleCart}>
-            <img className='cart-icon' src={cartIcon} alt='' />
+            <Icon width='30px'>
+              <CartIcon />
+            </Icon>
             <span className='cart-count'>{cart.length}</span>
             {showCart && nothingInCart}
           </Cart>

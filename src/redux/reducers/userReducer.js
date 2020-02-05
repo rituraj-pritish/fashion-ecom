@@ -15,7 +15,8 @@ import {
   APPLY_FILTER,
   RESET_FILTER,
   SET_CURRENT_PRODUCTS,
-  SET_OVERLAY
+  SET_OVERLAY,
+  UPDATE_FILTERED
 } from '../types';
 import filter from '../../helpers/filter';
 
@@ -143,13 +144,20 @@ export default (state = initialState, { type, payload }) => {
       };
     case APPLY_FILTER:
       let products;
-      // if (payload.category === 'sort') {
-      //   products = state.filtered ? state.filtered : state.currentProducts;
-      // } else {
-      //   products = state.currentProducts;
-      // }
+      if (state.searching && !state.filtering) {
+        products = state.filtered;
+      } else {
+        products = state.currentProducts;
+      }
 
-      products = state.currentProducts;
+      if (payload.category === 'sort' && payload.subCategory === 'all') {
+        return {
+          ...state,
+          filtered: state.currentProducts,
+          filtering: true,
+          loading: false
+        };
+      }
 
       const filteredProducts = filter(
         products,
@@ -160,6 +168,12 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         filtered: filteredProducts,
         filtering: true,
+        loading: false
+      };
+    case UPDATE_FILTERED:
+      return {
+        ...state,
+        filtered: payload,
         loading: false
       };
     case RESET_FILTER:

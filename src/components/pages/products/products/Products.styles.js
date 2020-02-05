@@ -10,3 +10,15 @@ export const Container = styled.div`
     display: block;
   }
 `
+
+export const FilterBtn = styled.div`
+  display: none;
+  text-align: left;
+  margin: 1rem 0;
+  cursor: pointer;
+  font-size: 1.6rem;
+
+  @media ${sizes.xl} {
+    display: block;
+  }
+`

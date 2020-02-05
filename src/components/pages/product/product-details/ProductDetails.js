@@ -40,20 +40,16 @@ const ProductDetails = ({ product, variant }) => {
             placeat nulla blanditiis optio facilis, harum necessitatibus
             cupiditate quam laborum maiores voluptas minus. Dicta, expedita
             doloribus!
+            <br/>
+            <br/>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam neque obcaecati totam incidunt esse dolor! Nisi consectetur error voluptas dicta? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, delectus.
+
           </div>
         ) : (
           <div>
             Colors: {product.variants[variant].variant} <br />
             Product Id: #1234554321 <br />
             Vendor: {product.brand.toUpperCase()} <br />
-            details <br />
-            details <br />
-            details <br />
-            details <br />
-            details <br />
-            details <br />
-            details <br />
-            details <br />
           </div>
         )}
       </Content>

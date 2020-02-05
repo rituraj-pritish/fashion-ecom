@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import Button from '../../../reusable-components/Button';
+import Button from '../../../common/Button';
 import { CheckoutBoxContainer, Container, Line } from './CheckoutBox.styles';
 
 const CheckoutBox = ({ cart, history, auth }) => {

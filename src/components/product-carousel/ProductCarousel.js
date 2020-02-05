@@ -2,18 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Swiper from 'react-id-swiper';
 import 'swiper/css/swiper.css';
-import LazyLoad from 'react-lazy-load';
 import { Link } from 'react-router-dom';
 
+import HeartIcon from '../../assets/icons/HeartIcon';
 import {
   ProductCarouselContainer,
   CarouselItemContainer,
   ItemBottom,
   Title
 } from './ProductCarousel.styles';
-import { addToCart, addToWishlist, setAlert } from '../../redux/actions/userActions';
+import {
+  addToCart,
+  addToWishlist,
+  setAlert
+} from '../../redux/actions/userActions';
 import { connect } from 'react-redux';
-import Button from '../reusable-components/Button';
+import Button from '../common/Button';
+import Icon from '../common/Icon';
+import Text from '../common/Text';
 
 const params = {
   slidesPerView: 2,
@@ -63,33 +69,36 @@ const ProductCarousel = ({
     };
 
     const handleWishlist = () => {
-      if(auth.isEmpty) {
-        setAlert('Login to continue','danger');
+      if (auth.isEmpty) {
+        setAlert('Login to continue', 'danger');
         return;
       }
-      if(isInWishlist) return;
-      addToWishlist(product,0)
+      if (isInWishlist) return;
+      addToWishlist(product, 0);
     };
 
     return (
       <CarouselItemContainer key={id}>
-        {/* <LazyLoad className='lazyload product'> */}
         <Link to={`/product/${category}/${id}`}>
           <img src={images[0]} alt={name} />
         </Link>
-        {/* </LazyLoad> */}
         <ItemBottom>
-          {isInWishlist ? (
-            <i className='fas fa-heart' style={{ color: 'red' }} />
-          ) : (
-            <i className='fas fa-heart' onClick={handleWishlist} />
-          )}
-          <h3>{name}</h3>
-          <p>
+          <Icon
+            className='wishlist-icon'
+            color={isInWishlist ? 'red' : 'lightGrey'}
+            onClick={handleWishlist}
+          >
+            <HeartIcon />
+          </Icon>
+          <Text fontWeight='bold'>{name}</Text>
+          <Text mt='0.5rem' mb='1.5rem'>
             $ {price}
             {price % 1 === 0 && '.00'}
-          </p>
-          <Button fullWidth onClick={handleCartBtn} secondary={isInCart}>
+          </Text>
+          <Button
+            onClick={handleCartBtn}
+            variant={isInCart ? 'secondary' : 'primary'}
+          >
             {isInCart ? 'ADDED TO CART' : 'ADD TO CART'}
           </Button>
         </ItemBottom>

@@ -21,21 +21,13 @@ export const Details = styled.div`
 export const Quantity = styled.div`
   display: flex;
   align-items: center;
-  i {
-    cursor: pointer;
-    padding: 20px;
-  }
 `;
 
-export const Remove = styled.i`
-  font-size: 1.7rem;
-  cursor: pointer;
-  
+export const Remove = styled.div`
+  width: fit-content;
+  justify-self: end;
+  color: #5a5a5a;
   &:hover {
-    color: red;
+    color: ${({ theme }) => theme.colors.red};
   }
-`
-
-export const Amount = styled.div`
-  font-weight: bold;
-`
+`;

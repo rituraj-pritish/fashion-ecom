@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 
 import { Link, Redirect } from 'react-router-dom';
-import Logo from '../../../assets/Logo'
+import Logo from '../../../assets/Logo';
 import { PageContainer } from '../../../index.styles';
 import { StyledLogo, Container } from './SignIn.styles';
 import { connect } from 'react-redux';
 import { signin } from '../../../redux/actions/authActions';
 import { setAlert } from '../../../redux/actions/userActions';
-import Input from '../../reusable-components/Input';
-import Button from '../../reusable-components/Button';
+import Input from '../../common/Input';
+import Button from '../../common/Button';
+import Text from '../../common/Text';
 
 const SignIn = ({ firebase, signin, setAlert }) => {
   const [formData, setFormData] = useState({
@@ -37,11 +38,11 @@ const SignIn = ({ firebase, signin, setAlert }) => {
   return (
     <PageContainer>
       <Container>
-        <Link to='/'>
-          <StyledLogo>
-            <Logo/>
-          </StyledLogo>
-        </Link>
+        <StyledLogo>
+          <Link to='/'>
+            <Logo />
+          </Link>
+        </StyledLogo>
         <form onSubmit={handleSubmit}>
           <label htmlFor='email'>Email</label>
           <Input
@@ -59,10 +60,16 @@ const SignIn = ({ firebase, signin, setAlert }) => {
             onChange={handleChange}
           />
 
-          <Button fullWidth>Sign In</Button>
-          <p>
-            Don't have an account ? <Link to='/signup'>Sign Up</Link>
-          </p>
+          <Button>Sign In</Button>
+          <Text mt='2rem'>
+            Don't have an account ?
+            <Link to='/signup'>
+              <Text display='inline' color='blue'>
+                {' '}
+                Sign Up
+              </Text>
+            </Link>
+          </Text>
         </form>
       </Container>
     </PageContainer>

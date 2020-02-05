@@ -7,7 +7,7 @@ const MailListModal = ({ open, setOpen }) => {
   return (
     <Modal open={open} setOpen={setOpen}>
       <MailListContainer>
-        <img src={require('../../assets/maillist.jpg')} alt='items' />
+        <img src={require('../../assets/images/maillist.jpg')} alt='items' />
         <div>
           <h2>Join our mailing list</h2>
           <p>
