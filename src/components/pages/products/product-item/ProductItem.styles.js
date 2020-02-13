@@ -48,8 +48,4 @@ export const Wishlist = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
-  svg path {
-    fill: ${({isAddedToWishlist}) => isAddedToWishlist ? 'red' : '#eee' };
-  }
 `;

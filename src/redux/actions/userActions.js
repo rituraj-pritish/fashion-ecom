@@ -15,7 +15,8 @@ import {
   UPDATE_FILTERED,
   RESET_FILTER,
   SET_CURRENT_PRODUCTS,
-  SET_OVERLAY
+  SET_OVERLAY,
+  EMPTY_CART
 } from '../types';
 import PRODUCTS from '../../data/PRODUCTS';
 
@@ -105,6 +106,10 @@ export const search = query => async dispatch => {
 export const removeSearch = () => async dispatch => {
   dispatch({ type: REMOVE_SEARCH });
 };
+
+export const emptyCart = () => ({
+  type: EMPTY_CART
+})
 
 export const applyFilter = (category, subCategory) => async dispatch => {
   dispatch({ type: APPLY_FILTER, payload: { category, subCategory } });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { FilterPanelContainer, Line, List } from './FilterPanel.styles';
 import { connect } from 'react-redux';
 

@@ -15,8 +15,8 @@ const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8];
 const Brands = () => {
   return (
     <StyledBrands>
-      {brands.map(brand => (
-        <img src={brand} alt='brand' />
+      {brands.map((brand, idx) => (
+        <img src={brand} alt='brand' key={idx} />
       ))}
     </StyledBrands>
   );

@@ -5,11 +5,10 @@ import styled from 'styled-components';
 
 export const StyledButton = styled.button``;
 
-const PaymentButton = ({ amount = 50, setIsOrderPlaced }) => {
+const PaymentButton = ({ amount, setIsOrderPlaced, emptyCart }) => {
   const handleToken = res => {
     console.log(res);
-    //tell user order is placed
-    //continue shopping button
+    emptyCart();
     setIsOrderPlaced(true);
   };
 

@@ -16,7 +16,8 @@ import {
   RESET_FILTER,
   SET_CURRENT_PRODUCTS,
   SET_OVERLAY,
-  UPDATE_FILTERED
+  UPDATE_FILTERED,
+  EMPTY_CART
 } from '../types';
 import filter from '../../helpers/filter';
 
@@ -82,6 +83,12 @@ export default (state = initialState, { type, payload }) => {
         }),
         loading: false
       };
+    case EMPTY_CART:
+      return {
+        ...state,
+        cart: [],
+        loading: false
+      }
     case REMOVE_FROM_CART:
       return {
         ...state,

@@ -11,6 +11,7 @@ import {
 } from '../../../../redux/actions/userActions';
 import { PageContainer } from '../../../../index.styles';
 
+import Loader from '../../../layout/loader/Loader'
 import ProductOverview from '../product-overview/ProductOverview';
 import ProductDetails from '../product-details/ProductDetails';
 import ProductCarousel from '../../../product-carousel/ProductCarousel';
@@ -42,7 +43,7 @@ const ProductPage = ({
     // eslint-disable-next-line
   }, [match.params]);
 
-  if (loading || product === null) return <div>Loading...</div>;
+  if (loading || product === null) return <Loader/>;
 
   return (
     <PageContainer>
@@ -58,7 +59,7 @@ const ProductPage = ({
         addToWishlist={addToWishlist}
       />
 
-      <ProductDetails product={product} variant={variant} />
+      {/* <ProductDetails product={product} variant={variant} /> */}
 
       <ProductCarousel
         title='Similar Products'
@@ -85,5 +86,5 @@ export default connect(mapStateToProps, {
 })(ProductPage);
 
 ProductPage.propTypes = {
-  product: PropTypes.object.isRequired
+  product: PropTypes.object
 };

@@ -62,6 +62,7 @@ const Navbar = ({ history, cart, search }) => {
   const handleSearch = e => {
     e.preventDefault();
     setSearchQuery('');
+    setShowSearchBar(false);
     search(searchQuery);
     history.push(`/products/${searchQuery}`);
   };

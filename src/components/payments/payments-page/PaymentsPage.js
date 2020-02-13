@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-
-import { PageContainer } from '../../../index.styles';
-import PaymentButton from '../payment-button/PaymentButton';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import Button from '../../common/Button';
+import PaymentButton from '../payment-button/PaymentButton';
 import {
   CardInfo,
   OrderSuccess,
   Amount,
   Container
 } from './PaymentsPage.styles';
-import Button from '../../common/Button';
-import { Link } from 'react-router-dom';
+import { emptyCart } from '../../../redux/actions/userActions';
+import { PageContainer } from '../../../index.styles';
 
-const PaymentsPage = ({ cart }) => {
+const PaymentsPage = ({ cart, emptyCart }) => {
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
   const amount = cart.reduce(
@@ -28,8 +29,17 @@ const PaymentsPage = ({ cart }) => {
             Total payable amount:
             <span>$ {amount}</span>
           </Amount>
-          <PaymentButton amount={amount} setIsOrderPlaced={setIsOrderPlaced} />
-          <CardInfo>* card no: 4242 4242 4242 4242</CardInfo>
+          <PaymentButton
+            amount={amount}
+            setIsOrderPlaced={setIsOrderPlaced}
+            emptyCart={emptyCart}
+          />
+
+          <CardInfo>
+            *email: email@email.com <br />
+            *card no: 4242 4242 4242 4242 <br />
+            *exp: 2/22 *cvc: 222
+          </CardInfo>
         </Container>
       ) : (
         <Container>
@@ -52,4 +62,4 @@ const mapStateToProps = state => ({
   cart: state.user.cart
 });
 
-export default connect(mapStateToProps)(PaymentsPage);
+export default connect(mapStateToProps, { emptyCart })(PaymentsPage);

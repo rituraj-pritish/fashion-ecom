@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Icon from '../../../common/Icon';
-import Text from '../../../common/Text';
 import BarsIcon from '../../../../assets/icons/BarsIcon';
 import { PageContainer } from '../../../../index.styles';
 import FilterPanel from '../filter-panel/FilterPanel';
@@ -15,6 +14,7 @@ import {
   setOverlay
 } from '../../../../redux/actions/userActions';
 import { useState } from 'react';
+import Text from '../../../common/Text';
 
 const Products = ({
   match,
@@ -36,7 +36,7 @@ const Products = ({
       if (filtering) resetFilter();
     };
     // eslint-disable-next-line
-  }, [match.params,filtering,searching]);
+  }, [match.params, filtering, searching]);
 
   if (loading) return <div>loading</div>;
 
@@ -62,8 +62,8 @@ const Products = ({
 
       <Container>
         <FilterPanel show={showFilter} setShow={setShowFilter} items={items} />
-        {searching && filtered.length === 0 && (
-          <div>Sorry no products found. Try different keyword</div>
+        {((searching && filtered.length === 0) || items.length === 0) && (
+          <Text mt='2rem'>No products found.</Text>
         )}
         <ProductsContainer items={items} />
       </Container>

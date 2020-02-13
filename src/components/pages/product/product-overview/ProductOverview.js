@@ -24,6 +24,8 @@ import {
   Policy,
   Wishlist
 } from './ProductOverview.styles';
+import { useEffect } from 'react';
+import ProductDetails from '../product-details/ProductDetails';
 
 const ProductOverview = ({
   product,
@@ -37,23 +39,23 @@ const ProductOverview = ({
   setAlert,
   history
 }) => {
+  const { name, rating, brand, variants, id } = product;
+
   const [currentImg, setCurrentImg] = useState();
   const [price, setPrice] = useState();
   const [quantity, setQuantity] = useState(1);
 
-  const { name, rating, brand, variants } = product;
-
-  if (!currentImg) {
+  useEffect(() => {
     setCurrentImg(variants[variant].images[0]);
     setPrice(variants[variant].price);
-  }
+  }, [id, variant, variants]);
 
   const images = variants[variant].images.map(imageUrl => {
-    let current = imageUrl === currentImg;
+    const isCurrentImage = imageUrl === currentImg;
     return (
       <SmallImage
         key={imageUrl}
-        current={current}
+        isCurrentImage={isCurrentImage}
         onClick={() => setCurrentImg(imageUrl)}
       >
         <LazyLoad className='lazyload'>
@@ -204,6 +206,7 @@ const ProductOverview = ({
           </Icon>
           <Text>{isInWishlist ? 'Added To Wishlist' : 'Add To Wishlist'}</Text>
         </Wishlist>
+        <ProductDetails product={product} variant={variant} />
       </ActionsContainer>
     </ProductOverviewContainer>
   );

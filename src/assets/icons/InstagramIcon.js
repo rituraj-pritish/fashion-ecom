@@ -30,8 +30,8 @@ const InstagramIcon = () => {
           y2='46'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#B75596' />
-          <stop offset='1' stop-color='#FDD455' />
+          <stop stopColor='#B75596' />
+          <stop offset='1' stopColor='#FDD455' />
         </linearGradient>
         <linearGradient
           id='paint1_linear'
@@ -41,8 +41,8 @@ const InstagramIcon = () => {
           y2='46'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#AD4F8F' />
-          <stop offset='1' stop-color='#FFCF30' />
+          <stop stopColor='#AD4F8F' />
+          <stop offset='1' stopColor='#FFCF30' />
         </linearGradient>
         <linearGradient
           id='paint2_linear'
@@ -52,8 +52,8 @@ const InstagramIcon = () => {
           y2='45'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#BD4797' />
-          <stop offset='1' stop-color='#FFD442' />
+          <stop stopColor='#BD4797' />
+          <stop offset='1' stopColor='#FFD442' />
         </linearGradient>
       </defs>
     </svg>

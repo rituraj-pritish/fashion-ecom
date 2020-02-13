@@ -22,7 +22,6 @@ import ScrollToTop from './ScrollToTop';
 import PaymentsPage from './payments/payments-page/PaymentsPage';
 import ProductPage from './pages/product/product-page/ProductPage';
 import Overlay from './layout/overlay/Overlay';
-import Preloader from './Preloader';
 import Footer from './layout/footer/Footer';
 
 function App({ auth, getProducts }) {
@@ -69,7 +68,6 @@ function App({ auth, getProducts }) {
           <Footer />
         </Router>
       </ThemeProvider>
-      <Preloader />
       <ReactNotification />
       <ReactTooltip />
       <Overlay />

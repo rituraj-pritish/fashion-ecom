@@ -27,7 +27,7 @@ export const SmallImage = styled.div`
 
   &::after {
     content: '';
-    display: ${({ current }) => (current ? 'none' : 'block')};
+    display: ${({ isCurrentImage }) => (isCurrentImage ? 'none' : 'block')};
     position: absolute;
     top: 0;
     left: 0;

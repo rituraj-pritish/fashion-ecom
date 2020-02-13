@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazy-load';
 
 import HeartIcon from '../../../../assets/icons/HeartIcon';
-import SaleBanner from '../../product/SaleBanner'
+import SaleBanner from '../../product/SaleBanner';
 import {
   ItemBottom,
   ProductItemContainer,
@@ -27,7 +27,7 @@ const ProductItem = ({
   wishlist,
   auth
 }) => {
-  const { name, variants, id, category,sale } = item;
+  const { name, variants, id, category, sale } = item;
   const variant = variants[0];
   const image = variant.images[0];
 
@@ -58,7 +58,7 @@ const ProductItem = ({
           <img src={image} alt={name} />
         </LazyLoad>
       </Link>
-      {sale && <SaleBanner/>}
+      {sale && <SaleBanner />}
       <ItemBottom>
         <Wishlist>
           <Icon

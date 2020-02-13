@@ -39,7 +39,6 @@ const ProductsContainer = ({
 
   return (
     <Container>
-      {products.length === 0 && <Text gridColumn='1/-1' m='3rem 0'>No products found.</Text>}
       {products.length > 0 &&
         products.map(item => <ProductItem key={item.id} item={item} />)}
     </Container>
