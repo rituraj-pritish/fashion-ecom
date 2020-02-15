@@ -8,7 +8,6 @@ import {
 import ProductItem from '../product-item/ProductItem';
 import { Container } from './ProductsContainer.styles';
 
-import Text from '../../../common/Text'
 const ProductsContainer = ({
   items,
   setCurrentProducts,

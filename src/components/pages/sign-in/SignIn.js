@@ -13,8 +13,8 @@ import Text from '../../common/Text';
 
 const SignIn = ({ firebase, signin, setAlert }) => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: 'demo@demo.com',
+    password: '123123'
   });
 
   if (firebase.auth.uid) return <Redirect to='/' />;

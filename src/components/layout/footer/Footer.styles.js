@@ -150,7 +150,7 @@ export const BottomContainer = styled.div`
 
 export const SocialLinks = styled.div`
   svg {
-    width: 40px;
+    width: 35px;
     margin: 0 7px;
     cursor: pointer;
     transition: 0.2s;
