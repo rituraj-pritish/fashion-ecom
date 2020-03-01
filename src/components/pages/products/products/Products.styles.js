@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import sizes from '../../../../sizes'
+import styled from 'styled-components';
+import sizes from '../../../../sizes';
 
 export const Container = styled.div`
   display: grid;
@@ -9,7 +9,7 @@ export const Container = styled.div`
   @media ${sizes.xl} {
     display: block;
   }
-`
+`;
 
 export const FilterBtn = styled.div`
   display: none;
@@ -17,8 +17,9 @@ export const FilterBtn = styled.div`
   margin: 1rem 0;
   cursor: pointer;
   font-size: 1.6rem;
+  width: max-content;
 
   @media ${sizes.xl} {
     display: block;
   }
-`
+`;

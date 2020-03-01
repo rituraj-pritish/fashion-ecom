@@ -52,9 +52,7 @@ export const signin = ({ email, password }) => async dispatch => {
 export const signOut = () => async dispatch => {
   try {
     const res = await firebase.auth().signOut();
-    console.log(res);
     localStorage.clear();
-    // window.location.reload();
     setAlert('Sign out successful', 'success');
   } catch (err) {}
   dispatch({ type: SIGNOUT });

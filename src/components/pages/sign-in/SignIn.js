@@ -59,7 +59,7 @@ const SignIn = ({ firebase, signin, setAlert }) => {
             value={password}
             onChange={handleChange}
           />
-
+          {!firebase.auth.isLoaded && 'loding'}
           <Button>Sign In</Button>
           <Text mt='2rem'>
             Don't have an account ?

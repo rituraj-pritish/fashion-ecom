@@ -30,7 +30,6 @@ const FilterPanel = ({ items, applyFilter, show, setShow, loading }) => {
 
   const handleBrandChange = e => {
     if (currentBrand === e.target.getAttribute('id')) return;
-    console.log('change');
     setCurrentBrand(e.target.getAttribute('id'));
     applyFilter('brand', e.target.getAttribute('id'));
   };

@@ -47,7 +47,7 @@ const rrfProps = {
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={<Loader/>} persistor={persistor}>
+    <PersistGate loading={<Loader />} persistor={persistor}>
       <ReactReduxFirebaseProvider {...rrfProps}>
         <App />
       </ReactReduxFirebaseProvider>

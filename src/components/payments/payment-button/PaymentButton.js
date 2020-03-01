@@ -7,7 +7,6 @@ export const StyledButton = styled.button``;
 
 const PaymentButton = ({ amount, setIsOrderPlaced, emptyCart }) => {
   const handleToken = res => {
-    console.log(res);
     emptyCart();
     setIsOrderPlaced(true);
   };
