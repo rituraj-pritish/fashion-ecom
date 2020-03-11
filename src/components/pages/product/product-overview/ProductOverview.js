@@ -48,6 +48,7 @@ const ProductOverview = ({
   useEffect(() => {
     setCurrentImg(variants[variant].images[0]);
     setPrice(variants[variant].price);
+    setQuantity(1);
   }, [id, variant, variants]);
 
   const images = variants[variant].images.map(imageUrl => {

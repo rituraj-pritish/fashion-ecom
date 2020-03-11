@@ -59,8 +59,6 @@ const ProductPage = ({
         addToWishlist={addToWishlist}
       />
 
-      {/* <ProductDetails product={product} variant={variant} /> */}
-
       <ProductCarousel
         title='Similar Products'
         data={Object.values(PRODUCTS).flat()}
