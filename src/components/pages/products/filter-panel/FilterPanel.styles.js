@@ -1,5 +1,6 @@
-import styled from 'styled-components';
-import sizes from '../../../../sizes';
+import styled from 'styled-components'
+import sizes from 'sizes'
+import theme from 'theme'
 
 export const FilterPanelContainer = styled.aside`
   background: #eee;
@@ -34,13 +35,13 @@ export const FilterPanelContainer = styled.aside`
   @media ${sizes.mob} {
     transform: translateX(${({ show, theme }) => (show ? 0 : '-265px')});
   }
-`;
+`
 export const Line = styled.div`
   width: 100%;
   height: 1px;
   margin: 10px 0;
   background: #000;
-`;
+`
 
 export const List = styled.ul`
   list-style-type: none;
@@ -60,4 +61,25 @@ export const List = styled.ul`
       cursor: pointer;
     }
   }
-`;
+`
+
+export const FilterBtnContainer = styled.div`
+  background: white;
+  position: sticky;
+  top: ${theme.navHt};
+  z-index: 5;
+  padding: 0.5rem 0;
+`
+
+export const FilterBtn = styled.div`
+  display: none;
+  text-align: left;
+  margin: 1rem 0;
+  cursor: pointer;
+  font-size: 1.6rem;
+  width: max-content;
+
+  @media ${sizes.xl} {
+    display: block;
+  }
+`

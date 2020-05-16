@@ -2,15 +2,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import ProductItem from '../product-item/ProductItem'
+import Text from 'components/common/Text'
 import { Container } from './ProductsContainer.styles'
 
 const ProductsContainer = ({ products }) => {
+  if (!products.length) return <Text>No results found</Text>
   return (
     <Container>
-      {products.length &&
-        products.map(product => (
-          <ProductItem key={product.id} product={product} />
-        ))}
+      {products.map(product => (
+        <ProductItem key={product.id} product={product} />
+      ))}
     </Container>
   )
 }

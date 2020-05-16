@@ -4,7 +4,7 @@ import { db } from 'services/firebase'
 // types
 
 const SET_PRODUCTS = 'SET_PRODUCTS'
-const SET_FILTER = 'SET_FILTER'
+const SET_FILTER_CRITERIA = 'SET_FILTER_CRITERIA'
 
 // action creators
 
@@ -19,8 +19,8 @@ export const getProducts = () => async dispatch => {
   }
 }
 
-export const setFilter = criteria => ({
-  type: SET_FILTER,
+export const setFilterCriteria = criteria => ({
+  type: SET_FILTER_CRITERIA,
   payload: criteria
 })
 
@@ -29,7 +29,7 @@ export const setFilter = criteria => ({
 const initialState = {
   allProducts: [],
   isLoading: true,
-  filter: {
+  filterCriteria: {
     price: 'all',
     brand: 'brand-all',
     sort: 'rating'
@@ -43,14 +43,9 @@ export default (state = initialState, { type, payload }) =>
       case SET_PRODUCTS:
         draft.allProducts = payload
         draft.isLoading = false
-        draft.filter = {
-          price: 'all',
-          brand: 'brand-all',
-          sort: 'rating'
-        }
         break
-      case SET_FILTER:
-        draft.filter = payload
+      case SET_FILTER_CRITERIA:
+        draft.filterCriteria = payload
         break
     }
   })
