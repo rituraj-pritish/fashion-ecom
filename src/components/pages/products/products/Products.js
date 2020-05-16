@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import {
-  removeSearch,
   resetFilter,
   setOverlay
 } from 'redux/actions/userActions'
-import searchProducts from 'helpers/searchProducts'
 import Icon from 'components/common/Icon'
 import Text from 'components/common/Text'
 import BarsIcon from 'assets/icons/BarsIcon'
@@ -46,7 +44,7 @@ const Products = ({
         {((searching && filtered.length === 0) || products.length === 0) && (
           <Text mt='2rem'>No products found.</Text>
         )}
-        <ProductsContainer items={products} />
+        <ProductsContainer products={products} />
       </Container>
     </PageContainer>
   )

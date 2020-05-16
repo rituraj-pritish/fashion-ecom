@@ -1,45 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
-import {
-  setCurrentProducts,
-  updateFiltered
-} from '../../../../redux/actions/userActions'
 import ProductItem from '../product-item/ProductItem'
 import { Container } from './ProductsContainer.styles'
 
-const ProductsContainer = ({
-  items,
-  setCurrentProducts,
-  updateFiltered,
-  filtered,
-  filtering,
-  searching,
-  loading
-}) => {
-  // const [products, setProducts] = useState(null);
-  const products = items
-  // useEffect(() => {
-  //   if (searching) {
-  //     setProducts(filtered);
-  //     setCurrentProducts(filtered);
-  //   } else {
-  //     setProducts(items);
-  //     setCurrentProducts(items);
-  //   }
-
-  //   if (filtering) {
-  //     // updateFiltered(items);
-  //     setProducts(filtered);
-  //   }
-  // }, [filtering, searching, filtered, items, setCurrentProducts]);
-
-  // if (loading || products === null) return <div>loading...</div>;
-
+const ProductsContainer = ({ products }) => {
   return (
     <Container>
-      {products.length > 0 &&
-        products.map(item => <ProductItem key={item.id} item={item} />)}
+      {products.length &&
+        products.map(product => (
+          <ProductItem key={product.id} product={product} />
+        ))}
     </Container>
   )
 }
@@ -51,6 +22,4 @@ const mapStateToProps = state => ({
   loading: state.user.loading
 })
 
-export default connect(mapStateToProps, { setCurrentProducts, updateFiltered })(
-  ProductsContainer
-)
+export default connect(mapStateToProps)(ProductsContainer)

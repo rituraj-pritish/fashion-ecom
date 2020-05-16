@@ -10,7 +10,7 @@ const SearchResults = ({ products }) => {
       {!products.length ? (
         <Text>No results found</Text>
       ) : (
-        <ProductsContainer items={products} />
+        <ProductsContainer products={products} />
       )}
     </PageContainer>
   )

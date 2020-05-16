@@ -7,6 +7,7 @@ const mapStateToProps = ({ products: prod }, { match }) => {
   const { allProducts } = prod
   const searchQuery = match.params.searchQuery
   const products = searchProducts(allProducts, searchQuery)
+
   return {
     products
   }

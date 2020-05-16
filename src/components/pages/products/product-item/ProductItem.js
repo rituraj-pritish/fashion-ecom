@@ -20,14 +20,14 @@ import Button from '../../../common/Button';
 import Icon from '../../../common/Icon';
 
 const ProductItem = ({
-  item,
+  product,
   addToCart,
   addToWishlist,
   cart,
   wishlist,
   isAuthenticated
 }) => {
-  const { name, variants, id, category, sale } = item;
+  const { name, variants, id, category, sale } = product;
   const variant = variants[0];
   const image = variant.images[0];
 
@@ -38,7 +38,7 @@ const ProductItem = ({
     e.preventDefault();
 
     if (isInCart) return;
-    addToCart(item, 0, 1);
+    addToCart(product, 0, 1);
   };
 
   const handleWishlist = () => {
@@ -48,7 +48,7 @@ const ProductItem = ({
     }
     if (isInWishlist) return;
 
-    addToWishlist(item, 0);
+    addToWishlist(product, 0);
   };
 
   return (
