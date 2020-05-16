@@ -51,7 +51,7 @@ export const signin = ({ email, password }) => async dispatch => {
 
 export const signOut = () => async dispatch => {
   try {
-    const res = await firebase.auth().signOut();
+    await firebase.auth().signOut();
     localStorage.clear();
     setAlert('Sign out successful', 'success');
   } catch (err) {}
