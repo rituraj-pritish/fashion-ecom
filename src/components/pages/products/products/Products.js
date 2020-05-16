@@ -2,10 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import {
-  resetFilter,
-  setOverlay
-} from 'redux/actions/userActions'
+import { resetFilter, setOverlay } from 'redux/actions/userActions'
 import Icon from 'components/common/Icon'
 import Text from 'components/common/Text'
 import BarsIcon from 'assets/icons/BarsIcon'
@@ -13,13 +10,9 @@ import FilterPanel from '../filter-panel/FilterPanel'
 import ProductsContainer from '../products-container/ProductsContainer'
 import { Container, FilterBtn } from './Products.styles'
 import { PageContainer } from 'index.styles'
+import filter from 'helpers/filter'
 
-const Products = ({
-  products,
-  searching,
-  filtered,
-  setOverlay
-}) => {
+const Products = ({ products, searching, filtered, setOverlay }) => {
   const [showFilter, setShowFilter] = useState(false)
 
   const handleClick = () => {
@@ -56,11 +49,13 @@ Products.propTypes = {
 
 const mapStateToProps = ({ products: prod, user }, { match }) => {
   const { productsCategory: category } = match.params
-  const { allProducts } = prod
+  const { allProducts, filter: filterCri } = prod
 
   let products = []
   products = allProducts.filter(product => product.category === category)
   if (!products.length) products = allProducts
+
+  products = filter(products, filterCri)
 
   return {
     products,

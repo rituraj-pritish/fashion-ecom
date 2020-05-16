@@ -1,40 +1,50 @@
-import React, { useState, useRef } from 'react';
-import { FilterPanelContainer, Line, List } from './FilterPanel.styles';
-import { connect } from 'react-redux';
+import React, { useState, useRef } from 'react'
+import { FilterPanelContainer, Line, List } from './FilterPanel.styles'
+import { connect } from 'react-redux'
 
-import { applyFilter } from '../../../../redux/actions/userActions';
-import clickOutside from '../../../../helpers/clickOutside';
+import { setFilter } from 'redux/products'
+import clickOutside from 'helpers/clickOutside'
 
-const FilterPanel = ({ items, applyFilter, show, setShow, loading }) => {
-  //to get unique values
-  const brands = [...new Set(items.map(p => p.brand.toUpperCase()))];
-
-  const [priceRange, setPriceRange] = useState('all');
-  const [currentBrand, setCurrentBrand] = useState('brand-all');
-  const [sort, setSort] = useState('rating');
-  const node = useRef();
+const FilterPanel = ({ setFilter, show, setShow, brands }) => {
+  const [priceRange, setPriceRange] = useState('all')
+  const [currentBrand, setCurrentBrand] = useState('brand-all')
+  const [sort, setSort] = useState('rating')
+  const node = useRef()
 
   const handlePriceChange = e => {
-    if (priceRange === e.target.getAttribute('id')) return;
+    if (priceRange === e.target.getAttribute('id')) return
 
-    setPriceRange(e.target.getAttribute('id'));
-    applyFilter('priceRange', e.target.getAttribute('id'));
-  };
+    setPriceRange(e.target.getAttribute('id'))
+    setFilter({
+      price: e.target.getAttribute('id'),
+      sort,
+      brand: currentBrand
+    })
+  }
 
   const handleSortChange = e => {
-    if (sort === e.target.getAttribute('id')) return;
+    if (sort === e.target.getAttribute('id')) return
 
-    setSort(e.target.getAttribute('id'));
-    applyFilter('sort', e.target.getAttribute('id'));
-  };
+    setSort(e.target.getAttribute('id'))
+    setFilter({
+      price: priceRange,
+      sort: e.target.getAttribute('id'),
+      brand: currentBrand
+    })
+  }
 
   const handleBrandChange = e => {
-    if (currentBrand === e.target.getAttribute('id')) return;
-    setCurrentBrand(e.target.getAttribute('id'));
-    applyFilter('brand', e.target.getAttribute('id'));
-  };
+    if (currentBrand === e.target.getAttribute('id')) return
 
-  clickOutside(node, () => setShow(false));
+    setCurrentBrand(e.target.getAttribute('id'))
+    setFilter({
+      price: priceRange,
+      sort,
+      brand: e.target.getAttribute('id')
+    })
+  }
+
+  clickOutside(node, () => setShow(false))
 
   return (
     <FilterPanelContainer show={show} ref={node}>
@@ -180,11 +190,16 @@ const FilterPanel = ({ items, applyFilter, show, setShow, loading }) => {
       </List>
       <Line />
     </FilterPanelContainer>
-  );
-};
+  )
+}
 
-const mapStateToProps = state => ({
-  loading: state.user.loading
-});
+const mapStateToProps = ({ products: { allProducts } }) => {
+  const brands = [
+    ...new Set(allProducts.map(product => product.brand.toUpperCase()))
+  ]
+  return {
+    brands
+  }
+}
 
-export default connect(mapStateToProps, { applyFilter })(FilterPanel);
+export default connect(mapStateToProps, { setFilter })(FilterPanel)
