@@ -1,39 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import { Link, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-import { Link, Redirect } from 'react-router-dom';
-import Logo from '../../../assets/Logo';
-import { PageContainer } from '../../../index.styles';
-import { StyledLogo, Container } from './SignIn.styles';
-import { connect } from 'react-redux';
-import { signin } from '../../../redux/actions/authActions';
-import { setAlert } from '../../../redux/actions/userActions';
-import Input from '../../common/Input';
-import Button from '../../common/Button';
-import Text from '../../common/Text';
+import Logo from 'assets/Logo'
+import { signin } from 'redux/auth'
+import { setAlert } from 'redux/actions/userActions'
+import Input from 'components/common/Input'
+import Button from 'components/common/Button'
+import Text from 'components/common/Text'
+import { PageContainer } from 'index.styles'
+import { StyledLogo, Container } from './SignIn.styles'
 
-const SignIn = ({ firebase, signin, setAlert }) => {
+const SignIn = ({ isAuthenticated, isLoading, signin, setAlert }) => {
   const [formData, setFormData] = useState({
     email: 'demo@demo.com',
     password: '123123'
-  });
+  })
 
-  if (firebase.auth.uid) return <Redirect to='/' />;
+  if (isAuthenticated) return <Redirect to='/' />
 
-  const { email, password } = formData;
+  const { email, password } = formData
 
   const handleChange = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (email === '' || password === '') {
-      setAlert('All fields are required', 'danger');
-      return;
+      setAlert('All fields are required', 'danger')
+      return
     }
-    signin({ email, password });
-  };
+    signin({ email, password })
+  }
 
   return (
     <PageContainer>
@@ -59,8 +59,8 @@ const SignIn = ({ firebase, signin, setAlert }) => {
             value={password}
             onChange={handleChange}
           />
-          {!firebase.auth.isLoaded && 'loding'}
-          <Button>Sign In</Button>
+          {/* TODO {!firebase.auth.isLoaded && 'loding'} */}
+          <Button isLoading={isLoading}>Sign In</Button>
           <Text mt='2rem'>
             Don't have an account ?
             <Link to='/signup'>
@@ -73,11 +73,12 @@ const SignIn = ({ firebase, signin, setAlert }) => {
         </form>
       </Container>
     </PageContainer>
-  );
-};
+  )
+}
 
-const mapStateToProps = state => ({
-  firebase: state.firebase
-});
+const mapStateToProps = ({ auth }) => ({
+  isAuthenticated: auth.isAuthenticated,
+  isLoading: auth.isLoading
+})
 
-export default connect(mapStateToProps, { signin, setAlert })(SignIn);
+export default connect(mapStateToProps, { signin, setAlert })(SignIn)

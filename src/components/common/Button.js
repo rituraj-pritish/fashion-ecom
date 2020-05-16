@@ -1,7 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
-import { typography, space, color, variant, position, flexbox,layout, grid, border } from 'styled-system';
-import theme from '../../theme';
+import React from 'react'
+import styled from 'styled-components'
+import {
+  typography,
+  space,
+  color,
+  variant,
+  position,
+  flexbox,
+  layout,
+  grid,
+  border
+} from 'styled-system'
+import ClipLoader from 'react-spinners/ClipLoader'
+
+import theme from 'theme'
 
 const StyledButton = styled.button`
 width: 100%;
@@ -19,7 +31,7 @@ ${variant({
     primary: {
       color: theme.colors.white,
       bg: theme.colors.primary,
-      '&:hover' : {
+      '&:hover': {
         bg: theme.colors.primaryDark
       }
     },
@@ -34,15 +46,19 @@ ${variant({
   }
 })}
 ${typography} ${color} ${space} ${position} ${layout} ${grid} ${flexbox} ${border}
-`;
+`
 
-const Button = ({ children, ...otherProps }) => {
-  return <StyledButton {...otherProps}>{children}</StyledButton>;
-};
+const Button = ({ children, isLoading, ...otherProps }) => {
+  return (
+    <StyledButton {...otherProps}>
+      {isLoading ? <ClipLoader size={17} color={theme.colors.white} /> : children}
+    </StyledButton>
+  )
+}
 
 Button.defaultProps = {
   variant: 'primary',
   height: '35px'
 }
 
-export default Button;
+export default Button

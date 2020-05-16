@@ -1,24 +1,30 @@
-import React, { useRef } from 'react';
+import React, { useRef } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
+import { signOut } from 'redux/auth'
+import clickOutside from 'helpers/clickOutside'
+import SignOutIcon from 'assets/icons/SignOutIcon'
+import HeartIcon from 'assets/icons/HeartIcon'
+import CartIcon from 'assets/icons/CartIcon'
+import Button from 'components/common/Button'
+import Icon from 'components/common/Icon'
 import {
   UserOptions,
   NoAuthOptions,
   AuthOptions
-} from './NavUserOptions.styles';
-import { Link } from 'react-router-dom';
-import { signOut } from '../../../redux/actions/authActions';
-import { connect } from 'react-redux';
-import clickOutside from '../../../helpers/clickOutside';
-import SignOutIcon from '../../../assets/icons/SignOutIcon';
-import HeartIcon from '../../../assets/icons/HeartIcon';
-import CartIcon from '../../../assets/icons/CartIcon';
-import Button from '../../common/Button';
-import Icon from '../../common/Icon';
+} from './NavUserOptions.styles'
 
-const NavUserOptions = ({ show, setShow, signOut, auth, userRef }) => {
-  const node = useRef();
+const NavUserOptions = ({
+  show,
+  setShow,
+  signOut,
+  isAuthenticated,
+  userRef
+}) => {
+  const node = useRef()
 
-  clickOutside(node, () => setShow(false), userRef);
+  clickOutside(node, () => setShow(false), userRef)
 
   const noAuthOptions = (
     <NoAuthOptions>
@@ -32,7 +38,7 @@ const NavUserOptions = ({ show, setShow, signOut, auth, userRef }) => {
         </Link>
       </div>
     </NoAuthOptions>
-  );
+  )
 
   const authOptions = (
     <AuthOptions>
@@ -63,17 +69,17 @@ const NavUserOptions = ({ show, setShow, signOut, auth, userRef }) => {
         </li>
       </ul>
     </AuthOptions>
-  );
+  )
 
   return (
     <UserOptions ref={node} show={show}>
-      {auth.uid ? authOptions : noAuthOptions}
+      {isAuthenticated ? authOptions : noAuthOptions}
     </UserOptions>
-  );
-};
+  )
+}
 
-const mapStateToProps = state => ({
-  auth: state.firebase.auth
-});
+const mapStateToProps = ({ auth }) => ({
+  isAuthenticated: auth.isAuthenticated
+})
 
-export default connect(mapStateToProps, { signOut })(NavUserOptions);
+export default connect(mapStateToProps, { signOut })(NavUserOptions)

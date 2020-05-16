@@ -1,27 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Swiper from 'react-id-swiper';
-import 'swiper/css/swiper.css';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import LazyLoad from 'react-lazy-load';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Swiper from 'react-id-swiper'
+import 'swiper/css/swiper.css'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import LazyLoad from 'react-lazy-load'
 
-import HeartIcon from '../../assets/icons/HeartIcon';
-import SaleBanner from '../pages/product/SaleBanner';
+import HeartIcon from '../../assets/icons/HeartIcon'
+import SaleBanner from '../pages/product/SaleBanner'
 import {
   ProductCarouselContainer,
   CarouselItemContainer,
   ItemBottom,
   Title
-} from './ProductCarousel.styles';
+} from './ProductCarousel.styles'
 import {
   addToCart,
   addToWishlist,
   setAlert
-} from '../../redux/actions/userActions';
-import Button from '../common/Button';
-import Icon from '../common/Icon';
-import Text from '../common/Text';
+} from '../../redux/actions/userActions'
+import Button from '../common/Button'
+import Icon from '../common/Icon'
+import Text from '../common/Text'
 
 const params = {
   slidesPerView: 2,
@@ -48,7 +48,7 @@ const params = {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev'
   }
-};
+}
 
 const ProductCarousel = ({
   title,
@@ -57,27 +57,27 @@ const ProductCarousel = ({
   addToWishlist,
   cart,
   wishlist,
-  auth
+  isAuthenticated
 }) => {
   const render = data.map(product => {
-    const { name, variants, id, category, sale } = product;
-    const { price, images } = variants[0];
-    const isInCart = cart.find(item => item.product.id === id);
-    const isInWishlist = wishlist.find(item => item.product.id === id);
+    const { name, variants, id, category, sale } = product
+    const { price, images } = variants[0]
+    const isInCart = cart.find(item => item.product.id === id)
+    const isInWishlist = wishlist.find(item => item.product.id === id)
 
     const handleCartBtn = e => {
-      if (isInCart) return;
-      addToCart(product, 0, 1);
-    };
+      if (isInCart) return
+      addToCart(product, 0, 1)
+    }
 
     const handleWishlist = () => {
-      if (auth.isEmpty) {
-        setAlert('Login to continue', 'danger');
-        return;
+      if (!isAuthenticated) {
+        setAlert('Login to continue', 'danger')
+        return
       }
-      if (isInWishlist) return;
-      addToWishlist(product, 0);
-    };
+      if (isInWishlist) return
+      addToWishlist(product, 0)
+    }
 
     return (
       <CarouselItemContainer key={id}>
@@ -110,27 +110,27 @@ const ProductCarousel = ({
           </Button>
         </ItemBottom>
       </CarouselItemContainer>
-    );
-  });
+    )
+  })
 
   return (
     <ProductCarouselContainer>
       <Title>{title[0].toUpperCase() + title.slice(1)}</Title>
       <Swiper {...params}>{render}</Swiper>
     </ProductCarouselContainer>
-  );
-};
+  )
+}
 
 const mapStateToProps = state => ({
   cart: state.user.cart,
   wishlist: state.user.wishlist,
-  auth: state.firebase.auth
-});
+  isAuthenticated: state.auth.isAuthenticated
+})
 
 export default connect(mapStateToProps, { addToCart, addToWishlist })(
   ProductCarousel
-);
+)
 
 ProductCarousel.propTypes = {
   data: PropTypes.array.isRequired
-};
+}

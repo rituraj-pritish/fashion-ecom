@@ -1,48 +1,48 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { Link, Redirect } from 'react-router-dom'
 
-import Logo from '../../../assets/Logo';
-import { PageContainer } from '../../../index.styles';
-import { StyledLogo, Container } from './SignUp.styles';
-import { signup } from '../../../redux/actions/authActions';
-import { setAlert } from '../../../redux/actions/userActions';
-import Input from '../../common/Input';
-import Button from '../../common/Button';
-import Text from '../../common/Text';
+import Logo from 'assets/Logo'
+import { signup } from 'redux/auth'
+import { setAlert } from 'redux/actions/userActions'
+import Input from 'components/common/Input'
+import Button from 'components/common/Button'
+import Text from 'components/common/Text'
+import { PageContainer } from 'index.styles'
+import { StyledLogo, Container } from './SignUp.styles'
 
-const SignUp = ({ signup, firebase, setAlert }) => {
+const SignUp = ({ signup, isAuthenticated, isLoading, setAlert }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     password1: '',
     password2: ''
-  });
+  })
 
-  if (firebase.auth.uid) return <Redirect to='/' />;
+  if (isAuthenticated) return <Redirect to='/' />
 
-  const { name, email, password1, password2, phone } = formData;
+  const { name, email, password1, password2, phone } = formData
 
   const handleChange = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (email === '' || name === '' || password1 === '' || password2 === '') {
-      setAlert('All fields are required', 'danger');
-      return;
+      setAlert('All fields are required', 'danger')
+      return
     } else if (password1 !== password2) {
-      setAlert('Passwords do not match', 'danger');
-      return;
+      setAlert('Passwords do not match', 'danger')
+      return
     } else if (password1.length < 6) {
-      setAlert('Password must be at least six characters long', 'danger');
-      return;
+      setAlert('Password must be at least six characters long', 'danger')
+      return
     }
-    signup({ ...formData, password: password1 });
-  };
+    signup({ ...formData, password: password1 })
+  }
 
   return (
     <PageContainer>
@@ -88,7 +88,7 @@ const SignUp = ({ signup, firebase, setAlert }) => {
             onChange={handleChange}
           />
 
-          <Button>Sign Up</Button>
+          <Button isLoading={isLoading}>Sign Up</Button>
           <Text mt='2rem'>
             Already have an account ?
             <Link to='/signin'>
@@ -101,11 +101,12 @@ const SignUp = ({ signup, firebase, setAlert }) => {
         </form>
       </Container>
     </PageContainer>
-  );
-};
+  )
+}
 
-const mapStateToProps = state => ({
-  firebase: state.firebase
-});
+const mapStateToProps = ({ auth: { isAuthenticated, isLoading } }) => ({
+  isAuthenticated,
+  isLoading
+})
 
-export default connect(mapStateToProps, { signup, setAlert })(SignUp);
+export default connect(mapStateToProps, { signup, setAlert })(SignUp)

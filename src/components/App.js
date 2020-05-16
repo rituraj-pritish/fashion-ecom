@@ -1,37 +1,39 @@
-import React, { Fragment, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-import { connect } from 'react-redux';
-import ReactTooltip from 'react-tooltip';
-import ReactNotification from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css';
+import React, { Fragment, useEffect } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
+import { connect } from 'react-redux'
+import ReactTooltip from 'react-tooltip'
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
-import theme from '../theme';
-import Navbar from './layout/navbar/Navbar';
-import Home from './pages/home/home/Home';
-import SignIn from './pages/sign-in/SignIn';
-import SignUp from './pages/sign-up/SignUp';
-import { getProducts } from '../redux/actions/userActions';
-import Cart from './pages/cart/cart-container/Cart';
-import TopButton from './layout/top-button/TopButton';
-import Wishlist from './pages/wishlist/Wishlist';
-import Loader from './layout/loader/Loader';
-import Products from './pages/products/products/Products';
-import PrivateRoute from './PrivateRoute';
-import ScrollToTop from './ScrollToTop';
-import PaymentsPage from './payments/payments-page/PaymentsPage';
-import ProductPage from './pages/product/product-page/ProductPage';
-import Overlay from './layout/overlay/Overlay';
-import Footer from './layout/footer/Footer';
+import { authStateChangeHandler } from 'redux/auth'
+import { getProducts } from '../redux/actions/userActions'
+import Navbar from './layout/navbar/Navbar'
+import Home from './pages/home/home/Home'
+import SignIn from './pages/sign-in/SignIn'
+import SignUp from './pages/sign-up/SignUp'
+import Cart from './pages/cart/cart-container/Cart'
+import TopButton from './layout/top-button/TopButton'
+import Wishlist from './pages/wishlist/Wishlist'
+import Loader from './layout/loader/Loader'
+import Products from './pages/products/products/Products'
+import PrivateRoute from './PrivateRoute'
+import ScrollToTop from './ScrollToTop'
+import PaymentsPage from './payments/payments-page/PaymentsPage'
+import ProductPage from './pages/product/product-page/ProductPage'
+import Overlay from './layout/overlay/Overlay'
+import Footer from './layout/footer/Footer'
+import theme from 'theme'
 
-function App({ auth, getProducts }) {
+const App = ({ isLoading, getProducts, authStateChangeHandler }) => {
   useEffect(() => {
-    getProducts();
+    authStateChangeHandler()
+    getProducts()
     // eslint-disable-next-line
-  }, []);
+  }, [])
 
-  if (!auth.isLoaded) {
-    return <Loader />;
+  if (isLoading) {
+    return <Loader />
   }
 
   return (
@@ -72,11 +74,14 @@ function App({ auth, getProducts }) {
       <ReactTooltip />
       <Overlay />
     </Fragment>
-  );
+  )
 }
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth
-});
+  isLoading: state.app.isLoading
+})
 
-export default connect(mapStateToProps, { getProducts })(App);
+export default connect(mapStateToProps, {
+  getProducts,
+  authStateChangeHandler
+})(App)

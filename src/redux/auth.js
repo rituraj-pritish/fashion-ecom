@@ -1,5 +1,6 @@
-import firebase from '../../firebase/firebase'
+import { firebase, db } from 'services/firebase'
 import produce from 'immer'
+import { setAppLoading } from './app'
 
 // types
 
@@ -60,14 +61,38 @@ export const signin = ({ email, password }) => async dispatch => {
   }
 }
 
-// export const signOut = () => async dispatch => {
-//   try {
-//     await firebase.auth().signOut()
-//     localStorage.clear()
-//     setAlert('Sign out successful', 'success')
-//   } catch (err) {}
-//   dispatch({ type: SIGNOUT })
-// }
+export const authStateChangeHandler = () => async dispatch => {
+  firebase.auth().onAuthStateChanged(async user => {
+    if (user) {
+      const res = await db.collection('users').doc(user.uid).get()
+
+      const { displayName, email, photoURL, uid } = res.data()
+
+      dispatch({
+        type: AUTH_SUCCESS,
+        payload: {
+          displayName,
+          email,
+          photoURL,
+          uid
+        }
+      })
+
+      dispatch(setAppLoading(false))
+    } else {
+      dispatch(setAppLoading(false))
+    }
+  })
+}
+
+export const signOut = () => async dispatch => {
+  try {
+    await firebase.auth().signOut()
+    localStorage.clear()
+    // TODO setAlert('Sign out successful', 'success')
+  } catch (err) {}
+  dispatch({ type: AUTH_FAILURE })
+}
 
 //reducer
 
