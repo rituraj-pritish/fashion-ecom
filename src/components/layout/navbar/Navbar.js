@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { useState, useEffect, useRef } from 'react'
+import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-import UserIcon from '../../../assets/icons/UserIcon';
-import CartIcon from '../../../assets/icons/CartIcon';
-import SearchIcon from '../../../assets/icons/SearchIcon';
-import Logo from '../../../assets/Logo';
-import Icon from '../../common/Icon';
+import UserIcon from '../../../assets/icons/UserIcon'
+import CartIcon from '../../../assets/icons/CartIcon'
+import SearchIcon from '../../../assets/icons/SearchIcon'
+import Logo from '../../../assets/Logo'
+import Icon from '../../common/Icon'
 
-import SearchBar from './search-bar/SearchBar';
+import SearchBar from './search-bar/SearchBar'
 import {
   Nav,
   Search,
@@ -18,56 +18,55 @@ import {
   Container,
   SearchIconContainer,
   StyledLogo
-} from './Navbar.styles';
-import NavUserOptions from './NavUserOptions';
-import clickOutside from '../../../helpers/clickOutside';
-import { search } from '../../../redux/actions/userActions';
+} from './Navbar.styles'
+import NavUserOptions from './NavUserOptions'
+import clickOutside from '../../../helpers/clickOutside'
+import { search } from '../../../redux/actions/userActions'
 
 const Navbar = ({ history, cart, search }) => {
-  const [showUserOptions, setShowUserOptions] = useState(false);
-  const [showCart, setShowCart] = useState(false);
-  const [show, setShow] = useState(true);
-  const [showSearchBar, setShowSearchBar] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const node = useRef();
-  const cartRef = useRef();
-  const userRef = useRef();
+  const [showUserOptions, setShowUserOptions] = useState(false)
+  const [showCart, setShowCart] = useState(false)
+  const [show, setShow] = useState(true)
+  const [showSearchBar, setShowSearchBar] = useState(false)
+  const [text, setText] = useState('')
+  const node = useRef()
+  const cartRef = useRef()
+  const userRef = useRef()
 
-  clickOutside(node, () => setShowCart(false), cartRef);
+  clickOutside(node, () => setShowCart(false), cartRef)
 
   useEffect(() => {
     if (
       history.location.pathname === '/signin' ||
       history.location.pathname === '/signup'
     ) {
-      setShow(false);
+      setShow(false)
     } else {
-      setShow(true);
+      setShow(true)
     }
-  }, [history.location]);
+  }, [history.location])
 
   const handleCart = () => {
     if (showCart) {
-      setShowCart(false);
-      return;
+      setShowCart(false)
+      return
     }
     if (cart.length === 0) {
-      setShowCart(true);
+      setShowCart(true)
     } else {
-      history.push('/user/cart');
-      setShowCart(false);
+      history.push('/user/cart')
+      setShowCart(false)
     }
-  };
+  }
 
   const handleSearch = e => {
-    e.preventDefault();
-    setSearchQuery('');
-    setShowSearchBar(false);
-    search(searchQuery);
-    history.push(`/products/${searchQuery}`);
-  };
+    e.preventDefault()
+    setText('')
+    setShowSearchBar(false)
+    history.push(`/s/${text}`)
+  }
 
-  const nothingInCart = <Nothing ref={node}>Cart is empty.</Nothing>;
+  const nothingInCart = <Nothing ref={node}>Cart is empty.</Nothing>
 
   return (
     <Nav id='my-nav' show={show}>
@@ -81,8 +80,8 @@ const Navbar = ({ history, cart, search }) => {
         <Search onSubmit={handleSearch} className='search'>
           <input
             type='text'
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
+            value={text}
+            onChange={e => setText(e.target.value)}
             className='search-input'
           />
           <button className='search-btn'>Search</button>
@@ -97,8 +96,8 @@ const Navbar = ({ history, cart, search }) => {
             showSearchBar={showSearchBar}
             setShowSearchBar={setShowSearchBar}
             handleSearch={handleSearch}
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
+            searchQuery={text}
+            setSearchQuery={setText}
           />
 
           <li
@@ -126,11 +125,11 @@ const Navbar = ({ history, cart, search }) => {
         </NavLinks>
       </Container>
     </Nav>
-  );
-};
+  )
+}
 
 const mapStateToProps = state => ({
   cart: state.user.cart
-});
+})
 
-export default withRouter(connect(mapStateToProps, { search })(Navbar));
+export default withRouter(connect(mapStateToProps, { search })(Navbar))

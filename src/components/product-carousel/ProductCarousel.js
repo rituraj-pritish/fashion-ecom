@@ -81,7 +81,7 @@ const ProductCarousel = ({
 
     return (
       <CarouselItemContainer key={id}>
-        <Link to={`/product/${category}/${id}`}>
+        <Link to={`/product/${id}`}>
           <LazyLoad className='lazyload' offsetBottom={250} offsetRight={2000}>
             <img src={images[0]} alt={name} />
           </LazyLoad>

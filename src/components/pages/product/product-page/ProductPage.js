@@ -1,26 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import {
-  getProduct,
-  removeProduct,
   addToCart,
   addToWishlist,
   setAlert
-} from '../../../../redux/actions/userActions';
-import { PageContainer } from '../../../../index.styles';
-
-import Loader from '../../../layout/loader/Loader'
-import ProductOverview from '../product-overview/ProductOverview';
-import ProductDetails from '../product-details/ProductDetails';
-import ProductCarousel from '../../../product-carousel/ProductCarousel';
-import PRODUCTS from '../../../../data/PRODUCTS';
+} from 'redux/actions/userActions'
+import Loader from 'components/layout/loader/Loader'
+import ProductOverview from '../product-overview/ProductOverview'
+import ProductCarousel from 'components/product-carousel/ProductCarousel'
+import { PageContainer } from 'index.styles' 
 
 const ProductPage = ({
-  match,
-  getProduct,
-  removeProduct,
   product,
   loading,
   wishlist,
@@ -28,22 +20,12 @@ const ProductPage = ({
   addToCart,
   addToWishlist,
   isAuthenticated,
-  setAlert
+  setAlert,
+  products
 }) => {
-  const productCategory = match.params.productCategory;
-  const productId = match.params.productId;
-  const [variant, setVariant] = useState(0);
+  const [variant, setVariant] = useState(0)
 
-  useEffect(() => {
-    getProduct(productCategory, productId);
-
-    return () => {
-      removeProduct();
-    };
-    // eslint-disable-next-line
-  }, [match.params]);
-
-  if (loading || product === null) return <Loader/>;
+  if (loading || product === null) return <Loader />
 
   return (
     <PageContainer>
@@ -59,30 +41,34 @@ const ProductPage = ({
         addToWishlist={addToWishlist}
       />
 
-      <ProductCarousel
-        title='Similar Products'
-        data={Object.values(PRODUCTS).flat()}
-      />
+      <ProductCarousel title='Similar Products' data={products} />
     </PageContainer>
-  );
-};
-
-const mapStateToProps = state => ({
-  product: state.user.currentProduct,
-  cart: state.user.cart,
-  wishlist: state.user.wishlist,
-  loading: state.user.loading,
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(mapStateToProps, {
-  getProduct,
-  removeProduct,
-  addToCart,
-  addToWishlist,
-  setAlert
-})(ProductPage);
+  )
+}
 
 ProductPage.propTypes = {
   product: PropTypes.object
-};
+}
+
+const mapStateToProps = (
+  { products: { allProducts }, user, auth },
+  { match }
+) => {
+  const { productId } = match.params
+  const product = allProducts.find(product => product.id === productId)
+
+  return {
+    product,
+    products: allProducts,
+    cart: user.cart,
+    wishlist: user.wishlist,
+    loading: user.loading,
+    isAuthenticated: auth.isAuthenticated
+  }
+}
+
+export default connect(mapStateToProps, {
+  addToCart,
+  addToWishlist,
+  setAlert
+})(ProductPage)

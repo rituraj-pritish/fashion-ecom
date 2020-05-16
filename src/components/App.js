@@ -7,7 +7,7 @@ import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 
 import { authStateChangeHandler } from 'redux/auth'
-import { getProducts } from '../redux/actions/userActions'
+import { getProducts } from 'redux/products'
 import Navbar from './layout/navbar/Navbar'
 import Home from './pages/home/home/Home'
 import SignIn from './pages/sign-in/SignIn'
@@ -23,6 +23,7 @@ import PaymentsPage from './payments/payments-page/PaymentsPage'
 import ProductPage from './pages/product/product-page/ProductPage'
 import Overlay from './layout/overlay/Overlay'
 import Footer from './layout/footer/Footer'
+import SearchResults from './SearchResults'
 import theme from 'theme'
 
 const App = ({ isLoading, getProducts, authStateChangeHandler }) => {
@@ -45,13 +46,18 @@ const App = ({ isLoading, getProducts, authStateChangeHandler }) => {
             <Switch>
               <Route
                 exact
-                path='/product/:productCategory/:productId'
+                path='/product/:productId'
                 component={ProductPage}
               />
               <Route
                 exact
                 path='/products/:productsCategory'
                 component={Products}
+              />
+              <Route
+                exact
+                path='/s/:searchQuery'
+                component={SearchResults}
               />
               <Route exact path='/user/cart' component={Cart} />
               <PrivateRoute exact path='/user/wishlist' component={Wishlist} />
