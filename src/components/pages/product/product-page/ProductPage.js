@@ -27,7 +27,7 @@ const ProductPage = ({
   cart,
   addToCart,
   addToWishlist,
-  auth,
+  isAuthenticated,
   setAlert
 }) => {
   const productCategory = match.params.productCategory;
@@ -48,7 +48,7 @@ const ProductPage = ({
   return (
     <PageContainer>
       <ProductOverview
-        auth={auth}
+        isAuthenticated={isAuthenticated}
         setAlert={setAlert}
         product={product}
         variant={variant}
@@ -72,7 +72,7 @@ const mapStateToProps = state => ({
   cart: state.user.cart,
   wishlist: state.user.wishlist,
   loading: state.user.loading,
-  auth: state.firebase.auth
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, {

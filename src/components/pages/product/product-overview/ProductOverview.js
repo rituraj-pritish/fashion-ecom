@@ -35,7 +35,7 @@ const ProductOverview = ({
   wishlist,
   addToCart,
   addToWishlist,
-  auth,
+  isAuthenticated,
   setAlert,
   history
 }) => {
@@ -92,7 +92,7 @@ const ProductOverview = ({
   };
 
   const handleWishlist = () => {
-    if (auth.isEmpty) {
+    if (!isAuthenticated) {
       setAlert('Login to continue', 'danger');
       return;
     }
@@ -103,7 +103,7 @@ const ProductOverview = ({
   const handleBuy = e => {
     e.preventDefault();
 
-    if (auth.isEmpty) {
+    if (!isAuthenticated) {
       history.push('/signin');
       return;
     }

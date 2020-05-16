@@ -1,27 +1,27 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import React from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-import Button from '../../../common/Button';
-import Text from '../../../common/Text';
-import { CheckoutBoxContainer, Container, Line } from './CheckoutBox.styles';
+import Button from '../../../common/Button'
+import Text from '../../../common/Text'
+import { CheckoutBoxContainer, Container, Line } from './CheckoutBox.styles'
 
-const CheckoutBox = ({ cart, history, auth }) => {
+const CheckoutBox = ({ cart, history, isAuthenticated }) => {
   let subTotal = cart
     .reduce(
       (total, { product, variant, qty }) =>
         total + product.variants[variant].price * qty,
       0
     )
-    .toFixed(2);
+    .toFixed(2)
 
   const handleCheckout = () => {
-    if (auth.isEmpty) {
-      history.push('/signin');
-      return;
+    if (!isAuthenticated) {
+      history.push('/signin')
+      return
     }
-    history.push('/user/checkout');
-  };
+    history.push('/user/checkout')
+  }
 
   return (
     <CheckoutBoxContainer>
@@ -34,17 +34,20 @@ const CheckoutBox = ({ cart, history, auth }) => {
           $ {subTotal > 200 ? subTotal : (parseFloat(subTotal) + 20).toFixed(2)}
         </p>
         <Button onClick={handleCheckout}>Proceed to buy</Button>
-        {subTotal < 200 && <Text mt='2rem' lineHeight='22px'>
-          Free shipping on orders over
-          {'  '}<Text color='primary'> $200</Text>
-        </Text>}
+        {subTotal < 200 && (
+          <Text mt='2rem' lineHeight='22px'>
+            Free shipping on orders over
+            {'  '}
+            <Text color='primary'> $200</Text>
+          </Text>
+        )}
       </Container>
     </CheckoutBoxContainer>
-  );
-};
+  )
+}
 
-const mapStateToProps = state => ({
-  auth: state.firebase.auth
-});
+const mapStateToProps = ({ isAuthenticated }) => ({
+  isAuthenticated
+})
 
-export default withRouter(connect(mapStateToProps)(CheckoutBox));
+export default withRouter(connect(mapStateToProps)(CheckoutBox))

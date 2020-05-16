@@ -1,24 +1,24 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Route, Redirect } from 'react-router-dom';
+import React from 'react'
+import { connect } from 'react-redux'
+import { Route, Redirect } from 'react-router-dom'
 
 const PrivateRoute = ({
   component: Component,
-  auth: { isEmpty },
-  loading,
+  isAuthenticated,
+  isLoading,
   ...rest
 }) => (
   <Route
     {...rest}
     render={props =>
-      isEmpty && !loading ? <Redirect to='/' /> : <Component {...props} />
+      !isAuthenticated && !isLoading ? <Redirect to='/' /> : <Component {...props} />
     }
   />
-);
+)
 
-const mapStateToProps = state => ({
-  auth: state.firebase.auth,
-  loading: state.firebase.loading
-});
+const mapStateToProps = ({ auth: { isAuthenticated, isLoading } }) => ({
+  isAuthenticated,
+  isLoading
+})
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default connect(mapStateToProps)(PrivateRoute)

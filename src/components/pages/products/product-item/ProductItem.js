@@ -25,7 +25,7 @@ const ProductItem = ({
   addToWishlist,
   cart,
   wishlist,
-  auth
+  isAuthenticated
 }) => {
   const { name, variants, id, category, sale } = item;
   const variant = variants[0];
@@ -42,7 +42,7 @@ const ProductItem = ({
   };
 
   const handleWishlist = () => {
-    if (auth.isEmpty) {
+    if (!isAuthenticated) {
       setAlert('Login to add to wishlist', 'danger');
       return;
     }
@@ -89,7 +89,7 @@ const ProductItem = ({
 const mapStateToProps = state => ({
   cart: state.user.cart,
   wishlist: state.user.wishlist,
-  auth: state.firebase.auth
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, { addToCart, addToWishlist })(
