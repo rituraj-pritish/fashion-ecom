@@ -21,9 +21,8 @@ import {
 } from './Navbar.styles'
 import NavUserOptions from './NavUserOptions'
 import clickOutside from '../../../helpers/clickOutside'
-import { search } from '../../../redux/actions/userActions'
 
-const Navbar = ({ history, cart, search }) => {
+const Navbar = ({ history, cart }) => {
   const [showUserOptions, setShowUserOptions] = useState(false)
   const [showCart, setShowCart] = useState(false)
   const [show, setShow] = useState(true)
@@ -129,7 +128,7 @@ const Navbar = ({ history, cart, search }) => {
 }
 
 const mapStateToProps = state => ({
-  cart: state.user.cart
+  cart: state.products.cart
 })
 
-export default withRouter(connect(mapStateToProps, { search })(Navbar))
+export default withRouter(connect(mapStateToProps)(Navbar))

@@ -1,12 +1,12 @@
-import { combineReducers } from 'redux';
-import userReducer from 'redux/reducers/userReducer'
+import { combineReducers } from 'redux'
 import auth from './auth'
 import app from './app'
 import products from './products'
+import overlay from './overlay'
 
 export default combineReducers({
-  user: userReducer,
   app,
   products,
-  auth
-});
+  auth,
+  overlay
+})

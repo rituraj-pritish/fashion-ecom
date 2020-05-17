@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { setOverlay } from '../../../redux/actions/userActions';
-import { useEffect } from 'react';
+import React from 'react'
+import styled from 'styled-components'
+import { connect } from 'react-redux'
+import { setOverlay } from 'redux/overlay'
+import { useEffect } from 'react'
 
 export const OverlayContainer = styled.div`
   display: ${({ show }) => (show ? 'block' : 'none')};
@@ -18,31 +18,31 @@ export const OverlayContainer = styled.div`
   cursor: pointer;
   overflow: hidden;
   transition: 0.3s;
-`;
+`
 
 const Overlay = ({ showOverlay, setOverlay }) => {
-  const root = document.getElementById('root');
+  const root = document.getElementById('root')
 
   useEffect(() => {
     if (showOverlay) {
-      root.style.position = 'fixed';
-      root.style.overflow = 'hidden';
+      root.style.position = 'fixed'
+      root.style.overflow = 'hidden'
     }
 
     return () => {
-      root.style.position = 'initial';
-      root.style.overflow = 'initial';
-    };
-// eslint-disable-next-line
-  }, [showOverlay]);
+      root.style.position = 'initial'
+      root.style.overflow = 'initial'
+    }
+    // eslint-disable-next-line
+  }, [showOverlay])
 
   return (
     <OverlayContainer onClick={() => setOverlay(false)} show={showOverlay} />
-  );
-};
+  )
+}
 
 const mapStateToProps = state => ({
-  showOverlay: state.user.showOverlay
-});
+  showOverlay: state.overlay
+})
 
-export default connect(mapStateToProps, { setOverlay })(Overlay);
+export default connect(mapStateToProps, { setOverlay })(Overlay)

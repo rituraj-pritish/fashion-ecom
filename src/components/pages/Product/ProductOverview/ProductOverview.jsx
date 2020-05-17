@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import LazyLoad from 'react-lazy-load';
-import { withRouter } from 'react-router-dom';
+import React, { useState } from 'react'
+import LazyLoad from 'react-lazy-load'
+import { withRouter } from 'react-router-dom'
 
-import returnImg from '../../../../assets/images/return.webp';
-import worldwideImg from '../../../../assets/images/worldwide.webp';
-import Button from '../../../ui/Button';
-import Text from '../../../ui/Text';
-import Icon from '../../../ui/Icon';
-import PlusIcon from '../../../../assets/icons/PlusIcon';
-import MinusIcon from '../../../../assets/icons/MinusIcon';
-import HeartIcon from '../../../../assets/icons/HeartIcon';
-import StarIcon from '../../../../assets/icons/StarIcon';
+import returnImg from '../../../../assets/images/return.webp'
+import worldwideImg from '../../../../assets/images/worldwide.webp'
+import Button from '../../../ui/Button'
+import Text from '../../../ui/Text'
+import Icon from '../../../ui/Icon'
+import PlusIcon from '../../../../assets/icons/PlusIcon'
+import MinusIcon from '../../../../assets/icons/MinusIcon'
+import HeartIcon from '../../../../assets/icons/HeartIcon'
+import StarIcon from '../../../../assets/icons/StarIcon'
 import {
   SmallImages,
   SmallImage,
@@ -23,9 +23,9 @@ import {
   CartBtn,
   Policy,
   Wishlist
-} from './ProductOverview.styles';
-import { useEffect } from 'react';
-import ProductDetails from '../ProductDetails';
+} from './ProductOverview.styles'
+import { useEffect } from 'react'
+import ProductDetails from '../ProductDetails'
 
 const ProductOverview = ({
   product,
@@ -39,20 +39,20 @@ const ProductOverview = ({
   setAlert,
   history
 }) => {
-  const { name, rating, brand, variants, id } = product;
+  const { name, rating, brand, variants, id } = product
 
-  const [currentImg, setCurrentImg] = useState();
-  const [price, setPrice] = useState();
-  const [quantity, setQuantity] = useState(1);
+  const [currentImg, setCurrentImg] = useState()
+  const [price, setPrice] = useState()
+  const [quantity, setQuantity] = useState(1)
 
   useEffect(() => {
-    setCurrentImg(variants[variant].images[0]);
-    setPrice(variants[variant].price);
-    setQuantity(1);
-  }, [id, variant, variants]);
+    setCurrentImg(variants[variant].images[0])
+    setPrice(variants[variant].price)
+    setQuantity(1)
+  }, [id, variant, variants])
 
   const images = variants[variant].images.map(imageUrl => {
-    const isCurrentImage = imageUrl === currentImg;
+    const isCurrentImage = imageUrl === currentImg
     return (
       <SmallImage
         key={imageUrl}
@@ -63,53 +63,56 @@ const ProductOverview = ({
           <img src={imageUrl} alt='img' />
         </LazyLoad>
       </SmallImage>
-    );
-  });
+    )
+  })
 
-  const stars = [];
+  const stars = []
   for (let i = 1; i <= rating; i++) {
     stars.push(
       <Icon key={i} color='golden'>
         <StarIcon />
       </Icon>
-    );
+    )
   }
 
-  const isInCart = cart.find(item => item.product.id === product.id);
-  const isInWishlist = wishlist.find(item => item.product.id === product.id);
+  const isInCart = cart.find(item => item.product.id === product.id)
+  const isInWishlist = wishlist.find(item => item.product.id === product.id)
 
   const changeVariant = item => {
-    const index = variants.indexOf(item);
-    if (index === variant) return;
-    setVariant(index);
-    setCurrentImg(variants[index].images[0]);
-    setPrice(variants[index].price);
-  };
+    const index = variants.indexOf(item)
+    if (index === variant) return
+    setVariant(index)
+    setCurrentImg(variants[index].images[0])
+    setPrice(variants[index].price)
+  }
 
   const handleCartBtn = () => {
-    if (isInCart) return;
-    addToCart(product, variant, quantity);
-  };
+    if (isInCart) return
+    addToCart({ product, variant, qty: quantity })
+  }
 
   const handleWishlist = () => {
     if (!isAuthenticated) {
-      setAlert('Login to continue', 'danger');
-      return;
+      setAlert('Login to continue', 'danger')
+      return
     }
-    if (isInWishlist) return;
-    addToWishlist(product, variant);
-  };
+    if (isInWishlist) return
+    addToWishlist({
+      product,
+      variant
+    })
+  }
 
   const handleBuy = e => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!isAuthenticated) {
-      history.push('/signin');
-      return;
+      history.push('/signin')
+      return
     }
-    addToCart(product, variant, 1);
-    history.push('/user/cart');
-  };
+    addToCart(product, variant, 1)
+    history.push('/user/cart')
+  }
 
   return (
     <ProductOverviewContainer>
@@ -175,8 +178,8 @@ const ProductOverview = ({
             <Icon
               width='10px'
               onClick={() => {
-                if (quantity === 1) return;
-                setQuantity(quantity - 1);
+                if (quantity === 1) return
+                setQuantity(quantity - 1)
               }}
             >
               <MinusIcon />
@@ -210,7 +213,7 @@ const ProductOverview = ({
         <ProductDetails product={product} variant={variant} />
       </ActionsContainer>
     </ProductOverviewContainer>
-  );
-};
+  )
+}
 
-export default withRouter(ProductOverview);
+export default withRouter(ProductOverview)

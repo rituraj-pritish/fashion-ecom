@@ -4,14 +4,14 @@ import { connect } from 'react-redux'
 
 import Logo from 'assets/Logo'
 import { signin } from 'redux/auth'
-import { setAlert } from 'redux/actions/userActions'
+import setAlert from 'setAlert'
 import Input from 'components/ui/Input'
 import Button from 'components/ui/Button'
 import Text from 'components/ui/Text'
 import { PageContainer } from 'index.styles'
 import { StyledLogo, Container } from './SignIn.styles'
 
-const SignIn = ({ isAuthenticated, isLoading, signin, setAlert }) => {
+const SignIn = ({ isAuthenticated, isLoading, signin }) => {
   const [formData, setFormData] = useState({
     email: 'demo@demo.com',
     password: '123123'
@@ -81,4 +81,4 @@ const mapStateToProps = ({ auth }) => ({
   isLoading: auth.isLoading
 })
 
-export default connect(mapStateToProps, { signin, setAlert })(SignIn)
+export default connect(mapStateToProps, { signin })(SignIn)

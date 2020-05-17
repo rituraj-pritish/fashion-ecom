@@ -1,6 +1,7 @@
 import { firebase, db } from 'services/firebase'
 import produce from 'immer'
 import { setAppLoading } from './app'
+import setAlert from 'setAlert'
 
 // types
 
@@ -27,7 +28,7 @@ export const signup = data => async dispatch => {
     }
     //TODO set user
     dispatch({ type: AUTH_SUCCESS })
-    // set alert
+    setAlert({ message: 'Sign up successful', type: 'success' })
   } catch (err) {
     dispatch({ type: AUTH_FAILURE, payload: err })
     //TODO handle err message
@@ -44,7 +45,7 @@ export const signin = ({ email, password }) => async dispatch => {
       .signInWithEmailAndPassword(email, password)
 
     if (res.user.uid) {
-      // TODO setAlert('Sign in successful', 'success')
+      setAlert('Sign in successful', 'success')
     }
     //TODO set user
     dispatch({ type: AUTH_SUCCESS })
@@ -54,9 +55,9 @@ export const signin = ({ email, password }) => async dispatch => {
       err.code === 'auth/invalid-email' ||
       err.code === 'auth/wrong-password'
     ) {
-      // TODO setAlert('Wrong Credentials', 'danger')
+      setAlert('Wrong Credentials', 'danger')
     } else {
-      // TODO setAlert(err.message, 'danger')
+      setAlert(err.message, 'danger')
     }
   }
 }
@@ -89,7 +90,7 @@ export const signOut = () => async dispatch => {
   try {
     await firebase.auth().signOut()
     localStorage.clear()
-    // TODO setAlert('Sign out successful', 'success')
+    setAlert('Sign out successful', 'success')
   } catch (err) {}
   dispatch({ type: AUTH_FAILURE })
 }

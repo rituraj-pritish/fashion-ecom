@@ -1,23 +1,20 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import LazyLoad from 'react-lazy-load';
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import LazyLoad from 'react-lazy-load'
 
-import HeartIcon from '../../../../assets/icons/HeartIcon';
-import SaleBanner from '../../Product/SaleBanner';
+import { addToCart, addToWishlist } from 'redux/products'
+import HeartIcon from '../../../../assets/icons/HeartIcon'
+import SaleBanner from '../../Product/SaleBanner'
 import {
   ItemBottom,
   ProductItemContainer,
   Wishlist
-} from './ProductItem.styles';
-import {
-  addToCart,
-  addToWishlist,
-  setAlert
-} from '../../../../redux/actions/userActions';
-import Button from '../../../ui/Button';
-import Icon from '../../../ui/Icon';
+} from './ProductItem.styles'
+import setAlert from 'setAlert'
+import Button from '../../../ui/Button'
+import Icon from '../../../ui/Icon'
 
 const ProductItem = ({
   product,
@@ -27,29 +24,29 @@ const ProductItem = ({
   wishlist,
   isAuthenticated
 }) => {
-  const { name, variants, id, sale } = product;
-  const variant = variants[0];
-  const image = variant.images[0];
+  const { name, variants, id, sale } = product
+  const variant = variants[0]
+  const image = variant.images[0]
 
-  const isInCart = cart.find(item => item.product.id === id);
-  const isInWishlist = wishlist.find(item => item.product.id === id);
+  const isInCart = cart.find(item => item.product.id === id)
+  const isInWishlist = wishlist.find(item => item.product.id === id)
 
   const handleCartBtn = e => {
-    e.preventDefault();
+    e.preventDefault()
 
-    if (isInCart) return;
-    addToCart(product, 0, 1);
-  };
+    if (isInCart) return
+    addToCart({ product, variant: 0, qty: 1 })
+  }
 
   const handleWishlist = () => {
     if (!isAuthenticated) {
-      setAlert('Login to add to wishlist', 'danger');
-      return;
+      setAlert('Login to add to wishlist', 'danger')
+      return
     }
-    if (isInWishlist) return;
+    if (isInWishlist) return
 
-    addToWishlist(product, 0);
-  };
+    addToWishlist({ product, variant: 0 })
+  }
 
   return (
     <ProductItemContainer>
@@ -83,19 +80,19 @@ const ProductItem = ({
         </Button>
       </ItemBottom>
     </ProductItemContainer>
-  );
-};
+  )
+}
 
 const mapStateToProps = state => ({
-  cart: state.user.cart,
-  wishlist: state.user.wishlist,
+  cart: state.products.cart,
+  wishlist: state.products.wishlist,
   isAuthenticated: state.auth.isAuthenticated
-});
+})
 
 export default connect(mapStateToProps, { addToCart, addToWishlist })(
   ProductItem
-);
+)
 
 ProductItem.propTypes = {
   item: PropTypes.object.isRequired
-};
+}

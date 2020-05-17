@@ -1,7 +1,7 @@
 import FilterPanel from './FilterPanel'
 import { connect } from 'react-redux'
 
-import { setOverlay } from 'redux/actions/userActions'
+import { setOverlay } from 'redux/overlay'
 import { setFilterCriteria } from 'redux/products'
 
 const mapStateToProps = ({ products: { allProducts } }) => {

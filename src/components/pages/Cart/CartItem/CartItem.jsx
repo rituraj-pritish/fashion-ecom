@@ -1,24 +1,15 @@
-import React from 'react';
-import LazyLoad from 'react-lazy-load';
-import { connect } from 'react-redux';
+import React from 'react'
+import LazyLoad from 'react-lazy-load'
+import { connect } from 'react-redux'
 
-import Icon from '../../../ui/Icon';
-import Text from '../../../ui/Text';
-import PlusIcon from '../../../../assets/icons/PlusIcon';
-import TrashIcon from '../../../../assets/icons/TrashIcon';
-import MinusIcon from '../../../../assets/icons/MinusIcon';
-import {
-  CartItemContainer,
-  Quantity,
-  Details,
-  Remove
-} from './CartItem.styles';
-import {
-  updateCart,
-  removeFromCart,
-  removeFromWishlist
-} from '../../../../redux/actions/userActions';
-import { Link } from 'react-router-dom';
+import { removeFromCart, removeFromWishlist, updateCart } from 'redux/products'
+import Icon from '../../../ui/Icon'
+import Text from '../../../ui/Text'
+import PlusIcon from '../../../../assets/icons/PlusIcon'
+import TrashIcon from '../../../../assets/icons/TrashIcon'
+import MinusIcon from '../../../../assets/icons/MinusIcon'
+import { CartItemContainer, Quantity, Details, Remove } from './CartItem.styles'
+import { Link } from 'react-router-dom'
 
 const CartItem = ({
   page,
@@ -31,17 +22,17 @@ const CartItem = ({
     product: { variants, name, id },
     variant,
     qty
-  } = item;
-  const imageUrl = variants[variant].images[0];
-  const price = variants[variant].price;
+  } = item
+  const imageUrl = variants[variant].images[0]
+  const price = variants[variant].price
 
   const handleRemove = () => {
     if (page === 'cart') {
-      removeFromCart(item.product);
+      removeFromCart(id)
     } else {
-      removeFromWishlist(item.product.id);
+      removeFromWishlist(id)
     }
-  };
+  }
 
   return (
     <CartItemContainer>
@@ -60,8 +51,8 @@ const CartItem = ({
               m='5px'
               p='5px'
               onClick={() => {
-                if (qty === 1) return;
-                updateCart(item.product, qty - 1);
+                if (qty === 1) return
+                updateCart({ id: item.product.id, qty: qty - 1 })
               }}
             >
               <MinusIcon />
@@ -72,7 +63,7 @@ const CartItem = ({
             <Icon
               m='5px'
               p='5px'
-              onClick={() => updateCart(item.product, qty + 1)}
+              onClick={() => updateCart({ id: item.product.id, qty: qty + 1 })}
             >
               <PlusIcon />
             </Icon>
@@ -90,11 +81,11 @@ const CartItem = ({
         </Icon>
       </Remove>
     </CartItemContainer>
-  );
-};
+  )
+}
 
 export default connect(null, {
   updateCart,
   removeFromCart,
   removeFromWishlist
-})(CartItem);
+})(CartItem)

@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LazyLoad from 'react-lazy-load'
 
+import { addToCart, addToWishlist, removeFromWishlist } from 'redux/products'
+import setAlert from 'setAlert'
 import HeartIcon from '../../assets/icons/HeartIcon'
 import SaleBanner from '../pages/Product/SaleBanner'
 import {
@@ -14,11 +16,6 @@ import {
   ItemBottom,
   Title
 } from './ProductCarousel.styles'
-import {
-  addToCart,
-  addToWishlist,
-  setAlert
-} from '../../redux/actions/userActions'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
 import Text from '../ui/Text'
@@ -55,6 +52,7 @@ const ProductCarousel = ({
   data,
   addToCart,
   addToWishlist,
+  removeFromWishlist,
   cart,
   wishlist,
   isAuthenticated
@@ -67,7 +65,11 @@ const ProductCarousel = ({
 
     const handleCartBtn = e => {
       if (isInCart) return
-      addToCart(product, 0, 1)
+      addToCart({
+        product,
+        qty: 1,
+        variant: 0
+      })
     }
 
     const handleWishlist = () => {
@@ -75,8 +77,15 @@ const ProductCarousel = ({
         setAlert('Login to continue', 'danger')
         return
       }
-      if (isInWishlist) return
-      addToWishlist(product, 0)
+
+      if (isInWishlist) {
+        removeFromWishlist(product.id)
+      } else {
+        addToWishlist({
+          product,
+          variant: 0
+        })
+      }
     }
 
     return (
@@ -122,14 +131,16 @@ const ProductCarousel = ({
 }
 
 const mapStateToProps = state => ({
-  cart: state.user.cart,
-  wishlist: state.user.wishlist,
+  cart: state.products.cart,
+  wishlist: state.products.wishlist,
   isAuthenticated: state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps, { addToCart, addToWishlist })(
-  ProductCarousel
-)
+export default connect(mapStateToProps, {
+  addToCart,
+  addToWishlist,
+  removeFromWishlist
+})(ProductCarousel)
 
 ProductCarousel.propTypes = {
   data: PropTypes.array.isRequired

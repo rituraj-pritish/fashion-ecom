@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import Button from '../../ui/Button'
 import PaymentButton from './PaymentButton'
@@ -10,7 +10,7 @@ import {
   Amount,
   Container
 } from './PaymentsPage.styles'
-import { emptyCart } from '../../../redux/actions/userActions'
+import { emptyCart } from 'redux/products'
 import { PageContainer } from '../../../index.styles'
 
 const PaymentsPage = ({ cart, emptyCart }) => {
@@ -21,8 +21,6 @@ const PaymentsPage = ({ cart, emptyCart }) => {
       total + curr.product.variants[curr.variant].price * curr.qty,
     0
   )
-
-  if (amount === 0) return <Redirect to='/' />
 
   return (
     <PageContainer>
@@ -62,7 +60,7 @@ const PaymentsPage = ({ cart, emptyCart }) => {
 }
 
 const mapStateToProps = state => ({
-  cart: state.user.cart
+  cart: state.products.cart
 })
 
 export default connect(mapStateToProps, { emptyCart })(PaymentsPage)

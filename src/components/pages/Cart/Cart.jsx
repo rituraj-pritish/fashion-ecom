@@ -34,7 +34,7 @@ const Cart = ({ cart }) => {
 };
 
 const mapStateToProps = state => ({
-  cart: state.user.cart
+  cart: state.products.cart
 });
 
 export default connect(mapStateToProps)(Cart);

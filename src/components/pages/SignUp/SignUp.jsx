@@ -4,14 +4,14 @@ import { Link, Redirect } from 'react-router-dom'
 
 import Logo from 'assets/Logo'
 import { signup } from 'redux/auth'
-import { setAlert } from 'redux/actions/userActions'
+import setAlert from 'setAlert'
 import Input from 'components/ui/Input'
 import Button from 'components/ui/Button'
 import Text from 'components/ui/Text'
 import { PageContainer } from 'index.styles'
 import { StyledLogo, Container } from './SignUp.styles'
 
-const SignUp = ({ signup, isAuthenticated, isLoading, setAlert }) => {
+const SignUp = ({ signup, isAuthenticated, isLoading }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -109,4 +109,4 @@ const mapStateToProps = ({ auth: { isAuthenticated, isLoading } }) => ({
   isLoading
 })
 
-export default connect(mapStateToProps, { signup, setAlert })(SignUp)
+export default connect(mapStateToProps, { signup })(SignUp)

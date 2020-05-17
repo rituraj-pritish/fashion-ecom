@@ -30,7 +30,7 @@ const Wishlist = ({ wishlist }) => {
 };
 
 const mapStateToProps = state => ({
-  wishlist: state.user.wishlist
+  wishlist: state.products.wishlist
 });
 
 export default connect(mapStateToProps)(Wishlist);

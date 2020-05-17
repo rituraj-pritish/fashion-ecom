@@ -2,15 +2,12 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import {
-  addToCart,
-  addToWishlist,
-  setAlert
-} from 'redux/actions/userActions'
+import { addToCart, addToWishlist } from 'redux/products'
+import setAlert from 'setAlert'
 import Loader from 'components/layout/Loader'
 import ProductOverview from './ProductOverview'
 import ProductCarousel from 'components/ProductCarousel'
-import { PageContainer } from 'index.styles' 
+import { PageContainer } from 'index.styles'
 
 const ProductPage = ({
   product,
@@ -20,7 +17,6 @@ const ProductPage = ({
   addToCart,
   addToWishlist,
   isAuthenticated,
-  setAlert,
   products
 }) => {
   const [variant, setVariant] = useState(0)
@@ -51,7 +47,7 @@ ProductPage.propTypes = {
 }
 
 const mapStateToProps = (
-  { products: { allProducts }, user, auth },
+  { products: { allProducts, cart, wishlist }, user, auth },
   { match }
 ) => {
   const { productId } = match.params
@@ -60,15 +56,13 @@ const mapStateToProps = (
   return {
     product,
     products: allProducts,
-    cart: user.cart,
-    wishlist: user.wishlist,
-    loading: user.loading,
+    cart: cart,
+    wishlist: wishlist,
     isAuthenticated: auth.isAuthenticated
   }
 }
 
 export default connect(mapStateToProps, {
   addToCart,
-  addToWishlist,
-  setAlert
+  addToWishlist
 })(ProductPage)
