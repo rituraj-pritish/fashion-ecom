@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const ProductCarouselContainer = styled.div`
   margin: 5rem 0;
@@ -46,7 +46,7 @@ export const ProductCarouselContainer = styled.div`
       display: none;
     }
   }
-`;
+`
 
 export const CarouselItemContainer = styled.div`
   background: #f6f8fc;
@@ -57,7 +57,7 @@ export const CarouselItemContainer = styled.div`
     width: 100%;
     cursor: pointer;
   }
-`;
+`
 
 export const ItemBottom = styled.div`
   padding: 0 10px 10px 10px;
@@ -86,9 +86,8 @@ export const ItemBottom = styled.div`
   button {
     margin-top: auto;
   }
-`;
+`
 export const Title = styled.div`
   text-align: left;
   font-size: 1.8rem;
-`;
-
+`

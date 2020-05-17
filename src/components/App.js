@@ -26,14 +26,14 @@ import Footer from 'components/layout/Footer'
 import SearchResults from 'components/SearchResults'
 import theme from 'theme'
 
-const App = ({ isLoading, getProducts, authStateChangeHandler }) => {
+const App = ({ isLoading, getProducts, products, authStateChangeHandler }) => {
   useEffect(() => {
     authStateChangeHandler()
     getProducts()
     // eslint-disable-next-line
   }, [])
 
-  if (isLoading) {
+  if (isLoading || !products.length) {
     return <Loader />
   }
 
@@ -72,7 +72,8 @@ const App = ({ isLoading, getProducts, authStateChangeHandler }) => {
 }
 
 const mapStateToProps = state => ({
-  isLoading: state.app.isLoading
+  isLoading: state.app.isLoading,
+  products: state.products.allProducts
 })
 
 export default connect(mapStateToProps, {
