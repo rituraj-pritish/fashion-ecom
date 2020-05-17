@@ -8,7 +8,7 @@ import {
   setAlert
 } from 'redux/actions/userActions'
 import Loader from 'components/layout/Loader'
-import ProductOverview from './product-overview/ProductOverview'
+import ProductOverview from './ProductOverview'
 import ProductCarousel from 'components/ProductCarousel'
 import { PageContainer } from 'index.styles' 
 

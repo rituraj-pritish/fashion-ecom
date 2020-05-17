@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ProductItem from '../product-item/ProductItem'
+import ProductItem from '../ProductItem'
 import Text from 'components/ui/Text'
 import { Container } from './ProductsContainer.styles'
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import sizes from '../../../sizes';
+import sizes from 'sizes';
 
 export const FooterContainer = styled.div`
   position: relative;

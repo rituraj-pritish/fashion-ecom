@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 
 import { PageContainer } from '../../../index.styles'
 import ProductCarousel from '../../ProductCarousel'
-import ShopLinks from './shop-links/ShopLinks'
-import CollectionContainer from './collection/CollectionContainer'
-import Brands from './brands/Brands'
+import ShopLinks from './ShopLinks'
+import CollectionContainer from './Collection'
+import Brands from './Brands'
 
 const Home = ({ products }) => {
   useEffect(() => {}, [products])

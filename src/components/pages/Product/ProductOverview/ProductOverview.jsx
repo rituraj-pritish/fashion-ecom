@@ -25,7 +25,7 @@ import {
   Wishlist
 } from './ProductOverview.styles';
 import { useEffect } from 'react';
-import ProductDetails from '../product-details/ProductDetails';
+import ProductDetails from '../ProductDetails';
 
 const ProductOverview = ({
   product,
