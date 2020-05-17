@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazy-load';
 
 import HeartIcon from '../../../../assets/icons/HeartIcon';
-import SaleBanner from '../../product/SaleBanner';
+import SaleBanner from '../../Product/SaleBanner';
 import {
   ItemBottom,
   ProductItemContainer,
@@ -16,8 +16,8 @@ import {
   addToWishlist,
   setAlert
 } from '../../../../redux/actions/userActions';
-import Button from '../../../common/Button';
-import Icon from '../../../common/Icon';
+import Button from '../../../ui/Button';
+import Icon from '../../../ui/Icon';
 
 const ProductItem = ({
   product,
@@ -27,7 +27,7 @@ const ProductItem = ({
   wishlist,
   isAuthenticated
 }) => {
-  const { name, variants, id, category, sale } = product;
+  const { name, variants, id, sale } = product;
   const variant = variants[0];
   const image = variant.images[0];
 
@@ -53,7 +53,7 @@ const ProductItem = ({
 
   return (
     <ProductItemContainer>
-      <Link to={`/product/${category}/${id}`}>
+      <Link to={`/product/${id}`}>
         <LazyLoad className='lazyload'>
           <img src={image} alt={name} />
         </LazyLoad>

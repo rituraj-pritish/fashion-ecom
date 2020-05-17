@@ -8,22 +8,22 @@ import 'react-notifications-component/dist/theme.css'
 
 import { authStateChangeHandler } from 'redux/auth'
 import { getProducts } from 'redux/products'
-import Navbar from './layout/navbar/Navbar'
-import Home from './pages/home/home/Home'
-import SignIn from './pages/sign-in/SignIn'
-import SignUp from './pages/sign-up/SignUp'
-import Cart from './pages/cart/cart-container/Cart'
-import TopButton from './layout/top-button/TopButton'
-import Wishlist from './pages/wishlist/Wishlist'
-import Loader from './layout/loader/Loader'
-import Products from './pages/products/products/Products'
-import PrivateRoute from './PrivateRoute'
-import ScrollToTop from './ScrollToTop'
-import PaymentsPage from './payments/payments-page/PaymentsPage'
-import ProductPage from './pages/product/product-page/ProductPage'
-import Overlay from './layout/overlay/Overlay'
-import Footer from './layout/footer/Footer'
-import SearchResults from './SearchResults'
+import Navbar from 'components/layout/Navbar'
+import Home from 'components/pages/Home'
+import SignIn from 'components/pages/SignIn'
+import SignUp from 'components/pages/SignUp'
+import Cart from 'components/pages/Cart'
+import TopButton from 'components/layout/TopButton'
+import Wishlist from 'components/pages/Wishlist'
+import Loader from 'components/layout/Loader'
+import Products from 'components/pages/products/products/Products'
+import PrivateRoute from 'components/PrivateRoute'
+import ScrollToTop from 'components/ScrollToTop'
+import Payment from 'components/pages/Payment'
+import Product from 'components/pages/Product'
+import Overlay from 'components/layout/Overlay'
+import Footer from 'components/layout/Footer'
+import SearchResults from 'components/SearchResults'
 import theme from 'theme'
 
 const App = ({ isLoading, getProducts, authStateChangeHandler }) => {
@@ -44,28 +44,16 @@ const App = ({ isLoading, getProducts, authStateChangeHandler }) => {
           <Navbar />
           <ScrollToTop>
             <Switch>
-              <Route
-                exact
-                path='/product/:productId'
-                component={ProductPage}
-              />
+              <Route exact path='/product/:productId' component={Product} />
               <Route
                 exact
                 path='/products/:productsCategory'
                 component={Products}
               />
-              <Route
-                exact
-                path='/s/:searchQuery'
-                component={SearchResults}
-              />
+              <Route exact path='/s/:searchQuery' component={SearchResults} />
               <Route exact path='/user/cart' component={Cart} />
               <PrivateRoute exact path='/user/wishlist' component={Wishlist} />
-              <PrivateRoute
-                exact
-                path='/user/checkout'
-                component={PaymentsPage}
-              />
+              <PrivateRoute exact path='/user/checkout' component={Payment} />
               <Route exact path='/signin' component={SignIn} />
               <Route exact path='/signup' component={SignUp} />
               <Route path='/' component={Home} />

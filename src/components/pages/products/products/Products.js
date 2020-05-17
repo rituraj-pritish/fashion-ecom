@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import FilterPanel from '../filter-panel/FilterPanel'
+import FilterPanel from '../FilterPanel'
 import ProductsContainer from '../products-container/ProductsContainer'
 import { Container } from './Products.styles'
 import { PageContainer } from 'index.styles'

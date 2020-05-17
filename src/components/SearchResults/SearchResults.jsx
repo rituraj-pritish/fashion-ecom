@@ -2,7 +2,7 @@ import React from 'react'
 
 import { PageContainer } from 'index.styles'
 import ProductsContainer from 'components/pages/products/products-container/ProductsContainer'
-import FilterPanel from 'components/pages/products/filter-panel/FilterPanel'
+import FilterPanel from 'components/pages/products/FilterPanel'
 import { Container } from './SearchResults.styled'
 
 const SearchResults = ({ products }) => {
