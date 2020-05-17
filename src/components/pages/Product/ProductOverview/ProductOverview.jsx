@@ -110,7 +110,7 @@ const ProductOverview = ({
       history.push('/signin')
       return
     }
-    addToCart(product, variant, 1)
+    addToCart({ product, variant, qty: 1 })
     history.push('/user/cart')
   }
 
