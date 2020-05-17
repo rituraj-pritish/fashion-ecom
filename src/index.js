@@ -11,7 +11,7 @@ import storage from 'redux-persist/lib/storage'
 
 import './index.css'
 import App from './components/App'
-import Loader from './components/layout/Loader/Loader'
+import Loader from './components/layout/Loader'
 
 const persistConfig = {
   key: 'root',

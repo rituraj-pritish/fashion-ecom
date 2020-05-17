@@ -60,7 +60,7 @@ const ProductCarousel = ({
   isAuthenticated
 }) => {
   const render = data.map(product => {
-    const { name, variants, id, category, sale } = product
+    const { name, variants, id, sale } = product
     const { price, images } = variants[0]
     const isInCart = cart.find(item => item.product.id === id)
     const isInWishlist = wishlist.find(item => item.product.id === id)

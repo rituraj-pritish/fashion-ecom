@@ -16,7 +16,7 @@ const Cart = ({ cart }) => {
         <>
           <Text m='2rem 0'>Your cart is empty.</Text>
           <Button maxWidth='200px' m='0 auto'>
-            <Link to='home'>Continue Shopping</Link>
+            <Link to='/'>Continue Shopping</Link>
           </Button>
         </>
       ) : (
