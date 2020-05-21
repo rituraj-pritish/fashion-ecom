@@ -11,7 +11,7 @@ import PlusIcon from 'assets/icons/PlusIcon'
 import MinusIcon from 'assets/icons/MinusIcon'
 import HeartIcon from 'assets/icons/HeartIcon'
 import StarIcon from 'assets/icons/StarIcon'
-import Image from './Image'
+import Image from 'components/Image'
 import {
   SmallImages,
   SmallImage,
@@ -61,7 +61,7 @@ const ProductOverview = ({
         onClick={() => setCurrentImg(imageUrl)}
       >
         <LazyLoad className='lazyload'>
-          <img src={imageUrl} alt='img' />
+          <Image src={imageUrl} alt='img' size='small' />
         </LazyLoad>
       </SmallImage>
     )
