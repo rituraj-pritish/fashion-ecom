@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 import LazyLoad from 'react-lazy-load'
 import { withRouter } from 'react-router-dom'
 
-import returnImg from '../../../../assets/images/return.webp'
-import worldwideImg from '../../../../assets/images/worldwide.webp'
+import returnImg from 'assets/images/return.webp'
+import worldwideImg from 'assets/images/worldwide.webp'
 import Button from '../../../ui/Button'
 import Text from '../../../ui/Text'
 import Icon from '../../../ui/Icon'
-import PlusIcon from '../../../../assets/icons/PlusIcon'
-import MinusIcon from '../../../../assets/icons/MinusIcon'
-import HeartIcon from '../../../../assets/icons/HeartIcon'
-import StarIcon from '../../../../assets/icons/StarIcon'
+import PlusIcon from 'assets/icons/PlusIcon'
+import MinusIcon from 'assets/icons/MinusIcon'
+import HeartIcon from 'assets/icons/HeartIcon'
+import StarIcon from 'assets/icons/StarIcon'
+import Image from './Image'
 import {
   SmallImages,
   SmallImage,
@@ -121,7 +122,7 @@ const ProductOverview = ({
           <SmallImages>{images}</SmallImages>
           <LazyLoad>
             <LazyLoad className='lazyload'>
-              <img src={currentImg} alt={name} />
+              <Image src={currentImg} alt={name} />
             </LazyLoad>
           </LazyLoad>
         </ImagesContainer>
