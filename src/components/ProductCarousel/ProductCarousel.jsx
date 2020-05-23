@@ -54,15 +54,16 @@ const ProductCarousel = ({
   addToCart,
   addToWishlist,
   removeFromWishlist,
-  cart,
-  wishlist,
+  cartIds,
+  wishlistIds,
   isAuthenticated
 }) => {
   const render = data.map(product => {
     const { name, variants, id, sale } = product
     const { price, images } = variants[0]
-    const isInCart = cart.find(item => item.product.id === id)
-    const isInWishlist = wishlist.find(item => item.product.id === id)
+
+    const isInCart = cartIds.find(productId => productId === id)
+    const isInWishlist = wishlistIds.find(productId => productId === id)
 
     const handleCartBtn = e => {
       if (isInCart) return
@@ -132,8 +133,8 @@ const ProductCarousel = ({
 }
 
 const mapStateToProps = state => ({
-  cart: state.products.cart,
-  wishlist: state.products.wishlist,
+  cartIds: state.cart.itemIds,
+  wishlistIds: state.wishlist.itemIds,
   isAuthenticated: state.auth.isAuthenticated
 })
 

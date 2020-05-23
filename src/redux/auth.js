@@ -1,7 +1,10 @@
-import { firebase, db } from 'services/firebase'
 import produce from 'immer'
-import { setAppLoading } from './app'
+
+import { firebase, db } from 'services/firebase'
 import setAlert from 'setAlert'
+import { setAppLoading } from 'redux/app'
+import { setCartIds } from 'redux/cart'
+import { setWishlistIds } from 'redux/wishlist'
 
 // types
 
@@ -20,20 +23,22 @@ export const signup = data => async dispatch => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
 
-    if (res.user.uid) {
-      firebase.firestore().collection('users').doc(res.user.uid).set({
-        name: name,
-        phone: phone
-      })
+    const userPayload = {
+      name,
+      phone,
+      id: res.user.id,
+      email
     }
-    //TODO set user
-    dispatch({ type: AUTH_SUCCESS })
-    setAlert({ message: 'Sign up successful', type: 'success' })
+
+    if (res.user.uid) {
+      db.collection('users').doc(res.user.uid).set(userPayload)
+    }
+
+    dispatch({ type: AUTH_SUCCESS, payload: userPayload })
+    setAlert('Sign up successful', 'success')
   } catch (err) {
     dispatch({ type: AUTH_FAILURE, payload: err })
-    //TODO handle err message
-    console.log(err)
-    // set alert
+    setAlert(err.message, 'danger')
   }
 }
 
@@ -44,11 +49,25 @@ export const signin = ({ email, password }) => async dispatch => {
       .auth()
       .signInWithEmailAndPassword(email, password)
 
+    let user
     if (res.user.uid) {
-      setAlert('Sign in successful', 'success')
+      user = await db.collection('users').doc(res.user.uid).get()
     }
-    //TODO set user
-    dispatch({ type: AUTH_SUCCESS })
+
+    const userData = user.data()
+
+    if (user) {
+      setAlert('Sign in successful', 'success')
+      dispatch({ type: AUTH_SUCCESS, payload: userData() })
+
+      if (userData.cart.length) {
+        dispatch(setCartIds(userData.cart))
+      }
+
+      if (userData.wishlist.length) {
+        dispatch(setWishlistIds(userData.wishlist))
+      }
+    }
   } catch (err) {
     dispatch({ type: AUTH_FAILURE })
     if (
@@ -67,18 +86,10 @@ export const authStateChangeHandler = () => async dispatch => {
     if (user) {
       const res = await db.collection('users').doc(user.uid).get()
 
-      const { displayName, email, photoURL, uid } = res.data()
-
       dispatch({
         type: AUTH_SUCCESS,
-        payload: {
-          displayName,
-          email,
-          photoURL,
-          uid
-        }
+        payload: res.data()
       })
-
       dispatch(setAppLoading(false))
     } else {
       dispatch(setAppLoading(false))

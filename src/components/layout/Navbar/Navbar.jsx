@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import UserIcon from '../../../assets/icons/UserIcon'
 import CartIcon from '../../../assets/icons/CartIcon'
@@ -22,7 +21,7 @@ import {
 import NavUserOptions from './NavUserOptions'
 import clickOutside from '../../../helpers/clickOutside'
 
-const Navbar = ({ history, cart }) => {
+const Navbar = ({ history, cartCount }) => {
   const [showUserOptions, setShowUserOptions] = useState(false)
   const [showCart, setShowCart] = useState(false)
   const [show, setShow] = useState(true)
@@ -50,7 +49,7 @@ const Navbar = ({ history, cart }) => {
       setShowCart(false)
       return
     }
-    if (cart.length === 0) {
+    if (!cartCount) {
       setShowCart(true)
     } else {
       history.push('/user/cart')
@@ -118,7 +117,7 @@ const Navbar = ({ history, cart }) => {
             <Icon width='30px'>
               <CartIcon />
             </Icon>
-            <span className='cart-count'>{cart.length}</span>
+            <span className='cart-count'>{cartCount}</span>
             {showCart && nothingInCart}
           </Cart>
         </NavLinks>
@@ -127,8 +126,4 @@ const Navbar = ({ history, cart }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  cart: state.products.cart
-})
-
-export default withRouter(connect(mapStateToProps)(Navbar))
+export default Navbar
