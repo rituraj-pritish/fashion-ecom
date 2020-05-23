@@ -56,14 +56,16 @@ const ProductCarousel = ({
   removeFromWishlist,
   cartIds,
   wishlistIds,
-  isAuthenticated
+  isAuthenticated,
+  isLoading,
+  productInFocus
 }) => {
   const render = data.map(product => {
     const { name, variants, id, sale } = product
     const { price, images } = variants[0]
 
-    const isInCart = cartIds.find(productId => productId === id)
-    const isInWishlist = wishlistIds.find(productId => productId === id)
+    const isInCart = cartIds.find(({ productId }) => productId === id)
+    const isInWishlist = wishlistIds.find(({ productId }) => productId === id)
 
     const handleCartBtn = e => {
       if (isInCart) return
@@ -116,6 +118,7 @@ const ProductCarousel = ({
             variant={isInCart ? 'secondary' : 'primary'}
             minHeight='35px'
             height='auto'
+            isLoading={isLoading && productInFocus === id}
           >
             {isInCart ? 'ADDED TO CART' : 'ADD TO CART'}
           </Button>
@@ -133,7 +136,9 @@ const ProductCarousel = ({
 }
 
 const mapStateToProps = state => ({
+  isLoading: state.cart.isLoading,
   cartIds: state.cart.itemIds,
+  productInFocus: state.cart.inFocus,
   wishlistIds: state.wishlist.itemIds,
   isAuthenticated: state.auth.isAuthenticated
 })

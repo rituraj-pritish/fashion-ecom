@@ -1,15 +1,26 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import { PageContainer } from '../../../index.styles';
-import CartItem from './CartItem';
-import CheckoutBox from './CheckoutBox';
-import { ItemsContainer, Container } from './Cart.styles';
-import Text from '../../ui/Text';
-import Button from '../../ui/Button';
+import { getCartItems } from 'redux/cart'
+import { PageContainer } from '../../../index.styles'
+import CartItem from './CartItem'
+import CheckoutBox from './CheckoutBox'
+import { ItemsContainer, Container } from './Cart.styles'
+import Text from '../../ui/Text'
+import Button from '../../ui/Button'
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, isLoading, shouldFetch, getCartItems }) => {
+  useEffect(() => {
+    if (shouldFetch) getCartItems()
+  }, [shouldFetch, getCartItems])
+
+  if(isLoading) return (
+    <PageContainer>
+      loading......
+    </PageContainer>
+  )
+
   return (
     <PageContainer>
       {cart.length === 0 ? (
@@ -30,11 +41,13 @@ const Cart = ({ cart }) => {
         </Container>
       )}
     </PageContainer>
-  );
-};
+  )
+}
 
-const mapStateToProps = state => ({
-  cart: state.products.cart
-});
+const mapStateToProps = ({ cart }) => ({
+  shouldFetch: cart.itemIds.length > cart.items.length,
+  cart: cart.items,
+  isLoading: cart.isLoading
+})
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps, { getCartItems })(Cart)

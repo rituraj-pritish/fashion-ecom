@@ -1,4 +1,4 @@
-import produce from "immer";
+import produce from 'immer'
 
 // types
 
@@ -14,31 +14,28 @@ const REMOVE_FROM_WISHLIST_FAILURE = 'REMOVE_FROM_WISHLIST_FAILURE'
 
 // action creators
 
-export const setWishlistIds = (ids) => ({
+export const setWishlistIds = wishlistItems => ({
   type: SET_WISHLIST_PRODUCT_IDS,
-  payload: ids
+  payload: wishlistItems.map(({ productId }) => productId)
 })
 
-export const addToWishlist = () => {
+export const addToWishlist = () => {}
 
-}
-
-export const removeFromWishlist = () => {
-  
-}
+export const removeFromWishlist = () => {}
 
 const initialState = {
   itemIds: [],
   items: [],
-  isLoading: false
+  isLoading: false,
+  inFocus: null
 }
 
-export default (state = initialState, {type, payload}) =>
-  (produce(state, draft => {
+export default (state = initialState, { type, payload }) =>
+  produce(state, draft => {
     // eslint-disable-next-line
-    switch(type) {
+    switch (type) {
       case SET_WISHLIST_PRODUCT_IDS:
         draft.itemIds = payload
         break
     }
-  }))
+  })
