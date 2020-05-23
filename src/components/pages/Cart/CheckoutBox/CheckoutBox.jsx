@@ -9,8 +9,8 @@ import { CheckoutBoxContainer, Container, Line } from './CheckoutBox.styles'
 const CheckoutBox = ({ cart, history, isAuthenticated }) => {
   let subTotal = cart
     .reduce(
-      (total, { product, variant, qty }) =>
-        total + product.variants[variant].price * qty,
+      (total, { product, variant, quantity }) =>
+        total + product.variants[variant].price * quantity,
       0
     )
     .toFixed(2)

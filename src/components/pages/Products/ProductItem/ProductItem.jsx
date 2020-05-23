@@ -36,7 +36,7 @@ const ProductItem = ({
     e.preventDefault()
 
     if (isInCart) return
-    addToCart({ product, variant: 0, qty: 1 })
+    addToCart({ product, variant: 0, quantity: 1 })
   }
 
   const handleWishlist = () => {

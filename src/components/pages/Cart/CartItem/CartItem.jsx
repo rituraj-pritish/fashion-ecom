@@ -22,7 +22,7 @@ const CartItem = ({
   const {
     product: { variants, name, id },
     variant,
-    qty
+    quantity
   } = item
   const imageUrl = variants[variant].images[0]
   const price = variants[variant].price
@@ -46,25 +46,25 @@ const CartItem = ({
       <Details>
         <p>{name}</p>
 
-        {qty && (
+        {quantity && (
           <Quantity>
             <Icon
               m='5px'
               p='5px'
               onClick={() => {
-                if (qty === 1) return
-                updateCart({ id: item.product.id, qty: qty - 1 })
+                if (quantity === 1) return
+                updateCart({ id: item.product.id, quantity: quantity - 1 })
               }}
             >
               <MinusIcon />
             </Icon>
             <Text m='5px' p='5px' mb='8px'>
-              {qty}
+              {quantity}
             </Text>
             <Icon
               m='5px'
               p='5px'
-              onClick={() => updateCart({ id: item.product.id, qty: qty + 1 })}
+              onClick={() => updateCart({ id: item.product.id, quantity: quantity + 1 })}
             >
               <PlusIcon />
             </Icon>
@@ -73,7 +73,7 @@ const CartItem = ({
       </Details>
 
       <Text fontWeight='bold'>
-        $ {qty ? (Math.round(qty * price * 100) / 100).toFixed(2) : price}
+        $ {quantity ? (Math.round(quantity * price * 100) / 100).toFixed(2) : price}
       </Text>
 
       <Remove onClick={handleRemove} className='far fa-trash-alt'>

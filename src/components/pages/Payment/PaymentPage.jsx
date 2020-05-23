@@ -17,7 +17,7 @@ const PaymentsPage = ({ cart }) => {
 
   const amount = cart.reduce(
     (total, curr) =>
-      total + curr.product.variants[curr.variant].price * curr.qty,
+      total + curr.product.variants[curr.variant].price * curr.quantity,
     0
   )
 
@@ -29,10 +29,7 @@ const PaymentsPage = ({ cart }) => {
             Total payable amount:
             <span>$ {amount}</span>
           </Amount>
-          <PaymentButton
-            amount={amount}
-            setIsOrderPlaced={setIsOrderPlaced}
-          />
+          <PaymentButton amount={amount} setIsOrderPlaced={setIsOrderPlaced} />
 
           <CardInfo>
             *email: email@email.com <br />

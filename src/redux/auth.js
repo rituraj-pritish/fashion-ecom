@@ -23,19 +23,19 @@ export const signup = data => async dispatch => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
 
-    const userPayload = {
-      name,
-      phone,
-      id: res.user.id,
-      email
-    }
-
     if (res.user.uid) {
-      db.collection('users').doc(res.user.uid).set(userPayload)
-    }
+      const userPayload = {
+        name,
+        phone,
+        id: res.user.uid,
+        email
+      }
 
-    dispatch({ type: AUTH_SUCCESS, payload: userPayload })
-    setAlert('Sign up successful', 'success')
+      db.collection('users').doc(res.user.uid).set(userPayload)
+
+      dispatch({ type: AUTH_SUCCESS, payload: userPayload })
+      setAlert('Sign up successful', 'success')
+    }
   } catch (err) {
     dispatch({ type: AUTH_FAILURE, payload: err })
     setAlert(err.message, 'danger')
@@ -56,28 +56,21 @@ export const signin = ({ email, password }) => async dispatch => {
 
     const userData = user.data()
 
-    if (user) {
+    if (userData) {
       setAlert('Sign in successful', 'success')
-      dispatch({ type: AUTH_SUCCESS, payload: userData() })
+      dispatch({ type: AUTH_SUCCESS, payload: userData })
 
-      if (userData.cart.length) {
+      if (userData.cart) {
         dispatch(setCartIds(userData.cart))
       }
 
-      if (userData.wishlist.length) {
+      if (userData.wishlist) {
         dispatch(setWishlistIds(userData.wishlist))
       }
     }
   } catch (err) {
     dispatch({ type: AUTH_FAILURE })
-    if (
-      err.code === 'auth/invalid-email' ||
-      err.code === 'auth/wrong-password'
-    ) {
-      setAlert('Wrong Credentials', 'danger')
-    } else {
-      setAlert(err.message, 'danger')
-    }
+    setAlert('Wrong Credentials', 'danger')
   }
 }
 
@@ -86,9 +79,19 @@ export const authStateChangeHandler = () => async dispatch => {
     if (user) {
       const res = await db.collection('users').doc(user.uid).get()
 
+      const userData = res.data()
+
+      if (userData.cart) {
+        dispatch(setCartIds(userData.cart))
+      }
+
+      if (userData.wishlist) {
+        dispatch(setWishlistIds(userData.wishlist))
+      }
+
       dispatch({
         type: AUTH_SUCCESS,
-        payload: res.data()
+        payload: userData
       })
       dispatch(setAppLoading(false))
     } else {

@@ -89,7 +89,7 @@ const ProductOverview = ({
 
   const handleCartBtn = () => {
     if (isInCart) return
-    addToCart({ product, variant, qty: quantity })
+    addToCart({ product, variant, quantity: quantity })
   }
 
   const handleWishlist = () => {
@@ -111,7 +111,7 @@ const ProductOverview = ({
       history.push('/signin')
       return
     }
-    addToCart({ product, variant, qty: 1 })
+    addToCart({ product, variant, quantity: 1 })
     history.push('/user/cart')
   }
 

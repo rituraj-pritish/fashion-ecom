@@ -69,7 +69,7 @@ const ProductCarousel = ({
       if (isInCart) return
       addToCart({
         product,
-        qty: 1,
+        quantity: 1,
         variant: 0
       })
     }
