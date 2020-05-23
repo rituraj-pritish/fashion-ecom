@@ -3,8 +3,6 @@ import { db } from 'services/firebase'
 
 // types
 
-const SET_CART_PRODUCT_IDS = 'SET_CART_PRODUCT_IDS'
-
 const GET_CART_ITEMS_REQUEST = 'GET_CART_ITEMS_REQUEST'
 const GET_CART_ITEMS_SUCCESS = 'GET_CART_ITEMS_SUCCESS'
 const GET_CART_ITEMS_FAILURE = 'GET_CART_ITEMS_FAILURE'
@@ -23,48 +21,37 @@ const REMOVE_FROM_CART_FAILURE = 'REMOVE_FROM_CART_FAILURE'
 
 // action creators
 
-export const setCartIds = cartItems => ({
-  type: SET_CART_PRODUCT_IDS,
-  payload: cartItems
-})
-
-export const getCartItems = () => async (dispatch, getState) => {
+export const getCartItems = userId => async (dispatch, getState) => {
   dispatch({ type: GET_CART_ITEMS_REQUEST })
-  const ids = getState().cart.itemIds
 
   try {
-    const promises = ids.map(id => db.collection('products').doc(id).get())
-    Promise.all(promises).then(res => {
-      const items = res.map(doc => doc.data())
-      // dispatch({type: GET_CART_ITEMS_SUCCESS, payload: items})
-    } )
+    const res = await db
+      .collection('carts')
+      .doc(userId)
+      .collection('items')
+      .get()
+    const items = res.docs.map(doc => doc.data())
+    dispatch({ type: GET_CART_ITEMS_SUCCESS, payload: items })
   } catch (err) {
     console.log(err)
   }
 }
 
 export const addToCart = item => async (dispatch, getState) => {
-  dispatch({ type: ADD_TO_CART_REQUEST, payload: item.product.id })
+  dispatch({ type: ADD_TO_CART_REQUEST, payload: item.id })
   const addedDate = new Date().toISOString()
 
   const { auth } = getState()
   const userId = auth.user?.id
-  const userCart = auth.user?.cart || []
 
   try {
     await db
-      .collection('users')
+      .collection('carts')
       .doc(userId)
-      .update({
-        cart: [
-          {
-            product: item.product,
-            variant: item.variant,
-            quantity: item.quantity,
-            date: addedDate
-          },
-          ...userCart
-        ]
+      .collection('items')
+      .doc(item.id).set({
+        ...item,
+        date: addedDate
       })
 
     dispatch({
@@ -79,17 +66,17 @@ export const addToCart = item => async (dispatch, getState) => {
 
 export const removeFromCart = id => async (dispatch, getState) => {
   dispatch({ type: REMOVE_FROM_CART_REQUEST, payload: id })
-  const { auth, cart } = getState()
+  const { auth } = getState()
   const userId = auth.user?.id
-  const userCart = cart.itemIds
 
   try {
     await db
-      .collection('users')
+      .collection('carts')
       .doc(userId)
-      .update({
-        cart: userCart.filter(productId => productId !== id)
-      })
+      .collection('items')
+      .doc(id)
+      .delete()
+
     dispatch({ type: REMOVE_FROM_CART_SUCCESS, payload: id })
   } catch (err) {
     dispatch({ type: REMOVE_FROM_CART_FAILURE })
@@ -100,7 +87,6 @@ export const removeFromCart = id => async (dispatch, getState) => {
 export const updateCart = () => {}
 
 const initialState = {
-  itemIds: [],
   items: [],
   isLoading: false,
   inFocus: null
@@ -110,10 +96,6 @@ export default (state = initialState, { type, payload }) =>
   produce(state, draft => {
     //eslint-disable-next-line
     switch (type) {
-      case SET_CART_PRODUCT_IDS:
-        draft.itemIds = payload
-        break
-
       case GET_CART_ITEMS_REQUEST:
       case ADD_TO_CART_REQUEST:
       case UPDATE_CART_REQUEST:
@@ -136,15 +118,13 @@ export default (state = initialState, { type, payload }) =>
         break
 
       case ADD_TO_CART_SUCCESS:
-        draft.itemIds.unshift(payload.product.id)
         draft.items.unshift(payload)
         draft.isLoading = false
         draft.inFocus = null
         break
 
       case REMOVE_FROM_CART_SUCCESS:
-        draft.itemIds.slice().filter(id => id !== payload)
-        draft.items.slice().filter(item => item.product.id !== payload)
+        draft.items = state.items.filter(item => item.id !== payload)
         draft.isLoading = false
         draft.inFocus = null
         break

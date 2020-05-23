@@ -14,19 +14,15 @@ import { Link } from 'react-router-dom'
 
 const CartItem = ({
   page,
-  item,
   updateCart,
   removeFromCart,
-  removeFromWishlist
+  removeFromWishlist,
+  imageUrl,
+  price,
+  id,
+  name,
+  quantity
 }) => {
-  const {
-    product: { variants, name, id },
-    variant,
-    quantity
-  } = item
-  const imageUrl = variants[variant].images[0]
-  const price = variants[variant].price
-
   const handleRemove = () => {
     if (page === 'cart') {
       removeFromCart(id)
@@ -53,7 +49,7 @@ const CartItem = ({
               p='5px'
               onClick={() => {
                 if (quantity === 1) return
-                updateCart({ id: item.product.id, quantity: quantity - 1 })
+                updateCart({ id, quantity: quantity - 1 })
               }}
             >
               <MinusIcon />
@@ -64,7 +60,7 @@ const CartItem = ({
             <Icon
               m='5px'
               p='5px'
-              onClick={() => updateCart({ id: item.product.id, quantity: quantity + 1 })}
+              onClick={() => updateCart({ id, quantity: quantity + 1 })}
             >
               <PlusIcon />
             </Icon>
@@ -73,7 +69,10 @@ const CartItem = ({
       </Details>
 
       <Text fontWeight='bold'>
-        $ {quantity ? (Math.round(quantity * price * 100) / 100).toFixed(2) : price}
+        ${' '}
+        {quantity
+          ? (Math.round(quantity * price * 100) / 100).toFixed(2)
+          : price}
       </Text>
 
       <Remove onClick={handleRemove} className='far fa-trash-alt'>

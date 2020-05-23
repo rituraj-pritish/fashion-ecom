@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { getCartItems } from 'redux/cart'
 import { PageContainer } from '../../../index.styles'
 import CartItem from './CartItem'
 import CheckoutBox from './CheckoutBox'
@@ -10,17 +9,7 @@ import { ItemsContainer, Container } from './Cart.styles'
 import Text from '../../ui/Text'
 import Button from '../../ui/Button'
 
-const Cart = ({ cart, isLoading, shouldFetch, getCartItems }) => {
-  useEffect(() => {
-    if (shouldFetch) getCartItems()
-  }, [shouldFetch, getCartItems])
-
-  if(isLoading) return (
-    <PageContainer>
-      loading......
-    </PageContainer>
-  )
-
+const Cart = ({ cart }) => {
   return (
     <PageContainer>
       {cart.length === 0 ? (
@@ -34,7 +23,7 @@ const Cart = ({ cart, isLoading, shouldFetch, getCartItems }) => {
         <Container>
           <ItemsContainer>
             {cart.map(item => (
-              <CartItem page='cart' key={item.product.id} item={item} />
+              <CartItem page='cart' key={item.id} {...item} />
             ))}
           </ItemsContainer>
           <CheckoutBox cart={cart} />
@@ -45,9 +34,7 @@ const Cart = ({ cart, isLoading, shouldFetch, getCartItems }) => {
 }
 
 const mapStateToProps = ({ cart }) => ({
-  shouldFetch: cart.itemIds.length > cart.items.length,
-  cart: cart.items,
-  isLoading: cart.isLoading
+  cart: cart.items
 })
 
-export default connect(mapStateToProps, { getCartItems })(Cart)
+export default connect(mapStateToProps)(Cart)

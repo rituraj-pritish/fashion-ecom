@@ -64,15 +64,17 @@ const ProductCarousel = ({
     const { name, variants, id, sale } = product
     const { price, images } = variants[0]
 
-    const isInCart = cartIds.find(({ productId }) => productId === id)
-    const isInWishlist = wishlistIds.find(({ productId }) => productId === id)
+    const isInCart = cartIds.find(productId => productId === id)
+    const isInWishlist = wishlistIds.find(productId => productId === id)
 
     const handleCartBtn = e => {
       if (isInCart) return
       addToCart({
-        product,
-        quantity: 1,
-        variant: 0
+        id,
+        imageUrl: images[0],
+        name,
+        price,
+        quantity: 1
       })
     }
 
@@ -137,9 +139,9 @@ const ProductCarousel = ({
 
 const mapStateToProps = state => ({
   isLoading: state.cart.isLoading,
-  cartIds: state.cart.itemIds,
+  cartIds: state.cart.items.map(({ id }) => id),
   productInFocus: state.cart.inFocus,
-  wishlistIds: state.wishlist.itemIds,
+  wishlistIds: state.wishlist.items.map(({ id }) => id),
   isAuthenticated: state.auth.isAuthenticated
 })
 

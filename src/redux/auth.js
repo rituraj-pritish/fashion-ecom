@@ -3,8 +3,8 @@ import produce from 'immer'
 import { firebase, db } from 'services/firebase'
 import setAlert from 'setAlert'
 import { setAppLoading } from 'redux/app'
-import { setCartIds } from 'redux/cart'
-import { setWishlistIds } from 'redux/wishlist'
+import { getCartItems } from 'redux/cart'
+import { getWishlistItems } from 'redux/wishlist'
 
 // types
 
@@ -51,6 +51,8 @@ export const signin = ({ email, password }) => async dispatch => {
 
     let user
     if (res.user.uid) {
+      dispatch(getCartItems(res.user.uid))
+      // dispatch(getWishlistItems(res.user.uid))
       user = await db.collection('users').doc(res.user.uid).get()
     }
 
@@ -59,14 +61,6 @@ export const signin = ({ email, password }) => async dispatch => {
     if (userData) {
       setAlert('Sign in successful', 'success')
       dispatch({ type: AUTH_SUCCESS, payload: userData })
-
-      if (userData.cart) {
-        dispatch(setCartIds(userData.cart))
-      }
-
-      if (userData.wishlist) {
-        dispatch(setWishlistIds(userData.wishlist))
-      }
     }
   } catch (err) {
     dispatch({ type: AUTH_FAILURE })
@@ -78,16 +72,10 @@ export const authStateChangeHandler = () => async dispatch => {
   firebase.auth().onAuthStateChanged(async user => {
     if (user) {
       const res = await db.collection('users').doc(user.uid).get()
+      dispatch(getCartItems(user.uid))
+      // dispatch(getWishlistItems(user.uid))
 
       const userData = res.data()
-
-      if (userData.cart) {
-        dispatch(setCartIds(userData.cart))
-      }
-
-      if (userData.wishlist) {
-        dispatch(setWishlistIds(userData.wishlist))
-      }
 
       dispatch({
         type: AUTH_SUCCESS,
