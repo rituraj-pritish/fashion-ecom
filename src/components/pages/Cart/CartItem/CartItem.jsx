@@ -2,6 +2,7 @@ import React from 'react'
 import LazyLoad from 'react-lazy-load'
 import { connect } from 'react-redux'
 
+import MoonLoader from 'react-spinners/MoonLoader'
 import { removeFromCart, updateCart } from 'redux/cart'
 import { removeFromWishlist } from 'redux/wishlist'
 import Icon from '../../../ui/Icon'
@@ -9,7 +10,13 @@ import Text from '../../../ui/Text'
 import PlusIcon from '../../../../assets/icons/PlusIcon'
 import TrashIcon from '../../../../assets/icons/TrashIcon'
 import MinusIcon from '../../../../assets/icons/MinusIcon'
-import { CartItemContainer, Quantity, Details, Remove } from './CartItem.styles'
+import {
+  CartItemContainer,
+  Quantity,
+  Details,
+  Remove,
+  Loader
+} from './CartItem.styles'
 import { Link } from 'react-router-dom'
 
 const CartItem = ({
@@ -21,7 +28,8 @@ const CartItem = ({
   price,
   id,
   name,
-  quantity
+  quantity,
+  isLoading
 }) => {
   const handleRemove = () => {
     if (page === 'cart') {
@@ -32,7 +40,12 @@ const CartItem = ({
   }
 
   return (
-    <CartItemContainer>
+    <CartItemContainer isLoading={isLoading}>
+      {isLoading && (
+        <Loader>
+          <MoonLoader size={35} />
+        </Loader>
+      )}
       <LazyLoad className='lazyload'>
         <Link to={`/product/${id}`}>
           <img src={imageUrl} alt={name} />
@@ -84,7 +97,11 @@ const CartItem = ({
   )
 }
 
-export default connect(null, {
+const mapStateToProps = ({ cart: { isLoading, inFocus } }, { id }) => ({
+  isLoading: isLoading && inFocus === id
+})
+
+export default connect(mapStateToProps, {
   updateCart,
   removeFromCart,
   removeFromWishlist

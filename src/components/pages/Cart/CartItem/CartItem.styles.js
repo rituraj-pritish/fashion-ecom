@@ -7,7 +7,24 @@ export const CartItemContainer = styled.div`
   border-bottom: 1px solid #202020;
   font-size: 1.5rem;
   align-items: center;
+  position: relative;
+
+  ${({isLoading}) => isLoading && `
+    filter: blur(1.2px);
+  `};
 `;
+
+export const Loader = styled.div`
+  position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+`
 
 export const Details = styled.div`
   text-align: left;

@@ -60,7 +60,6 @@ export const addToCart = item => async (dispatch, getState) => {
     })
   } catch (err) {
     dispatch({ type: ADD_TO_CART_FAILURE })
-    console.log('er', err)
   }
 }
 
@@ -118,7 +117,7 @@ export default (state = initialState, { type, payload }) =>
         break
 
       case ADD_TO_CART_SUCCESS:
-        draft.items.unshift(payload)
+        draft.items.push(payload)
         draft.isLoading = false
         draft.inFocus = null
         break

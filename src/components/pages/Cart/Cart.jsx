@@ -34,7 +34,7 @@ const Cart = ({ cart }) => {
 }
 
 const mapStateToProps = ({ cart }) => ({
-  cart: cart.items
+  cart: cart.items.slice().sort((a, b) => new Date(b.date) - new Date(a.date))
 })
 
 export default connect(mapStateToProps)(Cart)
