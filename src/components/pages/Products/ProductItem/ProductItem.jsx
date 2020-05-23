@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import LazyLoad from 'react-lazy-load'
 
-import { addToCart, addToWishlist } from 'redux/products'
-import HeartIcon from '../../../../assets/icons/HeartIcon'
+import { addToCart } from 'redux/cart'
+import { addToWishlist } from 'redux/wishlist'
+import HeartIcon from 'assets/icons/HeartIcon'
 import SaleBanner from '../../Product/SaleBanner'
 import {
   ItemBottom,
@@ -13,8 +14,8 @@ import {
   Wishlist
 } from './ProductItem.styles'
 import setAlert from 'setAlert'
-import Button from '../../../ui/Button'
-import Icon from '../../../ui/Icon'
+import Button from 'components/ui/Button'
+import Icon from 'components/ui/Icon'
 
 const ProductItem = ({
   product,

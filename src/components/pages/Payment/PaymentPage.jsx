@@ -10,10 +10,9 @@ import {
   Amount,
   Container
 } from './PaymentsPage.styles'
-import { emptyCart } from 'redux/products'
 import { PageContainer } from '../../../index.styles'
 
-const PaymentsPage = ({ cart, emptyCart }) => {
+const PaymentsPage = ({ cart }) => {
   const [isOrderPlaced, setIsOrderPlaced] = useState(false)
 
   const amount = cart.reduce(
@@ -33,7 +32,6 @@ const PaymentsPage = ({ cart, emptyCart }) => {
           <PaymentButton
             amount={amount}
             setIsOrderPlaced={setIsOrderPlaced}
-            emptyCart={emptyCart}
           />
 
           <CardInfo>
@@ -63,4 +61,4 @@ const mapStateToProps = state => ({
   cart: state.products.cart
 })
 
-export default connect(mapStateToProps, { emptyCart })(PaymentsPage)
+export default connect(mapStateToProps)(PaymentsPage)

@@ -3,10 +3,14 @@ import auth from './auth'
 import app from './app'
 import products from './products'
 import overlay from './overlay'
+import cart from './cart'
+import wishlist from './wishlist'
 
 export default combineReducers({
   app,
   products,
   auth,
-  overlay
+  overlay,
+  cart,
+  wishlist
 })
