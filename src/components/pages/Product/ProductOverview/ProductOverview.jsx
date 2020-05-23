@@ -47,12 +47,12 @@ const ProductOverview = ({
   const [quantity, setQuantity] = useState(1)
 
   useEffect(() => {
-    setCurrentImg(variants[variant].images[0])
-    setPrice(variants[variant].price)
+    setCurrentImg(variants[variant]?.images[0])
+    setPrice(variants[variant]?.price)
     setQuantity(1)
   }, [id, variant, variants])
 
-  const images = variants[variant].images.map(imageUrl => {
+  const images = variants[variant]?.images.map(imageUrl => {
     const isCurrentImage = imageUrl === currentImg
     return (
       <SmallImage

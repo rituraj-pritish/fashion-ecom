@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -20,6 +20,13 @@ const ProductPage = ({
   products
 }) => {
   const [variant, setVariant] = useState(0)
+  
+  useEffect(
+    () => () => {
+      setVariant(0)
+    },
+    [product.id]
+  )
 
   if (loading || product === null) return <Loader />
 
