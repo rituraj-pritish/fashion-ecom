@@ -156,7 +156,7 @@ export const saveForLater = id => async (dispatch, getState) => {
       .update({
         forLater: true
       })
-    dispatch({ type: BACK_TO_CART_SUCCESS, payload: id })
+    dispatch({ type: SAVE_FOR_LATER_SUCCESS, payload: id })
   } catch (err) {
     dispatch({ type: SAVE_FOR_LATER_FAILURE })
     console.log(err)
@@ -249,17 +249,23 @@ export default (state = initialState, { type, payload }) =>
         break
 
       case SAVE_FOR_LATER_SUCCESS: {
-        const idx = draft.items.findIndex(item => item.id === payload)
+        const item = draft.items.find(item => item.id === payload)
+        item.forLater = true
+
+        draft.forLater.push(item)
+        draft.items = state.items.slice().filter(item => item.id !== payload)
         draft.inFocus = null
-        draft.items[idx].forLater = true
         draft.isLoading = false
         break
       }
 
       case BACK_TO_CART_SUCCESS: {
-        const idx = draft.items.findIndex(item => item.id === payload)
+        const item = draft.forLater.find(item => item.id === payload)
+        item.forLater = false
+        
+        draft.forLater = state.forLater.slice().filter(item => item.id !== payload)
         draft.inFocus = null
-        draft.items[idx].forLater = false
+        draft.items.push(item)
         draft.isLoading = false
         break
       }

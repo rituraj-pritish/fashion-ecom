@@ -2,8 +2,15 @@ import React from 'react'
 import LazyLoad from 'react-lazy-load'
 import { connect } from 'react-redux'
 
+import Button from 'components/ui/Button'
 import MoonLoader from 'react-spinners/MoonLoader'
-import { removeFromCart, updateCart } from 'redux/cart'
+import {
+  removeFromCart,
+  updateCart,
+  saveForLater,
+  backToCart,
+  addToCart
+} from 'redux/cart'
 import { removeFromWishlist } from 'redux/wishlist'
 import Icon from '../../../ui/Icon'
 import Text from '../../../ui/Text'
@@ -29,7 +36,10 @@ const CartItem = ({
   id,
   name,
   quantity,
-  isLoading
+  isLoading,
+  isSavedForLater,
+  saveForLater,
+  backToCart
 }) => {
   const handleRemove = () => {
     if (page === 'cart') {
@@ -38,6 +48,17 @@ const CartItem = ({
       removeFromWishlist(id)
     }
   }
+
+  const secondaryCallToAction =
+    page === 'cart' ? (
+      isSavedForLater ? (
+        <Button variant='secondary' onClick={() => backToCart(id)}>Move to Cart</Button>
+      ) : (
+        <Button variant='secondary' onClick={() => saveForLater(id)}>Save for Later</Button>
+      )
+    ) : (
+      <Button variant='secondary' onClick={() => {}}>move to cart</Button>
+    )
 
   return (
     <CartItemContainer isLoading={isLoading}>
@@ -88,23 +109,28 @@ const CartItem = ({
           : price}
       </Text>
 
-      <Remove onClick={handleRemove} className='far fa-trash-alt'>
-        <Icon width='16px'>
+      <Remove className='far fa-trash-alt'>
+        <Icon width='16px' onClick={handleRemove}>
           <TrashIcon />
         </Icon>
+        {false && secondaryCallToAction}
       </Remove>
     </CartItemContainer>
   )
 }
 
 const mapStateToProps = ({ cart, wishlist }, { page, id }) => ({
-  isLoading: page === 'cart' 
-    ? cart.isLoading && cart.inFocus === id
-    : wishlist.isLoading && wishlist.inFocus === id
+  isLoading:
+    page === 'cart'
+      ? cart.isLoading && cart.inFocus === id
+      : wishlist.isLoading && wishlist.inFocus === id,
+  isSavedForLater: cart.forLater.find(item => item.id === id)
 })
 
 export default connect(mapStateToProps, {
   updateCart,
   removeFromCart,
-  removeFromWishlist
+  removeFromWishlist,
+  saveForLater,
+  backToCart
 })(CartItem)

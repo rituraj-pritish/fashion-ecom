@@ -13,25 +13,19 @@ import {
   Search,
   NavLinks,
   Cart,
-  Nothing,
   Container,
   SearchIconContainer,
   StyledLogo
 } from './Navbar.styles'
 import NavUserOptions from './NavUserOptions'
-import clickOutside from '../../../helpers/clickOutside'
 
 const Navbar = ({ history, cartCount }) => {
   const [showUserOptions, setShowUserOptions] = useState(false)
-  const [showCart, setShowCart] = useState(false)
   const [show, setShow] = useState(true)
   const [showSearchBar, setShowSearchBar] = useState(false)
   const [text, setText] = useState('')
-  const node = useRef()
   const cartRef = useRef()
   const userRef = useRef()
-
-  clickOutside(node, () => setShowCart(false), cartRef)
 
   useEffect(() => {
     if (
@@ -45,16 +39,7 @@ const Navbar = ({ history, cartCount }) => {
   }, [history.location])
 
   const handleCart = () => {
-    if (showCart) {
-      setShowCart(false)
-      return
-    }
-    if (!cartCount) {
-      setShowCart(true)
-    } else {
-      history.push('/user/cart')
-      setShowCart(false)
-    }
+    history.push('/user/cart')
   }
 
   const handleSearch = e => {
@@ -63,8 +48,6 @@ const Navbar = ({ history, cartCount }) => {
     setShowSearchBar(false)
     history.push(`/s/${text}`)
   }
-
-  const nothingInCart = <Nothing ref={node}>Cart is empty.</Nothing>
 
   return (
     <Nav id='my-nav' show={show}>
@@ -118,7 +101,6 @@ const Navbar = ({ history, cartCount }) => {
               <CartIcon />
             </Icon>
             <span className='cart-count'>{cartCount}</span>
-            {showCart && nothingInCart}
           </Cart>
         </NavLinks>
       </Container>

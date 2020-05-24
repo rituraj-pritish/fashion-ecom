@@ -44,7 +44,20 @@ export const Remove = styled.div`
   width: fit-content;
   justify-self: end;
   color: #5a5a5a;
-  &:hover {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  & > div:hover {
     color: ${({ theme }) => theme.colors.red};
+  }
+
+  button {
+    position: absolute;
+    bottom: 0;
   }
 `;
