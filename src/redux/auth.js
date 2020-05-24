@@ -8,6 +8,8 @@ import { getWishlistItems } from 'redux/wishlist'
 
 // types
 
+const LOGOUT = 'LOGOUT'
+
 const AUTH_REQUEST = 'AUTH_REQUEST'
 const AUTH_FAILURE = 'AUTH_FAILURE'
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
@@ -91,10 +93,10 @@ export const authStateChangeHandler = () => async dispatch => {
 export const signOut = () => async dispatch => {
   try {
     await firebase.auth().signOut()
-    localStorage.clear()
+    localStorage.removeItem('persist:root')
     setAlert('Sign out successful', 'success')
   } catch (err) {}
-  dispatch({ type: AUTH_FAILURE })
+  dispatch({ type: LOGOUT })
 }
 
 //reducer

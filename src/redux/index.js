@@ -6,7 +6,7 @@ import overlay from './overlay'
 import cart from './cart'
 import wishlist from './wishlist'
 
-export default combineReducers({
+const appReducer =  combineReducers({
   app,
   products,
   auth,
@@ -14,3 +14,13 @@ export default combineReducers({
   cart,
   wishlist
 })
+
+const rootReducer = (state, action) => {
+  if(action.type === 'LOGOUT') {
+    state = undefined
+  }
+
+  return appReducer(state, action)
+}
+
+export default rootReducer

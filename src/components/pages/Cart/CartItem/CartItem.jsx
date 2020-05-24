@@ -97,8 +97,10 @@ const CartItem = ({
   )
 }
 
-const mapStateToProps = ({ cart: { isLoading, inFocus } }, { id }) => ({
-  isLoading: isLoading && inFocus === id
+const mapStateToProps = ({ cart, wishlist }, { page, id }) => ({
+  isLoading: page === 'cart' 
+    ? cart.isLoading && cart.inFocus === id
+    : wishlist.isLoading && wishlist.inFocus === id
 })
 
 export default connect(mapStateToProps, {

@@ -22,7 +22,7 @@ const Wishlist = ({ wishlist }) => {
       )}
       <Container>
         {wishlist.map(item => (
-          <CartItem item={item} page='wishlist' />
+          <CartItem {...item} page='wishlist' />
         ))}
       </Container>
     </PageContainer>
@@ -30,7 +30,7 @@ const Wishlist = ({ wishlist }) => {
 };
 
 const mapStateToProps = state => ({
-  wishlist: state.products.wishlist
+  wishlist: state.wishlist.items
 });
 
 export default connect(mapStateToProps)(Wishlist);

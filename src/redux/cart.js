@@ -1,5 +1,6 @@
 import produce from 'immer'
 import { db } from 'services/firebase'
+import setAlert from 'setAlert'
 
 // types
 
@@ -43,6 +44,11 @@ export const addToCart = item => async (dispatch, getState) => {
 
   const { auth } = getState()
   const userId = auth.user?.id
+
+  if(!userId) {
+    setAlert('Login to continue', 'danger')
+    dispatch({ type: ADD_TO_CART_FAILURE })
+  }
 
   try {
     await db
