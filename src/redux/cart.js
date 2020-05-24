@@ -4,6 +4,18 @@ import setAlert from 'setAlert'
 
 // types
 
+const BACK_TO_CART_REQUEST = 'BACK_TO_CART_REQUEST'
+const BACK_TO_CART_SUCCESS = 'BACK_TO_CART_SUCCESS'
+const BACK_TO_CART_FAILURE = 'BACK_TO_CART_FAILURE'
+
+const SAVE_FOR_LATER_REQUEST = 'SAVE_FOR_LATER_REQUEST'
+const SAVE_FOR_LATER_SUCCESS = 'SAVE_FOR_LATER_SUCCESS'
+const SAVE_FOR_LATER_FAILURE = 'SAVE_FOR_LATER_FAILURE'
+
+const EMPTY_CART_REQUEST = 'EMPTY_CART_REQUEST'
+const EMPTY_CART_SUCCESS = 'EMPTY_CART_SUCCESS'
+const EMPTY_CART_FAILURE = 'EMPTY_CART_FAILURE'
+
 const GET_CART_ITEMS_REQUEST = 'GET_CART_ITEMS_REQUEST'
 const GET_CART_ITEMS_SUCCESS = 'GET_CART_ITEMS_SUCCESS'
 const GET_CART_ITEMS_FAILURE = 'GET_CART_ITEMS_FAILURE'
@@ -22,7 +34,7 @@ const REMOVE_FROM_CART_FAILURE = 'REMOVE_FROM_CART_FAILURE'
 
 // action creators
 
-export const getCartItems = userId => async (dispatch, getState) => {
+export const getCartItems = userId => async dispatch => {
   dispatch({ type: GET_CART_ITEMS_REQUEST })
 
   try {
@@ -31,6 +43,7 @@ export const getCartItems = userId => async (dispatch, getState) => {
       .doc(userId)
       .collection('items')
       .get()
+
     const items = res.docs.map(doc => doc.data())
     dispatch({ type: GET_CART_ITEMS_SUCCESS, payload: items })
   } catch (err) {
@@ -45,7 +58,7 @@ export const addToCart = item => async (dispatch, getState) => {
   const { auth } = getState()
   const userId = auth.user?.id
 
-  if(!userId) {
+  if (!userId) {
     setAlert('Login to continue', 'danger')
     dispatch({ type: ADD_TO_CART_FAILURE })
   }
@@ -58,6 +71,7 @@ export const addToCart = item => async (dispatch, getState) => {
       .doc(item.id)
       .set({
         ...item,
+        forLater: false,
         date: addedDate
       })
 
@@ -107,8 +121,71 @@ export const updateCart = ({ id, quantity }) => async (dispatch, getState) => {
   }
 }
 
+export const emptyCart = () => async (dispatch, getState) => {
+  dispatch({ type: EMPTY_CART_REQUEST })
+
+  const userId = getState().auth.user?.id
+
+  db.collection('carts')
+    .doc(userId)
+    .collection('items')
+    .get()
+    .then(res => {
+      res.forEach(item => {
+        item.ref.delete()
+      })
+    })
+    .then(() => {
+      dispatch({ type: EMPTY_CART_SUCCESS })
+    })
+    .catch(err => {
+      if (err) dispatch({ type: EMPTY_CART_FAILURE })
+    })
+}
+
+export const saveForLater = id => async (dispatch, getState) => {
+  dispatch({ type: SAVE_FOR_LATER_REQUEST, payload: id })
+  const userId = getState().auth.user?.id
+
+  try {
+    await db
+      .collection('carts')
+      .doc(userId)
+      .collection('items')
+      .doc(id)
+      .update({
+        forLater: true
+      })
+    dispatch({ type: BACK_TO_CART_SUCCESS, payload: id })
+  } catch (err) {
+    dispatch({ type: SAVE_FOR_LATER_FAILURE })
+    console.log(err)
+  }
+}
+
+export const backToCart = id => async (dispatch, getState) => {
+  dispatch({ type: BACK_TO_CART_REQUEST, payload: id })
+  const userId = getState().auth.user?.id
+
+  try {
+    await db
+      .collection('carts')
+      .doc(userId)
+      .collection('items')
+      .doc(id)
+      .update({
+        forLater: false
+      })
+    dispatch({ type: BACK_TO_CART_SUCCESS, payload: id })
+  } catch (err) {
+    dispatch({ type: BACK_TO_CART_FAILURE })
+    console.log(err)
+  }
+}
+
 const initialState = {
   items: [],
+  forLater: [],
   isLoading: false,
   inFocus: null
 }
@@ -117,6 +194,9 @@ export default (state = initialState, { type, payload }) =>
   produce(state, draft => {
     //eslint-disable-next-line
     switch (type) {
+      case BACK_TO_CART_REQUEST:
+      case SAVE_FOR_LATER_REQUEST:
+      case EMPTY_CART_REQUEST:
       case GET_CART_ITEMS_REQUEST:
       case ADD_TO_CART_REQUEST:
       case UPDATE_CART_REQUEST:
@@ -125,6 +205,9 @@ export default (state = initialState, { type, payload }) =>
         draft.inFocus = payload || null
         break
 
+      case BACK_TO_CART_FAILURE:
+      case SAVE_FOR_LATER_FAILURE:
+      case EMPTY_CART_FAILURE:
       case GET_CART_ITEMS_FAILURE:
       case ADD_TO_CART_FAILURE:
       case UPDATE_CART_FAILURE:
@@ -134,7 +217,8 @@ export default (state = initialState, { type, payload }) =>
         break
 
       case GET_CART_ITEMS_SUCCESS:
-        draft.items = payload
+        draft.items = payload.filter(({ forLater }) => forLater === false)
+        draft.forLater = payload.filter(({ forLater }) => forLater === true)
         draft.isLoading = false
         break
 
@@ -155,6 +239,28 @@ export default (state = initialState, { type, payload }) =>
         draft.items[idx].quantity = payload.quantity
         draft.isLoading = false
         draft.inFocus = null
+        break
+      }
+
+      case EMPTY_CART_SUCCESS:
+        draft.inFocus = null
+        draft.items = []
+        draft.isLoading = false
+        break
+
+      case SAVE_FOR_LATER_SUCCESS: {
+        const idx = draft.items.findIndex(item => item.id === payload)
+        draft.inFocus = null
+        draft.items[idx].forLater = true
+        draft.isLoading = false
+        break
+      }
+
+      case BACK_TO_CART_SUCCESS: {
+        const idx = draft.items.findIndex(item => item.id === payload)
+        draft.inFocus = null
+        draft.items[idx].forLater = false
+        draft.isLoading = false
         break
       }
     }
