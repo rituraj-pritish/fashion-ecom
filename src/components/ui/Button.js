@@ -48,10 +48,19 @@ ${variant({
 ${typography} ${color} ${space} ${position} ${layout} ${grid} ${flexbox} ${border}
 `
 
-const Button = ({ children, isLoading, ...otherProps }) => {
+const Button = ({ children, variant, isLoading, ...otherProps }) => {
   return (
-    <StyledButton {...otherProps}>
-      {isLoading ? <ClipLoader size={17} color={theme.colors.white} /> : children}
+    <StyledButton variant={variant} {...otherProps}>
+      {isLoading ? (
+        <ClipLoader
+          size={17}
+          color={
+            variant === 'primary' ? theme.colors.white : theme.colors.primary
+          }
+        />
+      ) : (
+        children
+      )}
     </StyledButton>
   )
 }

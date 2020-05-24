@@ -1,11 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import LazyLoad from 'react-lazy-load'
 
-import { addToCart } from 'redux/cart'
-import { addToWishlist } from 'redux/wishlist'
 import HeartIcon from 'assets/icons/HeartIcon'
 import SaleBanner from '../../Product/SaleBanner'
 import {
@@ -29,8 +26,8 @@ const ProductItem = ({
   const variant = variants[0]
   const image = variant.images[0]
 
-  const isInCart = cart.find(item => item.product.id === id)
-  const isInWishlist = wishlist.find(item => item.product.id === id)
+  const isInCart = cart.find(item => item.id === id)
+  const isInWishlist = wishlist.find(item => item.id === id)
 
   const handleCartBtn = e => {
     e.preventDefault()
@@ -84,16 +81,8 @@ const ProductItem = ({
   )
 }
 
-const mapStateToProps = state => ({
-  cart: state.products.cart,
-  wishlist: state.products.wishlist,
-  isAuthenticated: state.auth.isAuthenticated
-})
-
-export default connect(mapStateToProps, { addToCart, addToWishlist })(
-  ProductItem
-)
-
 ProductItem.propTypes = {
   item: PropTypes.object.isRequired
 }
+
+export default ProductItem

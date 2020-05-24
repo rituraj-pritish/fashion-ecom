@@ -85,11 +85,14 @@ const ProductCarousel = ({
       }
 
       if (isInWishlist) {
-        removeFromWishlist(product.id)
+        removeFromWishlist(id)
       } else {
         addToWishlist({
-          product,
-          variant: 0
+          id,
+          imageUrl: images[0],
+          name,
+          price,
+          quantity: 1
         })
       }
     }

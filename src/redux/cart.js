@@ -49,7 +49,8 @@ export const addToCart = item => async (dispatch, getState) => {
       .collection('carts')
       .doc(userId)
       .collection('items')
-      .doc(item.id).set({
+      .doc(item.id)
+      .set({
         ...item,
         date: addedDate
       })
@@ -83,7 +84,22 @@ export const removeFromCart = id => async (dispatch, getState) => {
   }
 }
 
-export const updateCart = () => {}
+export const updateCart = ({ id, quantity }) => async (dispatch, getState) => {
+  dispatch({ type: UPDATE_CART_REQUEST, payload: id })
+
+  const { auth } = getState()
+  const userId = auth.user?.id
+  try {
+    db.collection('carts').doc(userId).collection('items').doc(id).update({
+      quantity
+    })
+
+    dispatch({ type: UPDATE_CART_SUCCESS, payload: { id, quantity } })
+  } catch (err) {
+    dispatch({ type: UPDATE_CART_FAILURE })
+    console.log(err)
+  }
+}
 
 const initialState = {
   items: [],
@@ -127,5 +143,13 @@ export default (state = initialState, { type, payload }) =>
         draft.isLoading = false
         draft.inFocus = null
         break
+
+      case UPDATE_CART_SUCCESS: {
+        const idx = draft.items.findIndex(item => item.id === payload.id)
+        draft.items[idx].quantity = payload.quantity
+        draft.isLoading = false
+        draft.inFocus = null
+        break
+      }
     }
   })

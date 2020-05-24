@@ -52,7 +52,7 @@ export const signin = ({ email, password }) => async dispatch => {
     let user
     if (res.user.uid) {
       dispatch(getCartItems(res.user.uid))
-      // dispatch(getWishlistItems(res.user.uid))
+      dispatch(getWishlistItems(res.user.uid))
       user = await db.collection('users').doc(res.user.uid).get()
     }
 
@@ -73,7 +73,7 @@ export const authStateChangeHandler = () => async dispatch => {
     if (user) {
       const res = await db.collection('users').doc(user.uid).get()
       dispatch(getCartItems(user.uid))
-      // dispatch(getWishlistItems(user.uid))
+      dispatch(getWishlistItems(user.uid))
 
       const userData = res.data()
 

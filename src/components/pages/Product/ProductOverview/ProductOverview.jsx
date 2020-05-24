@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import LazyLoad from 'react-lazy-load'
-import { withRouter } from 'react-router-dom'
 
+import setAlert from 'setAlert'
 import returnImg from 'assets/images/return.webp'
 import worldwideImg from 'assets/images/worldwide.webp'
 import Button from '../../../ui/Button'
@@ -30,21 +30,25 @@ import ProductDetails from '../ProductDetails'
 
 const ProductOverview = ({
   product,
-  variant,
-  setVariant,
   cart,
   wishlist,
   addToCart,
   addToWishlist,
   isAuthenticated,
-  setAlert,
-  history
+  history,
+  cartLoading
 }) => {
   const { name, rating, brand, variants, id } = product
-
+console.log('cas', cartLoading);
+  const [variant, setVariant] = useState(0)
   const [currentImg, setCurrentImg] = useState()
   const [price, setPrice] = useState()
   const [quantity, setQuantity] = useState(1)
+
+  // reset variant on product change
+  useEffect(() => {
+    setVariant(0)
+  }, [id])
 
   useEffect(() => {
     setCurrentImg(variants[variant]?.images[0])
@@ -76,8 +80,8 @@ const ProductOverview = ({
     )
   }
 
-  const isInCart = cart.find(item => item.product.id === product.id)
-  const isInWishlist = wishlist.find(item => item.product.id === product.id)
+  const isInCart = cart.find(item => item.id === product.id)
+  const isInWishlist = wishlist.find(item => item.id === product.id)
 
   const changeVariant = item => {
     const index = variants.indexOf(item)
@@ -89,7 +93,13 @@ const ProductOverview = ({
 
   const handleCartBtn = () => {
     if (isInCart) return
-    addToCart({ product, variant, quantity: quantity })
+    addToCart({
+      id,
+      name,
+      price,
+      imageUrl: variants[variant].images[0],
+      quantity: quantity
+    })
   }
 
   const handleWishlist = () => {
@@ -190,7 +200,7 @@ const ProductOverview = ({
               <PlusIcon />
             </Icon>
           </div>
-          <Button variant='secondary' onClick={handleCartBtn}>
+          <Button variant='secondary' isLoading={cartLoading} onClick={handleCartBtn}>
             {isInCart ? 'ADDED TO CART' : 'ADD TO CART'}
           </Button>
         </CartBtn>
@@ -217,4 +227,4 @@ const ProductOverview = ({
   )
 }
 
-export default withRouter(ProductOverview)
+export default ProductOverview
