@@ -45,12 +45,29 @@ ${variant({
     }
   }
 })}
+
+${({ disabled, variant }) =>
+  disabled &&
+  variant === 'primary' &&
+  `
+  opacity: 0.8;
+  pointer-events: none;
+`}
+
+${({ disabled, variant }) =>
+  disabled &&
+  variant === 'secondary' &&
+  `
+  cursor: default;
+  opacity: 0.5;
+`}
+
 ${typography} ${color} ${space} ${position} ${layout} ${grid} ${flexbox} ${border}
 `
 
-const Button = ({ children, variant, isLoading, ...otherProps }) => {
+const Button = ({ children, variant, isLoading, disabled, ...otherProps }) => {
   return (
-    <StyledButton variant={variant} {...otherProps}>
+    <StyledButton variant={variant} disabled={disabled} {...otherProps}>
       {isLoading ? (
         <ClipLoader
           size={17}

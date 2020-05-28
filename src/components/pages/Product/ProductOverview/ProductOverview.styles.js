@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import sizes from 'sizes';
+import styled from 'styled-components'
+import sizes from 'sizes'
 
 export const ProductOverviewContainer = styled.div`
   display: grid;
@@ -10,9 +10,9 @@ export const ProductOverviewContainer = styled.div`
     grid-template-columns: 1fr;
     grid-template-rows: auto;
   }
-`;
+`
 
-export const SmallImages = styled.div``;
+export const SmallImages = styled.div``
 
 export const SmallImage = styled.div`
   margin-bottom: 15px;
@@ -40,14 +40,14 @@ export const SmallImage = styled.div`
   &:hover::after {
     opacity: 0;
   }
-`;
+`
 
 export const MainImage = styled.div`
   img {
     width: 100%;
     height: auto;
   }
-`;
+`
 
 export const ImagesContainer = styled.div`
   display: grid;
@@ -55,18 +55,18 @@ export const ImagesContainer = styled.div`
   grid-column-gap: 5%;
   position: sticky;
   top: 65px;
-`;
+`
 
 export const ActionsContainer = styled.div`
   text-align: left;
   display: grid;
   grid-auto-rows: min-content;
   grid-row-gap: 15px;
-`;
+`
 
 export const Rating = styled.div`
   display: flex;
-`;
+`
 
 export const Policy = styled.div`
   display: flex;
@@ -92,11 +92,12 @@ export const Policy = styled.div`
       height: auto;
     }
   }
-`;
+`
 
 export const CartBtn = styled.div`
   display: flex;
   width: 100%;
+  height: 35px;
 
   & > div {
     background: whitesmoke;
@@ -116,7 +117,7 @@ export const CartBtn = styled.div`
       cursor: pointer;
     }
   }
-`;
+`
 
 export const Wishlist = styled.div`
   display: flex;
@@ -140,12 +141,12 @@ export const Wishlist = styled.div`
   @media ${sizes.lg} {
     margin-bottom: 30px;
   }
-`;
+`
 
 export const Variants = styled.div`
   display: flex;
   margin: 15px 0;
-`;
+`
 
 export const Variant = styled.div`
   width: 40px;
@@ -155,4 +156,4 @@ export const Variant = styled.div`
   border: ${({ color }) => color === '#ffffff' && '0.5px solid #000000'};
   margin-right: 15px;
   cursor: pointer;
-`;
+`

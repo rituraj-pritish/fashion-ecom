@@ -39,7 +39,7 @@ const ProductOverview = ({
   cartLoading
 }) => {
   const { name, rating, brand, variants, id } = product
-console.log('cas', cartLoading);
+
   const [variant, setVariant] = useState(0)
   const [currentImg, setCurrentImg] = useState()
   const [price, setPrice] = useState()
@@ -55,6 +55,8 @@ console.log('cas', cartLoading);
     setPrice(variants[variant]?.price)
     setQuantity(1)
   }, [id, variant, variants])
+
+  const isInStock = variants[variant].stock > 0
 
   const images = variants[variant]?.images.map(imageUrl => {
     const isCurrentImage = imageUrl === currentImg
@@ -148,8 +150,8 @@ console.log('cas', cartLoading);
           {price % 1 === 0 && '.00'}
         </Text>
         <Rating>{stars}</Rating>
-        <Text fontSize='1.9rem' color='green'>
-          In Stock
+        <Text fontSize='1.9rem' color={isInStock ? 'green' : 'red'}>
+          {isInStock ? 'In Stock' : 'Out of stock'}
         </Text>
         {variants.length > 1 && (
           <Variants>
@@ -200,7 +202,12 @@ console.log('cas', cartLoading);
               <PlusIcon />
             </Icon>
           </div>
-          <Button variant='secondary' isLoading={cartLoading} onClick={handleCartBtn}>
+          <Button
+            variant='secondary'
+            isLoading={cartLoading}
+            disabled={!isInStock}
+            onClick={handleCartBtn}
+          >
             {isInCart ? 'ADDED TO CART' : 'ADD TO CART'}
           </Button>
         </CartBtn>
@@ -211,6 +218,7 @@ console.log('cas', cartLoading);
           fontSize='2rem'
           letterSpacing='4px'
           onClick={handleBuy}
+          disabled={!isInStock}
         >
           BUY NOW
         </Button>
