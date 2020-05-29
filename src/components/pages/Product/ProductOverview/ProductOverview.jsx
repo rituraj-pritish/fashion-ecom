@@ -7,8 +7,6 @@ import worldwideImg from 'assets/images/worldwide.webp'
 import Button from '../../../ui/Button'
 import Text from '../../../ui/Text'
 import Icon from '../../../ui/Icon'
-import PlusIcon from 'assets/icons/PlusIcon'
-import MinusIcon from 'assets/icons/MinusIcon'
 import HeartIcon from 'assets/icons/HeartIcon'
 import StarIcon from 'assets/icons/StarIcon'
 import Image from 'components/Image'
@@ -27,6 +25,7 @@ import {
 } from './ProductOverview.styles'
 import { useEffect } from 'react'
 import ProductDetails from '../ProductDetails'
+import QuantityCounter from 'components/shared/QuantityCounter'
 
 const ProductOverview = ({
   product,
@@ -187,21 +186,7 @@ const ProductOverview = ({
         </Policy>
 
         <CartBtn>
-          <div>
-            <Icon
-              width='10px'
-              onClick={() => {
-                if (quantity === 1) return
-                setQuantity(quantity - 1)
-              }}
-            >
-              <MinusIcon />
-            </Icon>
-            <Text mb='3px'>{quantity}</Text>
-            <Icon width='10px' onClick={() => setQuantity(quantity + 1)}>
-              <PlusIcon />
-            </Icon>
-          </div>
+          <QuantityCounter count={quantity} setCount={setQuantity} />
           <Button
             variant='secondary'
             isLoading={cartLoading}

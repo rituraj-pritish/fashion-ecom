@@ -98,25 +98,6 @@ export const CartBtn = styled.div`
   display: flex;
   width: 100%;
   height: 35px;
-
-  & > div {
-    background: whitesmoke;
-    border-radius: 5px;
-    margin-right: 20px;
-    padding: 0 7px;
-    width: 20%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    p {
-      font-size: 1.5rem;
-    }
-
-    span {
-      cursor: pointer;
-    }
-  }
 `
 
 export const Wishlist = styled.div`

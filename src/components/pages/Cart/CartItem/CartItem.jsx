@@ -2,6 +2,7 @@ import React from 'react'
 import LazyLoad from 'react-lazy-load'
 import { connect } from 'react-redux'
 
+import QuantityCounter from 'components/shared/QuantityCounter'
 import Button from 'components/ui/Button'
 import MoonLoader from 'react-spinners/MoonLoader'
 import {
@@ -14,12 +15,9 @@ import {
 import { removeFromWishlist } from 'redux/wishlist'
 import Icon from '../../../ui/Icon'
 import Text from '../../../ui/Text'
-import PlusIcon from '../../../../assets/icons/PlusIcon'
 import TrashIcon from '../../../../assets/icons/TrashIcon'
-import MinusIcon from '../../../../assets/icons/MinusIcon'
 import {
   CartItemContainer,
-  Quantity,
   Details,
   Remove,
   Loader
@@ -52,12 +50,18 @@ const CartItem = ({
   const secondaryCallToAction =
     page === 'cart' ? (
       isSavedForLater ? (
-        <Button variant='secondary' onClick={() => backToCart(id)}>Move to Cart</Button>
+        <Button variant='secondary' onClick={() => backToCart(id)}>
+          Move to Cart
+        </Button>
       ) : (
-        <Button variant='secondary' onClick={() => saveForLater(id)}>Save for Later</Button>
+        <Button variant='secondary' onClick={() => saveForLater(id)}>
+          Save for Later
+        </Button>
       )
     ) : (
-      <Button variant='secondary' onClick={() => {}}>move to cart</Button>
+      <Button variant='secondary' onClick={() => {}}>
+        move to cart
+      </Button>
     )
 
   return (
@@ -76,30 +80,16 @@ const CartItem = ({
       <Details>
         <p>{name}</p>
 
-        {quantity && (
-          <Quantity>
-            <Icon
-              m='5px'
-              p='5px'
-              onClick={() => {
-                if (quantity === 1) return
-                updateCart({ id, quantity: quantity - 1 })
-              }}
-            >
-              <MinusIcon />
-            </Icon>
-            <Text m='5px' p='5px' mb='8px'>
-              {quantity}
-            </Text>
-            <Icon
-              m='5px'
-              p='5px'
-              onClick={() => updateCart({ id, quantity: quantity + 1 })}
-            >
-              <PlusIcon />
-            </Icon>
-          </Quantity>
-        )}
+        <QuantityCounter
+          count={quantity}
+          onIncrement={() => {
+            updateCart({ id, quantity: quantity + 1 })
+          }}
+          onDecrement={() => {
+            if (quantity === 1) return
+            updateCart({ id, quantity: quantity - 1 })
+          }}
+        />
       </Details>
 
       <Text fontWeight='bold'>

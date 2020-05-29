@@ -35,11 +35,6 @@ export const Details = styled.div`
   justify-content: space-around;
 `;
 
-export const Quantity = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 export const Remove = styled.div`
   width: fit-content;
   justify-self: end;
