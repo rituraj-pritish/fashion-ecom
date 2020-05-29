@@ -13,7 +13,7 @@ const ProductPage = ({
     <PageContainer>
       <ProductOverview product={product} />
 
-      <ProductCarousel title='Similar Products' data={products} />
+      {/* <ProductCarousel title='Similar Products' data={products} /> */}
     </PageContainer>
   )
 }

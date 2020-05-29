@@ -52,7 +52,7 @@ export const getCartItems = userId => async dispatch => {
 }
 
 export const addToCart = item => async (dispatch, getState) => {
-  dispatch({ type: ADD_TO_CART_REQUEST, payload: item.id })
+  dispatch({ type: ADD_TO_CART_REQUEST, payload: item.variantId })
   const addedDate = new Date().toISOString()
 
   const { auth } = getState()
@@ -68,7 +68,7 @@ export const addToCart = item => async (dispatch, getState) => {
       .collection('carts')
       .doc(userId)
       .collection('items')
-      .doc(item.id)
+      .doc(item.variantId)
       .set({
         ...item,
         forLater: false,

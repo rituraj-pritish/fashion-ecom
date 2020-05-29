@@ -26,7 +26,13 @@ import Footer from 'components/layout/Footer'
 import SearchResults from 'components/SearchResults'
 import theme from 'theme'
 
-const App = ({ isAuthenticated, isLoading, getProducts, products, authStateChangeHandler }) => {
+const App = ({
+  isAuthenticated,
+  isLoading,
+  getProducts,
+  products,
+  authStateChangeHandler
+}) => {
   useEffect(() => {
     authStateChangeHandler()
     getProducts()
@@ -44,7 +50,11 @@ const App = ({ isAuthenticated, isLoading, getProducts, products, authStateChang
           <Navbar />
           <ScrollToTop>
             <Switch>
-              <Route exact path='/product/:productId' component={Product} />
+              <Route
+                exact
+                path='/product/:productId/variant/:variantId'
+                component={Product}
+              />
               <Route
                 exact
                 path='/products/:productsCategory'

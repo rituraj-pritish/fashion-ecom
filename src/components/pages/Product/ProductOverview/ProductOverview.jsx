@@ -35,27 +35,26 @@ const ProductOverview = ({
   addToWishlist,
   isAuthenticated,
   history,
-  cartLoading
+  cartLoading,
+  variantId
 }) => {
   const { name, rating, brand, variants, id } = product
 
-  const [variant, setVariant] = useState(0)
+  const [variant, setVariant] = useState(variantId)
   const [currentImg, setCurrentImg] = useState()
   const [price, setPrice] = useState()
   const [quantity, setQuantity] = useState(1)
 
-  // reset variant on product change
-  useEffect(() => {
-    setVariant(0)
-  }, [id])
+  // // reset variant on product change
+  // useEffect(() => {
+  //   setVariant(variantId)
+  // }, [id])
 
   useEffect(() => {
     setCurrentImg(variants[variant]?.images[0])
     setPrice(variants[variant]?.price)
     setQuantity(1)
-  }, [id, variant, variants])
-
-  const isInStock = variants[variant].stock > 0
+  }, [id, variant, variantId, variants])
 
   const images = variants[variant]?.images.map(imageUrl => {
     const isCurrentImage = imageUrl === currentImg
@@ -81,21 +80,23 @@ const ProductOverview = ({
     )
   }
 
-  const isInCart = cart.find(item => item.id === product.id)
+  const isInStock = variants[variant].stock > 0
+  const isInCart = Object.keys(variants).includes(variantId)
   const isInWishlist = wishlist.find(item => item.id === product.id)
 
-  const changeVariant = item => {
-    const index = variants.indexOf(item)
-    if (index === variant) return
-    setVariant(index)
-    setCurrentImg(variants[index].images[0])
-    setPrice(variants[index].price)
+  const changeVariant = varId => {
+    if (varId === variant) return
+    setVariant(varId)
+    setCurrentImg(variants[varId].images[0])
+    setPrice(variants[varId].price)
+    history.push(`/product/${id}/variant/${varId}`)
   }
 
   const handleCartBtn = () => {
     if (isInCart) return
     addToCart({
-      id,
+      productId: id,
+      variantId,
       name,
       price,
       imageUrl: variants[variant].images[0],
@@ -152,18 +153,18 @@ const ProductOverview = ({
         <Text fontSize='1.9rem' color={isInStock ? 'green' : 'red'}>
           {isInStock ? 'In Stock' : 'Out of stock'}
         </Text>
-        {variants.length > 1 && (
-          <Variants>
-            {variants.map(item => (
-              <Variant
-                key={item.color}
-                data-tip={item.variant[0].toUpperCase() + item.variant.slice(1)}
-                onClick={() => changeVariant(item)}
-                color={item.color}
-              />
-            ))}
-          </Variants>
-        )}
+
+        <Variants>
+          {Object.values(variants).map((item) => (
+            <Variant
+              key={item.id}
+              data-tip={item.variant[0].toUpperCase() + item.variant.slice(1)}
+              onClick={() => changeVariant(item.id)}
+              color={item.color}
+            />
+          ))}
+        </Variants>
+
         <Policy>
           <span>
             <LazyLoad className='lazyload'>
@@ -186,7 +187,11 @@ const ProductOverview = ({
         </Policy>
 
         <CartBtn>
-          <QuantityCounter count={quantity} setCount={setQuantity} />
+          <QuantityCounter
+            disabled={!isInStock}
+            count={quantity}
+            setCount={setQuantity}
+          />
           <Button
             variant='secondary'
             isLoading={cartLoading}

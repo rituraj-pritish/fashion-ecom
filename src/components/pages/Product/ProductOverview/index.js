@@ -9,14 +9,15 @@ const mapStateToProps = (
   { cart, wishlist, auth },
   {
     match: {
-      params: { productId }
+      params: { productId, variantId }
     }
   }
 ) => ({
   cart: cart.items,
   wishlist: wishlist.items,
   isAuthenticated: auth.isAuthenticated,
-  cartLoading: cart.isLoading && cart.inFocus === productId
+  cartLoading: cart.isLoading && cart.inFocus === productId,
+  variantId
 })
 
 export default withRouter(

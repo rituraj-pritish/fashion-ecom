@@ -18,4 +18,11 @@ export const CounterWrapper = styled.div`
   span {
     cursor: pointer;
   }
+
+  ${({ disabled }) =>
+    disabled &&
+    `
+    opacity: 0.6;
+    pointer-events: none;
+  `};
 `

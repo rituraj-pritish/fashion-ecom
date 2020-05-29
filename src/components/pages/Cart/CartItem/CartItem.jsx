@@ -31,7 +31,8 @@ const CartItem = ({
   removeFromWishlist,
   imageUrl,
   price,
-  id,
+  productId,
+  variantId,
   name,
   quantity,
   isLoading,
@@ -41,20 +42,20 @@ const CartItem = ({
 }) => {
   const handleRemove = () => {
     if (page === 'cart') {
-      removeFromCart(id)
+      removeFromCart(variantId)
     } else {
-      removeFromWishlist(id)
+      removeFromWishlist(variantId)
     }
   }
 
   const secondaryCallToAction =
     page === 'cart' ? (
       isSavedForLater ? (
-        <Button variant='secondary' onClick={() => backToCart(id)}>
+        <Button variant='secondary' onClick={() => backToCart(variantId)}>
           Move to Cart
         </Button>
       ) : (
-        <Button variant='secondary' onClick={() => saveForLater(id)}>
+        <Button variant='secondary' onClick={() => saveForLater(variantId)}>
           Save for Later
         </Button>
       )
@@ -72,7 +73,7 @@ const CartItem = ({
         </Loader>
       )}
       <LazyLoad className='lazyload'>
-        <Link to={`/product/${id}`}>
+        <Link to={`/product/${productId}/variant/${variantId}`}>
           <img src={imageUrl} alt={name} />
         </Link>
       </LazyLoad>
@@ -83,11 +84,11 @@ const CartItem = ({
         <QuantityCounter
           count={quantity}
           onIncrement={() => {
-            updateCart({ id, quantity: quantity + 1 })
+            updateCart({ variantId, quantity: quantity + 1 })
           }}
           onDecrement={() => {
             if (quantity === 1) return
-            updateCart({ id, quantity: quantity - 1 })
+            updateCart({ variantId, quantity: quantity - 1 })
           }}
         />
       </Details>

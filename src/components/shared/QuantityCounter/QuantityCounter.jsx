@@ -10,10 +10,11 @@ const QuantityCounter = ({
   count = 0,
   setCount = () => {},
   onIncrement = () => {},
-  onDecrement = () => {}
+  onDecrement = () => {},
+  disabled = false
 }) => {
   return (
-    <CounterWrapper>
+    <CounterWrapper disabled={disabled}>
       <Icon
         width='10px'
         onClick={() => {
