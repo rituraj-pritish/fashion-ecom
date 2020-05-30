@@ -110,12 +110,12 @@ const CartItem = ({
   )
 }
 
-const mapStateToProps = ({ cart, wishlist }, { page, id }) => ({
+const mapStateToProps = ({ cart, wishlist }, { page, variantId }) => ({
   isLoading:
     page === 'cart'
-      ? cart.isLoading && cart.inFocus === id
-      : wishlist.isLoading && wishlist.inFocus === id,
-  isSavedForLater: cart.forLater.find(item => item.id === id)
+      ? cart.isLoading && cart.inFocus === variantId
+      : wishlist.isLoading && wishlist.inFocus === variantId,
+  isSavedForLater: cart.forLater.find(item => item.variantId === variantId)
 })
 
 export default connect(mapStateToProps, {

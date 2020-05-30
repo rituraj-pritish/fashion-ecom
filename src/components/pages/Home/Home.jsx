@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
 
 import { PageContainer } from '../../../index.styles'
 import ProductCarousel from '../../ProductCarousel'
@@ -22,8 +21,4 @@ const Home = ({ products }) => {
   )
 }
 
-const mapStateToProps = ({ products }) => ({
-  products: products.allProducts
-})
-
-export default connect(mapStateToProps)(Home)
+export default Home

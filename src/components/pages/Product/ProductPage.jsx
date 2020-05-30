@@ -13,13 +13,18 @@ const ProductPage = ({
     <PageContainer>
       <ProductOverview product={product} />
 
-      {/* <ProductCarousel title='Similar Products' data={products} /> */}
+      <ProductCarousel title='Similar Products' data={products} excludeProduct={product.id} />
     </PageContainer>
   )
 }
 
 ProductPage.propTypes = {
-  product: PropTypes.object
+  product: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    variants: PropTypes.object.isRequired,
+  }).isRequired,
+  products: PropTypes.array.isRequired
 }
 
 export default ProductPage

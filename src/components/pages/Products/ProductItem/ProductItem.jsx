@@ -33,7 +33,8 @@ const ProductItem = ({
     e.preventDefault()
 
     if (isInCart) return
-    addToCart({ product, variant: 0, quantity: 1 })
+    // TODO handle 
+    addToCart({ productId: id, variant: 0, quantity: 1 })
   }
 
   const handleWishlist = () => {

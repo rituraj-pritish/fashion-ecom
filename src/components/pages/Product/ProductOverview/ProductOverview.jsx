@@ -45,16 +45,20 @@ const ProductOverview = ({
   const [price, setPrice] = useState()
   const [quantity, setQuantity] = useState(1)
 
-  // // reset variant on product change
-  // useEffect(() => {
-  //   setVariant(variantId)
-  // }, [id])
+  useEffect(() => {
+    setVariant(variantId)
+    return () => {
+      setVariant('')
+    }
+  }, [id, variantId])
 
   useEffect(() => {
     setCurrentImg(variants[variant]?.images[0])
     setPrice(variants[variant]?.price)
     setQuantity(1)
   }, [id, variant, variantId, variants])
+
+  if (!variant) return 'loading'
 
   const images = variants[variant]?.images.map(imageUrl => {
     const isCurrentImage = imageUrl === currentImg
@@ -80,8 +84,8 @@ const ProductOverview = ({
     )
   }
 
-  const isInStock = variants[variant].stock > 0
-  const isInCart = Object.keys(variants).includes(variantId)
+  const isInStock = variants[variant]?.stock > 0
+  const isInCart = cart.find(item => item.variantId === variantId)
   const isInWishlist = wishlist.find(item => item.id === product.id)
 
   const changeVariant = varId => {
@@ -123,7 +127,14 @@ const ProductOverview = ({
       history.push('/signin')
       return
     }
-    addToCart({ product, variant, quantity: 1 })
+    addToCart({
+      productId: id,
+      variantId,
+      name,
+      price,
+      imageUrl: variants[variant].images[0],
+      quantity: 1
+    })
     history.push('/user/cart')
   }
 
@@ -155,7 +166,7 @@ const ProductOverview = ({
         </Text>
 
         <Variants>
-          {Object.values(variants).map((item) => (
+          {Object.values(variants).map(item => (
             <Variant
               key={item.id}
               data-tip={item.variant[0].toUpperCase() + item.variant.slice(1)}

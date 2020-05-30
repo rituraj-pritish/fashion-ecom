@@ -229,7 +229,7 @@ export default (state = initialState, { type, payload }) =>
         break
 
       case REMOVE_FROM_CART_SUCCESS:
-        draft.items = state.items.filter(item => item.id !== payload)
+        draft.items = state.items.filter(item => item.variantId !== payload)
         draft.isLoading = false
         draft.inFocus = null
         break
