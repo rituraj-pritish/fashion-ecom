@@ -3,18 +3,19 @@ import styled from 'styled-components'
 export const ProductCarouselContainer = styled.div`
   margin: 5rem 0;
 
-  .carousel-container {
-    position: relative;
-    margin: 20px 10px;
-    overflow: hidden;
+  .slick-arrow {
+    &:focus,
+    &:hover {
+      background: #00000059;
+    }
+
+    &::before {
+      font-size: 34px;
+    }
   }
 
-  .swiper-slide {
-    height: auto;
-  }
-
-  .swiper-button-next {
-    right: 0;
+  .slick-next {
+    right: 7px;
     background: #00000059;
     color: white;
     height: 65px;
@@ -23,8 +24,8 @@ export const ProductCarouselContainer = styled.div`
     z-index: 4;
   }
 
-  .swiper-button-prev {
-    left: 0;
+  .slick-prev {
+    left: 10px;
     background: #00000059;
     color: white;
     height: 65px;
@@ -33,17 +34,24 @@ export const ProductCarouselContainer = styled.div`
     z-index: 4;
   }
 
-  .swiper-button-next.swiper-button-disabled,
-  .swiper-button-prev.swiper-button-disabled {
-    cursor: default;
-    pointer-events: all;
-  }
-
   /* for touch screens */
   @media (hover: none) and (pointer: coarse) {
-    .swiper-button-next,
-    .swiper-button-prev {
+    .slick-next,
+    .slick-prev {
       display: none;
+    }
+  }
+
+  .slick-slide {
+    padding: 0 10px;
+    height: 100%;
+
+    & > div {
+      height: 100%;
+    }
+
+    div:focus {
+      outline: none;
     }
   }
 `
@@ -52,6 +60,8 @@ export const CarouselItemContainer = styled.div`
   background: #f6f8fc;
   display: flex;
   flex-direction: column;
+  position: relative;
+  height: 100%;
 
   img {
     width: 100%;
@@ -65,6 +75,7 @@ export const ItemBottom = styled.div`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  height: 120px;
 
   .wishlist-icon {
     position: absolute;
@@ -90,4 +101,5 @@ export const ItemBottom = styled.div`
 export const Title = styled.div`
   text-align: left;
   font-size: 1.8rem;
+  margin-bottom: 2rem;
 `

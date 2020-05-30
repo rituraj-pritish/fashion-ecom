@@ -1,9 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import Swiper from 'react-id-swiper'
-import 'swiper/css/swiper.css'
+import Slider from 'react-slick'
 import { Link } from 'react-router-dom'
 import LazyLoad from 'react-lazy-load'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 import setAlert from 'setAlert'
 import HeartIcon from '../../assets/icons/HeartIcon'
@@ -18,31 +18,37 @@ import Button from '../ui/Button'
 import Icon from '../ui/Icon'
 import Text from '../ui/Text'
 
-const params = {
-  slidesPerView: 2,
-  breakpoints: {
-    600: {
-      slidesPerView: 3,
-      slidesPerGroup: 3
+const settings = {
+  infinite: false,
+  slidesToScroll: 5,
+  slidesToShow: 5,
+  speed: 500,
+  swipeToSlide: true,
+  arrows: true,
+  rows: 1,
+  responsive: [
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
     },
-    800: {
-      slidesPerView: 4,
-      slidesPerGroup: 4
+    {
+      breakpoint: 800,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3
+      }
     },
-    1000: {
-      slidesPerView: 5,
-      slidesPerGroup: 5
+    {
+      breakpoint: 1000,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4
+      }
     }
-  },
-  lazy: true,
-  slidesPerGroup: 2,
-  loop: false,
-  spaceBetween: 20,
-  containerClass: 'carousel-container',
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev'
-  }
+  ]
 }
 
 const ProductCarousel = ({
@@ -61,7 +67,7 @@ const ProductCarousel = ({
   const render = data
     // filter out out of stock products
     .filter(product => {
-      if(excludeProduct === product.id) return null
+      if (excludeProduct === product.id) return null
       const variant = Object.values(product.variants).find(
         ({ stock }) => stock > 0
       )
@@ -151,13 +157,9 @@ const ProductCarousel = ({
   return (
     <ProductCarouselContainer>
       <Title>{title[0].toUpperCase() + title.slice(1)}</Title>
-      <Swiper {...params}>{render}</Swiper>
+      <Slider {...settings}>{render}</Slider>
     </ProductCarouselContainer>
   )
-}
-
-ProductCarousel.propTypes = {
-  data: PropTypes.array.isRequired
 }
 
 export default ProductCarousel

@@ -7,6 +7,8 @@ const Sale = styled.div`
   background: ${({ theme }) => theme.colors.primary};
   opacity: 0.7;
   text-transform: uppercase;
+  top: 0;
+  left: 0;
   color: white;
   font-weight: bold;
   position: absolute;
