@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
   isLoading: state.cart.isLoading,
   inFocus: state.cart.inFocus,
   cartIds: state.cart.items.map(({ variantId }) => variantId),
-  wishlistIds: state.wishlist.items.map(({ id }) => id),
+  wishlistIds: state.wishlist.items.map(({ productId }) => productId),
   isAuthenticated: state.auth.isAuthenticated
 })
 

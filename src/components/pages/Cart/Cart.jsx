@@ -1,6 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import { PageContainer } from '../../../index.styles'
 import CartItem from './CartItem'
@@ -23,9 +23,9 @@ const Cart = ({ cart, forLater }) => {
         <Container>
           <ItemsContainer>
             {cart.map(item => (
-              <CartItem page='cart' key={item.id} {...item} />
+              <CartItem page='cart' key={item.variantId} {...item} />
             ))}
-{/* 
+            {/* 
             Saved For Later
 
             {forLater.map(item => (
@@ -39,9 +39,15 @@ const Cart = ({ cart, forLater }) => {
   )
 }
 
-const mapStateToProps = ({ cart }) => ({
-  cart: cart.items.slice().sort((a, b) => new Date(b.date) - new Date(a.date)),
-  forLater: cart.forLater
-})
+Cart.propTypes = {
+  cart: PropTypes.arrayOf(
+    PropTypes.shape({
+      productId: PropTypes.string.isRequired,
+      variantId: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired
+    }).isRequired
+  )
+}
 
-export default connect(mapStateToProps)(Cart)
+export default Cart

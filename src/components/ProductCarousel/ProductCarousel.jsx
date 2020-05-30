@@ -75,7 +75,7 @@ const ProductCarousel = ({
       ]
 
       const isInCart = cartIds.find(id => id === variantId)
-      const isInWishlist = wishlistIds.find(productId => productId === id)
+      const isInWishlist = wishlistIds.find(id => id === product.id)
 
       const handleCartBtn = e => {
         if (isInCart) return

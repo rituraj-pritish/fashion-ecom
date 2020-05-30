@@ -86,7 +86,7 @@ const ProductOverview = ({
 
   const isInStock = variants[variant]?.stock > 0
   const isInCart = cart.find(item => item.variantId === variantId)
-  const isInWishlist = wishlist.find(item => item.id === product.id)
+  const isInWishlist = wishlist.find(item => item.productId === id)
 
   const changeVariant = varId => {
     if (varId === variant) return
@@ -115,8 +115,11 @@ const ProductOverview = ({
     }
     if (isInWishlist) return
     addToWishlist({
-      product,
-      variant
+      productId: id,
+      variantId,
+      name,
+      price,
+      imageUrl: variants[variant].images[0]
     })
   }
 

@@ -1,27 +1,14 @@
 import React from 'react'
 import LazyLoad from 'react-lazy-load'
-import { connect } from 'react-redux'
 
 import QuantityCounter from 'components/shared/QuantityCounter'
 import Button from 'components/ui/Button'
 import MoonLoader from 'react-spinners/MoonLoader'
-import {
-  removeFromCart,
-  updateCart,
-  saveForLater,
-  backToCart,
-  addToCart
-} from 'redux/cart'
-import { removeFromWishlist } from 'redux/wishlist'
+
 import Icon from '../../../ui/Icon'
 import Text from '../../../ui/Text'
 import TrashIcon from '../../../../assets/icons/TrashIcon'
-import {
-  CartItemContainer,
-  Details,
-  Remove,
-  Loader
-} from './CartItem.styles'
+import { CartItemContainer, Details, Remove, Loader } from './CartItem.styles'
 import { Link } from 'react-router-dom'
 
 const CartItem = ({
@@ -44,7 +31,7 @@ const CartItem = ({
     if (page === 'cart') {
       removeFromCart(variantId)
     } else {
-      removeFromWishlist(variantId)
+      removeFromWishlist(productId)
     }
   }
 
@@ -81,16 +68,18 @@ const CartItem = ({
       <Details>
         <p>{name}</p>
 
-        <QuantityCounter
-          count={quantity}
-          onIncrement={() => {
-            updateCart({ variantId, quantity: quantity + 1 })
-          }}
-          onDecrement={() => {
-            if (quantity === 1) return
-            updateCart({ variantId, quantity: quantity - 1 })
-          }}
-        />
+        {page === 'cart' && (
+          <QuantityCounter
+            count={quantity}
+            onIncrement={() => {
+              updateCart({ variantId, quantity: quantity + 1 })
+            }}
+            onDecrement={() => {
+              if (quantity === 1) return
+              updateCart({ variantId, quantity: quantity - 1 })
+            }}
+          />
+        )}
       </Details>
 
       <Text fontWeight='bold'>
@@ -110,18 +99,4 @@ const CartItem = ({
   )
 }
 
-const mapStateToProps = ({ cart, wishlist }, { page, variantId }) => ({
-  isLoading:
-    page === 'cart'
-      ? cart.isLoading && cart.inFocus === variantId
-      : wishlist.isLoading && wishlist.inFocus === variantId,
-  isSavedForLater: cart.forLater.find(item => item.variantId === variantId)
-})
-
-export default connect(mapStateToProps, {
-  updateCart,
-  removeFromCart,
-  removeFromWishlist,
-  saveForLater,
-  backToCart
-})(CartItem)
+export default CartItem

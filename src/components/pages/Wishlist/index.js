@@ -1,3 +1,9 @@
+import { connect } from 'react-redux';
+
 import Wishlist from './Wishlist'
 
-export default Wishlist
+const mapStateToProps = state => ({
+  wishlist: state.wishlist.items
+});
+
+export default connect(mapStateToProps)(Wishlist);

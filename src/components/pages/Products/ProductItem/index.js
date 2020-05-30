@@ -5,6 +5,8 @@ import { addToWishlist } from 'redux/wishlist'
 import ProductItem from './ProductItem'
 
 const mapStateToProps = state => ({
+  isLoading: state.cart.isLoading,
+  inFocus: state.cart.inFocus,
   cart: state.cart.items,
   wishlist: state.wishlist.items,
   isAuthenticated: state.auth.isAuthenticated

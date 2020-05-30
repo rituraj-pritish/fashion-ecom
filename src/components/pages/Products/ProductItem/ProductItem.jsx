@@ -20,21 +20,29 @@ const ProductItem = ({
   addToWishlist,
   cart,
   wishlist,
-  isAuthenticated
+  isAuthenticated,
+  isLoading,
+  inFocus
 }) => {
   const { name, variants, id, sale } = product
-  const variant = variants[0]
+  const variant = variants[Object.keys(variants)[0]]
   const image = variant.images[0]
 
-  const isInCart = cart.find(item => item.id === id)
-  const isInWishlist = wishlist.find(item => item.id === id)
+  const isInCart = cart.find(item => item.variantId === variant.id)
+  const isInWishlist = wishlist.find(item => item.productId === id)
 
   const handleCartBtn = e => {
     e.preventDefault()
 
     if (isInCart) return
-    // TODO handle 
-    addToCart({ productId: id, variant: 0, quantity: 1 })
+    addToCart({
+      productId: id,
+      variantId: variant.id,
+      price: variant.price,
+      name,
+      imageUrl: image,
+      quantity: 1
+    })
   }
 
   const handleWishlist = () => {
@@ -44,7 +52,13 @@ const ProductItem = ({
     }
     if (isInWishlist) return
 
-    addToWishlist({ product, variant: 0 })
+    addToWishlist({
+      productId: id,
+      variantId: variant.id,
+      price: variant.price,
+      name,
+      imageUrl: image,
+    })
   }
 
   return (
@@ -74,6 +88,7 @@ const ProductItem = ({
           variant={isInCart ? 'secondary' : 'primary'}
           minHeight='35px'
           height='auto'
+          isLoading={isLoading && inFocus === variant.id}
         >
           {isInCart ? 'ADDED TO CART' : 'ADD TO CART'}
         </Button>
@@ -83,7 +98,19 @@ const ProductItem = ({
 }
 
 ProductItem.propTypes = {
-  item: PropTypes.object.isRequired
+  product: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    brand: PropTypes.string.isRequired,
+    variants: PropTypes.object.isRequired
+  }).isRequired,
+  addToCart: PropTypes.func.isRequired,
+  addToWishlist: PropTypes.func.isRequired,
+  cart: PropTypes.array.isRequired,
+  wishlist: PropTypes.array.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  inFocus: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool.isRequired
 }
 
 export default ProductItem

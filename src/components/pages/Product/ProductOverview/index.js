@@ -16,7 +16,7 @@ const mapStateToProps = (
   cart: cart.items,
   wishlist: wishlist.items,
   isAuthenticated: auth.isAuthenticated,
-  cartLoading: cart.isLoading && cart.inFocus === productId,
+  cartLoading: cart.isLoading && cart.inFocus === variantId,
   variantId
 })
 

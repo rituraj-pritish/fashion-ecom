@@ -1,9 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { PageContainer } from '../../../index.styles';
-import CartItem from '../Cart/CartItem/CartItem';
+import CartItem from '../Cart/CartItem';
 import { Container } from './Wishlist.styles';
 import Text from '../../ui/Text';
 import Button from '../../ui/Button';
@@ -29,12 +28,8 @@ const Wishlist = ({ wishlist }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  wishlist: state.wishlist.items
-});
-
-export default connect(mapStateToProps)(Wishlist);
-
 Wishlist.propTypes = {
   wishlist: PropTypes.array.isRequired
 };
+
+export default Wishlist

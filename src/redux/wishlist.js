@@ -35,7 +35,7 @@ export const getWishlistItems = userId => async dispatch => {
 }
 
 export const addToWishlist = item => async (dispatch, getState) => {
-  dispatch({ type: ADD_TO_WISHLIST_REQUEST, payload: item.id })
+  dispatch({ type: ADD_TO_WISHLIST_REQUEST, payload: item.productId })
 
   const { auth } = getState()
   const userId = auth.user?.id
@@ -45,7 +45,7 @@ export const addToWishlist = item => async (dispatch, getState) => {
       .collection('wishlists')
       .doc(userId)
       .collection('items')
-      .doc(item.id)
+      .doc(item.productId)
       .set(item)
 
     dispatch({ type: ADD_TO_WISHLIST_SUCCESS, payload: item })
@@ -72,7 +72,6 @@ export const removeFromWishlist = id => async (dispatch, getState) => {
     dispatch({ type: REMOVE_FROM_WISHLIST_SUCCESS, payload: id })
   } catch (err) {
     dispatch({ type: REMOVE_FROM_WISHLIST_FAILURE })
-    console.log(err)
   }
 }
 const initialState = {
@@ -103,7 +102,7 @@ export default (state = initialState, { type, payload }) =>
         break
 
       case REMOVE_FROM_WISHLIST_SUCCESS:
-        draft.items = state.items.slice().filter(item => item.id !== payload)
+        draft.items = state.items.slice().filter(item => item.productId !== payload)
         draft.isLoading = false
         draft.inFocus = null
         break
