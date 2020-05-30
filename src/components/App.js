@@ -6,6 +6,7 @@ import ReactTooltip from 'react-tooltip'
 import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 
+import { getCurrencies } from 'redux/currency'
 import { authStateChangeHandler } from 'redux/auth'
 import { getProducts } from 'redux/products'
 import Navbar from 'components/layout/Navbar'
@@ -30,15 +31,21 @@ const App = ({
   isAuthenticated,
   isLoading,
   getProducts,
-  authStateChangeHandler
+  authStateChangeHandler,
+  getCurrencies,
+  products
 }) => {
   useEffect(() => {
-    authStateChangeHandler()
     getProducts()
+    getCurrencies()
+  }, [])
+
+  useEffect(() => {
+    authStateChangeHandler()
     // eslint-disable-next-line
   }, [isAuthenticated])
 
-  if (isLoading) {
+  if (isLoading || !products.length) {
     return <Loader />
   }
 
@@ -82,10 +89,12 @@ const App = ({
 
 const mapStateToProps = state => ({
   isLoading: state.app.isLoading,
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  products: state.products.allProducts
 })
 
 export default connect(mapStateToProps, {
   getProducts,
-  authStateChangeHandler
+  authStateChangeHandler,
+  getCurrencies
 })(App)

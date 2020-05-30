@@ -18,6 +18,7 @@ import {
   StyledLogo
 } from './Navbar.styles'
 import NavUserOptions from './NavUserOptions'
+import CurrencySelector from './CurrencySelector'
 
 const Navbar = ({ history, cartCount }) => {
   const [showUserOptions, setShowUserOptions] = useState(false)
@@ -67,6 +68,7 @@ const Navbar = ({ history, cartCount }) => {
           />
           <button className='search-btn'>Search</button>
         </Search>
+
         <NavLinks>
           <SearchIconContainer onClick={() => setShowSearchBar(true)}>
             <Icon>
@@ -80,6 +82,10 @@ const Navbar = ({ history, cartCount }) => {
             searchQuery={text}
             setSearchQuery={setText}
           />
+
+          <li>
+            <CurrencySelector />
+          </li>
 
           <li
             ref={userRef}
