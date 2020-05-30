@@ -30,7 +30,6 @@ const App = ({
   isAuthenticated,
   isLoading,
   getProducts,
-  products,
   authStateChangeHandler
 }) => {
   useEffect(() => {
@@ -39,7 +38,7 @@ const App = ({
     // eslint-disable-next-line
   }, [isAuthenticated])
 
-  if (isLoading || !products.length) {
+  if (isLoading) {
     return <Loader />
   }
 
@@ -83,7 +82,6 @@ const App = ({
 
 const mapStateToProps = state => ({
   isLoading: state.app.isLoading,
-  products: state.products.allProducts,
   isAuthenticated: state.auth.isAuthenticated
 })
 
