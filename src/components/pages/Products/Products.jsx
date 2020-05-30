@@ -21,6 +21,4 @@ Products.propTypes = {
   products: PropTypes.array.isRequired
 }
 
-
-
 export default Products

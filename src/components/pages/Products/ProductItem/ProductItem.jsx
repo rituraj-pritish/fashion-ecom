@@ -63,7 +63,7 @@ const ProductItem = ({
 
   return (
     <ProductItemContainer>
-      <Link to={`/product/${id}`}>
+      <Link to={`/product/${id}/variant/${variant.id}`}>
         <LazyLoad className='lazyload'>
           <img src={image} alt={name} />
         </LazyLoad>
