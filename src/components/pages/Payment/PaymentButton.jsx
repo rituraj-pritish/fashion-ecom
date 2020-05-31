@@ -5,7 +5,7 @@ import Button from '../../ui/Button';
 
 export const StyledButton = styled.button``;
 
-const PaymentButton = ({ amount, setIsOrderPlaced, emptyCart }) => {
+const PaymentButton = ({ amount, setIsOrderPlaced, emptyCart, currency }) => {
   const handleToken = res => {
     emptyCart();
     setIsOrderPlaced(true);
@@ -14,9 +14,9 @@ const PaymentButton = ({ amount, setIsOrderPlaced, emptyCart }) => {
   return (
     <StripeCheckout
       name='Blogg'
-      description={`Payment of $ ${amount}`}
-      currency='USD'
-      amount={amount * 100}
+      description={`Payment of ${currency.symbol} ${(currency.rate * amount).toFixed(2)}`}
+      currency={currency.code}
+      amount={(currency.rate * amount).toFixed(2) * 100}
       token={handleToken}
       stripeKey='pk_test_6MmX11WOCB7TLNjgyIQsEQN400FaACm2cQ'
       allowRememberMe={false}

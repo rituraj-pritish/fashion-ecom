@@ -25,7 +25,8 @@ const CartItem = ({
   isLoading,
   isSavedForLater,
   saveForLater,
-  backToCart
+  backToCart,
+  currency
 }) => {
   const handleRemove = () => {
     if (page === 'cart') {
@@ -83,9 +84,11 @@ const CartItem = ({
       </Details>
 
       <Text fontWeight='bold'>
-        ${' '}
+        {`${currency.symbol} `}
         {quantity
-          ? (Math.round(quantity * price * 100) / 100).toFixed(2)
+          ? (
+              Math.round(quantity * (currency.rate * price) * 100) / 100
+            ).toFixed(2)
           : price}
       </Text>
 
