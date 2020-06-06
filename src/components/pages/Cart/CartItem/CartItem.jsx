@@ -72,11 +72,11 @@ const CartItem = ({
           <QuantityCounter
             count={quantity}
             onIncrement={() => {
-              updateCart({ variantId, quantity: quantity + 1 })
+              updateCart({ id: variantId, quantity: quantity + 1 })
             }}
             onDecrement={() => {
               if (quantity === 1) return
-              updateCart({ variantId, quantity: quantity - 1 })
+              updateCart({ id: variantId, quantity: quantity - 1 })
             }}
           />
         )}

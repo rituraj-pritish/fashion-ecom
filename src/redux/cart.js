@@ -235,7 +235,7 @@ export default (state = initialState, { type, payload }) =>
         break
 
       case UPDATE_CART_SUCCESS: {
-        const idx = draft.items.findIndex(item => item.id === payload.id)
+        const idx = draft.items.findIndex(item => item.variantId === payload.id)
         draft.items[idx].quantity = payload.quantity
         draft.isLoading = false
         draft.inFocus = null
