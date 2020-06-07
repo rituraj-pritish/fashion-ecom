@@ -1,16 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react'
-import {
-  FilterPanelContainer,
-  Line,
-  List,
-  FilterBtnContainer
-} from './FilterPanel.styles'
 
 import clickOutside from 'helpers/clickOutside'
 import Icon from 'components/ui/Icon'
 import PriceSlider from './PriceSlider'
 import BarsIcon from 'assets/icons/BarsIcon'
-import { FilterBtn } from './FilterPanel.styles'
+import {
+  FilterPanelContainer,
+  Line,
+  List,
+  FilterBtnContainer,
+  FilterPanelSidebar,
+  FilterBtn
+} from './FilterPanel.styles'
 
 const FilterPanel = ({ setFilterCriteria, brands, setOverlay, currency }) => {
   const [show, setShow] = useState(false)
@@ -56,7 +57,7 @@ const FilterPanel = ({ setFilterCriteria, brands, setOverlay, currency }) => {
   clickOutside(node, () => setShow(false))
 
   return (
-    <div>
+    <FilterPanelContainer>
       <FilterBtnContainer>
         <FilterBtn onClick={handleClick}>
           <Icon display='inline-block' width='15px'>
@@ -65,11 +66,8 @@ const FilterPanel = ({ setFilterCriteria, brands, setOverlay, currency }) => {
           Filter
         </FilterBtn>
       </FilterBtnContainer>
-      <FilterPanelContainer show={show} ref={node}>
-        <h2>
-          <i className='fas fa-filter' />
-          Filter
-        </h2>
+      <FilterPanelSidebar show={show} ref={node}>
+        <h2>Filter</h2>
         <Line />
 
         <h3>Sort By</h3>
@@ -144,8 +142,8 @@ const FilterPanel = ({ setFilterCriteria, brands, setOverlay, currency }) => {
           ))}
         </List>
         <Line />
-      </FilterPanelContainer>
-    </div>
+      </FilterPanelSidebar>
+    </FilterPanelContainer>
   )
 }
 
