@@ -1,26 +1,48 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
+import PropTypes from 'prop-types'
+
 import currencyList from 'redux/currency/currencyList'
+import { Selector, SelectorWrapper } from './CurrencySelector.styled'
+import clickOutside from 'helpers/clickOutside'
 
 const CurrencySelector = ({ changeCurrency, currencyCode }) => {
+  const [showSelector, setShowSelector] = useState(true)
+  const node = useRef()
+
   const handleChange = e => {
     changeCurrency(e.target.value)
   }
 
+  clickOutside(node, () => setShowSelector(false))
+
   return (
-    <form>
-      <label for='currency'>Currency</label>
-      <select name='currency' id='currency' onChange={handleChange}>
-        {/* <option selected={currencyCode === 'USD'} value='USD'>USD</option>
-        <option selected={currencyCode === 'INR'} value='INR'>INR</option> */}
-        {Object.values(currencyList).map(({ code, name_plural }) => (
-          <option
-            selected={currencyCode === code}
-            value={code}
-          >{`${code} - ${name_plural}`}</option>
-        ))}
-      </select>
-    </form>
+    <SelectorWrapper ref={node}>
+      <div onClick={() => setShowSelector(!showSelector)}>{currencyCode}</div>
+      {showSelector && (
+        <Selector>
+          <label htmlFor='currency'>Select Currency</label>
+          <select
+            value={currencyCode}
+            name='currency'
+            id='currency'
+            onChange={handleChange}
+          >
+            {Object.values(currencyList).map(({ code, name_plural }) => (
+              <option
+                key={code}
+                value={code}
+              >{`${code} - ${name_plural}`}</option>
+            ))}
+          </select>
+        </Selector>
+      )}
+    </SelectorWrapper>
   )
+}
+
+CurrencySelector.propTypes = {
+  changeCurrency: PropTypes.func.isRequired,
+  currencyCode: PropTypes.string.isRequired
 }
 
 export default CurrencySelector
