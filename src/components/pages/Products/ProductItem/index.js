@@ -4,12 +4,13 @@ import { addToCart } from 'redux/cart'
 import { addToWishlist } from 'redux/wishlist'
 import ProductItem from './ProductItem'
 
-const mapStateToProps = state => ({
-  isLoading: state.cart.isLoading,
-  inFocus: state.cart.inFocus,
-  cart: state.cart.items,
-  wishlist: state.wishlist.items,
-  isAuthenticated: state.auth.isAuthenticated
+const mapStateToProps = ({ auth, cart, wishlist, currency }) => ({
+  isLoading: cart.isLoading,
+  inFocus: cart.inFocus,
+  cart: cart.items,
+  wishlist: wishlist.items,
+  isAuthenticated: auth.isAuthenticated,
+  currency: currency.currency
 })
 
 export default connect(mapStateToProps, { addToCart, addToWishlist })(

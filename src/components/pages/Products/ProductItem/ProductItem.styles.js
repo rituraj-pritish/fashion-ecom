@@ -26,7 +26,7 @@ export const ItemBottom = styled.div`
 
   p {
     margin-top: 5px;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     margin-bottom: 15px;
   }
 

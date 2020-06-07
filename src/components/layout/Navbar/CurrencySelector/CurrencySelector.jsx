@@ -6,11 +6,12 @@ import { Selector, SelectorWrapper } from './CurrencySelector.styled'
 import clickOutside from 'helpers/clickOutside'
 
 const CurrencySelector = ({ changeCurrency, currencyCode }) => {
-  const [showSelector, setShowSelector] = useState(true)
+  const [showSelector, setShowSelector] = useState(false)
   const node = useRef()
 
   const handleChange = e => {
     changeCurrency(e.target.value)
+    setShowSelector(false)
   }
 
   clickOutside(node, () => setShowSelector(false))
