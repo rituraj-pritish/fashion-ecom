@@ -22,5 +22,11 @@ export const Selector = styled.form`
 
   select {
     margin-top: 0.6rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+
+    &:focus {
+      outline: none;
+    }
   }
 `
