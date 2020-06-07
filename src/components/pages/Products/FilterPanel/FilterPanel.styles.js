@@ -2,7 +2,13 @@ import styled from 'styled-components'
 import sizes from 'sizes'
 import theme from 'theme'
 
-export const FilterPanelContainer = styled.aside`
+export const FilterPanelContainer = styled.div`
+  position: sticky;
+  top: 50px;
+  z-index: 5;
+`
+
+export const FilterPanelSidebar = styled.aside`
   background: #eee;
   text-align: left;
   padding: 20px;

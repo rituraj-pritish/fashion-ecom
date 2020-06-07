@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { emptyCart } from 'redux/cart'
 import Button from '../../ui/Button'
 import PaymentButton from './PaymentButton'
 import {
@@ -13,7 +11,7 @@ import {
 } from './PaymentsPage.styles'
 import { PageContainer } from '../../../index.styles'
 
-const PaymentsPage = ({ cart, emptyCart }) => {
+const PaymentsPage = ({ cart, emptyCart, currency }) => {
   const [isOrderPlaced, setIsOrderPlaced] = useState(false)
 
   const amount = cart.reduce(
@@ -21,18 +19,23 @@ const PaymentsPage = ({ cart, emptyCart }) => {
     0
   )
 
+  const finalAmount = amount > 100 ? amount : amount + 10
+
   return (
     <PageContainer>
       {!isOrderPlaced ? (
         <Container>
           <Amount>
             Total payable amount:
-            <span>$ {amount}</span>
+            <span>{`${currency.symbol} ${(currency.rate * finalAmount).toFixed(
+              2
+            )}`}</span>
           </Amount>
           <PaymentButton
-            amount={amount}
+            amount={finalAmount}
             emptyCart={emptyCart}
             setIsOrderPlaced={setIsOrderPlaced}
+            currency={currency}
           />
 
           <CardInfo>
@@ -58,8 +61,4 @@ const PaymentsPage = ({ cart, emptyCart }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  cart: state.cart.items
-})
-
-export default connect(mapStateToProps, { emptyCart })(PaymentsPage)
+export default PaymentsPage

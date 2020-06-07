@@ -62,7 +62,8 @@ const ProductCarousel = ({
   isAuthenticated,
   isLoading,
   inFocus,
-  excludeProduct
+  excludeProduct,
+  currency
 }) => {
   const render = data
     // filter out out of stock products
@@ -137,8 +138,7 @@ const ProductCarousel = ({
             </Icon>
             <Text fontWeight='bold'>{name}</Text>
             <Text mt='0.5rem' mb='1.5rem'>
-              $ {price}
-              {price % 1 === 0 && '.00'}
+              {`${currency.symbol} ${(currency.rate * price).toFixed(2)}`}
             </Text>
             <Button
               onClick={handleCartBtn}

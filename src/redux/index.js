@@ -5,6 +5,7 @@ import products from './products'
 import overlay from './overlay'
 import cart from './cart'
 import wishlist from './wishlist'
+import currency from './currency'
 
 const appReducer =  combineReducers({
   app,
@@ -12,7 +13,8 @@ const appReducer =  combineReducers({
   auth,
   overlay,
   cart,
-  wishlist
+  wishlist,
+  currency
 })
 
 const rootReducer = (state, action) => {

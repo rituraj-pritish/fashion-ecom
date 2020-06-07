@@ -22,7 +22,8 @@ const ProductItem = ({
   wishlist,
   isAuthenticated,
   isLoading,
-  inFocus
+  inFocus,
+  currency
 }) => {
   const { name, variants, id, sale } = product
   const variant = variants[Object.keys(variants)[0]]
@@ -57,7 +58,7 @@ const ProductItem = ({
       variantId: variant.id,
       price: variant.price,
       name,
-      imageUrl: image,
+      imageUrl: image
     })
   }
 
@@ -81,7 +82,7 @@ const ProductItem = ({
 
         <h3>{name}</h3>
         <p>
-          $ {variant.price} {variant.price % 1 === 0 && '.00'}
+          {`${currency.symbol} ${(variant.price * currency.rate).toFixed(2)}`}
         </p>
         <Button
           onClick={handleCartBtn}
@@ -109,8 +110,9 @@ ProductItem.propTypes = {
   cart: PropTypes.array.isRequired,
   wishlist: PropTypes.array.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  inFocus: PropTypes.string.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  inFocus: PropTypes.string,
+  isLoading: PropTypes.bool.isRequired,
+  currency: PropTypes.object.isRequired
 }
 
 export default ProductItem

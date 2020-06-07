@@ -36,7 +36,8 @@ const ProductOverview = ({
   isAuthenticated,
   history,
   cartLoading,
-  variantId
+  variantId,
+  currency
 }) => {
   const { name, rating, brand, variants, id } = product
 
@@ -160,8 +161,7 @@ const ProductOverview = ({
           {brand.toUpperCase()}
         </Text>
         <Text fontSize='2.3rem'>
-          $ {price}
-          {price % 1 === 0 && '.00'}
+          {`${currency.symbol} ${(currency.rate * price).toFixed(2)}`}
         </Text>
         <Rating>{stars}</Rating>
         <Text fontSize='1.9rem' color={isInStock ? 'green' : 'red'}>

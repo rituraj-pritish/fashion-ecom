@@ -10,12 +10,13 @@ import {
 import { removeFromWishlist } from 'redux/wishlist'
 import CartItem from './CartItem'
 
-const mapStateToProps = ({ cart, wishlist }, { page, variantId, productId }) => ({
+const mapStateToProps = ({ cart, wishlist, currency }, { page, variantId, productId }) => ({
   isLoading:
     page === 'cart'
       ? cart.isLoading && cart.inFocus === variantId
       : wishlist.isLoading && wishlist.inFocus === productId,
-  isSavedForLater: cart.forLater.find(item => item.variantId === variantId)
+  isSavedForLater: cart.forLater.find(item => item.variantId === variantId),
+  currency: currency.currency
 })
 
 export default connect(mapStateToProps, {
