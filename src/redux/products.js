@@ -45,7 +45,7 @@ export default (state = initialState, { type, payload }) =>
         draft.isLoading = false
         break
       case SET_FILTER_CRITERIA:
-        draft.filterCriteria = payload
+        draft.filterCriteria = { ...state.filterCriteria, ...payload }
         break
     }
   })

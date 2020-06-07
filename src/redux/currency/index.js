@@ -38,7 +38,6 @@ export const getCurrencies = () => async dispatch => {
 
 export const changeCurrency = code => {
   localStorage.setItem('currency_code', code)
-
   return {
     type: CHANGE_CURRENCY,
     payload: {

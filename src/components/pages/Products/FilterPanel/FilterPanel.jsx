@@ -8,12 +8,12 @@ import {
 
 import clickOutside from 'helpers/clickOutside'
 import Icon from 'components/ui/Icon'
+import PriceSlider from './PriceSlider'
 import BarsIcon from 'assets/icons/BarsIcon'
 import { FilterBtn } from './FilterPanel.styles'
 
-const FilterPanel = ({ setFilterCriteria, brands, setOverlay }) => {
+const FilterPanel = ({ setFilterCriteria, brands, setOverlay, currency }) => {
   const [show, setShow] = useState(false)
-  const [priceRange, setPriceRange] = useState('all')
   const [currentBrand, setCurrentBrand] = useState('brand-all')
   const [sort, setSort] = useState('rating')
   const node = useRef()
@@ -35,25 +35,12 @@ const FilterPanel = ({ setFilterCriteria, brands, setOverlay }) => {
     setOverlay(true)
   }
 
-  const handlePriceChange = e => {
-    if (priceRange === e.target.getAttribute('id')) return
-
-    setPriceRange(e.target.getAttribute('id'))
-    setFilterCriteria({
-      price: e.target.getAttribute('id'),
-      sort,
-      brand: currentBrand
-    })
-  }
-
   const handleSortChange = e => {
     if (sort === e.target.getAttribute('id')) return
 
     setSort(e.target.getAttribute('id'))
     setFilterCriteria({
-      price: priceRange,
-      sort: e.target.getAttribute('id'),
-      brand: currentBrand
+      sort: e.target.getAttribute('id')
     })
   }
 
@@ -62,8 +49,6 @@ const FilterPanel = ({ setFilterCriteria, brands, setOverlay }) => {
 
     setCurrentBrand(e.target.getAttribute('id'))
     setFilterCriteria({
-      price: priceRange,
-      sort,
       brand: e.target.getAttribute('id')
     })
   }
@@ -127,70 +112,7 @@ const FilterPanel = ({ setFilterCriteria, brands, setOverlay }) => {
 
         <h3>Price</h3>
         <List>
-          <li>
-            <div>
-              <input
-                type='checkbox'
-                onChange={handlePriceChange}
-                checked={priceRange === 'all'}
-                id='all'
-              />
-              <label htmlFor='all'>All</label>
-            </div>
-          </li>
-          <li>
-            <div>
-              <input
-                type='checkbox'
-                onChange={handlePriceChange}
-                checked={priceRange === '5to50'}
-                id='5to50'
-              />
-              <label htmlFor='5to50'>$5 - $50</label>
-            </div>
-          </li>
-          <li>
-            <div>
-              <input
-                type='checkbox'
-                onChange={handlePriceChange}
-                checked={priceRange === '51to100'}
-                id='51to100'
-              />
-              <label htmlFor='51to100'>$51 - $100</label>
-            </div>
-          </li>
-          <li>
-            <div>
-              <input
-                type='checkbox'
-                onChange={handlePriceChange}
-                checked={priceRange === '101to150'}
-                id='101to150'
-              />
-              <label htmlFor='101to150'>$101 - $150</label>
-            </div>
-          </li>
-          <li>
-            <div>
-              <input
-                type='checkbox'
-                onChange={handlePriceChange}
-                checked={priceRange === '151to200'}
-                id='151to200'
-              />
-              <label htmlFor='151to200'>$151 - $200</label>
-            </div>
-          </li>
-          <li>
-            <input
-              type='checkbox'
-              onChange={handlePriceChange}
-              checked={priceRange === '201to300'}
-              id='201to300'
-            />
-            <label htmlFor='201to300'>$201 - $300</label>
-          </li>
+          <PriceSlider />
         </List>
         <Line />
 
