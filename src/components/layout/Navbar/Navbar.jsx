@@ -45,6 +45,8 @@ const Navbar = ({ history, cartCount }) => {
 
   const handleSearch = e => {
     e.preventDefault()
+    if (!text) return
+
     setText('')
     setShowSearchBar(false)
     history.push(`/s/${text}`)
