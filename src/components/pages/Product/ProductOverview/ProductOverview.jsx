@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import LazyLoad from 'react-lazy-load'
+import ReactTooltip from 'react-tooltip'
 
 import setAlert from 'setAlert'
 import returnImg from 'assets/images/return.webp'
@@ -48,6 +49,7 @@ const ProductOverview = ({
 
   useEffect(() => {
     setVariant(variantId)
+    ReactTooltip.rebuild()
     return () => {
       setVariant('')
     }

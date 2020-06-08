@@ -38,7 +38,7 @@ const App = ({
   useEffect(() => {
     getProducts()
     getCurrencies()
-  }, [])
+  }, [getCurrencies, getProducts])
 
   useEffect(() => {
     authStateChangeHandler()
