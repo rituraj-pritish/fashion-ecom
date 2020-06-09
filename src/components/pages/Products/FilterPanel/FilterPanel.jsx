@@ -5,7 +5,6 @@ import Icon from 'components/ui/Icon'
 import PriceSlider from './PriceSlider'
 import BarsIcon from 'assets/icons/BarsIcon'
 import {
-  FilterPanelContainer,
   Line,
   List,
   FilterBtnContainer,
@@ -57,7 +56,7 @@ const FilterPanel = ({ setFilterCriteria, brands, setOverlay, currency }) => {
   clickOutside(node, () => setShow(false))
 
   return (
-    <FilterPanelContainer>
+    <>
       <FilterBtnContainer>
         <FilterBtn onClick={handleClick}>
           <Icon display='inline-block' width='15px'>
@@ -143,7 +142,7 @@ const FilterPanel = ({ setFilterCriteria, brands, setOverlay, currency }) => {
         </List>
         <Line />
       </FilterPanelSidebar>
-    </FilterPanelContainer>
+    </>
   )
 }
 

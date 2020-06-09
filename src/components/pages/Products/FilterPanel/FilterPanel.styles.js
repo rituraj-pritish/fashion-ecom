@@ -2,12 +2,6 @@ import styled from 'styled-components'
 import sizes from 'sizes'
 import theme from 'theme'
 
-export const FilterPanelContainer = styled.div`
-  position: sticky;
-  top: 50px;
-  z-index: 5;
-`
-
 export const FilterPanelSidebar = styled.aside`
   background: #eee;
   text-align: left;
@@ -75,6 +69,11 @@ export const FilterBtnContainer = styled.div`
   top: ${theme.navHt};
   z-index: 5;
   padding: 0.5rem 0;
+  display: none;
+
+  @media ${sizes.xl} {
+    display: block;
+  }
 `
 
 export const FilterBtn = styled.div`
