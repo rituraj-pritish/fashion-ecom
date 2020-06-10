@@ -21,7 +21,7 @@ const Account = props => {
                   return (
                     <>
                       <Label>Name</Label>
-                      <Input type='text' onChange={input.onChange} />
+                      <Input  type='text' onChange={input.onChange} />
                     </>
                   )
                 }}

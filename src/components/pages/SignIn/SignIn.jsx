@@ -1,39 +1,23 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Logo from 'assets/Logo'
 import { signin } from 'redux/auth'
-import setAlert from 'setAlert'
-import Input from 'components/ui/Input'
 import Button from 'components/ui/Button'
 import Text from 'components/ui/Text'
 import { PageContainer } from 'index.styles'
 import { StyledLogo, Container } from './SignIn.styles'
+import { Form, Field } from 'react-final-form'
+import TextFieldAdapter from 'components/shared/forms/TextFieldAdapter'
+
+const INITIAL_VALUES = {
+  email: 'demo@demo.com',
+  password: '123123'
+}
 
 const SignIn = ({ isAuthenticated, isLoading, signin }) => {
-  const [formData, setFormData] = useState({
-    email: 'demo@demo.com',
-    password: '123123'
-  })
-
   if (isAuthenticated) return <Redirect to='/' />
-
-  const { email, password } = formData
-
-  const handleChange = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
-
-  const handleSubmit = e => {
-    e.preventDefault()
-
-    if (email === '' || password === '') {
-      setAlert('All fields are required', 'danger')
-      return
-    }
-    signin({ email, password })
-  }
 
   return (
     <PageContainer>
@@ -43,34 +27,41 @@ const SignIn = ({ isAuthenticated, isLoading, signin }) => {
             <Logo />
           </Link>
         </StyledLogo>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor='email'>Email</label>
-          <Input
-            type='text'
-            name='email'
-            value={email}
-            onChange={handleChange}
-          />
-
-          <label htmlFor='password'>Password</label>
-          <Input
-            type='password'
-            name='password'
-            value={password}
-            onChange={handleChange}
-          />
-          {/* TODO {!firebase.auth.isLoaded && 'loding'} */}
-          <Button isLoading={isLoading}>Sign In</Button>
-          <Text mt='2rem'>
-            Don't have an account ?
-            <Link to='/signup'>
-              <Text display='inline' color='blue'>
-                {' '}
-                Sign Up
-              </Text>
-            </Link>
-          </Text>
-        </form>
+        <Form
+          onSubmit={signin}
+          initialValues={INITIAL_VALUES}
+          render={({ handleSubmit, initialValues }) => {
+            return (
+              <form onSubmit={handleSubmit}>
+                <Field
+                  name='email'
+                  label='Email'
+                  isRequired
+                  validate={val => !val && 'required'}
+                  component={TextFieldAdapter}
+                />
+                <Field
+                  name='password'
+                  label='Password'
+                  inputType='password'
+                  isRequired
+                  validate={val => !val && 'required'}
+                  component={TextFieldAdapter}
+                />
+                <Button isLoading={isLoading}>Sign In</Button>
+                <Text mt='2rem'>
+                  Don't have an account ?
+                  <Link to='/signup'>
+                    <Text display='inline' color='blue'>
+                      {' '}
+                      Sign Up
+                    </Text>
+                  </Link>
+                </Text>
+              </form>
+            )
+          }}
+        />
       </Container>
     </PageContainer>
   )
