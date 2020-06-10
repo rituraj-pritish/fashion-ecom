@@ -93,7 +93,7 @@ const Navbar = ({ history, cartCount }) => {
             ref={userRef}
             onClick={() => setShowUserOptions(!showUserOptions)}
           >
-            <Icon height='35px' mb='5px'>
+            <Icon height='1.8rem' mb='0.5rem'>
               <UserIcon />
             </Icon>
 

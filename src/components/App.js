@@ -12,6 +12,7 @@ import { getProducts } from 'redux/products'
 import Navbar from 'components/layout/Navbar'
 import Home from 'components/pages/Home'
 import SignIn from 'components/pages/SignIn'
+import Account from 'components/pages/Account'
 import SignUp from 'components/pages/SignUp'
 import Cart from 'components/pages/Cart'
 import TopButton from 'components/layout/TopButton'
@@ -70,6 +71,7 @@ const App = ({
               <Route exact path='/user/cart' component={Cart} />
               <PrivateRoute exact path='/user/wishlist' component={Wishlist} />
               <PrivateRoute exact path='/user/checkout' component={Payment} />
+              <PrivateRoute exact path='/user/account' component={Account} />
               <Route exact path='/signin' component={SignIn} />
               <Route exact path='/signup' component={SignUp} />
               <Route path='/' component={Home} />

@@ -99,6 +99,25 @@ export const signOut = () => async dispatch => {
   dispatch({ type: LOGOUT })
 }
 
+export const updateUserDetails = ({ name, phone, email, address }) => async (
+  dispatch,
+  getState
+) => {
+  const { auth } = getState()
+  const userId = auth.user?.id
+
+  try {
+    db.collection('users').doc(userId).update({
+      name,
+      phone,
+      email,
+      address
+    })
+  } catch (err) {
+    
+  }
+}
+
 //reducer
 
 const initialState = {

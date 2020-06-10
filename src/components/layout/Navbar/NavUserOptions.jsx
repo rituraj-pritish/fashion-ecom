@@ -7,6 +7,7 @@ import clickOutside from 'helpers/clickOutside'
 import SignOutIcon from 'assets/icons/SignOutIcon'
 import HeartIcon from 'assets/icons/HeartIcon'
 import CartIcon from 'assets/icons/CartIcon'
+import { ReactComponent as AccountIcon } from 'assets/icons/account.svg'
 import Button from 'components/ui/Button'
 import Icon from 'components/ui/Icon'
 import {
@@ -57,6 +58,14 @@ const NavUserOptions = ({
               <CartIcon />
             </Icon>
             Cart
+          </Link>
+        </li>
+        <li>
+          <Link to='/user/account'>
+            <Icon>
+              <AccountIcon />
+            </Icon>
+            Account
           </Link>
         </li>
         <li>

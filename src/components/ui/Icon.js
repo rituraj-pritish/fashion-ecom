@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 import {
   typography,
   space,
@@ -9,26 +9,27 @@ import {
   layout,
   grid,
   border
-} from 'styled-system';
+} from 'styled-system'
 
 export const StyledIcon = styled.div`
     cursor: pointer;
   svg {
     width: 100%;
+    height: ${({ width }) => width};
 
     path {
       fill: ${({ color }) => color};
     }
   }
   ${typography} ${color} ${space} ${position} ${layout} ${grid} ${flexbox} ${border}
-`;
+`
 
 const Icon = ({ children, ...otherProps }) => {
-  return <StyledIcon {...otherProps}>{children}</StyledIcon>;
-};
+  return <StyledIcon {...otherProps}>{children}</StyledIcon>
+}
 
 Icon.defaultProps = {
-  width: '22px',
-};
+  width: '22px'
+}
 
-export default Icon;
+export default Icon
