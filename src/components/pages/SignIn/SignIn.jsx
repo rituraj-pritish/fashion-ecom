@@ -38,7 +38,7 @@ const SignIn = ({ isAuthenticated, isLoading, signin }) => {
                   name='email'
                   label='Email'
                   isRequired
-                  validate={val => !val && 'required'}
+                  validate={val => !val && 'Required'}
                   component={TextFieldAdapter}
                 />
                 <Field
@@ -46,7 +46,7 @@ const SignIn = ({ isAuthenticated, isLoading, signin }) => {
                   label='Password'
                   inputType='password'
                   isRequired
-                  validate={val => !val && 'required'}
+                  validate={val => !val && 'Required'}
                   component={TextFieldAdapter}
                 />
                 <Button isLoading={isLoading}>Sign In</Button>

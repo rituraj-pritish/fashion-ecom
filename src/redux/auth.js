@@ -41,7 +41,7 @@ export const signup = data => async dispatch => {
     }
   } catch (err) {
     dispatch({ type: AUTH_FAILURE, payload: err })
-    setAlert(err.message, 'danger')
+    return { [FORM_ERROR]: err.message }
   }
 }
 
@@ -67,8 +67,7 @@ export const signin = ({ email, password }) => async dispatch => {
     }
   } catch (err) {
     dispatch({ type: AUTH_FAILURE })
-    // setAlert('Wrong Credentials', 'danger')
-    return {[FORM_ERROR]: 'Wrong Credentials'}
+    return { [FORM_ERROR]: 'Wrong Credentials' }
   }
 }
 
@@ -115,9 +114,7 @@ export const updateUserDetails = ({ name, phone, email, address }) => async (
       email,
       address
     })
-  } catch (err) {
-    
-  }
+  } catch (err) {}
 }
 
 //reducer
