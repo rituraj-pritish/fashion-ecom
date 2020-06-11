@@ -5,6 +5,7 @@ import setAlert from 'setAlert'
 import { setAppLoading } from 'redux/app'
 import { getCartItems } from 'redux/cart'
 import { getWishlistItems } from 'redux/wishlist'
+import { FORM_ERROR } from 'final-form'
 
 // types
 
@@ -66,7 +67,8 @@ export const signin = ({ email, password }) => async dispatch => {
     }
   } catch (err) {
     dispatch({ type: AUTH_FAILURE })
-    setAlert('Wrong Credentials', 'danger')
+    // setAlert('Wrong Credentials', 'danger')
+    return {[FORM_ERROR]: 'Wrong Credentials'}
   }
 }
 
