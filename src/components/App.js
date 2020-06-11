@@ -39,14 +39,14 @@ const App = ({
   useEffect(() => {
     getProducts()
     getCurrencies()
-  }, [getCurrencies, getProducts])
+  }, [getCurrencies, getProducts, isAuthenticated])
 
   useEffect(() => {
     authStateChangeHandler()
     // eslint-disable-next-line
   }, [isAuthenticated])
 
-  if (isLoading || !products.length) {
+  if (isLoading) {
     return <Loader />
   }
 
