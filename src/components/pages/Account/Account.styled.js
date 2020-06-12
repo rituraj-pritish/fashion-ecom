@@ -11,7 +11,7 @@ export const StyledForm = styled.form`
     border-top-right-radius: 8px;
   }
 
-  & > div:nth-last-child(2) {
+  & > div:last-child {
     border-bottom-width: 2px;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
@@ -29,11 +29,11 @@ export const StyledForm = styled.form`
     border-right-width: 2px;
   }
 
-  button {
+  /* button {
     width: 16rem;
     margin-left: auto;
     margin-top: 1rem;
-  }
+  } */
 `
 
 export const AddressBlock = styled.div`
@@ -46,5 +46,16 @@ export const AddressBlock = styled.div`
 
   & > div > label {
     font-size: 1.4rem;
+  }
+`
+
+export const ActionButtons = styled.span`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+
+  button {
+    width: 16rem;
+    margin-left: 1rem;
   }
 `

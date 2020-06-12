@@ -104,20 +104,13 @@ export const signOut = () => async dispatch => {
   dispatch({ type: LOGOUT })
 }
 
-export const updateUserDetails = ({ name, phone, email, address }) => async (
-  dispatch,
-  getState
-) => {
+export const updateUserDetails = data => async (dispatch, getState) => {
   const { auth } = getState()
   const userId = auth.user?.id
 
   try {
-    await db.collection('users').doc(userId).update({
-      name,
-      phone,
-      email,
-      address
-    })
+    await db.collection('users').doc(userId).update(data)
+    dispatch({ type: UPDATE_DETAILS_SUCCESS, payload: data })
   } catch (err) {}
 }
 
@@ -147,6 +140,12 @@ export default (state = initialState, { type, payload }) =>
         draft.isLoading = false
         draft.isAuthenticated = false
         draft.user = null
+        break
+      case UPDATE_DETAILS_SUCCESS:
+        draft.user = {
+          id: state.user.id,
+          ...payload
+        }
         break
     }
   })

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { PageContainer } from 'index.styles'
 import { Form, Field } from 'react-final-form'
 import TextFieldAdapter from 'components/shared/forms/TextFieldAdapter'
-import { StyledForm, AddressBlock } from './Account.styled'
+import { StyledForm, AddressBlock, ActionButtons } from './Account.styled'
 import { emailValidator } from 'helpers/validations'
 import Button from 'components/ui/Button'
 
@@ -13,7 +13,6 @@ const Account = ({ user, updateUserDetails }) => {
 
   const handleUpdate = values => {
     setIsEditing(false)
-    console.log('cal')
     const { address_line_1, address_line_2, zip_code, ...otherDetails } = values
 
     updateUserDetails({
@@ -34,29 +33,37 @@ const Account = ({ user, updateUserDetails }) => {
           ...user
         }}
         onSubmit={handleUpdate}
-        render={({ handleSubmit, values }) => {
+        render={({ handleSubmit, pristine }) => {
           return (
             <StyledForm onSubmit={handleSubmit}>
               <Field
                 name='name'
                 label='Name'
                 isRequired
+                readOnly={!isEditing}
                 validate={val => !val && 'Required'}
                 component={TextFieldAdapter}
               />
               <Field
                 name='email'
                 label='Email'
+                readOnly={!isEditing}
                 isRequired
                 validate={emailValidator}
                 component={TextFieldAdapter}
               />
-              <Field name='phone' label='Phone' component={TextFieldAdapter} />
+              <Field
+                name='phone'
+                readOnly={!isEditing}
+                label='Phone'
+                component={TextFieldAdapter}
+              />
               <AddressBlock>
                 Address
                 <Field
                   name='address_line_1'
                   label='Line 1'
+                  readOnly={!isEditing}
                   isRequired
                   validate={val => !val && 'Required'}
                   component={TextFieldAdapter}
@@ -64,6 +71,7 @@ const Account = ({ user, updateUserDetails }) => {
                 <Field
                   name='address_line_2'
                   label='Line 2'
+                  readOnly={!isEditing}
                   isRequired
                   validate={val => !val && 'Required'}
                   component={TextFieldAdapter}
@@ -71,28 +79,36 @@ const Account = ({ user, updateUserDetails }) => {
                 <Field
                   name='zip_code'
                   label='Zip Code'
+                  readOnly={!isEditing}
                   isRequired
                   validate={val => !val && 'Required'}
                   component={TextFieldAdapter}
                 />
               </AddressBlock>
-              {isEditing ? (
-                <>
-                  <Button variant='cancel' onClick={() => setIsEditing(false)} >Cancel</Button>
-                  <Button type='submit'>Save Changes</Button>
-                </>
-              ) : (
-                <Button
-                  type='button'
-                  variant='secondary'
-                  onClick={e => {
-                    e.preventDefault()
-                    setIsEditing(true)
-                  }}
-                >
-                  Edit
-                </Button>
-              )}
+              <ActionButtons>
+                {isEditing ? (
+                  <>
+                    <Button
+                      variant='cancel'
+                      onClick={() => setIsEditing(false)}
+                    >
+                      Cancel
+                    </Button>
+                    <Button type='submit' disabled={pristine} >Save Changes</Button>
+                  </>
+                ) : (
+                  <Button
+                    type='button'
+                    variant='secondary'
+                    onClick={e => {
+                      e.preventDefault()
+                      setIsEditing(true)
+                    }}
+                  >
+                    Edit
+                  </Button>
+                )}
+              </ActionButtons>
             </StyledForm>
           )
         }}

@@ -21,11 +21,17 @@ const StyledInput = styled.input`
   background: #eee;
   margin-bottom: 20px;
   height: 35px;
-  border: 1px solid ${darken(0.10, theme.colors.lightGrey)};
+  border: 1px solid ${darken(0.1, theme.colors.lightGrey)};
+  ${({ readOnly }) =>
+    readOnly &&
+    `
+    opacity: 0.5;
+    pointer-events: none;
+  `};
 
   &:focus {
     border: none;
-    box-shadow: 0px 0px 0px 1px ${lighten(0.10, theme.colors.primary)};
+    box-shadow: 0px 0px 0px 1px ${lighten(0.1, theme.colors.primary)};
   }
 
   &[type='number']::-webkit-inner-spin-button,
