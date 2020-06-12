@@ -1,3 +1,9 @@
 import Account from './Account'
+import { connect } from 'react-redux'
+import { updateUserDetails } from 'redux/auth'
 
-export default Account
+const mapStateToProps = ({ auth }) => ({
+  user: auth.user
+})
+
+export default connect(mapStateToProps, { updateUserDetails })(Account)

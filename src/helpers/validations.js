@@ -9,3 +9,10 @@ export const passwordValidator = (val) => {
   if(!val) return 'Required'
   if(val.length <= 6) return 'Must be greater than six characters'
 }
+
+export const zipCodeValidator = (val) => {
+  if(!val) return 'Required'
+  
+  const regEx = /^[0-9\s]*$/
+  if(!regEx.test(val)) return 'Must be a zip code'
+}

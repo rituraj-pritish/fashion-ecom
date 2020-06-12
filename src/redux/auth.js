@@ -15,6 +15,10 @@ const AUTH_REQUEST = 'AUTH_REQUEST'
 const AUTH_FAILURE = 'AUTH_FAILURE'
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
 
+const UPDATE_DETAILS_REQUEST = 'UPDATE_DETAILS_REQUEST'
+const UPDATE_DETAILS_FAILURE = 'UPDATE_DETAILS_FAILURE'
+const UPDATE_DETAILS_SUCCESS = 'UPDATE_DETAILS_SUCCESS'
+
 // action creators
 
 export const signup = data => async dispatch => {
@@ -108,7 +112,7 @@ export const updateUserDetails = ({ name, phone, email, address }) => async (
   const userId = auth.user?.id
 
   try {
-    db.collection('users').doc(userId).update({
+    await db.collection('users').doc(userId).update({
       name,
       phone,
       email,

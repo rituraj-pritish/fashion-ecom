@@ -1,5 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import { darken, lighten } from 'polished'
+import styled from 'styled-components'
 import {
   space,
   typography,
@@ -8,7 +9,8 @@ import {
   grid,
   flexbox,
   border
-} from 'styled-system';
+} from 'styled-system'
+import theme from 'theme'
 
 const StyledInput = styled.input`
   width: 100%;
@@ -16,13 +18,14 @@ const StyledInput = styled.input`
   border-radius: 5px;
   padding: 1rem;
   font-size: 1.6rem;
-  border: none;
   background: #eee;
   margin-bottom: 20px;
   height: 35px;
+  border: 1px solid ${darken(0.10, theme.colors.lightGrey)};
 
   &:focus {
-    outline: none;
+    border: none;
+    box-shadow: 0px 0px 0px 1px ${lighten(0.10, theme.colors.primary)};
   }
 
   &[type='number']::-webkit-inner-spin-button,
@@ -31,10 +34,10 @@ const StyledInput = styled.input`
     margin: 0;
   }
   ${space} ${typography} ${color} ${layout} ${grid} ${flexbox} ${border}
-`;
+`
 
 const Input = props => {
-  return <StyledInput {...props} />;
-};
+  return <StyledInput {...props} />
+}
 
-export default Input;
+export default Input

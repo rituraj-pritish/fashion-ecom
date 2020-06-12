@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import {space, typography, color, layout,grid,flexbox} from 'styled-system'
 
 const StyledLabel = styled.label`
+  font-size: 1.6rem;
+
   ${({isRequired}) => isRequired && `
     &::after {
       content: '*';

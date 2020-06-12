@@ -14,6 +14,7 @@ import {
 import ClipLoader from 'react-spinners/ClipLoader'
 
 import theme from 'theme'
+import { lighten } from 'polished'
 
 const StyledButton = styled.button`
 width: 100%;
@@ -42,6 +43,10 @@ ${variant({
       borderStyle: 'solid',
       borderColor: theme.colors.primary,
       p: '0.4rem 1rem'
+    },
+    cancel: {
+      bg: lighten(0.2, theme.colors.grey),
+      color: theme.colors.white
     }
   }
 })}
