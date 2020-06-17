@@ -1,20 +1,20 @@
-import React from 'react';
-import StripeCheckout from 'react-stripe-checkout';
-import styled from 'styled-components';
-import Button from '../../ui/Button';
+import React from 'react'
+import PropTypes from 'prop-types'
+import StripeCheckout from 'react-stripe-checkout'
 
-export const StyledButton = styled.button``;
+import Button from '../../ui/Button'
 
-const PaymentButton = ({ amount, setIsOrderPlaced, emptyCart, currency }) => {
-  const handleToken = res => {
-    emptyCart();
-    setIsOrderPlaced(true);
-  };
+const PaymentButton = ({ amount, onOrderComplete, currency }) => {
+  const handleToken = () => {
+    onOrderComplete()
+  }
 
   return (
     <StripeCheckout
       name='Blogg'
-      description={`Payment of ${currency.symbol} ${(currency.rate * amount).toFixed(2)}`}
+      description={`Payment of ${currency.symbol} ${(
+        currency.rate * amount
+      ).toFixed(2)}`}
       currency={currency.code}
       amount={(currency.rate * amount).toFixed(2) * 100}
       token={handleToken}
@@ -23,7 +23,13 @@ const PaymentButton = ({ amount, setIsOrderPlaced, emptyCart, currency }) => {
     >
       <Button fullWidth>Checkout</Button>
     </StripeCheckout>
-  );
-};
+  )
+}
 
-export default PaymentButton;
+PaymentButton.propTypes = {
+  amount: PropTypes.number.isRequired,
+  onOrderComplete: PropTypes.func.isRequired,
+  currency: PropTypes.object.isRequired
+}
+
+export default PaymentButton

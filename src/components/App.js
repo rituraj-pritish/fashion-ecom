@@ -26,7 +26,7 @@ import Product from 'components/pages/Product'
 import Overlay from 'components/layout/Overlay'
 import Footer from 'components/layout/Footer'
 import SearchResults from 'components/SearchResults'
-import Orders from 'components/pages/Orders/Orders'
+import Orders from 'components/pages/Orders'
 import theme from 'theme'
 
 const App = ({

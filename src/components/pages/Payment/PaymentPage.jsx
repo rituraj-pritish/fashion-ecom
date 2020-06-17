@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import Button from '../../ui/Button'
+import Button from 'components/ui/Button'
 import PaymentButton from './PaymentButton'
 import {
   CardInfo,
@@ -9,9 +10,9 @@ import {
   Amount,
   Container
 } from './PaymentsPage.styles'
-import { PageContainer } from '../../../index.styles'
+import { PageContainer } from 'index.styles'
 
-const PaymentsPage = ({ cart, emptyCart, currency }) => {
+const PaymentsPage = ({ cart, emptyCart, currency, addNewOrder }) => {
   const [isOrderPlaced, setIsOrderPlaced] = useState(false)
 
   const amount = cart.reduce(
@@ -20,6 +21,21 @@ const PaymentsPage = ({ cart, emptyCart, currency }) => {
   )
 
   const finalAmount = amount > 100 ? amount : amount + 10
+  const payableAmount = `${currency.symbol} ${(
+    currency.rate * finalAmount
+  ).toFixed(2)}`
+
+  const handleOrderComplete = () => {
+    emptyCart()
+    setIsOrderPlaced(true)
+    addNewOrder({
+      products: cart,
+      currency_code: currency.code,
+      currency_symbol: currency.symbol,
+      currency_rate: currency.rate,
+      order_total: payableAmount,
+    })
+  }
 
   return (
     <PageContainer>
@@ -27,14 +43,11 @@ const PaymentsPage = ({ cart, emptyCart, currency }) => {
         <Container>
           <Amount>
             Total payable amount:
-            <span>{`${currency.symbol} ${(currency.rate * finalAmount).toFixed(
-              2
-            )}`}</span>
+            <span>{payableAmount}</span>
           </Amount>
           <PaymentButton
             amount={finalAmount}
-            emptyCart={emptyCart}
-            setIsOrderPlaced={setIsOrderPlaced}
+            onOrderComplete={handleOrderComplete}
             currency={currency}
           />
 
@@ -59,6 +72,13 @@ const PaymentsPage = ({ cart, emptyCart, currency }) => {
       )}
     </PageContainer>
   )
+}
+
+PaymentsPage.propTypes = {
+  emptyCart: PropTypes.func.isRequired,
+  currency: PropTypes.object.isRequired,
+  cart: PropTypes.array.isRequired,
+  addNewOrder: PropTypes.func.isRequired
 }
 
 export default PaymentsPage
