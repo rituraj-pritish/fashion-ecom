@@ -26,6 +26,7 @@ import Product from 'components/pages/Product'
 import Overlay from 'components/layout/Overlay'
 import Footer from 'components/layout/Footer'
 import SearchResults from 'components/SearchResults'
+import Orders from 'components/pages/Orders/Orders'
 import theme from 'theme'
 
 const App = ({
@@ -72,6 +73,7 @@ const App = ({
               <PrivateRoute exact path='/user/wishlist' component={Wishlist} />
               <PrivateRoute exact path='/user/checkout' component={Payment} />
               <PrivateRoute exact path='/user/account' component={Account} />
+              <PrivateRoute exact path='/user/orders' component={Orders} />
               <Route exact path='/signin' component={SignIn} />
               <Route exact path='/signup' component={SignUp} />
               <Route path='/' component={Home} />
