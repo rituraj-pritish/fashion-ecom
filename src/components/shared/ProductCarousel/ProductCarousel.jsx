@@ -6,17 +6,17 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 import setAlert from 'setAlert'
-import HeartIcon from '../../assets/icons/HeartIcon'
-import SaleBanner from '../pages/Product/SaleBanner'
+import HeartIcon from 'assets/icons/HeartIcon'
+import SaleBanner from 'components/pages/Product/SaleBanner'
 import {
   ProductCarouselContainer,
   CarouselItemContainer,
   ItemBottom,
   Title
 } from './ProductCarousel.styles'
-import Button from '../ui/Button'
-import Icon from '../ui/Icon'
-import Text from '../ui/Text'
+import Button from 'components/ui/Button'
+import Icon from 'components/ui/Icon'
+import Text from 'components/ui/Text'
 
 const settings = {
   infinite: false,

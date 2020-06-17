@@ -5,12 +5,12 @@ import ReactTooltip from 'react-tooltip'
 import setAlert from 'setAlert'
 import returnImg from 'assets/images/return.webp'
 import worldwideImg from 'assets/images/worldwide.webp'
-import Button from '../../../ui/Button'
-import Text from '../../../ui/Text'
-import Icon from '../../../ui/Icon'
+import Button from 'components/ui/Button'
+import Text from 'components/ui/Text'
+import Icon from 'components/ui/Icon'
 import HeartIcon from 'assets/icons/HeartIcon'
 import StarIcon from 'assets/icons/StarIcon'
-import Image from 'components/Image'
+import Image from 'components/shared/Image'
 import {
   SmallImages,
   SmallImage,

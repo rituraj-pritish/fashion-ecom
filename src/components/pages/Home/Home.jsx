@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import shuffleArray from 'helpers/ shuffleArray'
 import { PageContainer } from '../../../index.styles'
-import ProductCarousel from '../../ProductCarousel'
+import ProductCarousel from 'components/shared/ProductCarousel'
 import ShopLinks from './ShopLinks'
 import CollectionContainer from './Collection'
 import Brands from './Brands'
