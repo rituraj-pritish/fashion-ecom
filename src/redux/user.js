@@ -18,5 +18,7 @@ export default (state = initialState, { type, payload }) =>
     //eslint-disable-next-line
     switch (type) {
 
-    }
+      default:
+        break
+    } 
   })

@@ -262,12 +262,17 @@ export default (state = initialState, { type, payload }) =>
       case BACK_TO_CART_SUCCESS: {
         const item = draft.forLater.find(item => item.id === payload)
         item.forLater = false
-        
-        draft.forLater = state.forLater.slice().filter(item => item.id !== payload)
+
+        draft.forLater = state.forLater
+          .slice()
+          .filter(item => item.id !== payload)
         draft.inFocus = null
         draft.items.push(item)
         draft.isLoading = false
         break
       }
+
+      default:
+        break
     }
   })

@@ -72,5 +72,8 @@ export default (state = initialState, { type, payload }) =>
           rate: state.rates[payload.code]
         }
         break
+
+      default:
+        break
     }
   })

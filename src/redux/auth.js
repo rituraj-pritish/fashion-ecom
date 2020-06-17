@@ -147,5 +147,8 @@ export default (state = initialState, { type, payload }) =>
           ...payload
         }
         break
+
+      default:
+        break
     }
   })

@@ -47,5 +47,8 @@ export default (state = initialState, { type, payload }) =>
       case SET_FILTER_CRITERIA:
         draft.filterCriteria = { ...state.filterCriteria, ...payload }
         break
+
+      default:
+        break
     }
   })

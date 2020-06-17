@@ -82,7 +82,6 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) =>
   produce(state, draft => {
-    // eslint-disable-next-line
     switch (type) {
       case GET_WISHLIST_ITEMS_REQUEST:
       case ADD_TO_WISHLIST_REQUEST:
@@ -102,9 +101,14 @@ export default (state = initialState, { type, payload }) =>
         break
 
       case REMOVE_FROM_WISHLIST_SUCCESS:
-        draft.items = state.items.slice().filter(item => item.productId !== payload)
+        draft.items = state.items
+          .slice()
+          .filter(item => item.productId !== payload)
         draft.isLoading = false
         draft.inFocus = null
+        break
+
+      default:
         break
     }
   })
