@@ -3,6 +3,7 @@ import { lighten } from 'polished'
 
 export const Order = styled.div`
   border: 1px solid #eee;
+  border-radius: 4px;
 `
 
 export const TopSection = styled.div`
@@ -25,4 +26,11 @@ export const TopSection = styled.div`
       color: ${lighten(0.2, 'black')};
     }
   }
+`
+
+export const DeliveryDetail = styled.div`
+  font-weight: bold;
+  text-align: left;
+  padding: 0.7rem 2rem;
+  font-size: 1.8rem;
 `

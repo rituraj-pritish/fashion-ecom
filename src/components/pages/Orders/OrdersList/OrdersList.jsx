@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 
 import OrdersProductList from '../OrdersProductList'
-import { Order, TopSection } from './OrdersList.styled'
+import { Order, TopSection, DeliveryDetail } from './OrdersList.styled'
 
 const OrdersList = ({ orders }) => {
   if (!orders.length) return 'No orders placed yet'
@@ -13,7 +13,14 @@ const OrdersList = ({ orders }) => {
 
     const orderPlaced = moment(order_placed)
     const currentDate = moment(new Date().toISOString())
-    const dateDifference = currentDate.diff(orderPlaced,'days')
+    const dateDifference = currentDate.diff(orderPlaced, 'days')
+
+    const deliveryDetail =
+      dateDifference > 4
+        ? `Delivered ${moment(orderPlaced)
+            .add(3, 'days')
+            .format('DD MMM YYYY')}`
+        : `Arriving ${moment(orderPlaced).add(3, 'days').format('dddd')}`
 
     return (
       <Order>
@@ -31,6 +38,8 @@ const OrdersList = ({ orders }) => {
             <div>{shipping_name}</div>
           </div>
         </TopSection>
+
+        <DeliveryDetail>{deliveryDetail}</DeliveryDetail>
 
         <OrdersProductList {...order} />
       </Order>
