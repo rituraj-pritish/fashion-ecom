@@ -9,6 +9,7 @@ export const PageContainer = styled.div`
   width: 100%;
   text-align: center;
   color: ${({theme}) => theme.colors.black};
+  font-size: 1.6rem;
 
   @media ${sizes.md} {
     padding: 15px ${({ theme }) => theme.padding.md} 30px
