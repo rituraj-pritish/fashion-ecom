@@ -1,24 +1,39 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
-import { ProductWrapper, Details, ListWrapper } from './OrdersProductList.styled'
+import {
+  ProductWrapper,
+  Details,
+  ListWrapper
+} from './OrdersProductList.styled'
 
 const OrdersProductList = ({ products, currency_rate, currency_symbol }) => {
   return (
     <ListWrapper>
-      {products.map(({ name, price, imageUrl }) => (
-        <ProductWrapper>
-          <div>
-            <img src={imageUrl} alt={name} />
-          </div>
-          <Details>
-            <div>{name}</div>
+      {products
+        .slice(0, 2)
+        .map(({ productId, variantId, name, price, imageUrl }) => (
+          <ProductWrapper>
             <div>
-              {`${currency_symbol} ${(currency_rate * price).toFixed(2)}`}
+              <Link to={`/product/${productId}/variant/${variantId}`}>
+                <img src={imageUrl} alt={name} />
+              </Link>
             </div>
-          </Details>
-        </ProductWrapper>
-      ))}
+            <Details>
+              <Link to={`/product/${productId}/variant/${variantId}`}>
+                <div>{name}</div>
+              </Link>
+              <div>
+                {`${currency_symbol} ${(currency_rate * price).toFixed(2)}`}
+              </div>
+            </Details>
+          </ProductWrapper>
+        ))}
+      {products.length > 2 &&
+        `. . . ${products.length - 2} more ${
+          products.length > 3 ? 'products' : 'product'
+        }`}
     </ListWrapper>
   )
 }

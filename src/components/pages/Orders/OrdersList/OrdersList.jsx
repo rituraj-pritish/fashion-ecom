@@ -3,7 +3,13 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 
 import OrdersProductList from '../OrdersProductList'
-import { Order, TopSection, DeliveryDetail } from './OrdersList.styled'
+import {
+  Order,
+  TopSection,
+  DeliveryDetail,
+  BottomSection
+} from './OrdersList.styled'
+import Button from 'components/ui/Button'
 
 const OrdersList = ({ orders }) => {
   if (!orders.length) return 'No orders placed yet'
@@ -41,7 +47,13 @@ const OrdersList = ({ orders }) => {
 
         <DeliveryDetail>{deliveryDetail}</DeliveryDetail>
 
-        <OrdersProductList {...order} />
+        <BottomSection>
+          <OrdersProductList {...order} />
+          {/* <div>
+            <Button>Add Review</Button>
+            <Button>View Details</Button>
+          </div> */}
+        </BottomSection>
       </Order>
     )
   })

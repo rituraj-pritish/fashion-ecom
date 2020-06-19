@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const ListWrapper = styled.div`
   padding-left: 2rem;
+  text-align: left;
 `
 
 export const ProductWrapper = styled.div`

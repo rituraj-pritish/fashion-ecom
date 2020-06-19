@@ -3,9 +3,13 @@ import PropTypes from 'prop-types'
 
 import { PageContainer } from 'index.styles'
 import OrdersList from './OrdersList'
-import { OrdersWrapper } from './OrdersProductList/Orders.styled'
+import {
+  OrdersWrapper,
+  SpinnerWrapper
+} from './OrdersProductList/Orders.styled'
+import Spinner from 'components/shared/Spinner/Spinner'
 
-const Orders = ({ fetchOrders, orders }) => {
+const Orders = ({ fetchOrders, orders, isLoading }) => {
   useEffect(() => {
     fetchOrders()
   }, [fetchOrders])
@@ -13,7 +17,13 @@ const Orders = ({ fetchOrders, orders }) => {
   return (
     <PageContainer>
       <OrdersWrapper>
-        <OrdersList orders={orders} />
+        {isLoading ? (
+          <SpinnerWrapper>
+            <Spinner size={35} />
+          </SpinnerWrapper>
+        ) : (
+          <OrdersList orders={orders} />
+        )}
       </OrdersWrapper>
     </PageContainer>
   )
@@ -21,7 +31,8 @@ const Orders = ({ fetchOrders, orders }) => {
 
 Orders.propTypes = {
   fetchOrders: PropTypes.func.isRequired,
-  orders: PropTypes.array.isRequired
+  orders: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired
 }
 
 export default Orders
