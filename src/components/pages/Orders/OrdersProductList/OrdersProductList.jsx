@@ -7,6 +7,7 @@ import {
   Details,
   ListWrapper
 } from './OrdersProductList.styled'
+import { MoreProducts } from '../OrdersList/OrdersList.styled'
 
 const OrdersProductList = ({ products, currency_rate, currency_symbol }) => {
   return (
@@ -30,10 +31,12 @@ const OrdersProductList = ({ products, currency_rate, currency_symbol }) => {
             </Details>
           </ProductWrapper>
         ))}
-      {products.length > 2 &&
-        `. . . ${products.length - 2} more ${
-          products.length > 3 ? 'products' : 'product'
-        }`}
+      <MoreProducts>
+        {products.length > 2 &&
+          `. . . ${products.length - 2} more ${
+            products.length > 3 ? 'products' : 'product'
+          }`}
+      </MoreProducts>
     </ListWrapper>
   )
 }

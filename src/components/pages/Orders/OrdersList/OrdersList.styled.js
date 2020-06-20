@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { lighten } from 'polished'
+import theme from 'theme'
+import sizes from 'sizes'
 
 export const Order = styled.div`
   border: 1px solid #eee;
@@ -28,6 +30,14 @@ export const TopSection = styled.div`
       color: ${lighten(0.2, 'black')};
     }
   }
+
+  @media ${sizes.md} {
+    justify-content: space-between;
+
+    & > div {
+      margin: 0; 
+    }
+  }
 `
 
 export const DeliveryDetail = styled.div`
@@ -42,4 +52,9 @@ export const BottomSection = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-right: 2rem;
+`
+
+export const MoreProducts = styled.div`
+  font-size: 1.3rem;
+  color: ${theme.colors.grey};
 `
