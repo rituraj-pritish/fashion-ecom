@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import Rating from 'react-rating'
 
-import { ReactComponent as StarOutlineIcon } from 'assets/icons/star-outline.svg'
 import OrdersProductList from '../OrdersProductList'
 import {
   Order,
@@ -12,8 +10,7 @@ import {
   BottomSection
 } from './OrdersList.styled'
 import Button from 'components/ui/Button'
-import StarIcon from 'assets/icons/StarIcon'
-import Icon from 'components/ui/Icon'
+
 import RateProducts from '../RateProducts/RateProducts'
 
 const OrdersList = ({ orders }) => {
@@ -57,7 +54,7 @@ const OrdersList = ({ orders }) => {
           <div>
             {/* <Button variant='secondary' mb='2rem' >Write a Review</Button> */}
             {/* <Button variant='secondary' mb='2rem'>Rate Product</Button> */}
-            <RateProducts order={order} />
+            <RateProducts {...order} />
             {/* <Button>View Details</Button> */}
           </div>
         </BottomSection>

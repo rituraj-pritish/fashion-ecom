@@ -15,11 +15,6 @@ function ReactModalAdapter ({ className, modalClassName, ...props }) {
   )
 }
 
-ReactModalAdapter.propTypes = {
-  className: PropTypes.string,
-  modalClassName: PropTypes.string
-}
-
 // reference - https://github.com/reactjs/react-modal/issues/627#issuecomment-578814799
 export const StyledModal = styled(ReactModalAdapter).attrs({
   overlayClassName: 'Overlay',
@@ -44,6 +39,9 @@ export const StyledModal = styled(ReactModalAdapter).attrs({
     border-radius: 0.3rem;
     outline: none;
     padding: 1.6rem;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
     overflow: ${({ hasFixedHeader }) => hasFixedHeader ? 'hidden' : 'auto'};
     ${({ modalStyles }) => modalStyles && css`
       top: 50%;
@@ -54,16 +52,6 @@ export const StyledModal = styled(ReactModalAdapter).attrs({
   }
 `
 
-StyledModal.propTypes = {
-  hasFixedHeader: PropTypes.bool,
-  modalStyles: PropTypes.object
-}
-
-StyledModal.defaultProps = {
-  hasFixedHeader: false,
-  modalStyles: null
-}
-
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -73,16 +61,8 @@ export const Header = styled.div`
   margin-bottom: 1rem;
 `
 
-Header.propTypes = {
-  position: PropTypes.oneOf(['left', 'right', 'auto'])
-}
-
-Header.defaultProps = {
-  position: 'auto'
-}
-
 export const Footer = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 1.6rem;
 `
 
 export const Wrapper = styled.div`
@@ -107,16 +87,6 @@ export const Title = styled.div`
   }};
 `
 
-Title.propTypes = {
-  align: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large'])
-}
-
-Title.defaultProps = {
-  align: 'center',
-  size: 'small'
-}
-
 export const Content = styled.div`
   flex: 1;
   margin-top: 1.6rem;
@@ -124,12 +94,14 @@ export const Content = styled.div`
   overflow: ${({ overflowHidden }) => overflowHidden && 'hidden'};  
 `
 
-Content.propTypes = {
-  hasFixedHeader: PropTypes.bool,
-  overflowHidden: PropTypes.bool
-}
+export const CloseIconWrapper = styled.div`
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+  cursor: pointer;
 
-Content.defaultProps = {
-  hasFixedHeader: false,
-  overflowHidden: false
-}
+  svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+`
