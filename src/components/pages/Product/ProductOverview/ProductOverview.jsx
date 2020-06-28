@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import LazyLoad from 'react-lazy-load'
 import ReactTooltip from 'react-tooltip'
+import Rating from 'react-rating'
 
+import { ReactComponent as StarOutlineIcon } from 'assets/icons/star-outline.svg'
 import setAlert from 'setAlert'
 import returnImg from 'assets/images/return.webp'
 import worldwideImg from 'assets/images/worldwide.webp'
@@ -19,7 +21,6 @@ import {
   ProductOverviewContainer,
   Variants,
   Variant,
-  Rating,
   CartBtn,
   Policy,
   Wishlist
@@ -27,6 +28,7 @@ import {
 import { useEffect } from 'react'
 import ProductDetails from '../ProductDetails'
 import QuantityCounter from 'components/shared/QuantityCounter'
+import theme from 'theme'
 
 const ProductOverview = ({
   product,
@@ -40,7 +42,7 @@ const ProductOverview = ({
   variantId,
   currency
 }) => {
-  const { name, rating, brand, variants, id } = product
+  const { name, avg_rating, brand, variants, id } = product
 
   const [variant, setVariant] = useState(variantId)
   const [currentImg, setCurrentImg] = useState()
@@ -77,15 +79,6 @@ const ProductOverview = ({
       </SmallImage>
     )
   })
-
-  const stars = []
-  for (let i = 1; i <= rating; i++) {
-    stars.push(
-      <Icon key={i} color='golden'>
-        <StarIcon />
-      </Icon>
-    )
-  }
 
   const isInStock = variants[variant]?.stock > 0
   const isInCart = cart.find(item => item.variantId === variantId)
@@ -165,7 +158,20 @@ const ProductOverview = ({
         <Text fontSize='2.3rem'>
           {`${currency.symbol} ${(currency.rate * price).toFixed(2)}`}
         </Text>
-        <Rating>{stars}</Rating>
+        <Rating
+          initialRating={avg_rating}
+          emptySymbol={
+            <Icon mr='0.3rem' color={theme.colors.golden}>
+              <StarOutlineIcon />
+            </Icon>
+          }
+          fullSymbol={
+            <Icon color={theme.colors.golden} mr='0.3rem'>
+              <StarIcon />
+            </Icon>
+          }
+          readonly
+        />
         <Text fontSize='1.9rem' color={isInStock ? 'green' : 'red'}>
           {isInStock ? 'In Stock' : 'Out of stock'}
         </Text>

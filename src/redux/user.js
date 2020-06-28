@@ -12,6 +12,10 @@ const ADD_NEW_ORDER_REQUEST = 'ADD_NEW_ORDER_REQUEST'
 const ADD_NEW_ORDER_SUCCESS = 'ADD_NEW_ORDER_SUCCESS'
 const ADD_NEW_ORDER_FAILURE = 'ADD_NEW_ORDER_FAILURE'
 
+const RATE_PRODUCT_REQUEST = 'RATE_PRODUCT_REQUEST'
+const RATE_PRODUCT_SUCCESS = 'RATE_PRODUCT_SUCCESS'
+const RATE_PRODUCT_FAILURE = 'RATE_PRODUCT_FAILURE'
+
 // action creators
 
 export const fetchOrders = () => async (dispatch, getState) => {
@@ -62,11 +66,18 @@ export const rateProduct = (rating, orderId, productId, products) => async (
   dispatch,
   getState
 ) => {
-  dispatch({ type: ADD_NEW_ORDER_REQUEST })
+  dispatch({ type: RATE_PRODUCT_REQUEST, payload: productId })
   const { auth } = getState()
   const user = auth.user
 
   const product = products.find(({ productId: pId }) => pId === productId)
+  const idx = products.findIndex(({ productId: pId }) => pId === productId)
+
+  const newProductsArray = [...products]
+  newProductsArray[idx] = {
+    ...product,
+    rating
+  }
 
   try {
     await db
@@ -75,22 +86,23 @@ export const rateProduct = (rating, orderId, productId, products) => async (
       .collection('items')
       .doc(orderId)
       .update({
-        products: [
-          ...products.filter(({ productId: pId }) => pId !== productId),
-          {
-            ...product,
-            rating
-          }
-        ]
+        products: newProductsArray
       })
-  } catch (err) {}
+    dispatch({
+      type: RATE_PRODUCT_SUCCESS,
+      payload: { orderId, productId, rating, products }
+    })
+  } catch (err) {
+    dispatch({ type: RATE_PRODUCT_FAILURE, payload: productId })
+  }
 }
 
 // reducer
 
 const initialState = {
   orders: [],
-  isLoading: false
+  isLoading: false,
+  isRating: []
 }
 
 export default (state = initialState, { type, payload }) =>
@@ -110,6 +122,27 @@ export default (state = initialState, { type, payload }) =>
       case ADD_NEW_ORDER_FAILURE:
       case FETCH_ORDERS_FAILURE:
         draft.isLoading = false
+        break
+
+      case RATE_PRODUCT_REQUEST:
+        draft.isRating = [...state.isRating, payload]
+        break
+
+      case RATE_PRODUCT_SUCCESS: {
+        const orderIdx = state.orders.findIndex(
+          ({ order_id }) => order_id === payload.orderId
+        )
+        const productIdx = state.orders[orderIdx].products.findIndex(
+          ({ productId }) => productId === payload.productId
+        )
+
+        draft.orders[orderIdx].products[productIdx].rating = payload.rating
+        draft.isRating = state.isRating.filter(id => id !== payload.productId)
+        break
+      }
+
+      case RATE_PRODUCT_FAILURE:
+        draft.isRating = state.isRating.filter(id => id !== payload)
         break
 
       default:

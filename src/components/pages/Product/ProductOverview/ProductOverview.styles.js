@@ -64,10 +64,6 @@ export const ActionsContainer = styled.div`
   grid-row-gap: 15px;
 `
 
-export const Rating = styled.div`
-  display: flex;
-`
-
 export const Policy = styled.div`
   display: flex;
   justify-content: flex-start;

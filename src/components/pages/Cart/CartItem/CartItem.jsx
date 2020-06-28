@@ -10,6 +10,7 @@ import Text from '../../../ui/Text'
 import TrashIcon from '../../../../assets/icons/TrashIcon'
 import { CartItemContainer, Details, Remove, Loader } from './CartItem.styles'
 import { Link } from 'react-router-dom'
+import LoadingWrap from 'components/shared/LoadingWrap'
 
 const CartItem = ({
   page,
@@ -54,51 +55,48 @@ const CartItem = ({
     )
 
   return (
-    <CartItemContainer isLoading={isLoading}>
-      {isLoading && (
-        <Loader>
-          <MoonLoader size={35} />
-        </Loader>
-      )}
-      <LazyLoad className='lazyload'>
-        <Link to={`/product/${productId}/variant/${variantId}`}>
-          <img src={imageUrl} alt={name} />
-        </Link>
-      </LazyLoad>
+    <LoadingWrap isLoading={isLoading} >
+      <CartItemContainer>
+        <LazyLoad className='lazyload'>
+          <Link to={`/product/${productId}/variant/${variantId}`}>
+            <img src={imageUrl} alt={name} />
+          </Link>
+        </LazyLoad>
 
-      <Details>
-        <p>{name}</p>
+        <Details>
+          <p>{name}</p>
 
-        {page === 'cart' && (
-          <QuantityCounter
-            count={quantity}
-            onIncrement={() => {
-              updateCart({ id: variantId, quantity: quantity + 1 })
-            }}
-            onDecrement={() => {
-              if (quantity === 1) return
-              updateCart({ id: variantId, quantity: quantity - 1 })
-            }}
-          />
-        )}
-      </Details>
+          {page === 'cart' && (
+            <QuantityCounter
+              count={quantity}
+              onIncrement={() => {
+                updateCart({ id: variantId, quantity: quantity + 1 })
+              }}
+              onDecrement={() => {
+                if (quantity === 1) return
+                updateCart({ id: variantId, quantity: quantity - 1 })
+              }}
+            />
+          )}
+        </Details>
 
-      <Text fontWeight='bold'>
-        {`${currency.symbol} `}
-        {quantity
-          ? (
-              Math.round(quantity * (currency.rate * price) * 100) / 100
-            ).toFixed(2)
-          : price}
-      </Text>
+        <Text fontWeight='bold'>
+          {`${currency.symbol} `}
+          {quantity
+            ? (
+                Math.round(quantity * (currency.rate * price) * 100) / 100
+              ).toFixed(2)
+            : price}
+        </Text>
 
-      <Remove className='far fa-trash-alt'>
-        <Icon width='16px' onClick={handleRemove}>
-          <TrashIcon />
-        </Icon>
-        {false && secondaryCallToAction}
-      </Remove>
-    </CartItemContainer>
+        <Remove className='far fa-trash-alt'>
+          <Icon width='16px' onClick={handleRemove}>
+            <TrashIcon />
+          </Icon>
+          {false && secondaryCallToAction}
+        </Remove>
+      </CartItemContainer>
+    </LoadingWrap>
   )
 }
 

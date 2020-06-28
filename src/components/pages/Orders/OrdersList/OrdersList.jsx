@@ -10,8 +10,8 @@ import {
   BottomSection
 } from './OrdersList.styled'
 import Button from 'components/ui/Button'
+import RateProducts from '../RateProducts'
 
-import RateProducts from '../RateProducts/RateProducts'
 
 const OrdersList = ({ orders }) => {
   if (!orders.length) return 'No orders placed yet'

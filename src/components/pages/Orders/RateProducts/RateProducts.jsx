@@ -9,9 +9,11 @@ import Modal from 'components/shared/Modal/Modal'
 import Text from 'components/ui/Text'
 import { ProductWrapper, ProductsList } from './RateProducts.styled'
 import Rating from 'react-rating'
+import LoadingWrap from 'components/shared/LoadingWrap'
+import theme from 'theme'
 
-const RateProducts = ({ products, order_id }) => {
-  const [showModal, setShowModal] = useState(true)
+const RateProducts = ({ products, order_id, rateProduct, isRating }) => {
+  const [showModal, setShowModal] = useState(false)
   return (
     <>
       <Button variant='secondary' onClick={() => setShowModal(true)}>
@@ -28,27 +30,33 @@ const RateProducts = ({ products, order_id }) => {
         hasFixedHeader
       >
         <ProductsList>
-          {products.map(({ imageUrl, name, productId }) => (
-            <ProductWrapper>
-              <div>
+          {products.map(({ imageUrl, name, productId, rating }) => (
+            <LoadingWrap isLoading={isRating.includes(productId)}>
+              <ProductWrapper>
                 <div>
-                  <img src={imageUrl} alt={name} />
+                  <div>
+                    <img src={imageUrl} alt={name} />
+                  </div>
+                  <Text>{name}</Text>
                 </div>
-                <Text>{name}</Text>
-              </div>
-              <Rating
-                emptySymbol={
-                  <Icon mr='0.3rem'>
-                    <StarOutlineIcon />
-                  </Icon>
-                }
-                fullSymbol={
-                  <Icon color='golden' mr='0.3rem'>
-                    <StarIcon />
-                  </Icon>
-                }
-              />
-            </ProductWrapper>
+                <Rating
+                  initialRating={rating}
+                  emptySymbol={
+                    <Icon mr='0.3rem' color={theme.colors.golden}>
+                      <StarOutlineIcon />
+                    </Icon>
+                  }
+                  fullSymbol={
+                    <Icon color={theme.colors.golden} mr='0.3rem'>
+                      <StarIcon />
+                    </Icon>
+                  }
+                  onChange={rating =>
+                    rateProduct(rating, order_id, productId, products)
+                  }
+                />
+              </ProductWrapper>
+            </LoadingWrap>
           ))}
         </ProductsList>
       </Modal>
