@@ -9,7 +9,7 @@ export default {
     white: '#ffffff',
     red: '#ef4148',
     green: '#5ac12a',
-    golden: '#FFD700'
+    golden: '#FFD700',
   },
   navHt: '50px',
   padding: {

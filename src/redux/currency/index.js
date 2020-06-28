@@ -49,7 +49,6 @@ export const changeCurrency = code => {
 
 export default (state = initialState, { type, payload }) =>
   produce(state, draft => {
-    //eslint-disable-next-line
     switch (type) {
       case GET_CURRENCIES_REQUEST:
         draft.isLoading = true

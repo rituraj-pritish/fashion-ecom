@@ -58,6 +58,34 @@ export const addNewOrder = data => async (dispatch, getState) => {
   }
 }
 
+export const rateProduct = (rating, orderId, productId, products) => async (
+  dispatch,
+  getState
+) => {
+  dispatch({ type: ADD_NEW_ORDER_REQUEST })
+  const { auth } = getState()
+  const user = auth.user
+
+  const product = products.find(({ productId: pId }) => pId === productId)
+
+  try {
+    await db
+      .collection('orders')
+      .doc(user.id)
+      .collection('items')
+      .doc(orderId)
+      .update({
+        products: [
+          ...products.filter(({ productId: pId }) => pId !== productId),
+          {
+            ...product,
+            rating
+          }
+        ]
+      })
+  } catch (err) {}
+}
+
 // reducer
 
 const initialState = {
@@ -67,7 +95,6 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) =>
   produce(state, draft => {
-    //eslint-disable-next-line
     switch (type) {
       case ADD_NEW_ORDER_REQUEST:
       case FETCH_ORDERS_REQUEST:

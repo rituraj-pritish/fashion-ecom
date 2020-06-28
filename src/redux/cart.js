@@ -192,7 +192,6 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) =>
   produce(state, draft => {
-    //eslint-disable-next-line
     switch (type) {
       case BACK_TO_CART_REQUEST:
       case SAVE_FOR_LATER_REQUEST:
