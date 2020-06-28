@@ -1,6 +1,7 @@
 import produce from 'immer'
 import { db } from 'services/firebase'
 import getNewUid from 'helpers/getNewUid'
+import { updateProductRating } from './products'
 
 // types
 
@@ -92,6 +93,7 @@ export const rateProduct = (rating, orderId, productId, products) => async (
       type: RATE_PRODUCT_SUCCESS,
       payload: { orderId, productId, rating, products }
     })
+    dispatch(updateProductRating(productId, rating))
   } catch (err) {
     dispatch({ type: RATE_PRODUCT_FAILURE, payload: productId })
   }

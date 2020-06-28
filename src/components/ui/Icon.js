@@ -12,7 +12,7 @@ import {
 } from 'styled-system'
 
 export const StyledIcon = styled.div`
-    cursor: pointer;
+    cursor: ${({ noPointer }) => (noPointer ? 'initial' : 'pointer')};
   svg {
     width: 100%;
     height: ${({ width }) => width};

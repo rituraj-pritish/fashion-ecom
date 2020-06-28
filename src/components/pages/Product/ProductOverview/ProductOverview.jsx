@@ -161,12 +161,12 @@ const ProductOverview = ({
         <Rating
           initialRating={avg_rating}
           emptySymbol={
-            <Icon mr='0.3rem' color={theme.colors.golden}>
+            <Icon noPointer mr='0.3rem' color={theme.colors.golden}>
               <StarOutlineIcon />
             </Icon>
           }
           fullSymbol={
-            <Icon color={theme.colors.golden} mr='0.3rem'>
+            <Icon noPointer color={theme.colors.golden} mr='0.3rem'>
               <StarIcon />
             </Icon>
           }

@@ -19,6 +19,24 @@ export const getProducts = () => async dispatch => {
   }
 }
 
+export const updateProductRating = (productId, rating) => async dispatch => {
+  try {
+    const product = await (
+      await db.collection('products').doc(productId).get()
+    ).data()
+    const { avg_rating, total_ratings } = product
+    const newRating =
+      (avg_rating * total_ratings + rating) / (total_ratings + 1)
+    await db
+      .collection('products')
+      .doc(productId)
+      .update({
+        avg_rating: Math.round(newRating * 100) / 100,
+        total_ratings: total_ratings + 1
+      })
+  } catch (err) {}
+}
+
 export const setFilterCriteria = criteria => ({
   type: SET_FILTER_CRITERIA,
   payload: criteria
