@@ -31,8 +31,8 @@ const Modal = ({
     >
       <Header hasFixedHeader={hasFixedHeader}>{!!header && header}</Header>
       {showCloseButton && (
-        <CloseIconWrapper>
-          <CloseIcon onClick={onRequestClose} />
+        <CloseIconWrapper onClick={onRequestClose}>
+          <CloseIcon />
         </CloseIconWrapper>
       )}
       <Content hasFixedHeader={hasFixedHeader}>{children}</Content>

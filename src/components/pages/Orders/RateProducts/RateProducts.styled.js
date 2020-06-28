@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const ProductsList = styled.div`
-  /* overflow-y: auto; */
+  padding-right: 1.6rem;
   padding-top: 2rem;
 `
 

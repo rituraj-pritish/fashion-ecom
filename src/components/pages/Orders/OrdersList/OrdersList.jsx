@@ -11,7 +11,7 @@ import {
 } from './OrdersList.styled'
 import Button from 'components/ui/Button'
 import RateProducts from '../RateProducts'
-
+import ReviewProductList from '../ReviewProductList/ReviewProductList'
 
 const OrdersList = ({ orders }) => {
   if (!orders.length) return 'No orders placed yet'
@@ -52,10 +52,11 @@ const OrdersList = ({ orders }) => {
         <BottomSection>
           <OrdersProductList {...order} />
           <div>
-            {/* <Button variant='secondary' mb='2rem' >Write a Review</Button> */}
-            {/* <Button variant='secondary' mb='2rem'>Rate Product</Button> */}
+            <ReviewProductList {...order} />
             <RateProducts {...order} />
-            {/* <Button>View Details</Button> */}
+            {/* <Button variant='secondary'>
+              View Details
+            </Button> */}
           </div>
         </BottomSection>
       </Order>

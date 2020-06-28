@@ -35,7 +35,7 @@ export const TopSection = styled.div`
     justify-content: space-between;
 
     & > div {
-      margin: 0; 
+      margin: 0;
     }
   }
 `
@@ -50,8 +50,14 @@ export const DeliveryDetail = styled.div`
 export const BottomSection = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding-right: 2rem;
+
+  & > div:last-child {
+    button {
+      margin-bottom: 1rem;
+    }
+  }
 `
 
 export const MoreProducts = styled.div`

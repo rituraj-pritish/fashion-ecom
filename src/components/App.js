@@ -28,6 +28,7 @@ import Footer from 'components/layout/Footer'
 import SearchResults from 'components/SearchResults'
 import Orders from 'components/pages/Orders'
 import theme from 'theme'
+import Review from 'components/pages/Review/Review'
 
 const App = ({
   isAuthenticated,
@@ -74,6 +75,11 @@ const App = ({
               <PrivateRoute exact path='/user/checkout' component={Payment} />
               <PrivateRoute exact path='/user/account' component={Account} />
               <PrivateRoute exact path='/user/orders' component={Orders} />
+              <PrivateRoute
+                exact
+                path='/user/review/:orderId/p/:productId/v/:variantId'
+                component={Review}
+              />
               <Route exact path='/signin' component={SignIn} />
               <Route exact path='/signup' component={SignUp} />
               <Route path='/' component={Home} />

@@ -36,7 +36,7 @@ export const StyledModal = styled(ReactModalAdapter).attrs({
     bottom: 1.6rem;
     position: absolute;
     background: ${theme.colors.white};
-    border-radius: 0.3rem;
+    border-radius: 0.8rem;
     outline: none;
     padding: 1.6rem;
     padding-bottom: 0;
