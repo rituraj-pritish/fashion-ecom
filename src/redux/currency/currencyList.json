@@ -9,7 +9,7 @@
     "name_plural": "US dollars"
   },
   "CAD": {
-    "symbol": "CA$",
+    "symbol": "$",
     "name": "Canadian Dollar",
     "symbol_native": "$",
     "decimal_digits": 2,
@@ -27,7 +27,7 @@
     "name_plural": "Euros"
   },
   "AUD": {
-    "symbol": "AU$",
+    "symbol": "$",
     "name": "Australian Dollar",
     "symbol_native": "$",
     "decimal_digits": 2,
@@ -45,7 +45,7 @@
     "name_plural": "Bulgarian leva"
   },
   "CHF": {
-    "symbol": "CHf",
+    "symbol": "f",
     "name": "Swiss Franc",
     "symbol_native": "CHF",
     "decimal_digits": 2,
@@ -54,9 +54,9 @@
     "name_plural": "Swiss francs"
   },
   "CNY": {
-    "symbol": "CN¥",
+    "symbol": "¥",
     "name": "Chinese Yuan",
-    "symbol_native": "CN¥",
+    "symbol_native": "¥",
     "decimal_digits": 2,
     "rounding": 0,
     "code": "CNY",
@@ -70,15 +70,6 @@
     "rounding": 0,
     "code": "CZK",
     "name_plural": "Czech Republic korunas"
-  },
-  "DKK": {
-    "symbol": "Dkr",
-    "name": "Danish Krone",
-    "symbol_native": "kr",
-    "decimal_digits": 2,
-    "rounding": 0,
-    "code": "DKK",
-    "name_plural": "Danish kroner"
   },
   "GBP": {
     "symbol": "£",
@@ -97,15 +88,6 @@
     "rounding": 0,
     "code": "HRK",
     "name_plural": "Croatian kunas"
-  },
-  "HUF": {
-    "symbol": "Ft",
-    "name": "Hungarian Forint",
-    "symbol_native": "Ft",
-    "decimal_digits": 0,
-    "rounding": 0,
-    "code": "HUF",
-    "name_plural": "Hungarian forints"
   },
   "IDR": {
     "symbol": "Rp",
@@ -134,15 +116,6 @@
     "code": "INR",
     "name_plural": "Indian rupees"
   },
-  "ISK": {
-    "symbol": "Ikr",
-    "name": "Icelandic Króna",
-    "symbol_native": "kr",
-    "decimal_digits": 0,
-    "rounding": 0,
-    "code": "ISK",
-    "name_plural": "Icelandic krónur"
-  },
   "JPY": {
     "symbol": "¥",
     "name": "Japanese Yen",
@@ -162,7 +135,7 @@
     "name_plural": "South Korean won"
   },
   "MXN": {
-    "symbol": "MX$",
+    "symbol": "$",
     "name": "Mexican Peso",
     "symbol_native": "$",
     "decimal_digits": 2,
@@ -179,17 +152,8 @@
     "code": "MYR",
     "name_plural": "Malaysian ringgits"
   },
-  "NOK": {
-    "symbol": "Nkr",
-    "name": "Norwegian Krone",
-    "symbol_native": "kr",
-    "decimal_digits": 2,
-    "rounding": 0,
-    "code": "NOK",
-    "name_plural": "Norwegian kroner"
-  },
   "NZD": {
-    "symbol": "NZ$",
+    "symbol": "$",
     "name": "New Zealand Dollar",
     "symbol_native": "$",
     "decimal_digits": 2,
@@ -215,15 +179,6 @@
     "code": "PLN",
     "name_plural": "Polish zlotys"
   },
-  "RON": {
-    "symbol": "RON",
-    "name": "Romanian Leu",
-    "symbol_native": "RON",
-    "decimal_digits": 2,
-    "rounding": 0,
-    "code": "RON",
-    "name_plural": "Romanian lei"
-  },
   "RUB": {
     "symbol": "₽",
     "name": "Russian Ruble",
@@ -233,17 +188,8 @@
     "code": "RUB",
     "name_plural": "Russian rubles"
   },
-  "SEK": {
-    "symbol": "Skr",
-    "name": "Swedish Krona",
-    "symbol_native": "kr",
-    "decimal_digits": 2,
-    "rounding": 0,
-    "code": "SEK",
-    "name_plural": "Swedish kronor"
-  },
   "SGD": {
-    "symbol": "S$",
+    "symbol": "$",
     "name": "Singapore Dollar",
     "symbol_native": "$",
     "decimal_digits": 2,

@@ -12,6 +12,7 @@ import {
 import Button from 'components/ui/Button'
 import RateProducts from '../RateProducts'
 import ReviewProductList from '../ReviewProductList/ReviewProductList'
+import randomNo from 'helpers/randomNo'
 
 const OrdersList = ({ orders }) => {
   if (!orders.length) return 'No orders placed yet'
@@ -26,7 +27,7 @@ const OrdersList = ({ orders }) => {
     const deliveryDetail =
       dateDifference > 4
         ? `Delivered ${moment(orderPlaced)
-            .add(3, 'days')
+            .add(randomNo(3, 7), 'days')
             .format('DD MMM YYYY')}`
         : `Arriving ${moment(orderPlaced).add(3, 'days').format('dddd')}`
 

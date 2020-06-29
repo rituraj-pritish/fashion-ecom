@@ -17,6 +17,10 @@ const RATE_PRODUCT_REQUEST = 'RATE_PRODUCT_REQUEST'
 const RATE_PRODUCT_SUCCESS = 'RATE_PRODUCT_SUCCESS'
 const RATE_PRODUCT_FAILURE = 'RATE_PRODUCT_FAILURE'
 
+const ADD_REVIEW_REQUEST = 'ADD_REVIEW_REQUEST'
+const ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS'
+const ADD_REVIEW_FAILURE = 'ADD_REVIEW_FAILURE'
+
 // action creators
 
 export const fetchOrders = () => async (dispatch, getState) => {
@@ -99,12 +103,31 @@ export const rateProduct = (rating, orderId, productId, products) => async (
   }
 }
 
+export const addReview = (values, productId, orderId) => async dispatch => {
+  dispatch({ type: ADD_REVIEW_REQUEST })
+  try {
+    await db
+      .collection('reviews')
+      .doc('items')
+      .collection(productId)
+      .add({
+        ...values,
+        product_id: productId,
+        order_id: orderId
+      })
+    dispatch({ type: ADD_REVIEW_SUCCESS })
+  } catch (err) {
+    dispatch({ type: ADD_REVIEW_FAILURE })
+  }
+}
+
 // reducer
 
 const initialState = {
   orders: [],
   isLoading: false,
-  isRating: []
+  isRating: [],
+  addingReview: false
 }
 
 export default (state = initialState, { type, payload }) =>
@@ -145,6 +168,15 @@ export default (state = initialState, { type, payload }) =>
 
       case RATE_PRODUCT_FAILURE:
         draft.isRating = state.isRating.filter(id => id !== payload)
+        break
+
+      case ADD_REVIEW_REQUEST:
+        draft.addingReview = true
+        break
+
+      case ADD_REVIEW_SUCCESS:
+      case ADD_REVIEW_FAILURE:
+        draft.addingReview = false
         break
 
       default:

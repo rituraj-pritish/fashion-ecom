@@ -7,14 +7,13 @@ import { FormContainer } from './Review.styled'
 import TextFieldAdapter from 'components/shared/forms/TextFieldAdapter'
 import Button from 'components/ui/Button'
 
-const Review = ({ review }) => {
+const Review = ({ review, addReview, orderId, productId, isLoading }) => {
   return (
     <PageContainer>
       <Form
-        onSubmit={() => {}}
+        onSubmit={values => addReview(values, productId, orderId)}
         initialValues={review}
-        render={({ handleSubmit, values, valid, ...props }) => {
-          console.log('pro', props)
+        render={({ handleSubmit, values, valid }) => {
           return (
             <FormContainer>
               <form onSubmit={handleSubmit}>
@@ -44,7 +43,14 @@ const Review = ({ review }) => {
                   height='22rem'
                   component={TextFieldAdapter}
                 />
-                <Button disabled={!valid} width='10rem' marginLeft='auto' >Submit</Button>
+                <Button
+                  isLoading={isLoading}
+                  disabled={!valid}
+                  width='10rem'
+                  marginLeft='auto'
+                >
+                  Submit
+                </Button>
               </form>
             </FormContainer>
           )

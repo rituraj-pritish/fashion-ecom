@@ -28,7 +28,7 @@ import Footer from 'components/layout/Footer'
 import SearchResults from 'components/SearchResults'
 import Orders from 'components/pages/Orders'
 import theme from 'theme'
-import Review from 'components/pages/Review/Review'
+import Review from 'components/pages/Review'
 
 const App = ({
   isAuthenticated,
