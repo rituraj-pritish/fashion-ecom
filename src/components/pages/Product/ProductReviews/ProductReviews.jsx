@@ -2,12 +2,12 @@ import React, { useEffect, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import ReviewItem from 'components/shared/ReviewItem'
 import { Link } from 'react-router-dom'
+import { ReviewsWrapper, StyledLink } from './ProductReviews.styled'
 
 const ProductReviews = ({ productId, getProductReviews, page }) => {
   const [reviews, setReviews] = useState([])
   const [isFetching, setIsFetching] = useState(true)
 
-  console.log('re', reviews.length)
   const getReviews = useCallback(async () => {
     const res = await getProductReviews(productId)
     setReviews(res)
@@ -21,25 +21,17 @@ const ProductReviews = ({ productId, getProductReviews, page }) => {
 
   if (isFetching) return 'loading'
 
-  if (page === 'product') {
-    return (
-      <div>
-        {reviews.splice(0, 2).map(review => (
-          <ReviewItem {...review} />
-        ))}
-        {/* {reviews.length > 0 && ( */}
-          <Link to={`/reviews/${productId}`} >{`View all ${reviews.length} reviews`}</Link>
-        {/* )} */}
-      </div>
-    )
-  }
-
   return (
-    <div>
-      {reviews.map(review => (
+    <ReviewsWrapper>
+      {reviews.slice(0, 2).map(review => (
         <ReviewItem {...review} />
       ))}
-    </div>
+      {reviews.length > 2 && (
+        <StyledLink
+          to={`/reviews/${productId}`}
+        >{`View all ${reviews.length} reviews`}</StyledLink>
+      )}
+    </ReviewsWrapper>
   )
 }
 

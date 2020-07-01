@@ -10,12 +10,22 @@ import Button from 'components/ui/Button'
 import ProductCarousel from 'components/shared/ProductCarousel'
 import ShuffleArray from 'helpers/ shuffleArray'
 
-const Review = ({ review, addReview, orderId, productId, isLoading, products }) => {
+const Review = ({
+  review,
+  addReview,
+  orderId,
+  productId,
+  isLoading,
+  products
+}) => {
   return (
     <PageContainer>
       <Form
         onSubmit={values => addReview(values, productId, orderId)}
-        initialValues={review}
+        initialValues={{
+          anonymous: false,
+          ...review
+        }}
         render={({ handleSubmit, values, valid }) => {
           return (
             <FormContainer>
@@ -45,6 +55,18 @@ const Review = ({ review, addReview, orderId, productId, isLoading, products }) 
                   inputType='textarea'
                   height='22rem'
                   component={TextFieldAdapter}
+                />
+                <Field
+                  name='anonymous'
+                  type='checkbox'
+                  render={({ input }) => {
+                    return (
+                      <>
+                        <input id='anonymous' type='checkbox' {...input} />
+                        <label htmlFor='anonymous'>Post as anonymous</label>
+                      </>
+                    )
+                  }}
                 />
                 <Button
                   isLoading={isLoading}

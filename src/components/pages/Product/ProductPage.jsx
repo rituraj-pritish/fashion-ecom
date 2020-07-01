@@ -11,8 +11,8 @@ const ProductPage = ({ product, products }) => {
     <PageContainer>
       <ProductOverview product={product} />
 
-      <ProductReviews productId={product.id} page='product'/>
-      
+      <ProductReviews productId={product.id} />
+
       <ProductCarousel
         title='Similar Products'
         data={products}

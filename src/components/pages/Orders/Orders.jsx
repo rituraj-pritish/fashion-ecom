@@ -7,7 +7,7 @@ import {
   OrdersWrapper,
   SpinnerWrapper
 } from './OrdersProductList/Orders.styled'
-import Spinner from 'components/shared/Spinner/Spinner' 
+import Spinner from 'components/shared/Spinner' 
 
 const Orders = ({ fetchOrders, orders, isLoading }) => {
   useEffect(() => {

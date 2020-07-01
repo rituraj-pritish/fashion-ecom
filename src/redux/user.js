@@ -107,17 +107,28 @@ export const rateProduct = (rating, orderId, productId, products) => async (
   }
 }
 
-export const addReview = (values, productId, orderId) => async dispatch => {
+export const addReview = (values, productId, orderId) => async (
+  dispatch,
+  getState
+) => {
   dispatch({ type: ADD_REVIEW_REQUEST })
+
+  const { auth } = getState()
+  const user = auth.user
+  const id = getNewUid()
   try {
     await db
       .collection('reviews')
       .doc('items')
       .collection(productId)
-      .add({
+      .doc(id)
+      .set({
         ...values,
         product_id: productId,
-        order_id: orderId
+        order_id: orderId,
+        author: user.name,
+        date: new Date().toISOString(),
+        id
       })
     dispatch({ type: ADD_REVIEW_SUCCESS })
   } catch (err) {

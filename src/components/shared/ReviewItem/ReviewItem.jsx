@@ -1,17 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const ReviewItem = ({author, anonymous, heading, review, id}) => {
+import { Heading, Review, ReviewWrapper, Author } from './ReviewItem.styled'
+
+const ReviewItem = ({
+  author,
+  date,
+  anonymous = false,
+  heading,
+  review,
+  id
+}) => {
   return (
-    <div>
-      {review}
-    </div>
+    <ReviewWrapper>
+      <Heading>{heading}</Heading>
+      <Review>{review}</Review>
+      <Author>- {anonymous ? 'Anonymous' : author}</Author>
+    </ReviewWrapper>
   )
 }
 
 ReviewItem.propTypes = {
   anonymous: PropTypes.bool.isRequired,
   author: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired
 }
 
 export default ReviewItem
