@@ -17,6 +17,10 @@ const RATE_PRODUCT_REQUEST = 'RATE_PRODUCT_REQUEST'
 const RATE_PRODUCT_SUCCESS = 'RATE_PRODUCT_SUCCESS'
 const RATE_PRODUCT_FAILURE = 'RATE_PRODUCT_FAILURE'
 
+const GET_REVIEWS_REQUEST = 'GET_REVIEWS_REQUEST'
+const GET_REVIEWS_SUCCESS = 'GET_REVIEWS_SUCCESS'
+const GET_REVIEWS_FAILURE = 'GET_REVIEWS_FAILURE'
+
 const ADD_REVIEW_REQUEST = 'ADD_REVIEW_REQUEST'
 const ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS'
 const ADD_REVIEW_FAILURE = 'ADD_REVIEW_FAILURE'
@@ -118,6 +122,22 @@ export const addReview = (values, productId, orderId) => async dispatch => {
     dispatch({ type: ADD_REVIEW_SUCCESS })
   } catch (err) {
     dispatch({ type: ADD_REVIEW_FAILURE })
+  }
+}
+
+export const getProductReviews = productId => async dispatch => {
+  dispatch({ type: GET_REVIEWS_REQUEST })
+  try {
+    const res = await db
+      .collection('reviews')
+      .doc('items')
+      .collection(productId)
+      .get()
+    dispatch({ type: GET_REVIEWS_SUCCESS })
+    return res.docs.map(doc => doc.data())
+  } catch (err) {
+    console.log('err', err)
+    dispatch({ type: GET_REVIEWS_FAILURE })
   }
 }
 

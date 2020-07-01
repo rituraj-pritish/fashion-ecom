@@ -27,8 +27,9 @@ import Overlay from 'components/layout/Overlay'
 import Footer from 'components/layout/Footer'
 import SearchResults from 'components/SearchResults'
 import Orders from 'components/pages/Orders'
-import theme from 'theme'
 import Review from 'components/pages/Review'
+import Reviews from 'components/pages/Reviews'
+import theme from 'theme'
 
 const App = ({
   isAuthenticated,
@@ -80,6 +81,7 @@ const App = ({
                 path='/user/review/:orderId/p/:productId/v/:variantId'
                 component={Review}
               />
+              <Route exact path='/reviews/:productId' component={Reviews} />
               <Route exact path='/signin' component={SignIn} />
               <Route exact path='/signup' component={SignUp} />
               <Route path='/' component={Home} />

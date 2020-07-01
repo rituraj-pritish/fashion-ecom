@@ -4,13 +4,14 @@ import { connect } from 'react-redux'
 import { addReview } from 'redux/user'
 
 const mapStateToProps = (
-  { user: { isLoading } },
+  { products, user: { isLoading } },
   {
     match: {
       params: { productId, orderId }
     }
   }
 ) => ({
+  products: products.allProducts,
   isLoading,
   orderId,
   productId

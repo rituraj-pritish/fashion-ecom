@@ -1,13 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { PageContainer } from 'index.styles'
 import { Form, Field } from 'react-final-form'
+
+import { PageContainer } from 'index.styles'
 import RatingAdapter from 'components/shared/forms/RatingAdapter'
 import { FormContainer } from './Review.styled'
 import TextFieldAdapter from 'components/shared/forms/TextFieldAdapter'
 import Button from 'components/ui/Button'
+import ProductCarousel from 'components/shared/ProductCarousel'
+import ShuffleArray from 'helpers/ shuffleArray'
 
-const Review = ({ review, addReview, orderId, productId, isLoading }) => {
+const Review = ({ review, addReview, orderId, productId, isLoading, products }) => {
   return (
     <PageContainer>
       <Form
@@ -56,12 +59,14 @@ const Review = ({ review, addReview, orderId, productId, isLoading }) => {
           )
         }}
       />
+      <ProductCarousel title='Trending' data={ShuffleArray(products)} />
     </PageContainer>
   )
 }
 
 Review.propTypes = {
-  review: PropTypes.object
+  review: PropTypes.object,
+  products: PropTypes.array.isRequired
 }
 
 export default Review
