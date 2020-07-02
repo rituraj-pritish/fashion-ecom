@@ -14,8 +14,7 @@ const mapStateToProps = (
   const product = products.allProducts.find(({ id }) => id === productId)
   return {
     productId,
-    totalRatings: product.total_ratings,
-    avgRating: product.avg_rating
+    product
   }
 }
 

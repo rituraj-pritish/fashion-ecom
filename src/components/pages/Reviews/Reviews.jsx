@@ -8,10 +8,10 @@ import { ReactComponent as StarOutlineIcon } from 'assets/icons/star-outline.svg
 import StarIcon from 'assets/icons/StarIcon'
 import Icon from 'components/ui/Icon'
 import ReviewItem from 'components/shared/ReviewItem'
-import { SpinnerWrapper, AvgRating } from './Reviews.styled'
+import { SpinnerWrapper, AvgRating, Image, TopSection } from './Reviews.styled'
 import Spinner from 'components/shared/Spinner/Spinner'
 
-const Reviews = ({ getProductReviews, productId, avgRating, totalRatings }) => {
+const Reviews = ({ getProductReviews, productId, product }) => {
   const [reviews, setReviews] = useState([])
   const [isFetching, setIsFetching] = useState(true)
 
@@ -35,26 +35,51 @@ const Reviews = ({ getProductReviews, productId, avgRating, totalRatings }) => {
       </PageContainer>
     )
 
+  const { avg_rating, total_ratings, total_reviews, name, variants } = product
+  const { images } = variants[Object.keys(variants)[0]]
+
   return (
     <PageContainer align='left'>
-      <AvgRating>
-        <Rating
-          initialRating={4.3}
-          emptySymbol={
-            <Icon noPointer mr='0.3rem' width='18px' color={theme.colors.golden}>
-              <StarOutlineIcon />
-            </Icon>
-          }
-          fullSymbol={
-            <Icon noPointer width='18px' color={theme.colors.golden} mr='0.3rem'>
-              <StarIcon />
-            </Icon>
-          }
-          readonly
-        />
-        {avgRating} out of 5
-      </AvgRating>
-      <div>{totalRatings} Total ratings</div>
+      <TopSection>
+        <Image src={images[0]} alt='name' />
+        <div>
+          <div>{name}</div>
+
+          <AvgRating>
+            <Rating
+              initialRating={4.3}
+              emptySymbol={
+                <Icon
+                  noPointer
+                  mr='0.3rem'
+                  width='18px'
+                  color={theme.colors.golden}
+                >
+                  <StarOutlineIcon />
+                </Icon>
+              }
+              fullSymbol={
+                <Icon
+                  noPointer
+                  width='18px'
+                  color={theme.colors.golden}
+                  mr='0.3rem'
+                >
+                  <StarIcon />
+                </Icon>
+              }
+              readonly
+            />
+            <div>{avg_rating} out of 5</div>
+          </AvgRating>
+
+          <div>
+            <span>{total_ratings}</span>
+            ratings  &  <span>{total_reviews}</span>
+            reviews
+          </div>
+        </div>
+      </TopSection>
 
       {reviews.map(review => (
         <ReviewItem {...review} />
@@ -65,8 +90,7 @@ const Reviews = ({ getProductReviews, productId, avgRating, totalRatings }) => {
 
 Reviews.propTypes = {
   productId: PropTypes.string.isRequired,
-  avgRating: PropTypes.number.isRequired,
-  totalRatings: PropTypes.number.isRequired
+  product: PropTypes.object.isRequired
 }
 
 export default Reviews

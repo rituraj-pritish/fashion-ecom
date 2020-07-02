@@ -37,6 +37,22 @@ export const updateProductRating = (productId, rating) => async dispatch => {
   } catch (err) {}
 }
 
+export const updateProductReviews = productId => async dispatch => {
+  try {
+    const product = await (
+      await db.collection('products').doc(productId).get()
+    ).data()
+    const { total_ratings = 0 } = product
+
+    await db
+      .collection('products')
+      .doc(productId)
+      .update({
+        total_ratings: total_ratings + 1
+      })
+  } catch (err) {}
+}
+
 export const setFilterCriteria = criteria => ({
   type: SET_FILTER_CRITERIA,
   payload: criteria

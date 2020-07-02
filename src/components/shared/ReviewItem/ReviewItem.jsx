@@ -1,7 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
-import { Heading, Review, ReviewWrapper, Author } from './ReviewItem.styled'
+import {
+  Heading,
+  Review,
+  ReviewWrapper,
+  BottomSection
+} from './ReviewItem.styled'
 
 const ReviewItem = ({
   author,
@@ -15,7 +21,10 @@ const ReviewItem = ({
     <ReviewWrapper>
       <Heading>{heading}</Heading>
       <Review>{review}</Review>
-      <Author>- {anonymous ? 'Anonymous' : author}</Author>
+      <BottomSection>
+        <div>- {anonymous ? 'Anonymous' : author}</div>
+        <div>{moment(date).format('DD MMM YYYY')}</div>
+      </BottomSection>
     </ReviewWrapper>
   )
 }

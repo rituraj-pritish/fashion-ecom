@@ -3,7 +3,7 @@ import theme from 'theme'
 
 export const ReviewWrapper = styled.div`
   text-align: left;
-  margin: 1.4rem 0;
+  margin: 1.8rem 0;
 `
 
 export const Heading = styled.div`
@@ -19,7 +19,12 @@ export const Review = styled.div`
   margin-bottom: 1.5rem;
 `
 
-export const Author = styled.div`
+export const BottomSection = styled.div`
+  display: flex;
   color: ${theme.colors.grey};
   font-size: 1.4rem;
+
+  div {
+    margin-right: 15rem;
+  }
 `
