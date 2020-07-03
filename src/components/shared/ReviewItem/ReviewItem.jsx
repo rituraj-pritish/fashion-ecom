@@ -8,6 +8,7 @@ import {
   ReviewWrapper,
   BottomSection
 } from './ReviewItem.styled'
+import StarRating from '../StarRating'
 
 const ReviewItem = ({
   author,
@@ -15,14 +16,23 @@ const ReviewItem = ({
   anonymous = false,
   heading,
   review,
-  id
+  id,
+  overall_rating
 }) => {
   return (
     <ReviewWrapper>
-      <Heading>{heading}</Heading>
+      <Heading>
+        {heading}{' '}
+        <StarRating
+          readOnly
+          iconSize='1.4rem'
+          spaceBetweenIcons='0.2rem'
+          initialRating={overall_rating}
+        />
+      </Heading>
       <Review>{review}</Review>
       <BottomSection>
-        <div>- {anonymous ? 'Anonymous' : author}</div>
+        <div>- {anonymous ? 'Fashion Buyer' : author},</div>
         <div>{moment(date).format('DD MMM YYYY')}</div>
       </BottomSection>
     </ReviewWrapper>

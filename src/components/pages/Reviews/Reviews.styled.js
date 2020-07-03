@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import theme from 'theme'
+import { lighten } from 'polished'
 
 export const TopSection = styled.div`
   display: flex;
@@ -57,4 +58,10 @@ export const AvgRating = styled.div`
     margin-left: 0.5rem;
     margin-bottom: 2px;
   }
+`
+
+export const NoReviews = styled.div`
+  margin-top: 2.5rem;
+  font-size: 1.5rem;
+  color: ${lighten(0.2, 'black')};
 `

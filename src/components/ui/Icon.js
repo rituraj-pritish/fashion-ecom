@@ -15,7 +15,7 @@ export const StyledIcon = styled.div`
     cursor: ${({ noPointer }) => (noPointer ? 'initial' : 'pointer')};
   svg {
     width: 100%;
-    height: ${({ width }) => width};
+    height: ${({ size }) => size};
 
     path {
       fill: ${({ color }) => color};
@@ -24,12 +24,12 @@ export const StyledIcon = styled.div`
   ${typography} ${color} ${space} ${position} ${layout} ${grid} ${flexbox} ${border}
 `
 
-const Icon = ({ children, ...otherProps }) => {
-  return <StyledIcon {...otherProps}>{children}</StyledIcon>
-}
-
-Icon.defaultProps = {
-  width: '22px'
+const Icon = ({ children, size = '22px', ...otherProps }) => {
+  return (
+    <StyledIcon size={size} {...otherProps}>
+      {children}
+    </StyledIcon>
+  )
 }
 
 export default Icon

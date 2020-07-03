@@ -10,6 +10,13 @@ export const Heading = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+
+  & > span {
+    margin-left: 0.8rem;
+    margin-bottom: -2px;
+  }
 `
 
 export const Review = styled.div`
@@ -22,9 +29,9 @@ export const Review = styled.div`
 export const BottomSection = styled.div`
   display: flex;
   color: ${theme.colors.grey};
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 
   div {
-    margin-right: 15rem;
+    margin-right: 0.6rem;
   }
 `

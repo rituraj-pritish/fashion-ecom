@@ -38,7 +38,7 @@ const SearchBar = ({
         onChange={e => setSearchQuery(e.target.value)}
       />
       <button>
-        <Icon width='18px'>
+        <Icon size='18px'>
           <SearchIcon />
         </Icon>
       </button>

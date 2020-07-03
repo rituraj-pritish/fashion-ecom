@@ -8,10 +8,17 @@ import { ReactComponent as StarOutlineIcon } from 'assets/icons/star-outline.svg
 import StarIcon from 'assets/icons/StarIcon'
 import Icon from 'components/ui/Icon'
 import ReviewItem from 'components/shared/ReviewItem'
-import { SpinnerWrapper, AvgRating, Image, TopSection } from './Reviews.styled'
+import {
+  SpinnerWrapper,
+  AvgRating,
+  Image,
+  TopSection,
+  NoReviews
+} from './Reviews.styled'
 import Spinner from 'components/shared/Spinner/Spinner'
+import ProductCarousel from 'components/shared/ProductCarousel'
 
-const Reviews = ({ getProductReviews, productId, product }) => {
+const Reviews = ({ getProductReviews, productId, product, products }) => {
   const [reviews, setReviews] = useState([])
   const [isFetching, setIsFetching] = useState(true)
 
@@ -35,7 +42,13 @@ const Reviews = ({ getProductReviews, productId, product }) => {
       </PageContainer>
     )
 
-  const { avg_rating, total_ratings, total_reviews, name, variants } = product
+  const {
+    avg_rating,
+    total_ratings,
+    total_reviews = 0,
+    name,
+    variants
+  } = product
   const { images } = variants[Object.keys(variants)[0]]
 
   return (
@@ -75,22 +88,27 @@ const Reviews = ({ getProductReviews, productId, product }) => {
 
           <div>
             <span>{total_ratings}</span>
-            ratings  &  <span>{total_reviews}</span>
+            ratings & <span>{total_reviews}</span>
             reviews
           </div>
         </div>
       </TopSection>
 
-      {reviews.map(review => (
-        <ReviewItem {...review} />
-      ))}
+      {reviews.length === 0 ? (
+        <NoReviews>No reviews yet</NoReviews>
+      ) : (
+        reviews.map(review => <ReviewItem {...review} />)
+      )}
+
+      <ProductCarousel data={products} title='On Sale' />
     </PageContainer>
   )
 }
 
 Reviews.propTypes = {
   productId: PropTypes.string.isRequired,
-  product: PropTypes.object.isRequired
+  product: PropTypes.object.isRequired,
+  products: PropTypes.array.isRequired
 }
 
 export default Reviews
