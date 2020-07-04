@@ -17,9 +17,17 @@ const RATE_PRODUCT_REQUEST = 'RATE_PRODUCT_REQUEST'
 const RATE_PRODUCT_SUCCESS = 'RATE_PRODUCT_SUCCESS'
 const RATE_PRODUCT_FAILURE = 'RATE_PRODUCT_FAILURE'
 
+const REMOVE_RATING_REQUEST = 'REMOVE_RATING_REQUEST'
+const REMOVE_RATING_SUCCESS = 'REMOVE_RATING_SUCCESS'
+const REMOVE_RATING_FAILURE = 'REMOVE_RATING_FAILURE'
+
 const GET_REVIEWS_REQUEST = 'GET_REVIEWS_REQUEST'
 const GET_REVIEWS_SUCCESS = 'GET_REVIEWS_SUCCESS'
 const GET_REVIEWS_FAILURE = 'GET_REVIEWS_FAILURE'
+
+const GET_REVIEW_REQUEST = 'GET_REVIEW_REQUEST'
+const GET_REVIEW_SUCCESS = 'GET_REVIEW_SUCCESS'
+const GET_REVIEW_FAILURE = 'GET_REVIEW_FAILURE'
 
 const ADD_REVIEW_REQUEST = 'ADD_REVIEW_REQUEST'
 const ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS'
@@ -97,43 +105,109 @@ export const rateProduct = (rating, orderId, productId, products) => async (
       .update({
         products: newProductsArray
       })
+    await dispatch(updateProductRating(productId, rating))
     dispatch({
       type: RATE_PRODUCT_SUCCESS,
       payload: { orderId, productId, rating, products }
     })
-    dispatch(updateProductRating(productId, rating))
   } catch (err) {
     dispatch({ type: RATE_PRODUCT_FAILURE, payload: productId })
   }
 }
 
-export const addReview = (values, productId, orderId) => async (
+export const removeRating = (rating, orderId, productId, products) => async (
+  dispatch,
+  getState
+) => {
+  dispatch({ type: REMOVE_RATING_REQUEST, payload: productId })
+  const { auth } = getState()
+  const user = auth.user
+
+  const idx = products.findIndex(({ productId: pId }) => pId === productId)
+
+  const newProductsArray = [...products]
+  const newProductObject = { ...newProductsArray[idx] }
+  delete newProductObject.rating
+
+  newProductsArray[idx] = newProductObject
+
+  try {
+    await db
+      .collection('orders')
+      .doc(user.id)
+      .collection('items')
+      .doc(orderId)
+      .update({
+        products: newProductsArray
+      })
+
+    await dispatch(updateProductRating(productId, rating, true))
+    dispatch({
+      type: REMOVE_RATING_SUCCESS,
+      payload: { orderId, productId, products }
+    })
+  } catch (err) {
+    dispatch({ type: REMOVE_RATING_FAILURE, payload: productId })
+  }
+}
+
+export const addReview = (values, productId, orderId, reviewId) => async (
   dispatch,
   getState
 ) => {
   dispatch({ type: ADD_REVIEW_REQUEST })
-
   const { auth } = getState()
   const user = auth.user
   const id = getNewUid()
+
   try {
-    await db
+    if (reviewId) {
+      await db
+        .collection('reviews')
+        .doc('items')
+        .collection(productId)
+        .doc(reviewId)
+        .update({
+          ...values
+        })
+    } else {
+      await db
+        .collection('reviews')
+        .doc('items')
+        .collection(productId)
+        .doc(id)
+        .set({
+          ...values,
+          product_id: productId,
+          order_id: orderId,
+          author: user.name,
+          date: new Date().toISOString(),
+          id
+        })
+    }
+
+    dispatch(updateProductReviews)
+    dispatch({ type: ADD_REVIEW_SUCCESS })
+  } catch (err) {
+    dispatch({ type: ADD_REVIEW_FAILURE })
+  }
+}
+
+export const getReview = (productId, orderId) => async dispatch => {
+  dispatch({ type: GET_REVIEW_REQUEST })
+  try {
+    const res = await db
       .collection('reviews')
       .doc('items')
       .collection(productId)
-      .doc(id)
-      .set({
-        ...values,
-        product_id: productId,
-        order_id: orderId,
-        author: user.name,
-        date: new Date().toISOString(),
-        id
-      })
-    dispatch({ type: ADD_REVIEW_SUCCESS })
-    dispatch(updateProductReviews)
+      .where('order_id', '==', orderId)
+      .get()
+
+    dispatch({ type: GET_REVIEW_SUCCESS })
+    return res.docs.map(doc => doc.data())[0]
   } catch (err) {
-    dispatch({ type: ADD_REVIEW_FAILURE })
+    console.log('err', err)
+    dispatch({ type: GET_REVIEW_FAILURE })
   }
 }
 
@@ -181,6 +255,7 @@ export default (state = initialState, { type, payload }) =>
         draft.isLoading = false
         break
 
+      case REMOVE_RATING_REQUEST:
       case RATE_PRODUCT_REQUEST:
         draft.isRating = [...state.isRating, payload]
         break
@@ -198,6 +273,22 @@ export default (state = initialState, { type, payload }) =>
         break
       }
 
+      case REMOVE_RATING_SUCCESS: {
+        const orderIdx = state.orders.findIndex(
+          ({ order_id }) => order_id === payload.orderId
+        )
+        const productIdx = state.orders[orderIdx].products.findIndex(
+          ({ productId }) => productId === payload.productId
+        )
+        const product = { ...state.orders[orderIdx].products[productIdx] }
+        delete product.rating
+
+        draft.orders[orderIdx].products[productIdx] = product
+        draft.isRating = state.isRating.filter(id => id !== payload.productId)
+        break
+      }
+
+      case REMOVE_RATING_FAILURE:
       case RATE_PRODUCT_FAILURE:
         draft.isRating = state.isRating.filter(id => id !== payload)
         break

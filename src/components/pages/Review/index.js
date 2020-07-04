@@ -1,10 +1,10 @@
 import Review from './Review'
 import { connect } from 'react-redux'
 
-import { addReview } from 'redux/user'
+import { addReview, getReview } from 'redux/user'
 
 const mapStateToProps = (
-  { products, user: { isLoading } },
+  { products, user: { addingReview: isAddingReview } },
   {
     match: {
       params: { productId, orderId }
@@ -12,9 +12,9 @@ const mapStateToProps = (
   }
 ) => ({
   products: products.allProducts,
-  isLoading,
+  isAddingReview,
   orderId,
   productId
 })
 
-export default connect(mapStateToProps, { addReview })(Review)
+export default connect(mapStateToProps, { addReview, getReview })(Review)

@@ -54,7 +54,7 @@ const OrdersList = ({ orders }) => {
           <OrdersProductList {...order} />
           <div>
             <ReviewProductList {...order} />
-            <RateProducts {...order} />
+            {/* <RateProducts {...order} /> */}
             {/* <Button variant='secondary'>
               View Details
             </Button> */}

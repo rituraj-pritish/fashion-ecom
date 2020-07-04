@@ -26,3 +26,16 @@ export const ProductWrapper = styled.div`
     }
   }
 `
+
+export const RatingContainer = styled.div`
+  position: relative;
+
+  & > div {
+    position: absolute;
+    right: 0.5rem;
+    bottom: -2rem;
+    font-size: 1.1rem;
+    color: red;
+    cursor: pointer;
+  }
+`

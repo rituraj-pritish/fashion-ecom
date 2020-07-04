@@ -19,20 +19,34 @@ export const getProducts = () => async dispatch => {
   }
 }
 
-export const updateProductRating = (productId, rating) => async dispatch => {
+export const updateProductRating = (
+  productId,
+  rating,
+  remove = false
+) => async dispatch => {
   try {
     const product = await (
       await db.collection('products').doc(productId).get()
     ).data()
     const { avg_rating, total_ratings } = product
-    const newRating =
-      (avg_rating * total_ratings + rating) / (total_ratings + 1)
+
+    let newRating
+    let totalRatings
+
+    if (remove) {
+      newRating = ((avg_rating * total_ratings) - rating) / (total_ratings - 1)
+      totalRatings = total_ratings - 1
+    } else {
+      newRating = (avg_rating * total_ratings + rating) / (total_ratings + 1)
+      totalRatings = total_ratings + 1
+    }
+
     await db
       .collection('products')
       .doc(productId)
       .update({
         avg_rating: Math.round(newRating * 100) / 100,
-        total_ratings: total_ratings + 1
+        total_ratings: totalRatings
       })
   } catch (err) {}
 }

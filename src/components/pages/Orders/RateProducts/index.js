@@ -1,10 +1,12 @@
 import RateProducts from './RateProducts'
 import { connect } from 'react-redux'
 
-import { rateProduct } from 'redux/user'
+import { removeRating, rateProduct } from 'redux/user'
 
-const mapStateToProps = ({user}) => ({
-  isRating: user.isRating  
+const mapStateToProps = ({ user }) => ({
+  isRating: user.isRating
 })
 
-export default connect(mapStateToProps, { rateProduct })(RateProducts)
+export default connect(mapStateToProps, { rateProduct, removeRating })(
+  RateProducts
+)

@@ -1,27 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Field } from 'react-final-form'
 
 import { PageContainer } from 'index.styles'
 import RatingAdapter from 'components/shared/forms/RatingAdapter'
-import { FormContainer } from './Review.styled'
+import { FormContainer, SpinnerWrapper } from './Review.styled'
 import TextFieldAdapter from 'components/shared/forms/TextFieldAdapter'
 import Button from 'components/ui/Button'
 import ProductCarousel from 'components/shared/ProductCarousel'
 import ShuffleArray from 'helpers/ shuffleArray'
+import Spinner from 'components/shared/Spinner'
 
 const Review = ({
-  review,
   addReview,
   orderId,
   productId,
-  isLoading,
-  products
+  isAddingReview,
+  products,
+  getReview
 }) => {
+  const [review, setReview] = useState(null)
+  const [isFetching, setIsFetching] = useState(false)
+
+  useEffect(() => {
+    setIsFetching(true)
+    getReview(productId, orderId).then(res => {
+      setReview(res)
+      setIsFetching(false)
+    })
+  }, [productId, orderId, getReview])
+
+  if (isFetching) {
+    return (
+      <SpinnerWrapper>
+        <Spinner size={35} />
+      </SpinnerWrapper>
+    )
+  }
+
   return (
     <PageContainer>
       <Form
-        onSubmit={values => addReview(values, productId, orderId)}
+        onSubmit={values => addReview(values, productId, orderId, review.id)}
         initialValues={{
           anonymous: false,
           ...review
@@ -69,7 +89,7 @@ const Review = ({
                   }}
                 />
                 <Button
-                  isLoading={isLoading}
+                  isLoading={isAddingReview}
                   disabled={!valid}
                   width='10rem'
                   marginLeft='auto'
@@ -87,8 +107,11 @@ const Review = ({
 }
 
 Review.propTypes = {
-  review: PropTypes.object,
-  products: PropTypes.array.isRequired
+  orderId: PropTypes.string.isRequired,
+  productId: PropTypes.string.isRequired,
+  products: PropTypes.array.isRequired,
+  getReview: PropTypes.func.isRequired,
+  addReview: PropTypes.func.isRequired
 }
 
 export default Review

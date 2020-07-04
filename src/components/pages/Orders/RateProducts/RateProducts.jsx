@@ -7,12 +7,22 @@ import Icon from 'components/ui/Icon'
 import Button from 'components/ui/Button'
 import Modal from 'components/shared/Modal/Modal'
 import Text from 'components/ui/Text'
-import { ProductWrapper, ProductsList } from './RateProducts.styled'
+import {
+  ProductWrapper,
+  ProductsList,
+  RatingContainer
+} from './RateProducts.styled'
 import Rating from 'react-rating'
 import LoadingWrap from 'components/shared/LoadingWrap'
 import theme from 'theme'
 
-const RateProducts = ({ products, order_id, rateProduct, isRating }) => {
+const RateProducts = ({
+  products,
+  order_id,
+  rateProduct,
+  isRating,
+  removeRating
+}) => {
   const [showModal, setShowModal] = useState(false)
   return (
     <>
@@ -39,22 +49,35 @@ const RateProducts = ({ products, order_id, rateProduct, isRating }) => {
                   </div>
                   <Text>{name}</Text>
                 </div>
-                <Rating
-                  initialRating={rating}
-                  emptySymbol={
-                    <Icon mr='0.3rem' color={theme.colors.golden}>
-                      <StarOutlineIcon />
-                    </Icon>
-                  }
-                  fullSymbol={
-                    <Icon color={theme.colors.golden} mr='0.3rem'>
-                      <StarIcon />
-                    </Icon>
-                  }
-                  onChange={rating =>
-                    rateProduct(rating, order_id, productId, products)
-                  }
-                />
+
+                <RatingContainer>
+                  <Rating
+                    initialRating={rating}
+                    emptySymbol={
+                      <Icon mr='0.3rem' color={theme.colors.golden}>
+                        <StarOutlineIcon />
+                      </Icon>
+                    }
+                    fullSymbol={
+                      <Icon color={theme.colors.golden} mr='0.3rem'>
+                        <StarIcon />
+                      </Icon>
+                    }
+                    onChange={rating =>
+                      rateProduct(rating, order_id, productId, products)
+                    }
+                    readonly={!!rating}
+                  />
+                  {rating && (
+                    <div
+                      onClick={() =>
+                        removeRating(rating, order_id, productId, products)
+                      }
+                    >
+                      Remove
+                    </div>
+                  )}
+                </RatingContainer>
               </ProductWrapper>
             </LoadingWrap>
           ))}
