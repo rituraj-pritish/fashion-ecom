@@ -7,7 +7,7 @@ export const emailValidator = val => {
 
 export const passwordValidator = (val) => {
   if(!val) return 'Required'
-  if(val.length <= 6) return 'Must be greater than six characters'
+  if(val.length < 6) return 'Must be greater than five characters'
 }
 
 export const zipCodeValidator = (val) => {

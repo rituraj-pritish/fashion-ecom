@@ -30,6 +30,7 @@ import Orders from 'components/pages/Orders'
 import Review from 'components/pages/Review'
 import Reviews from 'components/pages/Reviews'
 import theme from 'theme'
+import ForgotPassword from './pages/ForgotPassword'
 
 const App = ({
   isAuthenticated,
@@ -83,6 +84,7 @@ const App = ({
               />
               <Route exact path='/reviews/:productId' component={Reviews} />
               <Route exact path='/signin' component={SignIn} />
+              <Route exact path='/forgot-password' component={ForgotPassword} />
               <Route exact path='/signup' component={SignUp} />
               <Route path='/' component={Home} />
             </Switch>

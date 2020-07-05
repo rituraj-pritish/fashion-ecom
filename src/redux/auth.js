@@ -19,6 +19,10 @@ const UPDATE_DETAILS_REQUEST = 'UPDATE_DETAILS_REQUEST'
 const UPDATE_DETAILS_FAILURE = 'UPDATE_DETAILS_FAILURE'
 const UPDATE_DETAILS_SUCCESS = 'UPDATE_DETAILS_SUCCESS'
 
+const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST'
+const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS'
+const RESET_PASSWORD_FAILURE = 'RESET_PASSWORD_FAILURE'
+
 // action creators
 
 export const signup = data => async dispatch => {
@@ -37,6 +41,10 @@ export const signup = data => async dispatch => {
         id: res.user.uid,
         email
       }
+
+      Object.keys(userPayload).forEach(key => {
+        userPayload[key] === undefined && delete userPayload[key]
+      })
 
       db.collection('users').doc(res.user.uid).set(userPayload)
 
@@ -95,6 +103,24 @@ export const authStateChangeHandler = () => async dispatch => {
   })
 }
 
+export const resetPassword = ({ email }) => async dispatch => {
+  dispatch({ type: RESET_PASSWORD_REQUEST })
+  try {
+    const user = await db.collection('users').where('email', '==', email).get()
+
+    if (!user.docs.length) {
+      throw new Error('The email is not registered')
+    }
+
+    await firebase.auth().sendPasswordResetEmail(email)
+
+    dispatch({ type: RESET_PASSWORD_SUCCESS })
+  } catch (err) {
+    dispatch({ type: RESET_PASSWORD_FAILURE })
+    return { [FORM_ERROR]: err.message }
+  }
+}
+
 export const signOut = () => async dispatch => {
   try {
     await firebase.auth().signOut()
@@ -119,7 +145,9 @@ export const updateUserDetails = data => async (dispatch, getState) => {
 const initialState = {
   user: null,
   isLoading: false,
-  isAuthenticated: false
+  isAuthenticated: false,
+  isSendingResetLink: false,
+  linkSent :false
 }
 
 export default (state = initialState, { type, payload }) =>
@@ -145,6 +173,21 @@ export default (state = initialState, { type, payload }) =>
           id: state.user.id,
           ...payload
         }
+        break
+
+      case RESET_PASSWORD_REQUEST:
+        draft.isSendingResetLink = true
+        draft.linkSent = false
+        break
+
+      case RESET_PASSWORD_SUCCESS:
+        draft.isSendingResetLink = false
+        draft.linkSent = true
+        break
+
+      case RESET_PASSWORD_FAILURE:
+        draft.isSendingResetLink = false
+        draft.linkSent = false
         break
 
       default:

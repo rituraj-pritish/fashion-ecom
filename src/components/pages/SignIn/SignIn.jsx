@@ -51,7 +51,15 @@ const SignIn = ({ isAuthenticated, isLoading, signin }) => {
                 />
                 <Button isLoading={isLoading}>Sign In</Button>
 
-                <Error>{(!!submitError && !dirtySinceLastSubmit ) && submitError}</Error>
+                <Error>
+                  {!!submitError && !dirtySinceLastSubmit && submitError}
+                </Error>
+
+                <Link to='/forgot-password'>
+                  <Text display='inline' color='blue'>
+                    Forgot password 
+                  </Text>
+                </Link>
               </form>
             )
           }}

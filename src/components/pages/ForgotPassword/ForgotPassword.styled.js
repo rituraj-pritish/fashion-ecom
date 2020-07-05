@@ -25,9 +25,5 @@ export const Container = styled.div`
     label {
       margin-bottom: 10px;
     }
-
-    a {
-      margin-top: 1rem;
-    }
   }
 `;

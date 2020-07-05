@@ -31,7 +31,8 @@ const Navbar = ({ history, cartCount }) => {
   useEffect(() => {
     if (
       history.location.pathname === '/signin' ||
-      history.location.pathname === '/signup'
+      history.location.pathname === '/signup' ||
+      history.location.pathname === '/forgot-password' 
     ) {
       setShow(false)
     } else {
@@ -93,7 +94,7 @@ const Navbar = ({ history, cartCount }) => {
             ref={userRef}
             onClick={() => setShowUserOptions(!showUserOptions)}
           >
-            <Icon size='1.8rem' mb='0.5rem'>
+            <Icon size='2.2rem'>
               <UserIcon />
             </Icon>
 
