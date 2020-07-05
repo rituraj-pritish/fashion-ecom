@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+*::selection {
+  background: #107CFA;
+  color: white;
+}
+
 html {
   font-size: 62.5%;
 }
