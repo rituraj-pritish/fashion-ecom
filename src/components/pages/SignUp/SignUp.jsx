@@ -15,7 +15,7 @@ import TextFieldAdapter from 'components/shared/forms/TextFieldAdapter'
 import { emailValidator, passwordValidator } from 'helpers/validations'
 import { Error } from 'components/shared/forms/Form.styled'
 
-const SignUp = ({ signup, isAuthenticated, isLoading }) => {
+const SignUp = ({ signup, isAuthenticated, isLoading, history }) => {
   if (isAuthenticated) return <Redirect to='/' />
 
   return (
@@ -28,8 +28,13 @@ const SignUp = ({ signup, isAuthenticated, isLoading }) => {
         </StyledLogo>
 
         <Form
-          onSubmit={signup}
-          render={({ handleSubmit, values, submitError, dirtySinceLastSubmit }) => {
+          onSubmit={values => signup(values, history.goBack)}
+          render={({
+            handleSubmit,
+            values,
+            submitError,
+            dirtySinceLastSubmit
+          }) => {
             return (
               <form onSubmit={handleSubmit}>
                 <Field
@@ -72,7 +77,9 @@ const SignUp = ({ signup, isAuthenticated, isLoading }) => {
                 <Button type='submit' isLoading={isLoading}>
                   Sign Up
                 </Button>
-                <Error>{(!!submitError && !dirtySinceLastSubmit ) && submitError}</Error>
+                <Error>
+                  {!!submitError && !dirtySinceLastSubmit && submitError}
+                </Error>
               </form>
             )
           }}

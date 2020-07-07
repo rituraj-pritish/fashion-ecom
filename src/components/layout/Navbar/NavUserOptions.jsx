@@ -22,7 +22,8 @@ const NavUserOptions = ({
   setShow,
   signOut,
   isAuthenticated,
-  userRef
+  userRef,
+  history
 }) => {
   const node = useRef()
 
@@ -78,7 +79,7 @@ const NavUserOptions = ({
           </Link>
         </li>
         <li>
-          <Link to='#' onClick={() => signOut()}>
+          <Link to='#' onClick={() => signOut(history)}>
             <Icon>
               <SignOutIcon />
             </Icon>

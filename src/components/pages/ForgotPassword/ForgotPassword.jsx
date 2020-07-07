@@ -60,12 +60,15 @@ const ForgotPassword = ({ isAuthenticated, resetPassword }) => {
                     <Error>
                       {!!submitError && !dirtySinceLastSubmit && submitError}
                     </Error>
+                    <Text color='blue' mt='2rem'>
+                      <Link to='/signin'>Go back to sign in</Link>
+                    </Text>
                   </>
                 )}
 
                 {!showForm && (
                   <>
-                    <Text color='green' mb='1.5rem'>
+                    <Text color='green' mb='1.5rem' fontSize='1.8rem'>
                       Reset link is sent to the email
                     </Text>
                     <Link to='/signin'>

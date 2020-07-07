@@ -32,7 +32,7 @@ const Navbar = ({ history, cartCount }) => {
     if (
       history.location.pathname === '/signin' ||
       history.location.pathname === '/signup' ||
-      history.location.pathname === '/forgot-password' 
+      history.location.pathname === '/forgot-password'
     ) {
       setShow(false)
     } else {
@@ -102,6 +102,7 @@ const Navbar = ({ history, cartCount }) => {
               userRef={userRef}
               show={showUserOptions}
               setShow={setShowUserOptions}
+              history={history}
             />
           </li>
 

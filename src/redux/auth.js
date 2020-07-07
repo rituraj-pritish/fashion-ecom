@@ -25,7 +25,7 @@ const RESET_PASSWORD_FAILURE = 'RESET_PASSWORD_FAILURE'
 
 // action creators
 
-export const signup = data => async dispatch => {
+export const signup = (data, goBack) => async dispatch => {
   dispatch({ type: AUTH_REQUEST })
 
   const { email, password, name, phone } = data
@@ -48,6 +48,7 @@ export const signup = data => async dispatch => {
 
       db.collection('users').doc(res.user.uid).set(userPayload)
 
+      goBack()
       dispatch({ type: AUTH_SUCCESS, payload: userPayload })
       setAlert('Sign up successful', 'success')
     }
@@ -57,7 +58,7 @@ export const signup = data => async dispatch => {
   }
 }
 
-export const signin = ({ email, password }) => async dispatch => {
+export const signin = ({ email, password }, goBack) => async dispatch => {
   dispatch({ type: AUTH_REQUEST })
   try {
     const res = await firebase
@@ -74,6 +75,7 @@ export const signin = ({ email, password }) => async dispatch => {
     const userData = user.data()
 
     if (userData) {
+      goBack()
       setAlert('Sign in successful', 'success')
       dispatch({ type: AUTH_SUCCESS, payload: userData })
     }
@@ -121,12 +123,12 @@ export const resetPassword = ({ email }) => async dispatch => {
   }
 }
 
-export const signOut = () => async dispatch => {
+export const signOut = history => async dispatch => {
   try {
     await firebase.auth().signOut()
-    localStorage.removeItem('persist:root')
     setAlert('Sign out successful', 'success')
   } catch (err) {}
+  history.push('/')
   dispatch({ type: LOGOUT })
 }
 
@@ -146,8 +148,7 @@ const initialState = {
   user: null,
   isLoading: false,
   isAuthenticated: false,
-  isSendingResetLink: false,
-  linkSent :false
+  isSendingResetLink: false
 }
 
 export default (state = initialState, { type, payload }) =>

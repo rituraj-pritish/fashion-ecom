@@ -17,7 +17,7 @@ const INITIAL_VALUES = {
   password: '123123'
 }
 
-const SignIn = ({ isAuthenticated, isLoading, signin }) => {
+const SignIn = ({ isAuthenticated, isLoading, signin, history }) => {
   if (isAuthenticated) return <Redirect to='/' />
 
   return (
@@ -29,7 +29,7 @@ const SignIn = ({ isAuthenticated, isLoading, signin }) => {
           </Link>
         </StyledLogo>
         <Form
-          onSubmit={signin}
+          onSubmit={(values) => signin(values, history.goBack)}
           initialValues={INITIAL_VALUES}
           render={({ handleSubmit, submitError, dirtySinceLastSubmit }) => {
             return (
