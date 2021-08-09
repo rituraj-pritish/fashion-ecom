@@ -23,7 +23,9 @@ const initialState = {
 export const getCurrencies = () => async dispatch => {
   dispatch({ type: GET_CURRENCIES_REQUEST })
 
-  fetch('https://api.exchangeratesapi.io/latest?base=USD ')
+  fetch(
+    `https://openexchangerates.org/api/latest.json ?app_id=${process.env.REACT_APP_EXCHANGE_RATE_APP_ID}&base=USD`
+  )
     .then(res =>
       res
         .json()

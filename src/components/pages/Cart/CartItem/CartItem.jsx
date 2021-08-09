@@ -3,12 +3,11 @@ import LazyLoad from 'react-lazy-load'
 
 import QuantityCounter from 'components/shared/QuantityCounter'
 import Button from 'components/ui/Button'
-import MoonLoader from 'react-spinners/MoonLoader'
 
 import Icon from '../../../ui/Icon'
 import Text from '../../../ui/Text'
 import TrashIcon from '../../../../assets/icons/TrashIcon'
-import { CartItemContainer, Details, Remove, Loader } from './CartItem.styles'
+import { CartItemContainer, Details, Remove } from './CartItem.styles'
 import { Link } from 'react-router-dom'
 import LoadingWrap from 'components/shared/LoadingWrap'
 

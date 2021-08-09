@@ -5,7 +5,7 @@ import currencyList from 'redux/currency/currencyList'
 import { Selector, SelectorWrapper } from './CurrencySelector.styled'
 import clickOutside from 'helpers/clickOutside'
 
-const CurrencySelector = ({ changeCurrency, currencyCode }) => {
+const CurrencySelector = ({ changeCurrency, currencyCode, hasError }) => {
   const [showSelector, setShowSelector] = useState(false)
   const node = useRef()
 
@@ -15,6 +15,8 @@ const CurrencySelector = ({ changeCurrency, currencyCode }) => {
   }
 
   clickOutside(node, () => setShowSelector(false))
+
+  if(hasError) return null
 
   return (
     <SelectorWrapper ref={node}>
@@ -43,7 +45,8 @@ const CurrencySelector = ({ changeCurrency, currencyCode }) => {
 
 CurrencySelector.propTypes = {
   changeCurrency: PropTypes.func.isRequired,
-  currencyCode: PropTypes.string.isRequired
+  currencyCode: PropTypes.string.isRequired,
+  hasError: PropTypes.bool.isRequired
 }
 
 export default CurrencySelector

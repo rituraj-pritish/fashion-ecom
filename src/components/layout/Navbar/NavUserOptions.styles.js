@@ -12,6 +12,7 @@ export const UserOptions = styled.div`
   border-radius: 8px;
   cursor: initial;
 `;
+
 export const NoAuthOptions = styled.div`
   min-width: 170px;
 

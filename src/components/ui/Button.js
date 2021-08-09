@@ -22,7 +22,7 @@ border: none;
 cursor: pointer;
 padding: 0.5rem 1rem;
 font-size: 1.6rem;
-border-radius: 5px;
+border-radius: ${theme.borderRadius};
 display: flex;
 justify-content: center;
 align-items: center;

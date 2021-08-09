@@ -47,7 +47,6 @@ const App = ({
 
   useEffect(() => {
     authStateChangeHandler()
-    // eslint-disable-next-line
   }, [isAuthenticated])
 
   if (isLoading) {

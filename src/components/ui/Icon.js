@@ -12,15 +12,26 @@ import {
 } from 'styled-system'
 
 export const StyledIcon = styled.div`
-    cursor: ${({ noPointer }) => (noPointer ? 'initial' : 'pointer')};
+  cursor: ${({ noPointer }) => (noPointer ? 'initial' : 'pointer')};
+
   svg {
     width: 100%;
     height: ${({ size }) => size};
 
     path {
-      fill: ${({ color }) => color};
+      fill: ${({ color }) => color ? color : 'grey'};
     }
   }
+
+  &:hover {
+    svg {
+      path {
+        fill: unset;
+      }
+    } 
+      
+  }
+
   ${typography} ${color} ${space} ${position} ${layout} ${grid} ${flexbox} ${border}
 `
 

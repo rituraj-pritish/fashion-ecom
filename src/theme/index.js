@@ -17,6 +17,6 @@ export default {
     md: '30px',
     xxl: '50px'
   },
-
+  borderRadius: '5px',
   maxWidth: '1350px'
 };
