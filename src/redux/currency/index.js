@@ -20,11 +20,13 @@ const initialState = {
   error: false
 }
 
+const CURRENCY_EXCHANGE_BASE_URL = 'https://openexchangerates.org/api'
+
 export const getCurrencies = () => async dispatch => {
   dispatch({ type: GET_CURRENCIES_REQUEST })
 
   fetch(
-    `https://openexchangerates.org/api/latest.json ?app_id=${process.env.REACT_APP_EXCHANGE_RATE_APP_ID}&base=USD`
+    `${CURRENCY_EXCHANGE_BASE_URL}/latest.json?app_id=${process.env.REACT_APP_EXCHANGE_RATE_APP_ID}&base=USD`
   )
     .then(res =>
       res
