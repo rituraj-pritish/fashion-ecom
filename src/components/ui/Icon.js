@@ -26,7 +26,7 @@ export const StyledIcon = styled.div`
   &:hover {
     svg {
       path {
-        fill: unset;
+        fill: ${({ hoverColor }) => hoverColor};
       }
     } 
       

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from 'theme'
 
 export const ProductItemContainer = styled.div`
   background: #f6f8fc;
@@ -9,6 +10,7 @@ export const ProductItemContainer = styled.div`
   img {
     width: 100%;
     cursor: pointer;
+    border-radius: ${theme.borderRadius};
   }
 `;
 

@@ -12,7 +12,7 @@ import Button from '../../ui/Button'
 const Cart = ({ cart, forLater }) => {
   return (
     <PageContainer>
-      {!cart.length && !forLater.length ? (
+      {!cart.length ? (
         <>
           <Text m='2rem 0'>Your cart is empty.</Text>
           <Button maxWidth='200px' m='0 auto'>

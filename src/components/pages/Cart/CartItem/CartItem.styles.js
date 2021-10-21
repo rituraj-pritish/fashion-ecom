@@ -16,6 +16,11 @@ export const Details = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  // counter
+  & > div {
+    width: fit-content;
+  }
 `;
 
 export const Remove = styled.div`
@@ -28,11 +33,6 @@ export const Remove = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-
-  & > div:hover {
-    color: ${({ theme }) => theme.colors.red};
-  }
 
   button {
     position: absolute;

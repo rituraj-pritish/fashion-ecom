@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import sizes from 'sizes';
+import theme from 'theme'
 
 export const StyledTitle = styled.div`
   padding: 1rem;
@@ -47,6 +48,7 @@ export const StyledCollectionItem = styled.div`
     transition: 0.5s;
     width: 100%;
     height: 100%;
+    border-radius: ${theme.borderRadius};
   }
 
   &:hover .col-bg {

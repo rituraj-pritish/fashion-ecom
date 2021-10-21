@@ -10,6 +10,7 @@ import TrashIcon from '../../../../assets/icons/TrashIcon'
 import { CartItemContainer, Details, Remove } from './CartItem.styles'
 import { Link } from 'react-router-dom'
 import LoadingWrap from 'components/shared/LoadingWrap'
+import theme from 'theme'
 
 const CartItem = ({
   page,
@@ -26,7 +27,7 @@ const CartItem = ({
   isSavedForLater,
   saveForLater,
   backToCart,
-  currency
+  currency,
 }) => {
   const handleRemove = () => {
     if (page === 'cart') {
@@ -54,7 +55,7 @@ const CartItem = ({
     )
 
   return (
-    <LoadingWrap isLoading={isLoading} >
+    <LoadingWrap isLoading={isLoading}>
       <CartItemContainer>
         <LazyLoad className='lazyload'>
           <Link to={`/product/${productId}/variant/${variantId}`}>
@@ -89,7 +90,11 @@ const CartItem = ({
         </Text>
 
         <Remove className='far fa-trash-alt'>
-          <Icon width='16px' onClick={handleRemove}>
+          <Icon
+            width='16px'
+            onClick={handleRemove}
+            hoverColor={theme.colors.red}
+          >
             <TrashIcon />
           </Icon>
           {false && secondaryCallToAction}

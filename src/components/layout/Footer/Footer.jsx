@@ -85,7 +85,7 @@ const Footer = ({ history }) => {
           <MailList>
             <h3>Stay up to date from fashion.co</h3>
             <form onSubmit={handleMaillist}>
-              <Input type='text' placeholder='enter your email' />
+              <Input type='text' placeholder='Enter your email' />
               <Button>Submit</Button>
             </form>
           </MailList>

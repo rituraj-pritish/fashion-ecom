@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from 'theme'
 
 export const Container = styled.div`
   position: relative;
@@ -79,6 +80,7 @@ export const ShopLinksContainer = styled.div`
     height: 100%;
     background-size: cover;
     transition: 0.3s ease-in;
+    border-radius: ${theme.borderRadius};
   }
 
   @media (max-width: 750px) {
