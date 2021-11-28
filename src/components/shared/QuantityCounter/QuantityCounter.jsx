@@ -13,7 +13,6 @@ const QuantityCounter = ({
   onDecrement = () => {},
   disabled = false,
 }) => {
-  console.log('c', count);
   return (
     <CounterWrapper disabled={disabled}>
       <IconWrapper
