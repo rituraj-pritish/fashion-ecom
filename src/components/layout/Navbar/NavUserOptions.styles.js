@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const UserOptions = styled.div`
   font-size: 1.6rem;
@@ -11,7 +11,7 @@ export const UserOptions = styled.div`
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
   cursor: initial;
-`;
+`
 
 export const NoAuthOptions = styled.div`
   min-width: 170px;
@@ -33,7 +33,7 @@ export const NoAuthOptions = styled.div`
       white-space: nowrap;
     }
   }
-`;
+`
 
 export const AuthOptions = styled.div`
   padding: 1rem 2rem;
@@ -50,4 +50,4 @@ export const AuthOptions = styled.div`
       margin-right: 2rem;
     }
   }
-`;
+`

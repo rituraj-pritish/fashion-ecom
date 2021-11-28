@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const CartItemContainer = styled.div`
   display: grid;
@@ -7,7 +7,7 @@ export const CartItemContainer = styled.div`
   border-bottom: 1px solid #202020;
   font-size: 1.5rem;
   align-items: center;
-`;
+`
 
 export const Details = styled.div`
   text-align: left;
@@ -21,7 +21,7 @@ export const Details = styled.div`
   & > div {
     width: fit-content;
   }
-`;
+`
 
 export const Remove = styled.div`
   width: fit-content;
@@ -38,4 +38,4 @@ export const Remove = styled.div`
     position: absolute;
     bottom: 0;
   }
-`;
+`

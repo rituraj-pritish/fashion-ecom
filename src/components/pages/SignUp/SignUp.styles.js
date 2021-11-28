@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const StyledLogo = styled.div`
   width: 16rem;
@@ -6,7 +6,7 @@ export const StyledLogo = styled.div`
   svg {
     width: 100%;
   }
-`;
+`
 export const Container = styled.div`
   font-size: 1.6rem;
   margin-top: -40px;
@@ -26,4 +26,4 @@ export const Container = styled.div`
       margin-bottom: 10px;
     }
   }
-`;
+`

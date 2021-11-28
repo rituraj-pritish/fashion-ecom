@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import sizes from 'sizes';
+import styled from 'styled-components'
+import sizes from 'sizes'
 
 export const FooterContainer = styled.div`
   position: relative;
@@ -20,7 +20,7 @@ export const FooterContainer = styled.div`
   @media ${sizes.mob} {
     padding: 30px ${({ theme }) => theme.padding.md};
   }
-`;
+`
 
 export const StyledLogo = styled.div`
   margin-right: 30px;
@@ -40,7 +40,7 @@ export const StyledLogo = styled.div`
     grid-column: 1/3;
     margin: 0 auto;
   }
-`;
+`
 
 export const SiteLinks = styled.ul`
   h3 {
@@ -67,7 +67,7 @@ export const SiteLinks = styled.ul`
   @media ${sizes.md} {
     margin-top: 15px;
   }
-`;
+`
 
 export const MailList = styled.div`
   text-align: end;
@@ -122,7 +122,7 @@ export const MailList = styled.div`
     width: 100%;
     text-align: center;
   }
-`;
+`
 
 export const TopContainer = styled.div`
   display: grid;
@@ -138,7 +138,7 @@ export const TopContainer = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
   }
-`;
+`
 
 export const BottomContainer = styled.div`
   font-size: 1.3rem;
@@ -146,7 +146,7 @@ export const BottomContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
+`
 
 export const SocialLinks = styled.div`
   svg {
@@ -163,4 +163,4 @@ export const SocialLinks = styled.div`
       width: 30px;
     }
   }
-`;
+`

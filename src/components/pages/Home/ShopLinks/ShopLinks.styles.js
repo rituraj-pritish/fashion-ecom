@@ -10,7 +10,7 @@ export const Container = styled.div`
   @media (max-width: 750px) {
     padding-top: 140%;
   }
-`;
+`
 
 export const ShopLinksContainer = styled.div`
   position: absolute;
@@ -87,4 +87,4 @@ export const ShopLinksContainer = styled.div`
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
   }
-`;
+`

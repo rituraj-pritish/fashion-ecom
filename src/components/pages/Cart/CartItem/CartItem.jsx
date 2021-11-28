@@ -13,95 +13,96 @@ import LoadingWrap from 'components/shared/LoadingWrap'
 import theme from 'theme'
 
 const CartItem = ({
-  page,
-  updateCart,
-  removeFromCart,
-  removeFromWishlist,
-  imageUrl,
-  price,
-  productId,
-  variantId,
-  name,
-  quantity,
-  isLoading,
-  isSavedForLater,
-  saveForLater,
-  backToCart,
-  currency,
+	page,
+	updateCart,
+	removeFromCart,
+	removeFromWishlist,
+	imageUrl,
+	price,
+	productId,
+	variantId,
+	name,
+	quantity,
+	isLoading,
+	isSavedForLater,
+	saveForLater,
+	backToCart,
+	currency,
 }) => {
-  const handleRemove = () => {
-    if (page === 'cart') {
-      removeFromCart(variantId)
-    } else {
-      removeFromWishlist(productId)
-    }
-  }
+	const handleRemove = () => {
+		if (page === 'cart') {
+			removeFromCart(variantId)
+		} else {
+			removeFromWishlist(productId)
+		}
+	}
 
-  const secondaryCallToAction =
-    page === 'cart' ? (
-      isSavedForLater ? (
-        <Button variant='secondary' onClick={() => backToCart(variantId)}>
+	/* eslint-disable */
+	const secondaryCallToAction = page === 'cart' ? (
+    	isSavedForLater ? (
+    		<Button variant='secondary' onClick={() => backToCart(variantId)}>
           Move to Cart
-        </Button>
-      ) : (
-        <Button variant='secondary' onClick={() => saveForLater(variantId)}>
+    		</Button>
+    	) : (
+    		<Button variant='secondary' onClick={() => saveForLater(variantId)}>
           Save for Later
-        </Button>
-      )
-    ) : (
-      <Button variant='secondary' onClick={() => {}}>
+    		</Button>
+    	)
+	) : (
+    	<Button variant='secondary' onClick={() => {}}>
         move to cart
-      </Button>
-    )
+    	</Button>
+	)
+	/* eslint-enable */
 
-  return (
-    <LoadingWrap isLoading={isLoading}>
-      <CartItemContainer>
-        <LazyLoad className='lazyload'>
-          <Link to={`/product/${productId}/variant/${variantId}`}>
-            <img src={imageUrl} alt={name} />
-          </Link>
-        </LazyLoad>
+	return (
+		<LoadingWrap isLoading={isLoading}>
+			<CartItemContainer>
+				<LazyLoad className='lazyload'>
+					<Link to={`/product/${productId}/variant/${variantId}`}>
+						<img src={imageUrl} alt={name} />
+					</Link>
+				</LazyLoad>
 
-        <Details>
-          <p>{name}</p>
+				<Details>
+					<p>{name}</p>
 
-          {page === 'cart' && (
-            <QuantityCounter
-              count={quantity}
-              onIncrement={() => {
-                updateCart({ id: variantId, quantity: quantity + 1 })
-              }}
-              onDecrement={() => {
-                if (quantity === 1) return
-                updateCart({ id: variantId, quantity: quantity - 1 })
-              }}
-            />
-          )}
-        </Details>
+					{page === 'cart' && (
+						<QuantityCounter
+							count={quantity}
+							onIncrement={() => {
+								updateCart({ id: variantId, quantity: quantity + 1 })
+							}}
+							onDecrement={() => {
+								if (quantity === 1) return
+								updateCart({ id: variantId, quantity: quantity - 1 })
+							}}
+						/>
+					)}
+				</Details>
 
-        <Text fontWeight='bold'>
-          {`${currency.symbol} `}
-          {quantity
-            ? (
-                Math.round(quantity * (currency.rate * price) * 100) / 100
-              ).toFixed(2)
-            : price}
-        </Text>
+				<Text fontWeight='bold'>
+					{`${currency.symbol} `}
+					{quantity
+						? (
+							Math.round(quantity * (currency.rate * price) * 100) / 100
+						).toFixed(2)
+						: price}
+				</Text>
 
-        <Remove className='far fa-trash-alt'>
-          <Icon
-            width='16px'
-            onClick={handleRemove}
-            hoverColor={theme.colors.red}
-          >
-            <TrashIcon />
-          </Icon>
-          {false && secondaryCallToAction}
-        </Remove>
-      </CartItemContainer>
-    </LoadingWrap>
-  )
+				<Remove className='far fa-trash-alt'>
+					<Icon
+						width='16px'
+						onClick={handleRemove}
+						hoverColor={theme.colors.red}
+					>
+						<TrashIcon />
+					</Icon>
+					{false && secondaryCallToAction}
+				</Remove>
+			</CartItemContainer>
+		</LoadingWrap>
+	)
 }
 
 export default CartItem

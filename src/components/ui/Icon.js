@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import {
-  typography,
-  space,
-  color,
-  position,
-  flexbox,
-  layout,
-  grid,
-  border
+	typography,
+	space,
+	color,
+	position,
+	flexbox,
+	layout,
+	grid,
+	border
 } from 'styled-system'
 
 export const StyledIcon = styled.div`
@@ -36,11 +36,11 @@ export const StyledIcon = styled.div`
 `
 
 const Icon = ({ children, size = '22px', ...otherProps }) => {
-  return (
-    <StyledIcon size={size} {...otherProps}>
-      {children}
-    </StyledIcon>
-  )
+	return (
+		<StyledIcon size={size} {...otherProps}>
+			{children}
+		</StyledIcon>
+	)
 }
 
 export default Icon

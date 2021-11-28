@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import sizes from 'sizes';
+import styled from 'styled-components'
+import sizes from 'sizes'
 
 export const Nav = styled.nav`
   font-size: 1.6rem;
@@ -23,7 +23,7 @@ export const Nav = styled.nav`
   @media ${sizes.mob} {
     padding: 0 ${({ theme }) => theme.padding.mob};
   }
-`;
+`
 
 export const Container = styled.div`
   max-width: ${({ theme }) => theme.maxWidth};
@@ -39,7 +39,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between;
   }
-`;
+`
 
 export const StyledLogo = styled.div`
   svg {
@@ -51,7 +51,7 @@ export const StyledLogo = styled.div`
       width: 95px;
     }
   }
-`;
+`
 
 export const SearchIconContainer = styled.li`
   display: none;
@@ -60,7 +60,7 @@ export const SearchIconContainer = styled.li`
   @media ${sizes.lg} {
     display: block;
   }
-`;
+`
 
 export const NavLinks = styled.ul`
   margin: 0;
@@ -85,7 +85,7 @@ export const NavLinks = styled.ul`
       }
     }
   }
-`;
+`
 
 export const Cart = styled.li`
   display: flex;
@@ -109,7 +109,7 @@ export const Cart = styled.li`
     justify-content: center;
     align-items: center;
   }
-`;
+`
 
 export const Search = styled.form`
   display: flex;
@@ -153,7 +153,7 @@ export const Search = styled.form`
   @media ${sizes.lg} {
     display: none;
   }
-`;
+`
 
 export const Nothing = styled.div`
   position: absolute;
@@ -166,4 +166,4 @@ export const Nothing = styled.div`
   padding: 15px;
   box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-`;
+`

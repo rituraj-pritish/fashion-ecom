@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const Sale = styled.div`
   font-size: 1.2rem;
@@ -13,10 +13,10 @@ const Sale = styled.div`
   font-weight: bold;
   position: absolute;
   border-bottom-right-radius: 5px;
-`;
+`
 
 const SaleBanner = () => {
-  return <Sale>sale !</Sale>;
-};
+	return <Sale>sale !</Sale>
+}
 
-export default SaleBanner;
+export default SaleBanner

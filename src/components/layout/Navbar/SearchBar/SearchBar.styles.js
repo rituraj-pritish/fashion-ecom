@@ -30,4 +30,4 @@ export const SearchBarContainer = styled.form`
   @media ${sizes.lg} {
     /* visibility: visible; */
   }
-`;
+`

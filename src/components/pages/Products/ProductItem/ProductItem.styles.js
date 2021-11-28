@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 import theme from 'theme'
 
 export const ProductItemContainer = styled.div`
@@ -12,7 +12,7 @@ export const ProductItemContainer = styled.div`
     cursor: pointer;
     border-radius: ${theme.borderRadius};
   }
-`;
+`
 
 export const ItemBottom = styled.div`
   padding: 0 15px 15px 15px;
@@ -35,7 +35,7 @@ export const ItemBottom = styled.div`
   button {
     margin-top: auto;
   }
-`;
+`
 export const Wishlist = styled.div`
   position: absolute;
   top: 10px;
@@ -50,4 +50,4 @@ export const Wishlist = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-`;
+`

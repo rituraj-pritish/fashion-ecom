@@ -18,11 +18,11 @@ const StyledLabel = styled.label`
 `
 
 const Label = ({children, ...otherProps}) => {
-  return (
-    <StyledLabel {...otherProps} >
-      {children}
-    </StyledLabel>
-  )
+	return (
+		<StyledLabel {...otherProps} >
+			{children}
+		</StyledLabel>
+	)
 }
 
 export default Label

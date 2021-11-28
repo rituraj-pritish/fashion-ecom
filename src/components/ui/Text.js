@@ -1,23 +1,23 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 import {
-  color,
-  space,
-  typography,
-  position,
-  grid,
-  display
-} from 'styled-system';
+	color,
+	space,
+	typography,
+	position,
+	grid,
+	display
+} from 'styled-system'
 
 const StyledText = styled.p`
   font-size: 1.6rem;
   color: inherit;
 
   ${color} ${space} ${typography} ${position} ${grid} ${display}
-`;
+`
 
 const Text = ({ children, ...otherProps }) => {
-  return <StyledText {...otherProps}>{children}</StyledText>;
-};
+	return <StyledText {...otherProps}>{children}</StyledText>
+}
 
-export default Text;
+export default Text

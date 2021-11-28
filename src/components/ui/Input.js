@@ -2,13 +2,13 @@ import React from 'react'
 import { darken, lighten } from 'polished'
 import styled from 'styled-components'
 import {
-  space,
-  typography,
-  color,
-  layout,
-  grid,
-  flexbox,
-  border
+	space,
+	typography,
+	color,
+	layout,
+	grid,
+	flexbox,
+	border
 } from 'styled-system'
 import theme from 'theme'
 
@@ -23,7 +23,7 @@ const StyledInput = styled.input`
   height: 35px;
   border: 1px solid ${darken(0.1, theme.colors.lightGrey)};
   ${({ readOnly }) =>
-    readOnly &&
+		readOnly &&
     `
     opacity: 0.5;
     pointer-events: none;
@@ -43,7 +43,7 @@ const StyledInput = styled.input`
 `
 
 const Input = props => {
-  return <StyledInput {...props} />
+	return <StyledInput {...props} />
 }
 
 export default Input

@@ -1,9 +1,9 @@
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 
 import Wishlist from './Wishlist'
 
 const mapStateToProps = state => ({
-  wishlist: state.wishlist.items
-});
+	wishlist: state.wishlist.items
+})
 
-export default connect(mapStateToProps)(Wishlist);
+export default connect(mapStateToProps)(Wishlist)

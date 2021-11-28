@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-import sizes from 'sizes';
+import styled from 'styled-components'
+import sizes from 'sizes'
 
 export const CheckoutBoxContainer = styled.div`
   @media ${sizes.lg} {
     position: sticky;
     top: -15px;
   }
-`;
+`
 
 export const Container = styled.div`
   background: #eee;
@@ -26,9 +26,9 @@ export const Container = styled.div`
     width: 100%;
     margin-top: 10px;
   }
-`;
+`
 
 export const Line = styled.div`
   border-bottom: 1px solid black;
   margin: 10px 0;
-`;
+`

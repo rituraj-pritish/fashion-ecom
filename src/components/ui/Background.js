@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { background, grid } from 'styled-system';
+import React from 'react'
+import styled from 'styled-components'
+import { background, grid } from 'styled-system'
 
 const StyledBackground = styled.div`
   background: ${({url,img}) => url ? `url(${url})` : img };
@@ -10,10 +10,10 @@ const StyledBackground = styled.div`
   height:100%;
   width: 100%;
   ${background} ${grid}
-`;
+`
 
 const Background = (props) => {
-  return <StyledBackground {...props} />;
-};
+	return <StyledBackground {...props} />
+}
 
-export default Background;
+export default Background

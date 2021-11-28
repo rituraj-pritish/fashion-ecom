@@ -1,16 +1,16 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Container = styled.div`
   width: max-content;
   margin: 0 auto;
   padding: 2rem;
-`;
+`
 
 export const CardInfo = styled.p`
   color: red;
   font-size: 1.5rem;
   margin-top: 2rem;
-`;
+`
 
 export const Amount = styled.div`
   font-size: 2rem;
@@ -20,7 +20,7 @@ export const Amount = styled.div`
     margin-left: 1rem;
     font-weight: bold;
   }
-`;
+`
 
 export const OrderSuccess = styled.div`
   padding: 2rem;
@@ -34,4 +34,4 @@ export const OrderSuccess = styled.div`
   background: #d8fad8;
   font-size: 2rem;
   margin-bottom: 2rem;
-`;
+`

@@ -12,7 +12,7 @@ export const ThumbInside = styled.div`
   height: 10px;
   width: 4px;
   background-color: ${({ isDragged }) =>
-    isDragged ? theme.colors.primary : '#CCC'};
+		isDragged ? theme.colors.primary : '#CCC'};
 `
 
 export const SliderThumb = styled.div`
@@ -68,11 +68,11 @@ export const Track = styled.div`
   width: 100%;
   border-radius: 4px;
   background: ${({ values, min, max }) =>
-    getTrackBackground({
-      values: values,
-      colors: ['#ccc', theme.colors.primary, '#ccc'],
-      min: min,
-      max: max
-    })};
+		getTrackBackground({
+			values: values,
+			colors: ['#ccc', theme.colors.primary, '#ccc'],
+			min: min,
+			max: max
+		})};
   align-self: center;
 `

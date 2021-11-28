@@ -1,15 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import {
-  typography,
-  space,
-  color,
-  variant,
-  position,
-  flexbox,
-  layout,
-  grid,
-  border
+	typography,
+	space,
+	color,
+	variant,
+	position,
+	flexbox,
+	layout,
+	grid,
+	border
 } from 'styled-system'
 import ClipLoader from 'react-spinners/ClipLoader'
 
@@ -28,31 +28,31 @@ justify-content: center;
 align-items: center;
 
 ${variant({
-  variants: {
-    primary: {
-      color: theme.colors.white,
-      bg: theme.colors.primary,
-      '&:hover': {
-        bg: theme.colors.primaryDark
-      }
-    },
-    secondary: {
-      color: theme.colors.primary,
-      bg: theme.colors.white,
-      borderWidth: '2px',
-      borderStyle: 'solid',
-      borderColor: theme.colors.primary,
-      p: '0.4rem 1rem'
-    },
-    cancel: {
-      bg: lighten(0.2, theme.colors.grey),
-      color: theme.colors.white
-    }
-  }
-})}
+		variants: {
+			primary: {
+				color: theme.colors.white,
+				bg: theme.colors.primary,
+				'&:hover': {
+					bg: theme.colors.primaryDark
+				}
+			},
+			secondary: {
+				color: theme.colors.primary,
+				bg: theme.colors.white,
+				borderWidth: '2px',
+				borderStyle: 'solid',
+				borderColor: theme.colors.primary,
+				p: '0.4rem 1rem'
+			},
+			cancel: {
+				bg: lighten(0.2, theme.colors.grey),
+				color: theme.colors.white
+			}
+		}
+	})}
 
 ${({ disabled, variant }) =>
-  disabled &&
+		disabled &&
   variant === 'primary' &&
   `
   opacity: 0.8;
@@ -60,7 +60,7 @@ ${({ disabled, variant }) =>
 `}
 
 ${({ disabled, variant }) =>
-  disabled &&
+		disabled &&
   variant === 'secondary' &&
   `
   cursor: default;
@@ -71,25 +71,25 @@ ${typography} ${color} ${space} ${position} ${layout} ${grid} ${flexbox} ${borde
 `
 
 const Button = ({ children, variant, isLoading, disabled, ...otherProps }) => {
-  return (
-    <StyledButton variant={variant} disabled={disabled} {...otherProps}>
-      {isLoading ? (
-        <ClipLoader
-          size={17}
-          color={
-            variant === 'primary' ? theme.colors.white : theme.colors.primary
-          }
-        />
-      ) : (
-        children
-      )}
-    </StyledButton>
-  )
+	return (
+		<StyledButton variant={variant} disabled={disabled} {...otherProps}>
+			{isLoading ? (
+				<ClipLoader
+					size={17}
+					color={
+						variant === 'primary' ? theme.colors.white : theme.colors.primary
+					}
+				/>
+			) : (
+				children
+			)}
+		</StyledButton>
+	)
 }
 
 Button.defaultProps = {
-  variant: 'primary',
-  height: '35px'
+	variant: 'primary',
+	height: '35px'
 }
 
 export default Button

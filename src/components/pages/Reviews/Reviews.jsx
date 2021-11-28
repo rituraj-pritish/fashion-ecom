@@ -9,106 +9,106 @@ import StarIcon from 'assets/icons/StarIcon'
 import Icon from 'components/ui/Icon'
 import ReviewItem from 'components/shared/ReviewItem'
 import {
-  SpinnerWrapper,
-  AvgRating,
-  Image,
-  TopSection,
-  NoReviews
+	SpinnerWrapper,
+	AvgRating,
+	Image,
+	TopSection,
+	NoReviews
 } from './Reviews.styled'
 import Spinner from 'components/shared/Spinner/Spinner'
 import ProductCarousel from 'components/shared/ProductCarousel'
 
 const Reviews = ({ getProductReviews, productId, product, products }) => {
-  const [reviews, setReviews] = useState([])
-  const [isFetching, setIsFetching] = useState(true)
+	const [reviews, setReviews] = useState([])
+	const [isFetching, setIsFetching] = useState(true)
 
-  const getReviews = useCallback(async () => {
-    const res = await getProductReviews(productId)
-    setReviews(res)
-    setIsFetching(false)
-  }, [getProductReviews, productId])
+	const getReviews = useCallback(async () => {
+		const res = await getProductReviews(productId)
+		setReviews(res)
+		setIsFetching(false)
+	}, [getProductReviews, productId])
 
-  useEffect(() => {
-    setIsFetching(true)
-    getReviews()
-  }, [getReviews, productId])
+	useEffect(() => {
+		setIsFetching(true)
+		getReviews()
+	}, [getReviews, productId])
 
-  if (isFetching)
-    return (
-      <PageContainer>
-        <SpinnerWrapper>
-          <Spinner size={35} />
-        </SpinnerWrapper>
-      </PageContainer>
-    )
+	if (isFetching)
+		return (
+			<PageContainer>
+				<SpinnerWrapper>
+					<Spinner size={35} />
+				</SpinnerWrapper>
+			</PageContainer>
+		)
 
-  const {
-    avg_rating,
-    total_ratings,
-    total_reviews = 0,
-    name,
-    variants
-  } = product
-  const { images } = variants[Object.keys(variants)[0]]
+	const {
+		avg_rating,
+		total_ratings,
+		total_reviews = 0,
+		name,
+		variants
+	} = product
+	const { images } = variants[Object.keys(variants)[0]]
 
-  return (
-    <PageContainer align='left'>
-      <TopSection>
-        <Image src={images[0]} alt='name' />
-        <div>
-          <div>{name}</div>
+	return (
+		<PageContainer align='left'>
+			<TopSection>
+				<Image src={images[0]} alt='name' />
+				<div>
+					<div>{name}</div>
 
-          <AvgRating>
-            <Rating
-              initialRating={4.3}
-              emptySymbol={
-                <Icon
-                  noPointer
-                  mr='0.3rem'
-                  width='18px'
-                  color={theme.colors.golden}
-                >
-                  <StarOutlineIcon />
-                </Icon>
-              }
-              fullSymbol={
-                <Icon
-                  noPointer
-                  width='18px'
-                  color={theme.colors.golden}
-                  mr='0.3rem'
-                >
-                  <StarIcon />
-                </Icon>
-              }
-              readonly
-            />
-            <div>{avg_rating} out of 5</div>
-          </AvgRating>
+					<AvgRating>
+						<Rating
+							initialRating={4.3}
+							emptySymbol={
+								<Icon
+									noPointer
+									mr='0.3rem'
+									width='18px'
+									color={theme.colors.golden}
+								>
+									<StarOutlineIcon />
+								</Icon>
+							}
+							fullSymbol={
+								<Icon
+									noPointer
+									width='18px'
+									color={theme.colors.golden}
+									mr='0.3rem'
+								>
+									<StarIcon />
+								</Icon>
+							}
+							readonly
+						/>
+						<div>{avg_rating} out of 5</div>
+					</AvgRating>
 
-          <div>
-            <span>{total_ratings}</span>
+					<div>
+						<span>{total_ratings}</span>
             ratings & <span>{total_reviews}</span>
             reviews
-          </div>
-        </div>
-      </TopSection>
+					</div>
+				</div>
+			</TopSection>
 
-      {reviews.length === 0 ? (
-        <NoReviews>No reviews yet</NoReviews>
-      ) : (
-        reviews.map(review => <ReviewItem {...review} />)
-      )}
+			{reviews.length === 0 ? (
+				<NoReviews>No reviews yet</NoReviews>
+			) : (
+				reviews.map((review, idx) => <ReviewItem {...review} key={idx} />)
+			)}
 
-      <ProductCarousel data={products} title='On Sale' />
-    </PageContainer>
-  )
+			<ProductCarousel data={products} title='On Sale' />
+		</PageContainer>
+	)
 }
 
 Reviews.propTypes = {
-  productId: PropTypes.string.isRequired,
-  product: PropTypes.object.isRequired,
-  products: PropTypes.array.isRequired
+	productId: PropTypes.string.isRequired,
+	product: PropTypes.object.isRequired,
+	products: PropTypes.array.isRequired
 }
 
 export default Reviews

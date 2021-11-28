@@ -5,8 +5,8 @@ import PaymentPage from './PaymentPage'
 import { addNewOrder } from 'redux/user'
 
 const mapStateToProps = ({ currency, cart }) => ({
-  currency: currency.currency,
-  cart: cart.items
+	currency: currency.currency,
+	cart: cart.items
 })
 
 export default connect(mapStateToProps, { emptyCart, addNewOrder })(PaymentPage)

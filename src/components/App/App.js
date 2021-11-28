@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import ReactTooltip from 'react-tooltip'
@@ -13,45 +13,41 @@ import Overlay from 'components/layout/Overlay'
 import Footer from 'components/layout/Footer'
 import theme from 'theme'
 import Routes from './Routes'
+import useProducts from 'hooks/useProducts'
 
-const App = ({
-  isAuthenticated,
-  isLoading,
-  getProducts,
-  authStateChangeHandler,
-  getCurrencies,
-  products
-}) => {
-  useEffect(() => {
-    getProducts()
-    getCurrencies()
-  }, [getCurrencies, getProducts, isAuthenticated])
+const App = () => {
+	const { getProducts, products } = useProducts()
 
-  useEffect(() => {
-    authStateChangeHandler()
-  }, [authStateChangeHandler, isAuthenticated])
+	useEffect(() => {
+		getProducts()
+		// getCurrencies()
+	}, [])
 
-  if (isLoading) {
-    return <Loader />
-  }
+	// useEffect(() => {
+	// 	authStateChangeHandler()
+	// }, [isAuthenticated])
 
-  return (
-    <Fragment>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <Navbar />
-          <ScrollToTop>
-            <Routes/>
-          </ScrollToTop>
-          <TopButton />
-          <Footer />
-        </Router>
-      </ThemeProvider>
-      <ReactNotification />
-      <ReactTooltip />
-      <Overlay />
-    </Fragment>
-  )
+	if (!products) {
+		return <Loader />
+	}
+
+	return (
+		<>
+			<ThemeProvider theme={theme}>
+				<Router>
+					<Navbar />
+					<ScrollToTop>
+						<Routes/>
+					</ScrollToTop>
+					<TopButton />
+					<Footer />
+				</Router>
+			</ThemeProvider>
+			<ReactNotification />
+			<ReactTooltip />
+			<Overlay />
+		</>
+	)
 }
 
 export default App

@@ -1,6 +1,6 @@
 import React from 'react'
-import styled from 'styled-components';
-import { typography, space, color, position, grid,layout, border } from 'styled-system';
+import styled from 'styled-components'
+import { typography, space, color, position, grid,layout, border } from 'styled-system'
 
 const StyledGrid = styled.div`
   display: grid;
@@ -8,11 +8,11 @@ const StyledGrid = styled.div`
 `
 
 const Grid = ({ children, ...otherProps }) => {
-  return (
-    <StyledGrid {...otherProps}>
-      {children}
-    </StyledGrid>
-  )
+	return (
+		<StyledGrid {...otherProps}>
+			{children}
+		</StyledGrid>
+	)
 }
 
 export default Grid

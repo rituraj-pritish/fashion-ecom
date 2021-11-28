@@ -16,7 +16,7 @@ export const CounterWrapper = styled.div`
   }
 
   ${({ disabled }) =>
-    disabled &&
+		disabled &&
     `
     opacity: 0.6;
     pointer-events: none;

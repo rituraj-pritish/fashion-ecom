@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-import sizes from 'sizes';
+import styled from 'styled-components'
+import sizes from 'sizes'
 import theme from 'theme'
 
 export const StyledTitle = styled.div`
   padding: 1rem;
   font-size: 2rem;
   font-weight: bold;
-`;
+`
 
 export const StyledCollectionContainer = styled.div`
   display: grid;
@@ -20,7 +20,7 @@ export const StyledCollectionContainer = styled.div`
     grid-template-rows: 1fr 1fr 1fr;
     height: 900px;
   }
-`;
+`
 
 export const StyledCollectionContent = styled.div`
   position: absolute;
@@ -36,7 +36,7 @@ export const StyledCollectionContent = styled.div`
   justify-content: center;
   align-items: center;
   transition: 0.4s;
-`;
+`
 
 export const StyledCollectionItem = styled.div`
   position: relative;
@@ -60,4 +60,4 @@ export const StyledCollectionItem = styled.div`
     height: 45%;
     border-radius: 15px;
   }
-`;
+`

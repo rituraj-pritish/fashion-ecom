@@ -1,8 +1,6 @@
 import React, { useRef } from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { signOut } from 'redux/auth'
 import clickOutside from 'helpers/clickOutside'
 import SignOutIcon from 'assets/icons/SignOutIcon'
 import HeartIcon from 'assets/icons/HeartIcon'
@@ -12,93 +10,89 @@ import { ReactComponent as OrdersIcon } from 'assets/icons/orders.svg'
 import Button from 'components/ui/Button'
 import Icon from 'components/ui/Icon'
 import {
-  UserOptions,
-  NoAuthOptions,
-  AuthOptions
+	UserOptions,
+	NoAuthOptions,
+	AuthOptions
 } from './NavUserOptions.styles'
+import useAuthentication from 'hooks/useAuthentication'
 
 const NavUserOptions = ({
-  show,
-  setShow,
-  signOut,
-  isAuthenticated,
-  userRef,
-  history
+	show,
+	setShow,
+	userRef,
+	history
 }) => {
-  const node = useRef()
+	const { isAuthenticated, signOut } = useAuthentication()
+	const node = useRef()
 
-  clickOutside(node, () => setShow(false), userRef)
+	clickOutside(node, () => setShow(false), userRef)
 
-  const noAuthOptions = (
-    <NoAuthOptions>
-      <Link to='/signin'>
-        <Button>Sign In</Button>
-      </Link>
-      <div>
-        <p>New Customer ?</p>
-        <Link to='/signup'>
-          <Button variant='secondary'>Sign up</Button>
-        </Link>
-      </div>
-    </NoAuthOptions>
-  )
+	const noAuthOptions = (
+		<NoAuthOptions>
+			<Link to='/signin'>
+				<Button>Sign In</Button>
+			</Link>
+			<div>
+				<p>New Customer ?</p>
+				<Link to='/signup'>
+					<Button variant='secondary'>Sign up</Button>
+				</Link>
+			</div>
+		</NoAuthOptions>
+	)
 
-  const authOptions = (
-    <AuthOptions>
-      <ul>
-        <li>
-          <Link to='/user/wishlist'>
-            <Icon>
-              <HeartIcon />
-            </Icon>
+	const authOptions = (
+		<AuthOptions>
+			<ul>
+				<li>
+					<Link to='/user/wishlist'>
+						<Icon>
+							<HeartIcon />
+						</Icon>
             Wishlist
-          </Link>
-        </li>
-        <li>
-          <Link to='/user/cart'>
-            <Icon>
-              <CartIcon />
-            </Icon>
+					</Link>
+				</li>
+				<li>
+					<Link to='/user/cart'>
+						<Icon>
+							<CartIcon />
+						</Icon>
             Cart
-          </Link>
-        </li>
-        <li>
-          <Link to='/user/orders'>
-            <Icon>
-              <OrdersIcon />
-            </Icon>
+					</Link>
+				</li>
+				<li>
+					<Link to='/user/orders'>
+						<Icon>
+							<OrdersIcon />
+						</Icon>
             Orders
-          </Link>
-        </li>
-        <li>
-          <Link to='/user/account'>
-            <Icon>
-              <AccountIcon />
-            </Icon>
+					</Link>
+				</li>
+				<li>
+					<Link to='/user/account'>
+						<Icon>
+							<AccountIcon />
+						</Icon>
             Account
-          </Link>
-        </li>
-        <li>
-          <Link to='#' onClick={() => signOut(history)}>
-            <Icon>
-              <SignOutIcon />
-            </Icon>
+					</Link>
+				</li>
+				<li>
+					<Link to='#' onClick={() => signOut(history)}>
+						<Icon>
+							<SignOutIcon />
+						</Icon>
             Sign Out
-          </Link>
-        </li>
-      </ul>
-    </AuthOptions>
-  )
+					</Link>
+				</li>
+			</ul>
+		</AuthOptions>
+	)
 
-  return (
-    <UserOptions ref={node} show={show}>
-      {isAuthenticated ? authOptions : noAuthOptions}
-    </UserOptions>
-  )
+	return (
+		<UserOptions ref={node} show={show}>
+			{isAuthenticated ? authOptions : noAuthOptions}
+		</UserOptions>
+	)
 }
 
-const mapStateToProps = ({ auth }) => ({
-  isAuthenticated: auth.isAuthenticated
-})
-
-export default connect(mapStateToProps, { signOut })(NavUserOptions)
+export default NavUserOptions

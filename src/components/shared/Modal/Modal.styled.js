@@ -5,20 +5,20 @@ import ReactModal from 'react-modal'
 import PropTypes from 'prop-types'
 
 function ReactModalAdapter ({ className, modalClassName, ...props }) {
-  return (
-    <ReactModal
-      className={modalClassName}
-      portalClassName={className}
-      ariaHideApp={false}
-      {...props}
-    />
-  )
+	return (
+		<ReactModal
+			className={modalClassName}
+			portalClassName={className}
+			ariaHideApp={false}
+			{...props}
+		/>
+	)
 }
 
 // reference - https://github.com/reactjs/react-modal/issues/627#issuecomment-578814799
 export const StyledModal = styled(ReactModalAdapter).attrs({
-  overlayClassName: 'Overlay',
-  modalClassName: 'Modal'
+	overlayClassName: 'Overlay',
+	modalClassName: 'Modal'
 })`
   & .Overlay {
     position: fixed;
@@ -76,15 +76,15 @@ export const Title = styled.div`
   text-align: ${({ align }) => align ? 'center' : 'auto'};
   font-weight: 700;
   font-size: ${({ size }) => {
-    switch (size) {
-      case 'medium':
-        return '1.9rem'
-      case 'large':
-        return '2.4rem'
-      default:
-        return '1.6rem'
-    }
-  }};
+		switch (size) {
+		case 'medium':
+			return '1.9rem'
+		case 'large':
+			return '2.4rem'
+		default:
+			return '1.6rem'
+		}
+	}};
 `
 
 export const Content = styled.div`
