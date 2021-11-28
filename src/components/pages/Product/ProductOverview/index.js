@@ -6,7 +6,7 @@ import { addToWishlist } from 'redux/wishlist'
 import ProductOverview from './ProductOverview'
 
 const mapStateToProps = (
-	{ cart, wishlist, currency },
+	{ cart, wishlist },
 	{
 		match: {
 			params: { variantId }
@@ -16,8 +16,7 @@ const mapStateToProps = (
 	cart: cart.items,
 	wishlist: wishlist.items,
 	cartLoading: cart.isLoading && cart.inFocus === variantId,
-	variantId,
-	currency: currency.currency
+	variantId
 })
 
 export default withRouter(

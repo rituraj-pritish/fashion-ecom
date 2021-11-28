@@ -18,6 +18,7 @@ import Button from 'components/ui/Button'
 import Icon from 'components/ui/Icon'
 import Text from 'components/ui/Text'
 import useAuthentication from 'hooks/useAuthentication'
+import useCurrency from 'hooks/useCurrency'
 
 const settings = {
 	infinite: false,
@@ -62,9 +63,9 @@ const ProductCarousel = ({
 	wishlistIds,
 	isLoading,
 	inFocus,
-	excludeProduct,
-	currency
+	excludeProduct
 }) => {
+	const { currency } = useCurrency()
 	const { isAuthenticated } = useAuthentication()
   
 	const render = data

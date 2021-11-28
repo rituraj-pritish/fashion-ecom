@@ -17,8 +17,17 @@ import {
 } from './Reviews.styled'
 import Spinner from 'components/shared/Spinner/Spinner'
 import ProductCarousel from 'components/shared/ProductCarousel'
+import useUserActions from 'hooks/useUserActions'
+import { useParams } from 'react-router'
+import useProducts from 'hooks/useProducts'
 
-const Reviews = ({ getProductReviews, productId, product, products }) => {
+const Reviews = () => {
+	const { productId } = useParams()
+	const { products, getProduct } = useProducts()
+
+	const product = getProduct(productId)
+	
+	const { getProductReviews } = useUserActions()
 	const [reviews, setReviews] = useState([])
 	const [isFetching, setIsFetching] = useState(true)
 

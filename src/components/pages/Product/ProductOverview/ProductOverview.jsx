@@ -30,6 +30,7 @@ import ProductDetails from '../ProductDetails'
 import QuantityCounter from 'components/shared/QuantityCounter'
 import theme from 'theme'
 import useAuthentication from 'hooks/useAuthentication'
+import useCurrency from 'hooks/useCurrency'
 
 const ProductOverview = ({
 	product,
@@ -39,9 +40,9 @@ const ProductOverview = ({
 	addToWishlist,
 	history,
 	cartLoading,
-	variantId,
-	currency
+	variantId
 }) => {
+	const { currency } = useCurrency()
 	const { isAuthenticated } = useAuthentication()
 	const { name, avg_rating, brand, variants, id } = product
 

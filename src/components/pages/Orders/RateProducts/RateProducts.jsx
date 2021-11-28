@@ -15,14 +15,14 @@ import {
 import Rating from 'react-rating'
 import LoadingWrap from 'components/shared/LoadingWrap'
 import theme from 'theme'
+import useUserActions from 'hooks/useUserActions'
 
 const RateProducts = ({
 	products,
 	order_id,
-	rateProduct,
 	isRating,
-	removeRating
 }) => {
+	const { rateProduct, removeRating } = useUserActions()
 	const [showModal, setShowModal] = useState(false)
 	return (
 		<>

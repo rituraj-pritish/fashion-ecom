@@ -10,6 +10,10 @@ export const FilterPanelSidebar = styled.aside`
   position: sticky;
   top: 65px;
 
+  &::before {
+    content: '';
+  }
+
   h2 {
     font-size: 1.8rem;
     margin-bottom: 10px;

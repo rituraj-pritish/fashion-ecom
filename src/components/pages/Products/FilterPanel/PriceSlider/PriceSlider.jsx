@@ -11,8 +11,10 @@ import {
 	SliderWrapper
 } from './PriceSlider.styled'
 import useFilter from 'hooks/useFilter'
+import useCurrency from 'hooks/useCurrency'
 
-const PriceSlider = ({ currency }) => {
+const PriceSlider = () => {
+	const { currency } = useCurrency()
 	const { setFilterCriteria } = useFilter()
 	const MIN = 1
 	const MAX = (250 * currency.rate).toFixed(2)

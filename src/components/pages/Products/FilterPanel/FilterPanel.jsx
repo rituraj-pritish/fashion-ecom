@@ -14,7 +14,7 @@ import {
 import useFilter from 'hooks/useFilter'
 import useProducts from 'hooks/useProducts'
 
-const FilterPanel = ({ setOverlay, currency }) => {
+const FilterPanel = () => {
 	const { products } = useProducts()
 	const { setFilterCriteria } = useFilter()
 	const [show, setShow] = useState(false)
@@ -40,7 +40,6 @@ const FilterPanel = ({ setOverlay, currency }) => {
 
 	const handleClick = () => {
 		setShow(!show)
-		setOverlay(true)
 	}
 
 	const handleSortChange = e => {

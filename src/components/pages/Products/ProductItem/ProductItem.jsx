@@ -14,6 +14,7 @@ import setAlert from 'setAlert'
 import Button from 'components/ui/Button'
 import Icon from 'components/ui/Icon'
 import useAuthentication from 'hooks/useAuthentication'
+import useCurrency from 'hooks/useCurrency'
 
 const ProductItem = ({
 	product,
@@ -22,9 +23,9 @@ const ProductItem = ({
 	cart,
 	wishlist,
 	isLoading,
-	inFocus,
-	currency
+	inFocus
 }) => {
+	const { currency } = useCurrency()
 	const { isAuthenticated } = useAuthentication()
   
 	const { name, variants, id, sale } = product

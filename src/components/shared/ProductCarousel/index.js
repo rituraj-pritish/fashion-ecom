@@ -8,8 +8,7 @@ const mapStateToProps = state => ({
 	isLoading: state.cart.isLoading,
 	inFocus: state.cart.inFocus,
 	cartIds: state.cart.items.map(({ variantId }) => variantId),
-	wishlistIds: state.wishlist.items.map(({ productId }) => productId),
-	currency: state.currency.currency
+	wishlistIds: state.wishlist.items.map(({ productId }) => productId)
 })
 
 export default connect(mapStateToProps, {

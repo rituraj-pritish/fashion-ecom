@@ -9,8 +9,10 @@ import {
 	NoReviews
 } from './ProductReviews.styled'
 import Spinner from 'components/shared/Spinner'
+import useUserActions from 'hooks/useUserActions'
 
-const ProductReviews = ({ productId, getProductReviews, page }) => {
+const ProductReviews = ({ productId }) => {
+	const { getProductReviews } = useUserActions()
 	const [reviews, setReviews] = useState([])
 	const [isFetching, setIsFetching] = useState(true)
 
