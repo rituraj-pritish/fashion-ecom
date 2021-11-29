@@ -11,12 +11,12 @@ import { CartItemContainer, Details, Remove } from './CartItem.styles'
 import { Link } from 'react-router-dom'
 import LoadingWrap from 'components/shared/LoadingWrap'
 import theme from 'theme'
+import useCart from 'hooks/useCart'
+import useCurrency from 'hooks/useCurrency'
+import useWishlist from 'hooks/useWishlist'
 
 const CartItem = ({
 	page,
-	updateCart,
-	removeFromCart,
-	removeFromWishlist,
 	imageUrl,
 	price,
 	productId,
@@ -25,10 +25,16 @@ const CartItem = ({
 	quantity,
 	isLoading,
 	isSavedForLater,
-	saveForLater,
-	backToCart,
-	currency,
 }) => {
+	const { currency } = useCurrency()
+	const { 
+		updateCart, 
+		removeFromCart, 
+		saveForLater, 
+		backToCart 
+	} = useCart()
+	const { removeFromWishlist } = useWishlist()
+	
 	const handleRemove = () => {
 		if (page === 'cart') {
 			removeFromCart(variantId)

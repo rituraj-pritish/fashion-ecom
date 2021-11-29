@@ -13,14 +13,16 @@ import {
 import { PageContainer } from 'index.styles'
 import useCurrency from 'hooks/useCurrency'
 import useUserActions from 'hooks/useUserActions'
+import useCart from 'hooks/useCart'
 
-const PaymentsPage = ({ cart, emptyCart }) => {
+const PaymentsPage = () => {
+	const { cartItems, emptyCart } = useCart()
 	const { currency } = useCurrency()
 	const { addNewOrder } = useUserActions()
   
 	const [isOrderPlaced, setIsOrderPlaced] = useState(false)
 
-	const amount = cart.reduce(
+	const amount = cartItems.reduce(
 		(total, curr) => total + curr.price * curr.quantity,
 		0
 	)
@@ -34,7 +36,7 @@ const PaymentsPage = ({ cart, emptyCart }) => {
 		emptyCart()
 		setIsOrderPlaced(true)
 		addNewOrder({
-			products: cart,
+			products: cartItems,
 			currency_code: currency.code,
 			currency_symbol: currency.symbol,
 			currency_rate: currency.rate,

@@ -19,6 +19,8 @@ import Icon from 'components/ui/Icon'
 import Text from 'components/ui/Text'
 import useAuthentication from 'hooks/useAuthentication'
 import useCurrency from 'hooks/useCurrency'
+import useWishlist from 'hooks/useWishlist'
+import useCart from 'hooks/useCart'
 
 const settings = {
 	infinite: false,
@@ -56,15 +58,14 @@ const settings = {
 const ProductCarousel = ({
 	title,
 	data,
-	addToCart,
-	addToWishlist,
-	removeFromWishlist,
-	cartIds,
-	wishlistIds,
+	cartIds = [],
+	wishlistIds = [],
 	isLoading,
 	inFocus,
 	excludeProduct
 }) => {
+	const { addToWishlist, removeFromWishlist } = useWishlist()
+	const { addToCart, removeFromCart } = useCart()
 	const { currency } = useCurrency()
 	const { isAuthenticated } = useAuthentication()
   

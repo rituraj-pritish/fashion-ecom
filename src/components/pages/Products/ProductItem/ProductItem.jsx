@@ -15,16 +15,16 @@ import Button from 'components/ui/Button'
 import Icon from 'components/ui/Icon'
 import useAuthentication from 'hooks/useAuthentication'
 import useCurrency from 'hooks/useCurrency'
+import useWishlist from 'hooks/useWishlist'
+import useCart from 'hooks/useCart'
 
 const ProductItem = ({
 	product,
-	addToCart,
-	addToWishlist,
-	cart,
-	wishlist,
 	isLoading,
 	inFocus
 }) => {
+	const { addToWishlist, wishlistItems } = useWishlist()
+	const { addToCart, cartItems } = useCart()
 	const { currency } = useCurrency()
 	const { isAuthenticated } = useAuthentication()
   
@@ -32,8 +32,8 @@ const ProductItem = ({
 	const variant = variants[Object.keys(variants)[0]]
 	const image = variant.images[0]
 
-	const isInCart = cart.find(item => item.variantId === variant.id)
-	const isInWishlist = wishlist.find(item => item.productId === id)
+	const isInCart = cartItems?.find(item => item.variantId === variant.id)
+	const isInWishlist = wishlistItems?.find(item => item.productId === id)
 
 	const handleCartBtn = e => {
 		e.preventDefault()

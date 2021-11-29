@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import UserIcon from '../../../assets/icons/UserIcon'
 import CartIcon from '../../../assets/icons/CartIcon'
@@ -19,14 +19,19 @@ import {
 } from './Navbar.styles'
 import NavUserOptions from './NavUserOptions'
 import CurrencySelector from './CurrencySelector'
+import useCart from 'hooks/useCart'
 
-const Navbar = ({ history, cartCount }) => {
+const Navbar = () => {
+	const history = useHistory()
 	const [showUserOptions, setShowUserOptions] = useState(false)
 	const [show, setShow] = useState(true)
 	const [showSearchBar, setShowSearchBar] = useState(false)
 	const [text, setText] = useState('')
 	const cartRef = useRef()
 	const userRef = useRef()
+
+	const { cartItems } = useCart()
+	const cartCount = cartItems?.length
 
 	useEffect(() => {
 		if (

@@ -11,13 +11,14 @@ import ProductCarousel from 'components/shared/ProductCarousel'
 import ShuffleArray from 'helpers/ shuffleArray'
 import Spinner from 'components/shared/Spinner'
 import useUserActions from 'hooks/useUserActions'
+import { useParams } from 'react-router'
+import useProducts from 'hooks/useProducts'
 
-const Review = ({
-	orderId,
-	productId,
-	isAddingReview,
-	products,
-}) => {
+const Review = () => {
+	//todo handle
+	const isAddingReview = false
+	const { products } = useProducts()
+	const { productId, orderId } = useParams()
 	const { addReview, getReview } = useUserActions()
   
 	const [review, setReview] = useState(null)

@@ -31,17 +31,18 @@ import QuantityCounter from 'components/shared/QuantityCounter'
 import theme from 'theme'
 import useAuthentication from 'hooks/useAuthentication'
 import useCurrency from 'hooks/useCurrency'
+import { useParams } from 'react-router'
+import useCart from 'hooks/useCart'
+import useWishlist from 'hooks/useWishlist'
 
 const ProductOverview = ({
 	product,
-	cart,
-	wishlist,
-	addToCart,
-	addToWishlist,
 	history,
-	cartLoading,
-	variantId
+	cartLoading
 }) => {
+	const { addToCart, cartItems } = useCart()
+	const { addToWishlist, wishlistItems } = useWishlist()
+	const { variantId } = useParams()
 	const { currency } = useCurrency()
 	const { isAuthenticated } = useAuthentication()
 	const { name, avg_rating, brand, variants, id } = product
@@ -83,8 +84,8 @@ const ProductOverview = ({
 	})
 
 	const isInStock = variants[variant]?.stock > 0
-	const isInCart = cart.find(item => item.variantId === variantId)
-	const isInWishlist = wishlist.find(item => item.productId === id)
+	const isInCart = cartItems.find(item => item.variantId === variantId)
+	const isInWishlist = wishlistItems.find(item => item.productId === id)
 
 	const changeVariant = varId => {
 		if (varId === variant) return

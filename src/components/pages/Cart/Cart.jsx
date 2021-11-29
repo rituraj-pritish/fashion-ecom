@@ -8,11 +8,14 @@ import CheckoutBox from './CheckoutBox'
 import { ItemsContainer, Container } from './Cart.styles'
 import Text from '../../ui/Text'
 import Button from '../../ui/Button'
+import useCart from 'hooks/useCart'
 
-const Cart = ({ cart, forLater }) => {
+const Cart = () => {
+	const { cartItems } = useCart()
+	
 	return (
 		<PageContainer>
-			{!cart.length ? (
+			{!cartItems.length ? (
 				<>
 					<Text m='2rem 0'>Your cart is empty.</Text>
 					<Button maxWidth='200px' m='0 auto'>
@@ -22,7 +25,7 @@ const Cart = ({ cart, forLater }) => {
 			) : (
 				<Container>
 					<ItemsContainer>
-						{cart.map(item => (
+						{cartItems.map(item => (
 							<CartItem page='cart' key={item.variantId} {...item} />
 						))}
 						{/* 
@@ -32,7 +35,7 @@ const Cart = ({ cart, forLater }) => {
               <CartItem page='cart' key={item.id} {...item} />
             ))} */}
 					</ItemsContainer>
-					<CheckoutBox cart={cart} />
+					<CheckoutBox cart={cartItems} />
 				</Container>
 			)}
 		</PageContainer>

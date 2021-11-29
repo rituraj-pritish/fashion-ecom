@@ -1,17 +1,19 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import { PageContainer } from '../../../index.styles'
 import CartItem from '../Cart/CartItem'
 import { Container } from './Wishlist.styles'
 import Text from '../../ui/Text'
 import Button from '../../ui/Button'
-import { Link } from 'react-router-dom'
+import useWishlist from 'hooks/useWishlist'
 
-const Wishlist = ({ wishlist }) => {
+const Wishlist = () => {
+	const { wishlistItems } = useWishlist()
+	
 	return (
 		<PageContainer>
-			{wishlist.length === 0 && (
+			{wishlistItems.length === 0 && (
 				<>
 					<Text m='2rem 0'>Your wishlist is empty</Text>
 					<Button maxWidth='200px' m='0 auto'>
@@ -20,16 +22,12 @@ const Wishlist = ({ wishlist }) => {
 				</>
 			)}
 			<Container>
-				{wishlist.map((item, idx) => (
+				{wishlistItems.map((item, idx) => (
 					<CartItem key={idx} {...item} page='wishlist' />
 				))}
 			</Container>
 		</PageContainer>
 	)
-}
-
-Wishlist.propTypes = {
-	wishlist: PropTypes.array.isRequired
 }
 
 export default Wishlist

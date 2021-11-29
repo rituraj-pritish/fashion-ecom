@@ -1,10 +1,3 @@
-import { connect } from 'react-redux'
+import Payment from './PaymentPage'
 
-import { emptyCart } from 'redux/cart'
-import PaymentPage from './PaymentPage'
-
-const mapStateToProps = ({ cart }) => ({
-	cart: cart.items
-})
-
-export default connect(mapStateToProps, { emptyCart })(PaymentPage)
+export default Payment

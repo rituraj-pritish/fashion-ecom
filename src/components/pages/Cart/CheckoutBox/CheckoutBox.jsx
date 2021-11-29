@@ -1,10 +1,15 @@
+import useAuthentication from 'hooks/useAuthentication'
+import useCurrency from 'hooks/useCurrency'
 import React from 'react'
 
 import Button from '../../../ui/Button'
 import Text from '../../../ui/Text'
 import { CheckoutBoxContainer, Container, Line } from './CheckoutBox.styles'
 
-const CheckoutBox = ({ cart, history, isAuthenticated, currency }) => {
+const CheckoutBox = ({ cart, history }) => {
+	const { currency } = useCurrency()
+	const { isAuthenticated } = useAuthentication()
+	
 	const FREE_DELIVERY_AMOUNT = (currency.rate * 100).toFixed(2)
 	const DELIVERY_FEE = (currency.rate * 10).toFixed(2)
 
