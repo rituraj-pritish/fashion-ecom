@@ -7,8 +7,8 @@ import Text from 'atoms/Text'
 import { PageContainer } from 'index.styles'
 import { StyledLogo, Container } from './SignIn.styles'
 import { Form, Field } from 'react-final-form'
-import { Error } from 'components/shared/forms/Form.styled'
-import TextFieldAdapter from 'components/shared/forms/TextFieldAdapter'
+import { Error } from 'components/forms/Form.styled'
+import TextFieldAdapter from 'components/forms/TextFieldAdapter'
 import useAuthentication from 'hooks/useAuthentication'
 
 const INITIAL_VALUES = {

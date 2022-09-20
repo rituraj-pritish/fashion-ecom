@@ -6,7 +6,7 @@ import {
 	OrdersWrapper,
 	SpinnerWrapper
 } from './OrdersProductList/Orders.styled'
-import Spinner from 'components/shared/Spinner' 
+import Spinner from 'components/Spinner' 
 import useOrders from 'hooks/useOrders'
 
 const Orders = () => {

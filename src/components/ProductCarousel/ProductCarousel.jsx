@@ -102,7 +102,7 @@ const ProductCarousel = ({
 
 			const handleWishlist = () => {
 				if (!isAuthenticated) {
-					return alert.error('Login to continue',)
+					return alert.error({ message: 'Login to continue' })
 				}
 
 				if (isInWishlist) {

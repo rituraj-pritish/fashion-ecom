@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
-import ReviewItem from 'components/shared/ReviewItem'
+import ReviewItem from 'components/ReviewItem'
 import {
 	ReviewsWrapper,
 	StyledLink,
 	SpinnerWrapper,
 	NoReviews
 } from './ProductReviews.styled'
-import Spinner from 'components/shared/Spinner'
+import Spinner from 'components/Spinner'
 import useUserActions from 'hooks/useUserActions'
 
 const ProductReviews = ({ productId }) => {

@@ -11,20 +11,20 @@ const notification = {
 }
 
 export default {
-	success: message => {
+	success: props => {
 		store.addNotification({
 			title: 'Success',
-			...notification,
-			message: message,
 			type: 'success',
+			...notification,
+			...props
 		})
 	},
-	error: message => {
+	error: props => {
 		store.addNotification({
 			title: 'Error',
-			...notification,
-			message: message,
 			type: 'danger',
+			...notification,
+			...props
 		})
 	},
 }

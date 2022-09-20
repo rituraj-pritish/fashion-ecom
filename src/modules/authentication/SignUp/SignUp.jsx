@@ -7,9 +7,9 @@ import Text from 'atoms/Text'
 import { PageContainer } from 'index.styles'
 import { StyledLogo, Container } from './SignUp.styles'
 import { Form, Field } from 'react-final-form'
-import TextFieldAdapter from 'components/shared/forms/TextFieldAdapter'
+import TextFieldAdapter from 'components/forms/TextFieldAdapter'
 import { emailValidator, passwordValidator } from 'helpers/validations'
-import { Error } from 'components/shared/forms/Form.styled'
+import { Error } from 'components/forms/Form.styled'
 import useAuthentication from 'hooks/useAuthentication'
 
 const SignUp = ({ history }) => {

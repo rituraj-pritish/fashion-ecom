@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Form, Field } from 'react-final-form'
 
 import { PageContainer } from 'index.styles'
-import TextFieldAdapter from 'components/shared/forms/TextFieldAdapter'
+import TextFieldAdapter from 'components/forms/TextFieldAdapter'
 import { StyledForm, AddressBlock, ActionButtons } from './Account.styled'
 import { emailValidator } from 'helpers/validations'
 import Button from 'atoms/Button'

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Button from 'atoms/Button'
-import Modal from 'components/shared/Modal'
+import Modal from 'components/Modal'
 import Text from 'atoms/Text'
 import { ProductWrapper } from './ReviewProductList.styled'
 import { Link } from 'react-router-dom'

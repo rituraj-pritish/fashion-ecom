@@ -1,7 +1,7 @@
 import React from 'react'
 import LazyLoad from 'react-lazy-load'
 
-import QuantityCounter from 'components/shared/QuantityCounter'
+import QuantityCounter from 'components/QuantityCounter'
 import Button from 'atoms/Button'
 
 import Icon from '../../../../atoms/Icon'
@@ -9,7 +9,7 @@ import Text from '../../../../atoms/Text'
 import TrashIcon from '../../../../assets/icons/TrashIcon'
 import { CartItemContainer, Details, Remove } from './CartItem.styles'
 import { Link } from 'react-router-dom'
-import LoadingWrap from 'components/shared/LoadingWrap'
+import LoadingWrap from 'components/LoadingWrap'
 import theme from 'theme'
 import useCart from 'hooks/useCart'
 import useCurrency from 'hooks/useCurrency'

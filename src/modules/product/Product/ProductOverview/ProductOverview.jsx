@@ -12,7 +12,7 @@ import Text from 'atoms/Text'
 import Icon from 'atoms/Icon'
 import HeartIcon from 'assets/icons/HeartIcon'
 import StarIcon from 'assets/icons/StarIcon'
-import Image from 'components/shared/Image'
+import Image from 'components/Image'
 import {
 	SmallImages,
 	SmallImage,
@@ -23,11 +23,11 @@ import {
 	Variant,
 	CartBtn,
 	Policy,
-	Wishlist
+	Wishlist,
 } from './ProductOverview.styles'
 import { useEffect } from 'react'
 import ProductDetails from '../ProductDetails'
-import QuantityCounter from 'components/shared/QuantityCounter'
+import QuantityCounter from 'components/QuantityCounter'
 import theme from 'theme'
 import useAuthentication from 'hooks/useAuthentication'
 import useCurrency from 'hooks/useCurrency'
@@ -35,11 +35,7 @@ import { useParams } from 'react-router'
 import useCart from 'hooks/useCart'
 import useWishlist from 'hooks/useWishlist'
 
-const ProductOverview = ({
-	product,
-	history,
-	cartLoading
-}) => {
+const ProductOverview = ({ product, history, cartLoading }) => {
 	const { addToCart, cartItems } = useCart()
 	const { addToWishlist, wishlistItems } = useWishlist()
 	const { variantId } = useParams()
@@ -103,13 +99,13 @@ const ProductOverview = ({
 			name,
 			price,
 			imageUrl: variants[variant].images[0],
-			quantity: quantity
+			quantity: quantity,
 		})
 	}
 
 	const handleWishlist = () => {
 		if (!isAuthenticated) {
-			return alert.error('Login to continue')
+			return alert.error({ message: 'Login to continue' })
 		}
 		if (isInWishlist) return
 		addToWishlist({
@@ -117,7 +113,7 @@ const ProductOverview = ({
 			variantId,
 			name,
 			price,
-			imageUrl: variants[variant].images[0]
+			imageUrl: variants[variant].images[0],
 		})
 	}
 
@@ -134,7 +130,7 @@ const ProductOverview = ({
 			name,
 			price,
 			imageUrl: variants[variant].images[0],
-			quantity: 1
+			quantity: 1,
 		})
 		history.push('/user/cart')
 	}
@@ -157,9 +153,7 @@ const ProductOverview = ({
 				<Text fontSize='1.5rem' color='grey' mt='-15px'>
 					{brand.toUpperCase()}
 				</Text>
-				<Text fontSize='2.3rem'>
-					{`${currency.symbol} ${(currency.rate * price).toFixed(2)}`}
-				</Text>
+				<Text fontSize='2.3rem'>{`${currency.symbol} ${(currency.rate * price).toFixed(2)}`}</Text>
 				<Rating
 					initialRating={avg_rating}
 					emptySymbol={
@@ -195,7 +189,7 @@ const ProductOverview = ({
 							<img src={worldwideImg} alt='worldwide shipping' />
 						</LazyLoad>
 						<p>
-              Worldwide <br /> Shipping
+							Worldwide <br /> Shipping
 						</p>
 					</span>
 					<span>
@@ -203,19 +197,15 @@ const ProductOverview = ({
 							<img src={returnImg} alt={'return policy'} />
 						</LazyLoad>
 						<p>
-              30 Days
+							30 Days
 							<br />
-              Return
+							Return
 						</p>
 					</span>
 				</Policy>
 
 				<CartBtn>
-					<QuantityCounter
-						disabled={!isInStock}
-						count={quantity}
-						setCount={setQuantity}
-					/>
+					<QuantityCounter disabled={!isInStock} count={quantity} setCount={setQuantity} />
 					<Button
 						variant='secondary'
 						isLoading={cartLoading}
@@ -234,7 +224,7 @@ const ProductOverview = ({
 					onClick={handleBuy}
 					disabled={!isInStock}
 				>
-          BUY NOW
+					BUY NOW
 				</Button>
 
 				<Wishlist onClick={handleWishlist}>

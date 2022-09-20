@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ProductOverview from './ProductOverview'
-import ProductCarousel from 'components/shared/ProductCarousel'
+import ProductCarousel from 'components/ProductCarousel'
 import { PageContainer } from 'index.styles'
 import ProductReviews from './ProductReviews'
 import useProducts from 'hooks/useProducts'

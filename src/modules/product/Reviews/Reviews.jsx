@@ -7,7 +7,7 @@ import { PageContainer } from 'index.styles'
 import { ReactComponent as StarOutlineIcon } from 'assets/icons/star-outline.svg'
 import StarIcon from 'assets/icons/StarIcon'
 import Icon from 'atoms/Icon'
-import ReviewItem from 'components/shared/ReviewItem'
+import ReviewItem from 'components/ReviewItem'
 import {
 	SpinnerWrapper,
 	AvgRating,
@@ -15,8 +15,8 @@ import {
 	TopSection,
 	NoReviews
 } from './Reviews.styled'
-import Spinner from 'components/shared/Spinner/Spinner'
-import ProductCarousel from 'components/shared/ProductCarousel'
+import Spinner from 'components/Spinner/Spinner'
+import ProductCarousel from 'components/ProductCarousel'
 import useUserActions from 'hooks/useUserActions'
 import { useParams } from 'react-router'
 import useProducts from 'hooks/useProducts'

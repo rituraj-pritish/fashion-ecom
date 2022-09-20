@@ -51,7 +51,7 @@ const ProductItem = ({
 
 	const handleWishlist = () => {
 		if (!isAuthenticated) {
-			return alert.error('Login to add to wishlist')
+			return alert.error({ message: 'Login to add to wishlist' })
 		}
 		if (isInWishlist) return
 

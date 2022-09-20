@@ -29,7 +29,7 @@ export default () => {
 		const userId = user?.id
 	
 		if (!userId) {
-			return alert.error('Login to continue')
+			return alert.error({ message: 'Login to continue'})
 		}
 	
 		await db

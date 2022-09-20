@@ -5,7 +5,7 @@ import { ReactComponent as StarOutlineIcon } from 'assets/icons/star-outline.svg
 import StarIcon from 'assets/icons/StarIcon'
 import Icon from 'atoms/Icon'
 import Button from 'atoms/Button'
-import Modal from 'components/shared/Modal/Modal'
+import Modal from 'components/Modal/Modal'
 import Text from 'atoms/Text'
 import {
 	ProductWrapper,
@@ -13,7 +13,7 @@ import {
 	RatingContainer
 } from './RateProducts.styled'
 import Rating from 'react-rating'
-import LoadingWrap from 'components/shared/LoadingWrap'
+import LoadingWrap from 'components/LoadingWrap'
 import theme from 'theme'
 import useUserActions from 'hooks/useUserActions'
 
