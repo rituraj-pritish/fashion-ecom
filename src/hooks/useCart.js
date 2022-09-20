@@ -3,7 +3,7 @@ import { createState, useState } from '@hookstate/core'
 
 import { db } from 'core/firebase'
 import useAuthentication from './useAuthentication'
-import setAlert from 'setAlert'
+import alert from 'core/alert'
 
 const CART_STATE = createState(null)
 
@@ -32,7 +32,7 @@ export default () => {
 		const userId = user?.id
 	
 		if (!userId) {
-			setAlert('Login to continue', 'danger')
+			return alert.error('Login to continue')
 		}
 	
 		await db

@@ -5,7 +5,7 @@ import LazyLoad from 'react-lazy-load'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
-import setAlert from 'setAlert'
+import alert from 'core/alert'
 import HeartIcon from 'assets/icons/HeartIcon'
 import SaleBanner from 'components/pages/Product/SaleBanner'
 import {
@@ -102,8 +102,7 @@ const ProductCarousel = ({
 
 			const handleWishlist = () => {
 				if (!isAuthenticated) {
-					setAlert('Login to continue', 'danger')
-					return
+					return alert.error('Login to continue',)
 				}
 
 				if (isInWishlist) {

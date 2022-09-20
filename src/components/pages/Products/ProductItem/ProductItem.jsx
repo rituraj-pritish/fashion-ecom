@@ -10,13 +10,13 @@ import {
 	ProductItemContainer,
 	Wishlist
 } from './ProductItem.styles'
-import setAlert from 'setAlert'
 import Button from 'components/ui/Button'
 import Icon from 'components/ui/Icon'
 import useAuthentication from 'hooks/useAuthentication'
 import useCurrency from 'hooks/useCurrency'
 import useWishlist from 'hooks/useWishlist'
 import useCart from 'hooks/useCart'
+import alert from 'core/alert'
 
 const ProductItem = ({
 	product,
@@ -51,8 +51,7 @@ const ProductItem = ({
 
 	const handleWishlist = () => {
 		if (!isAuthenticated) {
-			setAlert('Login to add to wishlist', 'danger')
-			return
+			return alert.error('Login to add to wishlist')
 		}
 		if (isInWishlist) return
 

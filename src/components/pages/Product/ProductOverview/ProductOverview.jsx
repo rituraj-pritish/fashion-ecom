@@ -4,7 +4,7 @@ import ReactTooltip from 'react-tooltip'
 import Rating from 'react-rating'
 
 import { ReactComponent as StarOutlineIcon } from 'assets/icons/star-outline.svg'
-import setAlert from 'setAlert'
+import alert from 'core/alert'
 import returnImg from 'assets/images/return.webp'
 import worldwideImg from 'assets/images/worldwide.webp'
 import Button from 'components/ui/Button'
@@ -109,8 +109,7 @@ const ProductOverview = ({
 
 	const handleWishlist = () => {
 		if (!isAuthenticated) {
-			setAlert('Login to continue', 'danger')
-			return
+			return alert.error('Login to continue')
 		}
 		if (isInWishlist) return
 		addToWishlist({
