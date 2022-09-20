@@ -5,20 +5,17 @@ import { db } from 'core/firebase'
 import useAuthentication from './useAuthentication'
 import alert from 'core/alert'
 
-const CART_STATE = createState(null)
+const CART_STATE = createState([])
 
 export default () => {
 	const { user } = useAuthentication()
-
 	const cartState = useState(CART_STATE)
-	const { userId } = useAuthentication()
-
 	const cartItems = cartState.get()
 
 	const getCartItems = async () => {
 		const res = await db
 			.collection('carts')
-			.doc(userId)
+			.doc(user.id)
 			.collection('items')
 			.get()
 

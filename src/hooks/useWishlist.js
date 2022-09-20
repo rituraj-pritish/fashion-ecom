@@ -52,6 +52,6 @@ export default () => {
 		getWishlistItems,
 		addToWishlist,
 		removeFromWishlist,
-		wishlist: wishlistState.get()
+		wishlistItems: wishlistState.get()
 	}))
 }

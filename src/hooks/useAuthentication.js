@@ -14,7 +14,7 @@ const AUTH_STATE = createState(INITIAL_STATE)
 export default () => {
 	const history = useHistory()
 	const authState = useState(AUTH_STATE)
-  
+
 	const signup = async (data, goBack) => {  
 		const { email, password, name, phone } = data
 
@@ -81,10 +81,7 @@ export default () => {
 					isAuthenticated: true
 				})
 			} else {
-				authState.set({
-					user: null,
-					isAuthenticated: true
-				})
+				authState.set(INITIAL_STATE)
 			}
 		})
 	}

@@ -19,10 +19,3 @@ const PrivateRoute = ({
 }
 
 export default PrivateRoute
-
-// const mapStateToProps = ({ auth: { isAuthenticated, isLoading } }) => ({
-// 	isAuthenticated,
-// 	isLoading
-// })
-
-// export default connect(mapStateToProps)(PrivateRoute)
