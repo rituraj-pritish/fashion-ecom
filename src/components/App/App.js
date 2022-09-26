@@ -13,8 +13,12 @@ import theme from 'theme'
 import Routes from './Routes'
 import useProducts from 'hooks/useProducts'
 import useAuthentication from 'hooks/useAuthentication'
+import useCart from 'hooks/useCart'
+import useWishlist from 'hooks/useWishlist'
 
 const App = () => {
+	const { getCartItems } = useCart()
+	const { getWishlistItems } = useWishlist()
 	const { getProducts, products } = useProducts()
 	const { authStateChangeHandler, isAuthenticated } = useAuthentication()
 
@@ -25,6 +29,10 @@ const App = () => {
 
 	useEffect(() => {
 		authStateChangeHandler()
+		if(isAuthenticated) {
+			getCartItems()
+			getWishlistItems()
+		}
 	}, [isAuthenticated])
 
 	if (!products) {

@@ -1,21 +1,27 @@
 import styled from 'styled-components'
 import theme from 'theme'
 
+export const AddressBlock = styled.div`
+  text-align: left;
+  font-size: 1.6rem;
+  border-color: ${theme.colors.lightGrey};
+  border-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+
+  & > div:first-child {
+    margin-top: 0.8rem;
+  }
+
+  & > div > label {
+    font-size: 1.4rem;
+  }
+`
+
 export const StyledForm = styled.form`
   max-width: 700px;
   margin: 0 auto;
-
-  & > div:first-child {
-    border-top-width: 2px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-  }
-
-  & > div:last-child {
-    border-bottom-width: 2px;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-  }
 
   & > div {
     padding: 1rem;
@@ -27,18 +33,11 @@ export const StyledForm = styled.form`
     border-left-width: 2px;
     border-right-width: 2px;
   }
-`
-
-export const AddressBlock = styled.div`
-  text-align: left;
-  font-size: 1.6rem;
 
   & > div:first-child {
-    margin-top: 0.8rem;
-  }
-
-  & > div > label {
-    font-size: 1.4rem;
+    border-top-width: 2px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
 `
 

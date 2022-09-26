@@ -9,22 +9,12 @@ import { ReactComponent as AccountIcon } from 'assets/icons/account.svg'
 import { ReactComponent as OrdersIcon } from 'assets/icons/orders.svg'
 import Button from 'atoms/Button'
 import Icon from 'atoms/Icon'
-import {
-	UserOptions,
-	NoAuthOptions,
-	AuthOptions
-} from './NavUserOptions.styles'
+import { UserOptions, NoAuthOptions, AuthOptions } from './NavUserOptions.styles'
 import useAuthentication from 'hooks/useAuthentication'
 
-const NavUserOptions = ({
-	show,
-	setShow,
-	userRef,
-	history
-}) => {
+const NavUserOptions = ({ show, setShow, userRef, history }) => {
 	const { isAuthenticated, signOut } = useAuthentication()
 	const node = useRef()
-	console.log('is', isAuthenticated);
 	clickOutside(node, () => setShow(false), userRef)
 
 	const noAuthOptions = (
@@ -49,15 +39,7 @@ const NavUserOptions = ({
 						<Icon>
 							<HeartIcon />
 						</Icon>
-            Wishlist
-					</Link>
-				</li>
-				<li>
-					<Link to='/user/cart'>
-						<Icon>
-							<CartIcon />
-						</Icon>
-            Cart
+						Wishlist
 					</Link>
 				</li>
 				<li>
@@ -65,7 +47,7 @@ const NavUserOptions = ({
 						<Icon>
 							<OrdersIcon />
 						</Icon>
-            Orders
+						Orders
 					</Link>
 				</li>
 				<li>
@@ -73,7 +55,7 @@ const NavUserOptions = ({
 						<Icon>
 							<AccountIcon />
 						</Icon>
-            Account
+						Account
 					</Link>
 				</li>
 				<li>
@@ -81,7 +63,7 @@ const NavUserOptions = ({
 						<Icon>
 							<SignOutIcon />
 						</Icon>
-            Sign Out
+						Sign Out
 					</Link>
 				</li>
 			</ul>

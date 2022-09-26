@@ -31,11 +31,12 @@ import QuantityCounter from 'components/QuantityCounter'
 import theme from 'theme'
 import useAuthentication from 'hooks/useAuthentication'
 import useCurrency from 'hooks/useCurrency'
-import { useParams } from 'react-router'
+import { useParams, useHistory } from 'react-router'
 import useCart from 'hooks/useCart'
 import useWishlist from 'hooks/useWishlist'
 
-const ProductOverview = ({ product, history, cartLoading }) => {
+const ProductOverview = ({ product }) => {
+	const history = useHistory()
 	const { addToCart, cartItems } = useCart()
 	const { addToWishlist, wishlistItems } = useWishlist()
 	const { variantId } = useParams()
@@ -43,6 +44,7 @@ const ProductOverview = ({ product, history, cartLoading }) => {
 	const { isAuthenticated } = useAuthentication()
 	const { name, avg_rating, brand, variants, id } = product
 
+	const [isLoading, setIsLoading] = useState(false)
 	const [variant, setVariant] = useState(variantId)
 	const [currentImg, setCurrentImg] = useState()
 	const [price, setPrice] = useState()
@@ -91,9 +93,10 @@ const ProductOverview = ({ product, history, cartLoading }) => {
 		history.push(`/product/${id}/variant/${varId}`)
 	}
 
-	const handleCartBtn = () => {
+	const handleCartBtn = async () => {
 		if (isInCart) return
-		addToCart({
+		setIsLoading(true)
+		await addToCart({
 			productId: id,
 			variantId,
 			name,
@@ -101,6 +104,7 @@ const ProductOverview = ({ product, history, cartLoading }) => {
 			imageUrl: variants[variant].images[0],
 			quantity: quantity,
 		})
+		setIsLoading(false)
 	}
 
 	const handleWishlist = () => {
@@ -117,21 +121,23 @@ const ProductOverview = ({ product, history, cartLoading }) => {
 		})
 	}
 
-	const handleBuy = e => {
+	const handleBuy = async e => {
 		e.preventDefault()
 
 		if (!isAuthenticated) {
 			history.push('/signin')
 			return
 		}
-		addToCart({
-			productId: id,
-			variantId,
-			name,
-			price,
-			imageUrl: variants[variant].images[0],
-			quantity: 1,
-		})
+		if(!isInCart) {
+			await addToCart({
+				productId: id,
+				variantId,
+				name,
+				price,
+				imageUrl: variants[variant].images[0],
+				quantity: 1,
+			})
+		}
 		history.push('/user/cart')
 	}
 
@@ -205,10 +211,10 @@ const ProductOverview = ({ product, history, cartLoading }) => {
 				</Policy>
 
 				<CartBtn>
-					<QuantityCounter disabled={!isInStock} count={quantity} setCount={setQuantity} />
+					<QuantityCounter disabled={!isInStock || isInCart} count={quantity} setCount={setQuantity} />
 					<Button
 						variant='secondary'
-						isLoading={cartLoading}
+						isLoading={isLoading}
 						disabled={!isInStock}
 						onClick={handleCartBtn}
 					>

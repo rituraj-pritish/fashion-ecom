@@ -17,12 +17,12 @@ import useCurrency from 'hooks/useCurrency'
 import useWishlist from 'hooks/useWishlist'
 import useCart from 'hooks/useCart'
 import alert from 'core/alert'
+import { useState } from 'react'
 
 const ProductItem = ({
 	product,
-	isLoading,
-	inFocus
 }) => {
+	const [isLoading, setIsLoading] = useState(false)
 	const { addToWishlist, wishlistItems } = useWishlist()
 	const { addToCart, cartItems } = useCart()
 	const { currency } = useCurrency()
@@ -35,11 +35,11 @@ const ProductItem = ({
 	const isInCart = cartItems?.find(item => item.variantId === variant.id)
 	const isInWishlist = wishlistItems?.find(item => item.productId === id)
 
-	const handleCartBtn = e => {
+	const handleCartBtn = async e => {
 		e.preventDefault()
-
 		if (isInCart) return
-		addToCart({
+		setIsLoading(true)
+		await addToCart({
 			productId: id,
 			variantId: variant.id,
 			price: variant.price,
@@ -47,6 +47,7 @@ const ProductItem = ({
 			imageUrl: image,
 			quantity: 1
 		})
+		setIsLoading(false)
 	}
 
 	const handleWishlist = () => {
@@ -91,7 +92,7 @@ const ProductItem = ({
 					variant={isInCart ? 'secondary' : 'primary'}
 					minHeight='35px'
 					height='auto'
-					isLoading={isLoading && inFocus === variant.id}
+					isLoading={isLoading}
 				>
 					{isInCart ? 'ADDED TO CART' : 'ADD TO CART'}
 				</Button>

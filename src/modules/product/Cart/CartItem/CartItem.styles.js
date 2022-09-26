@@ -7,6 +7,9 @@ export const CartItemContainer = styled.div`
   border-bottom: 1px solid #202020;
   font-size: 1.5rem;
   align-items: center;
+  &:last-child {
+    border: none;
+  }
 `
 
 export const Details = styled.div`

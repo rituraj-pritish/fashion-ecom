@@ -9,7 +9,7 @@ import {
 	flexbox,
 	layout,
 	grid,
-	border
+	border,
 } from 'styled-system'
 import ClipLoader from 'react-spinners/ClipLoader'
 
@@ -17,24 +17,25 @@ import theme from 'theme'
 import { lighten } from 'polished'
 
 const StyledButton = styled.button`
-width: 100%;
-border: none;
-cursor: pointer;
-padding: 0.5rem 1rem;
-font-size: 1.6rem;
-border-radius: ${theme.borderRadius};
-display: flex;
-justify-content: center;
-align-items: center;
+	width: 100%;
+	border: none;
+	cursor: pointer;
+	padding: 0.5rem 1rem;
+	font-weight: bold;
+	font-size: 1.6rem;
+	border-radius: ${theme.borderRadius};
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-${variant({
+	${variant({
 		variants: {
 			primary: {
 				color: theme.colors.white,
 				bg: theme.colors.primary,
 				'&:hover': {
-					bg: theme.colors.primaryDark
-				}
+					bg: theme.colors.primaryDark,
+				},
 			},
 			secondary: {
 				color: theme.colors.primary,
@@ -42,27 +43,27 @@ ${variant({
 				borderWidth: '2px',
 				borderStyle: 'solid',
 				borderColor: theme.colors.primary,
-				p: '0.4rem 1rem'
+				p: '0.4rem 1rem',
 			},
 			cancel: {
 				bg: lighten(0.2, theme.colors.grey),
-				color: theme.colors.white
-			}
-		}
+				color: theme.colors.white,
+			},
+		},
 	})}
 
-${({ disabled, variant }) =>
+	${({ disabled, variant }) =>
 		disabled &&
-  variant === 'primary' &&
-  `
+		variant === 'primary' &&
+		`
   opacity: 0.8;
   pointer-events: none;
 `}
 
 ${({ disabled, variant }) =>
 		disabled &&
-  variant === 'secondary' &&
-  `
+		variant === 'secondary' &&
+		`
   cursor: default;
   opacity: 0.5;
 `}
@@ -76,9 +77,7 @@ const Button = ({ children, variant, isLoading, disabled, ...otherProps }) => {
 			{isLoading ? (
 				<ClipLoader
 					size={17}
-					color={
-						variant === 'primary' ? theme.colors.white : theme.colors.primary
-					}
+					color={variant === 'primary' ? theme.colors.white : theme.colors.primary}
 				/>
 			) : (
 				children
@@ -89,7 +88,7 @@ const Button = ({ children, variant, isLoading, disabled, ...otherProps }) => {
 
 Button.defaultProps = {
 	variant: 'primary',
-	height: '35px'
+	height: '35px',
 }
 
 export default Button

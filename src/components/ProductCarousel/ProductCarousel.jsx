@@ -21,6 +21,7 @@ import useAuthentication from 'hooks/useAuthentication'
 import useCurrency from 'hooks/useCurrency'
 import useWishlist from 'hooks/useWishlist'
 import useCart from 'hooks/useCart'
+import { useState } from 'react'
 
 const settings = {
 	infinite: false,
@@ -55,20 +56,97 @@ const settings = {
 	]
 }
 
+const CarouselProductItem = ({ product }) => {
+	const { currency } = useCurrency()
+	const { addToWishlist, removeFromWishlist, wishlistItems } = useWishlist()
+	const { addToCart, cartItems } = useCart()
+	const { isAuthenticated } = useAuthentication()
+	const [isLoading, setIsLoading] = useState(false)
+
+	const { name, variants, id, sale } = product
+	const { price, images, id: variantId } = variants[
+		Object.values(variants).find(({ stock }) => stock > 0).id
+	]
+
+	const isInCart = cartItems.find(item => item.variantId === variantId)
+	const isInWishlist = wishlistItems.find(({ productId }) => productId === product.id)
+
+	const handleCartBtn = async () => {
+		if (isInCart) return
+		setIsLoading(true)
+		await addToCart({
+			productId: id,
+			variantId,
+			imageUrl: images[0],
+			name,
+			price,
+			quantity: 1
+		})
+		setIsLoading(false)
+	}
+
+	const handleWishlist = async () => {
+		if (!isAuthenticated) {
+			return alert.error({ message: 'Login to continue' })
+		}
+
+		if (isInWishlist) {
+			await removeFromWishlist(id)
+		} else {
+			await addToWishlist({
+				productId: id,
+				variantId,
+				imageUrl: images[0],
+				name,
+				price,
+				quantity: 1
+			})
+		}
+	}
+
+	return (
+		<CarouselItemContainer key={id}>
+			<Link to={`/product/${id}/variant/${variantId}`}>
+				<LazyLoad
+					className='lazyload'
+					offsetBottom={250}
+					offsetRight={2000}
+				>
+					<img src={images[0]} alt={name} />
+				</LazyLoad>
+			</Link>
+			{sale && <SaleBanner />}
+			<ItemBottom>
+				<Icon
+					className='wishlist-icon'
+					color={isInWishlist ? 'red' : 'lightGrey'}
+					onClick={handleWishlist}
+				>
+					<HeartIcon />
+				</Icon>
+				<Text fontWeight='bold'>{name}</Text>
+				<Text mt='0.5rem' mb='1.5rem'>
+					{`${currency.symbol} ${(currency.rate * price).toFixed(2)}`}
+				</Text>
+				<Button
+					onClick={handleCartBtn}
+					variant={isInCart ? 'secondary' : 'primary'}
+					minHeight='35px'
+					height='auto'
+					isLoading={isLoading}
+				>
+					{isInCart ? 'ADDED TO CART' : 'ADD TO CART'}
+				</Button>
+			</ItemBottom>
+		</CarouselItemContainer>
+	)
+}
+
 const ProductCarousel = ({
 	title,
 	data,
-	cartIds = [],
-	wishlistIds = [],
-	isLoading,
-	inFocus,
 	excludeProduct
 }) => {
-	const { addToWishlist, removeFromWishlist } = useWishlist()
-	const { addToCart, removeFromCart } = useCart()
-	const { currency } = useCurrency()
-	const { isAuthenticated } = useAuthentication()
-  
 	const render = data
 	// filter out out of stock products
 		.filter(product => {
@@ -80,81 +158,7 @@ const ProductCarousel = ({
 			return product
 		})
 		.map(product => {
-			const { name, variants, id, sale } = product
-			const { price, images, id: variantId } = variants[
-				Object.values(variants).find(({ stock }) => stock > 0).id
-			]
-
-			const isInCart = cartIds.find(id => id === variantId)
-			const isInWishlist = wishlistIds.find(id => id === product.id)
-
-			const handleCartBtn = e => {
-				if (isInCart) return
-				addToCart({
-					productId: id,
-					variantId,
-					imageUrl: images[0],
-					name,
-					price,
-					quantity: 1
-				})
-			}
-
-			const handleWishlist = () => {
-				if (!isAuthenticated) {
-					return alert.error({ message: 'Login to continue' })
-				}
-
-				if (isInWishlist) {
-					removeFromWishlist(id)
-				} else {
-					addToWishlist({
-						productId: id,
-						variantId,
-						imageUrl: images[0],
-						name,
-						price,
-						quantity: 1
-					})
-				}
-			}
-
-			return (
-				<CarouselItemContainer key={id}>
-					<Link to={`/product/${id}/variant/${variantId}`}>
-						<LazyLoad
-							className='lazyload'
-							offsetBottom={250}
-							offsetRight={2000}
-						>
-							<img src={images[0]} alt={name} />
-						</LazyLoad>
-					</Link>
-					{sale && <SaleBanner />}
-					<ItemBottom>
-						<Icon
-							className='wishlist-icon'
-							color={isInWishlist ? 'red' : 'lightGrey'}
-							onClick={handleWishlist}
-						>
-							<HeartIcon />
-						</Icon>
-						<Text fontWeight='bold'>{name}</Text>
-						<Text mt='0.5rem' mb='1.5rem'>
-							{`${currency.symbol} ${(currency.rate * price).toFixed(2)}`}
-						</Text>
-						<Button
-							onClick={handleCartBtn}
-							variant={isInCart ? 'secondary' : 'primary'}
-							minHeight='35px'
-							height='auto'
-							isLoading={isLoading && inFocus === variantId}
-						>
-							{isInCart ? 'ADDED TO CART' : 'ADD TO CART'}
-						</Button>
-					</ItemBottom>
-				</CarouselItemContainer>
-			)
+			return <CarouselProductItem key={product.id} product={product} />
 		})
 
 	return (
