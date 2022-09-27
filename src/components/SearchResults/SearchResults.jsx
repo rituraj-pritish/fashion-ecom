@@ -13,10 +13,10 @@ import ProductsContainer from 'modules/product/Products/ProductsContainer'
 const SearchResults = () => {
 	const { searchQuery } = useParams()
 	const { products: allProducts } = useProducts() 
-	const { criteria } = useFilter()
+	const { filterCriteria } = useFilter()
 	const products = filter(
 		searchProducts(allProducts, searchQuery),
-		criteria
+		filterCriteria
 	)
   
 	return (

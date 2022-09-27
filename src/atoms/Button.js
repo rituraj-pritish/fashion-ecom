@@ -52,12 +52,10 @@ const StyledButton = styled.button`
 		},
 	})}
 
-	${({ disabled, variant }) =>
-		disabled &&
-		variant === 'primary' &&
-		`
-  opacity: 0.8;
-  pointer-events: none;
+	${({ disabled }) =>
+		disabled && `
+		opacity: 0.8;
+		pointer-events: none;
 `}
 
 ${({ disabled, variant }) =>

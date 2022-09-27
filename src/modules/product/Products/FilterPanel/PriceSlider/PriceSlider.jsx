@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
 
 import { Range } from 'react-range'
 import {
@@ -63,14 +62,6 @@ const PriceSlider = () => {
 			/>
 		</SliderWrapper>
 	)
-}
-
-PriceSlider.propTypes = {
-	currency: PropTypes.shape({
-		code: PropTypes.string.isRequired,
-		rate: PropTypes.number.isRequired,
-		symbol: PropTypes.string.isRequired
-	}).isRequired
 }
 
 export default PriceSlider

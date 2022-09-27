@@ -35,7 +35,7 @@ const FilterPanel = () => {
 				brand: 'brand-all'
 			})
 		},
-		[setFilterCriteria]
+		[]
 	)
 
 	const handleClick = () => {

@@ -1,12 +1,14 @@
+import React from 'react'
+import { useHistory } from 'react-router-dom'
+
 import useAuthentication from 'hooks/useAuthentication'
 import useCurrency from 'hooks/useCurrency'
-import React from 'react'
-
 import Button from '../../../../atoms/Button'
 import Text from '../../../../atoms/Text'
 import { CheckoutBoxContainer, Container, Line } from './CheckoutBox.styles'
 
-const CheckoutBox = ({ cart, history }) => {
+const CheckoutBox = ({ cart }) => {
+	const history = useHistory()
 	const { currency } = useCurrency()
 	const { isAuthenticated } = useAuthentication()
 	

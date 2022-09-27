@@ -62,7 +62,6 @@ const CarouselProductItem = ({ product }) => {
 	const { addToCart, cartItems } = useCart()
 	const { isAuthenticated } = useAuthentication()
 	const [isLoading, setIsLoading] = useState(false)
-
 	const { name, variants, id, sale } = product
 	const { price, images, id: variantId } = variants[
 		Object.values(variants).find(({ stock }) => stock > 0).id
@@ -147,7 +146,7 @@ const ProductCarousel = ({
 	data,
 	excludeProduct
 }) => {
-	const render = data
+	const render = () => data
 	// filter out out of stock products
 		.filter(product => {
 			if (excludeProduct === product.id) return null
@@ -164,7 +163,7 @@ const ProductCarousel = ({
 	return (
 		<ProductCarouselContainer>
 			<Title>{title[0].toUpperCase() + title.slice(1)}</Title>
-			<Slider {...settings}>{render}</Slider>
+			<Slider {...settings}>{render()}</Slider>
 		</ProductCarouselContainer>
 	)
 }

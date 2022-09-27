@@ -100,6 +100,7 @@ export const ItemBottom = styled.div`
 `
 export const Title = styled.div`
   text-align: left;
-  font-size: 1.8rem;
+  font-size: 2rem;
+  font-weight: bold;
   margin-bottom: 2rem;
 `

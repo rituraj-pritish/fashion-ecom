@@ -13,7 +13,7 @@ export default () => {
 	const filterState = useState(FILTER_STATE)
 
 	const setFilterCriteria = criteria => {
-		filterState.set(criteria)
+		filterState.set(prevCriteria => ({ ...prevCriteria, ...criteria }))
 	}
 
 	return React.useMemo(() => ({

@@ -20,7 +20,7 @@ const Review = () => {
 	const { products } = useProducts()
 	const { productId, orderId } = useParams()
 	const { addReview, getReview } = useUserActions()
-  
+
 	const [review, setReview] = useState(null)
 	const [isFetching, setIsFetching] = useState(false)
 
@@ -30,7 +30,7 @@ const Review = () => {
 			setReview(res)
 			setIsFetching(false)
 		})
-	}, [productId, orderId, getReview])
+	}, [productId, orderId])
 
 	if (isFetching) {
 		return (

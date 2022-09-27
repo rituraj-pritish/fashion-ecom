@@ -22,7 +22,7 @@ const CURRENCY_STATE = createState(INITIAL_STATE)
 export default () => {
 	const currencyState = useState(CURRENCY_STATE)
   
-	const getCurrencies = async () => {
+	const getCurrencies = () => {
 		fetch(
 			`${CURRENCY_EXCHANGE_BASE_URL}/latest.json?app_id=${process.env.REACT_APP_EXCHANGE_RATE_APP_ID}&base=USD`
 		)
@@ -30,29 +30,29 @@ export default () => {
 				res
 					.json()
 					.then(res =>
-						currencyState.set({
-							...currencyState.get(),
+						currencyState.set(prevState => ({
+							...prevState,
 							rates: res.rates
-						})
+						}))
 					)
 			).catch(err => {
-				currencyState.set({
-					...currencyState.get(),
+				currencyState.set(prevState => ({
+					...prevState,
 					error: true
-				})
+				}))
 			})
 	}
   
 	const changeCurrency = code => {
 		localStorage.setItem('currency_code', code)
-		currencyState.set({
-			...currencyState.get(),
+		currencyState.set(prevState => ({
+			...prevState,
 			currency: {
 				code,
 				symbol: currencyList[code].symbol,
 				rate: currencyState.rates[code]
 			}
-		})
+		}))
 	}
 
 	return React.useMemo(() => ({

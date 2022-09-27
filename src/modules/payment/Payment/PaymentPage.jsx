@@ -12,13 +12,13 @@ import {
 } from './PaymentsPage.styles'
 import { PageContainer } from 'index.styles'
 import useCurrency from 'hooks/useCurrency'
-import useUserActions from 'hooks/useUserActions'
 import useCart from 'hooks/useCart'
+import useOrders from 'hooks/useOrders'
 
 const PaymentsPage = () => {
 	const { cartItems, emptyCart } = useCart()
 	const { currency } = useCurrency()
-	const { addNewOrder } = useUserActions()
+	const { addNewOrder } = useOrders()
   
 	const [isOrderPlaced, setIsOrderPlaced] = useState(false)
 
@@ -61,7 +61,7 @@ const PaymentsPage = () => {
 					<CardInfo>
             *email: email@email.com <br />
             *card no: 4242 4242 4242 4242 <br />
-            *exp: 2/22 *cvc: 222
+            *exp: 2/32 *cvc: 222
 					</CardInfo>
 				</Container>
 			) : (

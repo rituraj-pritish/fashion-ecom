@@ -15,16 +15,18 @@ import useProducts from 'hooks/useProducts'
 import useAuthentication from 'hooks/useAuthentication'
 import useCart from 'hooks/useCart'
 import useWishlist from 'hooks/useWishlist'
+import useCurrency from 'hooks/useCurrency'
 
 const App = () => {
 	const { getCartItems } = useCart()
 	const { getWishlistItems } = useWishlist()
 	const { getProducts, products } = useProducts()
+	const { getCurrencies } = useCurrency()
 	const { authStateChangeHandler, isAuthenticated } = useAuthentication()
 
 	useEffect(() => {
 		getProducts()
-		// getCurrencies()
+		getCurrencies()
 	}, [])
 
 	useEffect(() => {
