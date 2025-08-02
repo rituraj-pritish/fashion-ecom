@@ -2,10 +2,6 @@
   "name": "fashion",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "16.13.0",
-    "npm": "8.1.0"
-  },
   "dependencies": {
     "@hookstate/core": "^3.0.13",
     "@testing-library/jest-dom": "^4.2.4",
@@ -24,7 +20,6 @@
     "react-range": "^1.6.6",
     "react-rating": "^2.0.5",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "4.0.3",
     "react-slick": "^0.26.1",
     "react-spinners": "^0.8.3",
     "react-stripe-checkout": "^2.6.3",
@@ -56,7 +51,8 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.28.0",
-    "eslint-plugin-react": "^7.27.1"
+    "ajv": "^8.17.1",
+    "eslint-plugin-react": "^7.27.1",
+    "react-scripts": "^5.0.1"
   }
 }
