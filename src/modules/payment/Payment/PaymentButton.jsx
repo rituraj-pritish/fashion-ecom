@@ -11,14 +11,14 @@ const PaymentButton = ({ amount, onOrderComplete, currency }) => {
 
   return (
     <StripeCheckout
-      name='Blogg'
+      name='Fashion'
       description={`Payment of ${currency.symbol} ${(
         currency.rate * amount
       ).toFixed(2)}`}
       currency={currency.code}
       amount={(currency.rate * amount).toFixed(2) * 100}
       token={handleToken}
-      stripeKey='pk_test_6MmX11WOCB7TLNjgyIQsEQN400FaACm2cQ'
+      stripeKey={process.env.REACT_APP_STRIPE_KEY}
       allowRememberMe={false}
     >
       <Button fullWidth>Checkout</Button>

@@ -91,10 +91,9 @@ const Navbar = () => {
 						setSearchQuery={setText}
 					/>
 
-					{/* todo fix issues with currency selector */}
-					{/* <li>
+					<li>
 						<CurrencySelector />
-					</li> */}
+					</li>
 
 					<li
 						ref={userRef}

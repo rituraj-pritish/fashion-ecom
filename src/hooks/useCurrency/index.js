@@ -50,7 +50,7 @@ export default () => {
 			currency: {
 				code,
 				symbol: currencyList[code].symbol,
-				rate: currencyState.rates[code]
+				rate: currencyState.get().rates[code]
 			}
 		}))
 	}

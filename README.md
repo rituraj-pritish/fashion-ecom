@@ -1,6 +1,6 @@
 ## Fashion.co
 
-A fully functional clothing e-commerce web-app
+clothing e-commerce web-app
 
 Checkout the app [here](https://fashion-fashion.herokuapp.com/)
 

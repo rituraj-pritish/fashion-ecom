@@ -9,7 +9,7 @@ const CurrencySelector = () => {
 	const { changeCurrency, currency: { code }, error } = useCurrency()
 	const [showSelector, setShowSelector] = useState(false)
 	const node = useRef()
-
+	
 	const handleChange = e => {
 		changeCurrency(e.target.value)
 		setShowSelector(false)
